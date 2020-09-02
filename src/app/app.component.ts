@@ -6,7 +6,7 @@ import * as moment from 'moment';
 
 const colors: any = {
   red: {
-    primary: '#ad2121',
+    primary: '#ad2122',
     secondary: '#FAE3E3',
   },
   blue: {
