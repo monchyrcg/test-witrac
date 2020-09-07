@@ -1,5 +1,8 @@
 {
     "dashboard": {
-        "calendar": "Calendar"
+        "calendar": "Calendar",
+        "clients": "Clientes",
+        "new_appointment": "Nueva cita",
+        "new_client": "Nuevo cliente"
     }
 }
