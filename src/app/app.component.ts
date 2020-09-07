@@ -5,6 +5,7 @@ import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, Cal
 import * as moment from 'moment';
 import { HttpClient } from '@angular/common/http';
 import axios from "axios";
+import { TranslateService } from '@ngx-translate/core';
 
 const colors: any = {
   red: {
@@ -21,6 +22,8 @@ const colors: any = {
   },
 };
 
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './tailwind.component.html',
@@ -29,6 +32,9 @@ const colors: any = {
 })
 
 export class AppComponent {
+  isOpen = false;
+  isOpenMobile = true;
+
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -107,7 +113,9 @@ export class AppComponent {
 
   activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal, private http: HttpClient) { }
+  constructor(private modal: NgbModal, private http: HttpClient, private translate: TranslateService) {
+    this.translate.setDefaultLang('fr');
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (moment(date).isSame(this.viewDate, 'month')) {

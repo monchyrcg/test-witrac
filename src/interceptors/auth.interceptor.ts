@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
         req = req.clone({
             withCredentials: true
         })
-        console.log(req);
+
         req.headers.set('withCredentials', 'true');
         if (req.method === 'GET' || req.method === 'HEAD') {
             return next.handle(req);

@@ -6,6 +6,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        default: {
+          default: '#004d44'
+        },
         facebook: {
           default: '#4267b2',
         },
