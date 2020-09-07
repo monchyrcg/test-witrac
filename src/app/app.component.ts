@@ -3,6 +3,8 @@ import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView, } from 'angular-calendar';
 import * as moment from 'moment';
+import { HttpClient } from '@angular/common/http';
+import axios from "axios";
 
 const colors: any = {
   red: {
@@ -21,7 +23,7 @@ const colors: any = {
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
+  templateUrl: './tailwind.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -103,9 +105,9 @@ export class AppComponent {
     }, */
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen = true;
 
-  constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal, private http: HttpClient) { }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (moment(date).isSame(this.viewDate, 'month')) {
@@ -161,15 +163,32 @@ export class AppComponent {
     ];
   }
 
-  deleteEvent(eventToDelete: CalendarEvent) {
+  deleteEvent(eventToDelete: CalendarEvent): void {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
 
-  setView(view: CalendarView) {
+  setView(view: CalendarView): void {
     this.view = view;
   }
 
-  closeOpenMonthViewDay() {
+  closeOpenMonthViewDay(): void {
     this.activeDayIsOpen = false;
+  }
+
+  login(): void {
+    const url = `http://api.pruebas.test/sanctum/csrf-cookie`;
+    axios.defaults.withCredentials = true;
+    axios.defaults.headers = { 'Access-Control-Allow-Origin': '*' };
+    axios.get(url).then((res) => { console.log(res); });
+    /* this.http.get<any>(url).subscribe((res) => {
+      console.log(res);
+
+      // the response is correct but not set the cookies
+      // this.http.post<any>('http://pruebas.test/api/v1/login', { password: 'password', 'email': 'twatsica@example.com' }).subscribe(success => {
+      //   console.log(success);
+      //   this.http.get<any>('http://pruebas.test/api/v1/articles').subscribe(success => console.log(success));
+      // }
+      //   , error => console.log(error))
+    }) */
   }
 }
