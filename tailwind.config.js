@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        default: {
+        naturhouse: {
           default: '#004d44'
         },
         facebook: {

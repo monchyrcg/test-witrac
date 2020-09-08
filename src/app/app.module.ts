@@ -1,51 +1,64 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+
+
+
+
+
 import { AppRoutingModule } from './app-routing.module';
-import { NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient, HttpBackend } from '@angular/common/http';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
-import { AppComponent } from './app.component';
 import { AuthInterceptor } from '../interceptors/auth.interceptor';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-// AoT requires an exported function for factories
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+// modules
+import { SharedModule } from './shared/shared.module';
+import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+
+import { AppComponent } from './app.component';
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    NopagefoundComponent
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    NgbModalModule,
-    BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    SharedModule,
+    RouterModule,
     AppRoutingModule,
-    NgbModule,
+    DashboardModule,
+    AuthModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
+        useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
     }),
+
   ],
-  exports: [
-    TranslateModule
-  ],
+  exports: [],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {
+
+}

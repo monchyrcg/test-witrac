@@ -1,30 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { AppComponent } from './app.component';
-import { TranslateModule } from '@ngx-translate/core';
+
+// modules
+import { AuthRoutingModule } from './auth/auth-routing.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+
+import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { LoginComponent } from './auth/login/login.component';
+
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
-  },
-  {
-    path: 'dashboard',
-    loadChildren: () => import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
-    // canActivate: [AuthGeneral],
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-
+  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+  { path: 'login', component: LoginComponent },
+  { path: '**', component: NopagefoundComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), TranslateModule],
-  exports: [RouterModule, TranslateModule]
+  imports: [
+    RouterModule.forRoot(routes),
+    DashboardModule,
+    AuthRoutingModule
+  ],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 

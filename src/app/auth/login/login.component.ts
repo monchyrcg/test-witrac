@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-login',
@@ -9,4 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class LoginComponent {
 
+    constructor(
+
+    ) { }
 }

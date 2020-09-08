@@ -1,0 +1,111 @@
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <div class="flex flex-wrap -mx-2">
+        <div class="w-full md:w-1/3 px-2">
+            <div class="flex">
+                <div class="w-1/3 px-2">
+                    <button class="bg-naturhouse
+                        hover:bg-naturhouse
+                        text-white
+                        font-bold py-2 rounded w-10/12 h-12"
+                        mwlCalendarPreviousView [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="closeOpenMonthViewDay()">
+                        Previous
+                    </button>
+                </div>
+                <div class="w-1/3 px-2">
+                    <button class="bg-naturhouse
+                        hover:bg-naturhouse
+                        text-white
+                        font-bold py-2 rounded w-10/12 h-12" mwlCalendarToday
+                        [(viewDate)]="viewDate" mwlCalendarToday
+                        [(viewDate)]="viewDate">
+                        Today
+                    </button>
+                </div>
+                <div class="w-1/3 px-2">
+                    <button class="bg-naturhouse
+                        hover:bg-naturhouse
+                        text-white
+                        font-bold py-2 rounded w-10/12 h-12" mwlCalendarNextView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="closeOpenMonthViewDay()">
+                        Next
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="w-full md:w-1/3 px-2">
+            <div class="text-center">
+                <h3>{{ viewDate | calendarDate:(view +
+                    'ViewTitle'):'en' }}</h3>
+            </div>
+        </div>
+        <div class="w-full md:w-1/3 px-2">
+            <div class="flex">
+                <div class="w-1/3 px-2">
+                    <button class="bg-naturhouse
+                        hover:bg-naturhouse
+                        text-white
+                        font-bold py-2 px-4 rounded w-10/12
+                        h-12" (click)="setView(CalendarView.Month)"
+                        [class.active]="view ===
+                        CalendarView.Month">
+                        Month
+                    </button>
+                </div>
+                <div class="w-1/3 px-2">
+                    <button class="bg-naturhouse
+                        hover:bg-naturhouse
+                        text-white
+                        font-bold py-2 px-4 rounded w-10/12
+                        h-12" (click)="setView(CalendarView.Week)"
+                        [class.active]="view ===
+                        CalendarView.Week">
+                        Week
+                    </button>
+                </div>
+                <div class="w-1/3 px-2">
+                    <button class="bg-naturhouse
+                        hover:bg-naturhouse
+                        text-white
+                        font-bold py-2 px-4 rounded w-10/12
+                        h-12" (click)="setView(CalendarView.Day)"
+                        [class.active]="view ===
+                        CalendarView.Day">
+                        Day
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+    <!-- Replace with your content -->
+    <div class="px-4 py-6 sm:px-0">
+
+        <div [ngSwitch]="view">
+            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month"
+                [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen"
+                (dayClicked)="dayClicked($event.day)"
+                (eventClicked)="handleEvent('Clicked',
+                $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week"
+                [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" (eventClicked)="handleEvent('Clicked',
+                $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day"
+                [viewDate]="viewDate" [events]="events"
+                [refresh]="refresh" (eventClicked)="handleEvent('Clicked',
+                $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-day-view>
+        </div>
+
+    </div>
+    <!-- /End replace -->
+</div>

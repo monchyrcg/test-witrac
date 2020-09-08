@@ -1,4 +1,13 @@
 {
+    "login": {
+        "username": "Username",
+        "password": "Password",
+        "error_username": "Please enter your username",
+        "error_password": "Please choose a password.",
+        "sign_in": "Sign in",
+        "forgot": "Forgot Password?",
+        "signed": "{{year}} Naturhouse. All rights reserved."
+    },
     "dashboard": {
         "calendar": "Calendar",
         "clients": "Clients",
