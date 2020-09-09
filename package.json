@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "local": "ng serve -o -c local --port 4300",
+    "local": "ng serve -o -c local --host app.nutriwell.test --disableHostCheck",
     "develop-no": "ng build --prod --aot -c production",
     "updated:dev": "aws s3 rm s3://{{url}} --recursive && aws s3 cp ./dist s3://{{url}} --recursive",
     "updated:pro": "aws s3 rm s3://{{url}} --recursive && aws s3 cp ./dist s3://{{url}} --recursive",

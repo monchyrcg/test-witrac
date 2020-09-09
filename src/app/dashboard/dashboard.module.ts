@@ -7,15 +7,13 @@ import { adapterFactory } from 'angular-calendar/date-adapters/moment';
 import * as moment from 'moment';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { TranslateModule } from '@ngx-translate/core';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { SharedModule } from '../shared/shared.module';
+
+import { SharedModule } from '../shared/modules/shared.module';
 
 export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);

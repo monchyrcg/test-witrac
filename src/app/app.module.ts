@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { AuthInterceptor } from '../interceptors/auth.interceptor';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -15,12 +15,13 @@ export function createTranslateLoader(http: HttpClient) {
 
 // modules
 import { AppRoutingModule } from './app-routing.module';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared/modules/shared.module';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
+import { AuthenticationGeneralService } from './shared/services/auth-general.service';
 
 
 
@@ -47,6 +48,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
   ],
   exports: [],
   providers: [
+    AuthInterceptor, AuthenticationGeneralService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
