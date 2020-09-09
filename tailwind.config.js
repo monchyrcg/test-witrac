@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        naturhouse: {
+        nutriwell: {
           default: '#004d44'
         },
         facebook: {

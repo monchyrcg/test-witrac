@@ -6,7 +6,7 @@
         "error_password": "Please choose a password.",
         "sign_in": "Sign in",
         "forgot": "Forgot Password?",
-        "signed": "{{year}} Naturhouse. All rights reserved."
+        "signed": "{{year}} nutriwell. All rights reserved."
     },
     "dashboard": {
         "calendar": "Calendario",
