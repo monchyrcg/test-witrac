@@ -11,38 +11,23 @@
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
-                            <a href="#" class="px-3 py-2 rounded-md text-sm
-                                font-medium
-                                text-white bg-gray-900 focus:outline-none
-                                focus:text-white focus:bg-gray-700">
+                            <a routerLink="calendar" routerLinkActive="active"
+                                class="menu">
                                 {{ 'dashboard.calendar' | translate }}
                             </a>
 
-                            <a href="#" class="px-3 py-2 rounded-md text-sm
-                                font-medium
-                                text-gray-300 hover:text-white hover:bg-gray-900
-                                focus:outline-none focus:text-white
-                                focus:bg-gray-900">
+                            <a routerLink="clients" routerLinkActive="active"
+                                class="menu">
                                 {{ 'dashboard.clients' | translate }}
                             </a>
 
-                            <a href="#" class="px-3 py-2 rounded-md text-sm
-                                font-medium
-                                text-white bg-gray-700
-                                focus:outline-none focus:text-white
-                                focus:bg-gray-700">
+                            <a href="#" class="menu modal">
                                 {{ 'dashboard.new_appointment' | translate }}
                             </a>
 
-                            <a href="#" class="px-3 py-2 rounded-md text-sm
-                                font-medium
-                                text-white bg-gray-700
-                                focus:outline-none focus:text-white
-                                focus:bg-gray-700">
+                            <a href="#" class="menu modal">
                                 {{ 'dashboard.new_client' | translate }}
                             </a>
-
-                            <button (click)="login()">Login</button>
                         </div>
                     </div>
                 </div>

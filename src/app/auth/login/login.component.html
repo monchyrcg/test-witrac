@@ -16,7 +16,7 @@
                     [ngClass]="{ 'border border-red-500': submitted &&
                     f.password.errors }"
                     id="email" type="text"
-                    placeholder="{{ 'login.email' | translate }}">
+                    placeholder="{{ 'login.username' | translate }}">
                 <ng-container *ngIf="submitted && f.email.errors">
                     <app-error-form *ngIf="f.email.errors.required"
                         error="{{'errors.required' | translate}}"></app-error-form>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
 import { Subscription } from 'rxjs';
+
 
 @Component({
 	selector: 'app-login',
@@ -19,6 +21,7 @@ export class LoginComponent implements OnInit {
 	private subscription = new Subscription();
 
 	constructor(
+		private router: Router,
 		private builder: FormBuilder,
 		private loginService: LoginService
 	) { }
@@ -40,14 +43,15 @@ export class LoginComponent implements OnInit {
 			return;
 		}
 
+
 		// display form values on success
 		this.subscription.add(this.loginService.sanctum().subscribe(
 			(response: Response) => {
 				this.loginService.login(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value).subscribe(
 					res => {
-						this.loginService.probar().subscribe(
+						this.loginService.getUser().subscribe(
 							res => {
-								console.log(res);
+								this.router.navigate(['/']);
 							}, error => {
 								console.log(error);
 							}
@@ -58,15 +62,5 @@ export class LoginComponent implements OnInit {
 				)
 			}
 		));
-		/* this.subscription.add(
-			this.loginService.login(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value).subscribe(
-				res => {
-					console.log(res);
-				}, error => {
-					console.log(error);
-				}
-			)
-		); */
-
 	}
 }
