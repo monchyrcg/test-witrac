@@ -39,15 +39,4 @@ export class LoginService {
                 this.auth.setToken(result);
             }));
     }
-
-    // initUser(response) {
-    //     const user = <any>response;
-    //     if (user && user.token) {
-    //         this.data = user;
-    //         // this.setUser();
-    //         // this.setRenewer();
-    //     }
-    //     return user;
-    // }
-
 }

@@ -14,7 +14,6 @@ export class AuthenticationGeneralService {
     constructor(private http: HttpClient, private router: Router) {
         if (this.isLoggedIn()) {
             this.data = this.getUser();
-            // this.setRenewer();
         }
     }
 
@@ -84,7 +83,6 @@ export class AuthenticationGeneralService {
     }
 
     setToken(user: User) {
-        // this.data.expires = new Date().getTime() * 1000;
         localStorage.setItem('currentUser', JSON.stringify(user));
     }
 
