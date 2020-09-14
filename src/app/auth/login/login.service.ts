@@ -9,7 +9,7 @@ import { User } from 'src/app/shared/models/user.model';
 @Injectable()
 export class LoginService {
 
-    constructor(private http: HttpClient, private router: Router, private auth: AuthenticationGeneralService) { }
+    constructor(private http: HttpClient, private auth: AuthenticationGeneralService) { }
 
     sanctum() {
         return this.http

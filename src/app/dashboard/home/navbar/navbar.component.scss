@@ -1,0 +1,41 @@
+.menu {
+    @apply px-3; 
+    @apply py-2;
+    @apply rounded-md;
+    @apply text-sm;
+    @apply font-medium;
+    @apply text-gray-300;
+}
+.menu:hover {
+    @apply text-white;
+    @apply bg-gray-900
+}
+.menu:focus {
+    @apply outline-none;
+    @apply text-white;
+    @apply bg-gray-700;
+}
+
+.active {
+    @apply text-white;
+    @apply bg-gray-900;
+}
+
+.modal {
+    @apply text-white;
+    @apply bg-gray-700;
+}
+.modal:focus {
+    @apply outline-none;
+    @apply text-white;
+    @apply bg-gray-700;
+}
+
+.mobile {
+    cursor: pointer;
+    @apply block;
+    @apply px-4;
+    @apply py-2;
+    @apply text-sm;
+    @apply text-gray-700;
+}

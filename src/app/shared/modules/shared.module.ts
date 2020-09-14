@@ -35,7 +35,5 @@ export function createTranslateLoader(http: HttpClient) {
     providers: []
 })
 export class SharedModule {
-    constructor(private translate: TranslateService) {
-        translate.setDefaultLang('en');
-    }
+    /**/
 }
