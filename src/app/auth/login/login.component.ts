@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
 
 	ngOnInit(): void {
+		console.log('asdfasdfasdfasdf');
 		this.loginForm = this.builder.group({
 			email: ['', [Validators.required, Validators.email]],
 			password: ['', [Validators.required, Validators.minLength(6)]],

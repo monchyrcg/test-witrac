@@ -4,8 +4,6 @@ import { Subject } from 'rxjs';
 import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
-import { SettingsService } from 'src/app/services/settings.service';
-
 
 const colors: any = {
 	red: {
@@ -108,7 +106,7 @@ export class CalendarComponent {
 
 	activeDayIsOpen = true;
 
-	constructor(private modal: NgbModal, private http: HttpClient, private settings: SettingsService) {
+	constructor(private modal: NgbModal, private http: HttpClient) {
 
 	}
 
