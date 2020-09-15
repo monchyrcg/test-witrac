@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
-import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
+import { Component, ViewChild, TemplateRef, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, DAYS_OF_WEEK } from 'angular-calendar';
 import { Subject } from 'rxjs';
 import * as moment from 'moment';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClient } from '@angular/common/http';
+import { SettingsService } from 'src/app/shared/services/settings.service';
 
 const colors: any = {
 	red: {
@@ -26,11 +27,18 @@ const colors: any = {
 	styleUrls: ['./calendar.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CalendarComponent {
+
+export class CalendarComponent implements OnInit {
 
 	@ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
 	view: CalendarView = CalendarView.Month;
+
+	locale: string = localStorage.getItem('locale');
+
+	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+
+	weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
 
 	CalendarView = CalendarView;
 
@@ -90,23 +98,26 @@ export class CalendarComponent {
 			color: colors.blue,
 			allDay: true,
 		},
-        /* {
-          start: addHours(startOfDay(new Date()), 2),
-          end: addHours(new Date(), 2),
-          title: 'A draggable and resizable event',
-          color: colors.yellow,
-          actions: this.actions,
-          resizable: {
-            beforeStart: true,
-            afterEnd: true,
-          },
-          draggable: true,
-        }, */
+		/* {
+		  start: addHours(startOfDay(new Date()), 2),
+		  end: addHours(new Date(), 2),
+		  title: 'A draggable and resizable event',
+		  color: colors.yellow,
+		  actions: this.actions,
+		  resizable: {
+			beforeStart: true,
+			afterEnd: true,
+		  },
+		  draggable: true,
+		}, */
 	];
 
 	activeDayIsOpen = true;
 
-	constructor(private modal: NgbModal, private http: HttpClient) {
+	constructor(private modal: NgbModal, private settingService: SettingsService) {
+
+	}
+	ngOnInit(): void {
 
 	}
 
@@ -169,6 +180,7 @@ export class CalendarComponent {
 	}
 
 	setView(view: CalendarView): void {
+		this.locale = 'es';
 		this.view = view;
 	}
 

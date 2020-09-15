@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+import localeEn from '@angular/common/locales/en';
+import localeFr from '@angular/common/locales/it';
+import localeIt from '@angular/common/locales/fr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 
 import { adapterFactory } from 'angular-calendar/date-adapters/moment';
@@ -18,6 +22,11 @@ import { SharedModule } from '../shared/modules/shared.module';
 export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
 }
+
+registerLocaleData(localeEs);
+registerLocaleData(localeEn);
+registerLocaleData(localeFr);
+registerLocaleData(localeIt);
 
 @NgModule({
     declarations: [

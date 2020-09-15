@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-
-
+import { StaticData } from './shared/settings/staticdata';
 
 @Component({
 	selector: 'app-root',
@@ -10,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class AppComponent {
 
-	defaulLocal = ['es', 'en', 'fr', 'it'];
+	defaulLocal = StaticData.locales;
 
 	constructor(private translate: TranslateService) {
 
@@ -18,9 +17,9 @@ export class AppComponent {
 			translate.setDefaultLang(localStorage.getItem('locale'));
 		} else {
 			const browserLocale = (navigator.language).split('-')[0];
-			console.log(browserLocale);
+
 			const setLocale = this.defaulLocal.includes(browserLocale) ? browserLocale : 'en';
-			console.log(setLocale);
+
 			localStorage.setItem('locale', setLocale);
 			translate.setDefaultLang(setLocale);
 		}
