@@ -15,6 +15,7 @@ export class NavBarComponent {
     isOpen = false;
     isOpenMobile = true;
     isLanguage = false;
+    openLocaleMobile = false;
     locales = StaticData.locales;
     defaultLocale: string = localStorage.getItem('locale');
 
@@ -23,6 +24,8 @@ export class NavBarComponent {
     disabled() {
         this.isOpen = false;
         this.isLanguage = false;
+        this.isOpenMobile = true;
+        this.openLocaleMobile = false;
     }
 
     logout() {

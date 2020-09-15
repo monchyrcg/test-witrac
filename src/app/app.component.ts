@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { SettingsService } from './shared/services/settings.service';
 import { StaticData } from './shared/settings/staticdata';
 
 @Component({
@@ -11,17 +11,16 @@ export class AppComponent {
 
 	defaulLocal = StaticData.locales;
 
-	constructor(private translate: TranslateService) {
+	constructor(private settingService: SettingsService) {
 
 		if (localStorage.getItem('locale')) {
-			translate.setDefaultLang(localStorage.getItem('locale'));
+			this.settingService.setLang(localStorage.getItem('locale'));
 		} else {
 			const browserLocale = (navigator.language).split('-')[0];
 
 			const setLocale = this.defaulLocal.includes(browserLocale) ? browserLocale : 'en';
 
-			localStorage.setItem('locale', setLocale);
-			translate.setDefaultLang(setLocale);
+			this.settingService.changeLang(setLocale);
 		}
 	}
 }

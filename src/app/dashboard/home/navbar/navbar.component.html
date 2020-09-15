@@ -11,20 +11,20 @@
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a routerLink="calendar" routerLinkActive="active"
-                            class="menu">
+                            class="text menu">
                             {{ 'dashboard.calendar' | translate }}
                         </a>
 
                         <a routerLink="clients" routerLinkActive="active"
-                            class="menu">
+                            class="text menu">
                             {{ 'dashboard.clients' | translate }}
                         </a>
 
-                        <a href="#" class="menu modal">
+                        <a href="#" class="text menu modal">
                             {{ 'dashboard.new_appointment' | translate }}
                         </a>
 
-                        <a href="#" class="menu modal">
+                        <a href="#" class="text menu modal">
                             {{ 'dashboard.new_client' | translate }}
                         </a>
                     </div>
@@ -70,12 +70,11 @@
                                 shadow-xs" role="menu"
                                 aria-orientation="vertical"
                                 aria-labelledby="user-menu">
-                                <a class="navbar-a hover:bg-gray-100"
+                                <a class="navbar-a"
                                     role="menuitem">Your Profile</a>
-                                <a class="navbar-a hover:bg-gray-100"
-                                    role="menuitem"
-                                    (click)="changeLang('fr')">Settings</a>
-                                <a class="navbar-a hover:bg-gray-100"
+                                <a class="navbar-a"
+                                    role="menuitem">Settings</a>
+                                <a class="navbar-a"
                                     role="menuitem" (click)="logout()">Sign
                                     out</a>
                             </div>
@@ -89,7 +88,7 @@
                                 shadow-xs" role="menu"
                                 aria-orientation="vertical"
                                 aria-labelledby="user-menu">
-                                <a class="navbar-a hover:bg-gray-100"
+                                <a class="navbar-a"
                                     role="menuitem"
                                     *ngFor="let locale of
                                     locales"
@@ -128,37 +127,41 @@
             <!-- Open: "block", closed: "hidden" -->
             <div [ngClass]="{ hidden:isOpenMobile}" class="md:hidden">
                 <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    <a href="#" class="block px-3 py-2 rounded-md
-                        text-base
-                        font-medium text-white bg-gray-900
-                        focus:outline-none focus:text-white
-                        focus:bg-gray-700">
+                    <a routerLink="calendar" routerLinkActive="active"
+                        class="block text menu">
                         {{ 'dashboard.calendar' | translate }}
                     </a>
+                    <a routerLink="clients" routerLinkActive="active"
+                        class="block text menu">
+                        {{ 'dashboard.clients' | translate }}
+                    </a>
 
-                    <a href="#" class="block px-3 py-2 rounded-md
-                        text-base
-                        font-medium text-gray-300 hover:text-white
-                        hover:bg-gray-700 focus:outline-none
-                        focus:text-white focus:bg-gray-700">Team</a>
+                    <a href="#" class="block text menu modal">
+                        {{ 'dashboard.new_appointment' | translate }}
+                    </a>
 
-                    <a href="#" class="block px-3 py-2 rounded-md
-                        text-base
-                        font-medium text-gray-300 hover:text-white
-                        hover:bg-gray-700 focus:outline-none
-                        focus:text-white focus:bg-gray-700">Projects</a>
-                    <a href="#" class="block px-3 py-2 rounded-md
-                        text-base
-                        font-medium text-gray-300 hover:text-white
-                        hover:bg-gray-700 focus:outline-none
-                        focus:text-white focus:bg-gray-700">Calendar</a>
-                    <a href="#" class="block px-3 py-2 rounded-md
-                        text-base
-                        font-medium text-gray-300 hover:text-white
-                        hover:bg-gray-700 focus:outline-none
-                        focus:text-white focus:bg-gray-700">Reports</a>
+                    <a href="#" class="block text menu modal">
+                        {{ 'dashboard.new_client' | translate }}
+                    </a>
                 </div>
-                <div class="pt-4 pb-3 border-t border-gray-700">
+                <div class="pt-4 pb-3 border-t border-gray-700" style="cursor:
+                    pointer;">
+                    <div class="flex items-center px-5 space-x-3"
+                        (click)="openLocaleMobile= !openLocaleMobile">
+                        <div class="flex-shrink-0 font-medium text-gray-400">
+                            Locale : {{ defaultLocale | uppercase }}
+                        </div>
+                    </div>
+                    <div class="mt-3 px-2 space-y-1" *ngIf="openLocaleMobile">
+                        <a class="block text navbar-mobile"
+                            (click)="changeLang(locale)" *ngFor="let locale of
+                            locales">
+                            {{ locale | uppercase }}
+                        </a>
+                    </div>
+                </div>
+                <div class="pt-4 pb-3 border-t border-gray-700" style="cursor:
+                    pointer;">
                     <div class="flex items-center px-5 space-x-3">
                         <div class="flex-shrink-0">
                             <img class="h-10 w-10 rounded-full"
@@ -173,25 +176,15 @@
                         </div>
                     </div>
                     <div class="mt-3 px-2 space-y-1">
-                        <a href="#" class="block px-3 py-2 rounded-md
-                            text-base
-                            font-medium text-gray-400 hover:text-white
-                            hover:bg-gray-700 focus:outline-none
-                            focus:text-white focus:bg-gray-700">Your
-                            Profile</a>
-
-                        <a href="#" class="block px-3 py-2 rounded-md
-                            text-base
-                            font-medium text-gray-400 hover:text-white
-                            hover:bg-gray-700 focus:outline-none
-                            focus:text-white focus:bg-gray-700">Settings</a>
-                        <a href="#" class="block px-3 py-2 rounded-md
-                            text-base
-                            font-medium text-gray-400 hover:text-white
-                            hover:bg-gray-700 focus:outline-none
-                            focus:text-white focus:bg-gray-700"
-                            (click)="logout()">Sign
-                            out</a>
+                        <a class="block text navbar-mobile">
+                            Your Profile
+                        </a>
+                        <a class="block text navbar-mobile">
+                            Settings
+                        </a>
+                        <a class="block text navbar-mobile" (click)="logout()">
+                            Sign Out
+                        </a>
                     </div>
                 </div>
             </div>

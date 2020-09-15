@@ -1,7 +1,10 @@
-.menu {
+.text {
     @apply px-3; 
     @apply py-2;
     @apply rounded-md;
+}
+
+.menu {
     @apply text-sm;
     @apply font-medium;
     @apply text-gray-300;
@@ -38,4 +41,22 @@
     @apply py-2;
     @apply text-sm;
     @apply text-gray-700;
+}
+.navbar-a:hover {
+    @apply bg-gray-100;
+}
+
+.navbar-mobile {
+    @apply text-base;
+    @apply font-medium;
+    @apply text-gray-400;
+}
+.navbar-mobile:hover {
+    @apply text-white;
+    @apply bg-gray-700;
+}
+.navbar-mobile:focus {
+    @apply outline-none;
+    @apply text-white;
+    @apply bg-gray-700;
 }

@@ -12,9 +12,12 @@ export class SettingsService {
 
 	constructor(private translateService: TranslateService) { }
 
+	setLang(lang) {
+		this.translateService.use(lang);
+	}
 
 	changeLang(lang: string): void {
-		this.translateService.use(lang);
+		this.setLang(lang);
 		localStorage.setItem('locale', lang);
 
 		this.changeLocale.next(lang);
