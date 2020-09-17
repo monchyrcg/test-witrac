@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/auth/login/login.service';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { StaticData } from 'src/app/shared/settings/staticdata';
@@ -10,7 +13,7 @@ import { StaticData } from 'src/app/shared/settings/staticdata';
     styleUrls: ['./navbar.component.scss'],
 })
 
-export class NavBarComponent {
+export class NavBarComponent implements OnDestroy {
 
     isOpen = false;
     isOpenMobile = true;
@@ -19,7 +22,14 @@ export class NavBarComponent {
     locales = StaticData.locales;
     defaultLocale: string = localStorage.getItem('locale');
 
-    constructor(private auth: AuthenticationGeneralService, private translateService: TranslateService, private settingService: SettingsService) { }
+    private subscription = new Subscription();
+    
+    constructor(
+        private settingService: SettingsService,
+        private loginService: LoginService,
+        private router: Router
+    ) { }
+    
 
     disabled() {
         this.isOpen = false;
@@ -29,7 +39,11 @@ export class NavBarComponent {
     }
 
     logout() {
-        this.auth.logout();
+        this.subscription.add(this.loginService.logout().subscribe(
+            (response) => {
+                this.router.navigate(['/login']);
+            }
+        ));
     }
 
     changeLang(lang: string): void {
@@ -37,5 +51,9 @@ export class NavBarComponent {
 
         this.defaultLocale = lang;
         this.disabled();
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 }

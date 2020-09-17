@@ -2,6 +2,24 @@
     height: 100vh;
     place-content: center; background:
     url('https://naturhouse.es/_/img/new-naturhouse.jpg'); background-position:
-    center center;
+    center right;
     background-size: cover;
 }
+/*
+<a class="logo" href="{{store url=""}}">
+<img
+    {{if logo_width}}
+        width="{{var logo_width}}"
+    {{else}}
+        width="180"
+    {{/if}}
+
+    {{if logo_height}}
+        height="{{var logo_height}}"
+    {{/if}}
+
+    src="{{var logo_url}}"
+    alt="{{var logo_alt}}"
+    border="0"
+/>
+</a>*/

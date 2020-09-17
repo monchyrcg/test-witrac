@@ -39,4 +39,12 @@ export class LoginService {
                 this.auth.setToken(result);
             }));
     }
+
+    logout(){
+        return this.http
+            .get(`${environment.apiUrl}/api/logout`)
+            .pipe(map((response: any) => {
+                this.auth.clearUser();
+            }));
+    }
 }
