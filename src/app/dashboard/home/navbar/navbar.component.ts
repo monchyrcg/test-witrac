@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/auth/login/login.service';
+import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
+import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { StaticData } from 'src/app/shared/settings/staticdata';
 
@@ -23,13 +25,14 @@ export class NavBarComponent implements OnDestroy {
     defaultLocale: string = localStorage.getItem('locale');
 
     private subscription = new Subscription();
-    
+
     constructor(
         private settingService: SettingsService,
         private loginService: LoginService,
-        private router: Router
+        private router: Router,
+        private modalService: ModalService
     ) { }
-    
+
 
     disabled() {
         this.isOpen = false;
@@ -51,6 +54,15 @@ export class NavBarComponent implements OnDestroy {
 
         this.defaultLocale = lang;
         this.disabled();
+    }
+
+    showModal() {
+        this.modalService.init(ModalComponent, { text: 'El texto nuevo' }, { closeModal: this.closeModal.bind(this) });
+    }
+
+    closeModal() {
+        console.log(this.modalService); // undefined
+        this.modalService.destroy();
     }
 
     ngOnDestroy(): void {

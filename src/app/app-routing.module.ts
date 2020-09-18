@@ -22,7 +22,7 @@ const routes: Routes = [
     DashboardModule,
     AuthRoutingModule
   ],
-  exports: [RouterModule]
+  exports: [RouterModule, DashboardModule]
 })
 export class AppRoutingModule {
 
