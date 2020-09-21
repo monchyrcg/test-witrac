@@ -18,12 +18,15 @@
                             {{ 'dashboard.clients' | translate }}
                         </a>
 
-                        <a href="#" class="text menu modal">
+                        <a class="text menu modal">
                             {{ 'dashboard.new_appointment' | translate }}
                         </a>
 
-                        <a href="#" class="text menu modal" (click)="showModal()">
+                        <a class="text menu modal" (click)="createCustomer()">
                             {{ 'dashboard.new_client' | translate }}
+                        </a>
+                        <a class="text menu modal" (click)="showModal()">
+                            General modal
                         </a>
                     </div>
                 </div>
@@ -118,12 +121,15 @@
                 {{ 'dashboard.clients' | translate }}
             </a>
 
-            <a href="#" class="block text menu modal">
+            <a class="block text menu modal">
                 {{ 'dashboard.new_appointment' | translate }}
             </a>
 
-            <a href="#" class="block text menu modal" (click)="showModal()">
+            <a class="block text menu modal" (click)="createCustomer()">
                 {{ 'dashboard.new_client' | translate }}
+            </a>
+            <a class="block text menu modal" (click)="showModal()">
+                General modal
             </a>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700" style="cursor:

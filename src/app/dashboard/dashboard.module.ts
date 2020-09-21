@@ -12,12 +12,12 @@ import * as moment from 'moment';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/modules/shared.module';
 
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NavBarComponent } from './home/navbar/navbar.component';
-
-import { SharedModule } from '../shared/modules/shared.module';
+import { CustomerComponent } from './home/navbar/customer/customer.component';
 
 export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
@@ -32,7 +32,8 @@ registerLocaleData(localeIt);
     declarations: [
         HomeComponent,
         NavBarComponent,
-        CalendarComponent
+        CalendarComponent,
+        CustomerComponent
     ],
     imports: [
         CommonModule,

@@ -8,8 +8,5 @@ import { Component } from '@angular/core';
 
 export class HomeComponent {
 
-    isOpen = false;
-    isOpenMobile = true;
-
     constructor() { }
 }
