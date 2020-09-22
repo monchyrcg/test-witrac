@@ -4,3 +4,21 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.inputClass {
+   @apply shadow;
+   @apply appearance-none;
+   @apply border;
+   @apply rounded;
+   @apply w-full;
+   @apply py-2;
+   @apply px-3;
+   @apply text-nutriwell;
+   @apply leading-tight; 
+}
+
+.inputClass:focus {
+    @apply outline-none;
+    @apply border-nutriwell;
+}

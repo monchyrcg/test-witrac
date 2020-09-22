@@ -14,9 +14,9 @@ import { LoginService } from './login/login.service';
 
 @NgModule({
     declarations: [
-        LoginComponent,
-        ErrorFormComponent,
-        LabelFormComponent
+        LoginComponent
+        /* ErrorFormComponent,
+        LabelFormComponent */
     ],
     imports: [
         CommonModule,

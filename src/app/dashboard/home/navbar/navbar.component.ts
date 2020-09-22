@@ -23,7 +23,6 @@ export class NavBarComponent implements OnDestroy {
     locales = StaticData.locales;
     defaultLocale: string = localStorage.getItem('locale');
 
-
     private subscription = new Subscription();
 
     constructor(
@@ -61,7 +60,7 @@ export class NavBarComponent implements OnDestroy {
     }
 
     createCustomer() {
-        this.modalService.init(CustomerComponent, this.settingService.getLangText('customer'), { closeModal: this.closeModal.bind(this) });
+        this.modalService.init(CustomerComponent, this.settingService.getLangText('client_create'), { closeModal: this.closeModal.bind(this) });
     }
 
     ngOnDestroy(): void {

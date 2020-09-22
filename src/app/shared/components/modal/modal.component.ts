@@ -11,7 +11,6 @@ export class ModalComponent {
 	@Input() title: string;
 	@Input() text: string;
 	@Input() text_button_cancel: string;
-	@Input() icon: string;
 	@Output() closeModal;
 
 	closeModalF() {

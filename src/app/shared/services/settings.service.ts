@@ -23,7 +23,7 @@ export class SettingsService {
 		this.changeLocale.next(lang);
 	}
 
-	getLangText(target: string): string[] {
+	getLangText(target: string) {
 		return this.translateService.instant(target)
 	}
 }
