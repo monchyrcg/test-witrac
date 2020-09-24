@@ -2,26 +2,21 @@
     <div class="w-full max-w-xs" style="margin: 0 auto">
         <img src="https://naturhouse.es/_/img/logo_naturhouse.png" class="px-16
             mb-4" />
-        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-            [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
             <div class="mb-4">
                 <app-label-form for="email" name="{{ 'login.username' |
                     translate }}"></app-label-form>
-                <input formControlName="email"
-                    class="shadow appearance-none
+                <input formControlName="email" class="shadow appearance-none
                     border rounded w-full py-2
                     px-3
                     text-nutriwell leading-tight focus:outline-none
-                    focus:border-nutriwell"
-                    [ngClass]="{ 'border border-red-500': submitted &&
-                    f.password.errors }"
-                    id="email" type="text"
-                    placeholder="{{ 'login.username' | translate }}">
+                    focus:border-nutriwell" [ngClass]="{ 'border border-red-500': submitted &&
+                    f.password.errors }" id="email" type="text" placeholder="{{ 'login.username' | translate }}">
                 <ng-container *ngIf="submitted && f.email.errors">
-                    <app-error-form *ngIf="f.email.errors.required"
-                        error="{{'errors.required' | translate}}"></app-error-form>
-                    <app-error-form *ngIf="f.email.errors.email"
-                        error="{{'errors.email' | translate}}"></app-error-form>
+                    <app-error-form *ngIf="f.email.errors.required" error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                    <app-error-form *ngIf="f.email.errors.email" error="{{'errors.email' | translate}}">
+                    </app-error-form>
                 </ng-container>
 
             </div>
@@ -29,20 +24,18 @@
                 <app-label-form for="password" name="{{ 'login.password' |
                     translate }}"></app-label-form>
 
-                <input formControlName="password"
-                    class="shadow appearance-none
+                <input formControlName="password" class="shadow appearance-none
                     border rounded w-full py-2
                     px-3
                     text-nutriwell leading-tight focus:outline-none
-                    focus:border-nutriwell"
-                    [ngClass]="{ 'border border-red-500': submitted &&
-                    f.password.errors }"
-                    id="password"
-                    type="password"
+                    focus:border-nutriwell" [ngClass]="{ 'border border-red-500': submitted &&
+                    f.password.errors }" id="password" type="password"
                     placeholder="{{ 'login.password' | translate }}">
                 <ng-container *ngIf="submitted && f.password.errors">
-                    <app-error-form *ngIf="f.password.errors.required"
-                        error="{{'errors.required' | translate}}"></app-error-form>
+                    <app-error-form *ngIf="f.password.errors.required" error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                    <app-error-form *ngIf="f.password.errors.minlength" error="{{'errors.minLength' | translate:'8'}}">
+                    </app-error-form>
                 </ng-container>
             </div>
             <div class="flex items-center justify-between">
@@ -59,7 +52,7 @@
             </div>
         </form>
         <p class="text-center text-gray-500 text-xs">
-            {{ 'login.signed' | translate:param}}
+            {{ 'login.signed' | translate:param }}
         </p>
     </div>
 </div>

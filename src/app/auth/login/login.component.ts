@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	loginForm: FormGroup;
 	submitted = false;
 	param = { year: new Date().getFullYear() };
+	passwordLength = 8;
 
 	private subscription = new Subscription();
 

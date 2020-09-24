@@ -1,7 +1,8 @@
 {
     "errors": {
         "required": "The field is required",
-        "email": "The field must be a valid email"
+        "email": "The field must be a valid email",
+        "minLength": "The field must have at least {{ number }} characteres"
     },
     "login": {
         "username": "Username",

@@ -22,3 +22,8 @@
     @apply outline-none;
     @apply border-nutriwell;
 }
+
+.inputClass_groups {
+  @extend .inputClass;
+  @apply pl-16;
+}

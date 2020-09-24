@@ -19,6 +19,9 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { NavBarComponent } from './home/navbar/navbar.component';
 import { CustomerComponent } from './home/navbar/customer/customer.component';
 
+import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+
+
 export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
 }
@@ -41,7 +44,8 @@ registerLocaleData(localeIt);
         SharedModule,
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
         DashboardRoutingModule,
-        RouterModule
+        RouterModule,
+        Ng2FlatpickrModule
     ],
     providers: [],
 })
