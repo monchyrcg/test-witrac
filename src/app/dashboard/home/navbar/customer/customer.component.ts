@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Gender } from 'src/app/shared/models/gender.model';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import * as moment from 'moment';
-import Russian from 'flatpickr/dist/l10n/ru.js';
+import Spanish from 'flatpickr/dist/l10n/es.js';
 
 
 @Component({
@@ -25,12 +25,15 @@ export class CustomerComponent implements OnInit {
     clientForm: FormGroup;
     submitted = false;
 
+    under: boolean = false;
 
     private subscription = new Subscription();
 
     dateOptions: FlatpickrOptions = {
-        locale: Russian.ru,
-        maxDate: moment().subtract(18, 'years').format('YYYY-MM-DD')
+        locale: Spanish.es,
+        dateFormat: 'd-m-Y',
+        maxDate: moment().format('DD-MM-YYYY'),
+        disableMobile: true
     };
     constructor(
         private builder: FormBuilder,
@@ -51,6 +54,9 @@ export class CustomerComponent implements OnInit {
             prefix: ['+34', [Validators.required]],
             mobile: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
+            legal_checkbox: [''],
+            legal_name: [''],
+            legal_identity: [''],
         });
     }
 
@@ -63,6 +69,30 @@ export class CustomerComponent implements OnInit {
             return;
         }
 
+    }
+
+    changeDob($event) {
+        const dob = $event.target.value;
+        const dobFormat = moment(dob, 'DD-MM-YYYY');
+        const last = moment().subtract(18, 'years');
+
+        const legalFields = ['legal_checkbox', 'legal_name', 'legal_identity'];
+        if (dobFormat.isAfter(last, 'day')) {
+            legalFields.forEach(element => {
+                this.clientForm.get(element).setValidators([Validators.required]);
+            });
+
+            this.under = true;
+        } else {
+            legalFields.forEach(element => {
+                this.clientForm.get(element).clearValidators();
+            });
+
+            this.under = false;
+        }
+        legalFields.forEach(element => {
+            this.clientForm.get(element).updateValueAndValidity();
+        });
     }
 
     closeModalF() {

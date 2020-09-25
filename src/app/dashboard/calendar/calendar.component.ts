@@ -34,9 +34,9 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	view: CalendarView = CalendarView.Month;
 
 	locale: string = localStorage.getItem('locale');
-	changeLocaleSubscription: Subscription = null;
 
-	weekStartsOn: number = DAYS_OF_WEEK.TUESDAY;
+
+	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 
 	weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
@@ -117,9 +117,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnInit(): void {
-		this.changeLocaleSubscription = this.settingService.changeLocaleS$.subscribe((locale) => {
-			this.locale = locale;
-		})
+
 	}
 
 	dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -189,7 +187,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		this.changeLocaleSubscription.unsubscribe();
+
 	}
 
 }

@@ -77,7 +77,11 @@
                 }
               ]
             }
-          }
+          },
+          "allowedCommonJsDependencies": [
+            "angular-calendar/date-adapters/date-fns",
+            "@mattlewis92/dom-autoscroller"
+          ]
         },
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",

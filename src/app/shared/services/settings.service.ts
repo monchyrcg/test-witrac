@@ -7,11 +7,8 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class SettingsService {
 
-	private changeLocale = new BehaviorSubject<any>({ locale: localStorage.getItem('locale'), start: 1 });
-	public changeLocal$ = this.changeLocale.asObservable();
-
-	private changeLocaleSource = new Subject<string>();
-	public changeLocaleS$ = this.changeLocaleSource.asObservable();
+	private changeLocaleSource = new BehaviorSubject<any>({ locale: localStorage.getItem('locale'), start: 1 });
+	public changeLocal$ = this.changeLocaleSource.asObservable();
 
 	constructor(private translateService: TranslateService) { }
 
@@ -23,8 +20,7 @@ export class SettingsService {
 		this.setLang(lang);
 		localStorage.setItem('locale', lang);
 
-		this.changeLocale.next({ locale: lang, start: 1 });
-		this.changeLocaleSource.next(lang);
+		this.changeLocaleSource.next({ locale: lang, start: 1 });
 	}
 
 	getLangText(target: string) {
