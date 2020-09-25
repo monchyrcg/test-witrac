@@ -73,13 +73,16 @@
                                 <div class="absolute inset-y-0 left-0 flex items-center">
                                     <select aria-label="prefix" formControlName="prefix"
                                         class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5 focus:border-nutriwell">
-                                        <option>+34</option>
-                                        <option>+44</option>
-                                        <option>+15</option>
+                                        <option hidden selected value="">Prefix</option>
+                                        <option value="+34">+34</option>
+                                        <option value="+39">+39</option>
+                                        <option value="+33">+33</option>
+                                        <option value="+48">+48</option>
+                                        <option value="+1">+1</option>
                                     </select>
                                 </div>
                                 <input formControlName="mobile" class="inputClass_groups" id="mobile" type="number"
-                                    placeholder="{{ 'client_create.mobile' | translate }}">
+                                    placeholder="{{ 'client_create.mobile' | translate }}" min="0">
                             </div>
 
                         </div>

@@ -51,7 +51,7 @@ export class CustomerComponent implements OnInit {
             team: ['', [Validators.required]],
             dob: ['', [Validators.required]],
             job: ['', [Validators.required]],
-            prefix: ['+34', [Validators.required]],
+            prefix: ['', [Validators.required]],
             mobile: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
             legal_checkbox: [''],
