@@ -23,7 +23,8 @@
         "title": "Lorem ipsum",
         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis libero sit amet erat vehicula faucibus. Integer ultricies magna sed tellus bibendum, vitae iaculis mi dignissim. Donec at enim in ex molestie blandit. In lobortis lorem blandit, rutrum orci sollicitudin, pretium lectus. Mauris accumsan dignissim faucibus. Quisque vestibulum mauris ut magna mollis, eget tempus nulla dignissim.",
         "text_button_cancel": "Close"
-    }"client_create": {
+    },
+    "client_create": {
         "title": "Registrar el cliente",
         "text": "Registra tu cliente y sigue programando la cita",
         "text_button_register": "Registrar cliente",

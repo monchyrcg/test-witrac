@@ -1,9 +1,8 @@
-import { Component, ViewChild, TemplateRef, ChangeDetectionStrategy, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { Component, ViewChild, TemplateRef, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, DAYS_OF_WEEK } from 'angular-calendar';
-import { Subject } from 'rxjs';
-import * as moment from 'moment';
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
+import { Subject, Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { HttpClient } from '@angular/common/http';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 
 const colors: any = {
@@ -28,17 +27,18 @@ const colors: any = {
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, OnDestroy {
 
 	@ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
 	view: CalendarView = CalendarView.Month;
 
 	locale: string = localStorage.getItem('locale');
+	changeLocaleSubscription: Subscription = null;
 
-	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
+	weekStartsOn: number = DAYS_OF_WEEK.TUESDAY;
 
-	weekendDays: number[] = [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY];
+	weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];
 
 	CalendarView = CalendarView;
 
@@ -69,12 +69,10 @@ export class CalendarComponent implements OnInit {
 
 	refresh: Subject<any> = new Subject();
 
-	now = moment();
-
 	events: CalendarEvent[] = [
 		{
-			start: this.now.startOf('day').subtract(1).toDate(),
-			end: this.now.add(1).toDate(),
+			start: subDays(startOfDay(new Date()), 1),
+			end: addDays(new Date(), 1),
 			title: 'A 3 day event',
 			color: colors.red,
 			actions: this.actions,
@@ -86,45 +84,48 @@ export class CalendarComponent implements OnInit {
 			draggable: true,
 		},
 		{
-			start: this.now.startOf('day').toDate(),
+			start: startOfDay(new Date()),
 			title: 'An event with no end date',
 			color: colors.yellow,
 			actions: this.actions,
 		},
 		{
-			start: this.now.endOf('month').subtract(3).toDate(),
-			end: this.now.endOf('month').add(3).toDate(),
+			start: subDays(endOfMonth(new Date()), 3),
+			end: addDays(endOfMonth(new Date()), 3),
 			title: 'A long event that spans 2 months',
 			color: colors.blue,
 			allDay: true,
 		},
-		/* {
-		  start: addHours(startOfDay(new Date()), 2),
-		  end: addHours(new Date(), 2),
-		  title: 'A draggable and resizable event',
-		  color: colors.yellow,
-		  actions: this.actions,
-		  resizable: {
-			beforeStart: true,
-			afterEnd: true,
-		  },
-		  draggable: true,
-		}, */
+		{
+			start: addHours(startOfDay(new Date()), 2),
+			end: addHours(new Date(), 2),
+			title: 'A draggable and resizable event',
+			color: colors.yellow,
+			actions: this.actions,
+			resizable: {
+				beforeStart: true,
+				afterEnd: true,
+			},
+			draggable: true,
+		},
 	];
 
 	activeDayIsOpen = true;
 
-	constructor(private modal: NgbModal, private settingService: SettingsService) {
+	constructor(private modal: NgbModal, public settingService: SettingsService) {
 
 	}
-	ngOnInit(): void {
 
+	ngOnInit(): void {
+		this.changeLocaleSubscription = this.settingService.changeLocaleS$.subscribe((locale) => {
+			this.locale = locale;
+		})
 	}
 
 	dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-		if (moment(date).isSame(this.viewDate, 'month')) {
+		if (isSameMonth(date, this.viewDate)) {
 			if (
-				(moment(this.viewDate).isSame(date, 'day') && this.activeDayIsOpen === true) ||
+				(isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
 				events.length === 0
 			) {
 				this.activeDayIsOpen = false;
@@ -163,8 +164,8 @@ export class CalendarComponent implements OnInit {
 			...this.events,
 			{
 				title: 'New event',
-				start: this.now.startOf('day').toDate(),
-				end: this.now.endOf('day').toDate(),
+				start: startOfDay(new Date()),
+				end: endOfDay(new Date()),
 				color: colors.red,
 				draggable: true,
 				resizable: {
@@ -180,12 +181,15 @@ export class CalendarComponent implements OnInit {
 	}
 
 	setView(view: CalendarView): void {
-		this.locale = 'es';
 		this.view = view;
 	}
 
 	closeOpenMonthViewDay(): void {
 		this.activeDayIsOpen = false;
+	}
+
+	ngOnDestroy() {
+		this.changeLocaleSubscription.unsubscribe();
 	}
 
 }

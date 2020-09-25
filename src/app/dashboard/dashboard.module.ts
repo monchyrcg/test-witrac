@@ -6,8 +6,9 @@ import localeFr from '@angular/common/locales/it';
 import localeIt from '@angular/common/locales/fr';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 
-import { adapterFactory } from 'angular-calendar/date-adapters/moment';
-import * as moment from 'moment';
+// import { adapterFactory } from 'angular-calendar/date-adapters/moment';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+// import * as moment from 'moment';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 
@@ -22,9 +23,9 @@ import { CustomerComponent } from './home/navbar/customer/customer.component';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 
 
-export function momentAdapterFactory(): DateAdapter {
+/* export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
-}
+} */
 
 registerLocaleData(localeEs);
 registerLocaleData(localeEn);
@@ -42,7 +43,7 @@ registerLocaleData(localeIt);
         CommonModule,
         CommonModule,
         SharedModule,
-        CalendarModule.forRoot({ provide: DateAdapter, useFactory: momentAdapterFactory }),
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
         DashboardRoutingModule,
         RouterModule,
         Ng2FlatpickrModule

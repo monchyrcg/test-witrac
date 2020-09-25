@@ -1,9 +1,12 @@
 import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Ng2FlatpickrComponent } from 'ng2-flatpickr';
+import { FlatpickrOptions } from 'ng2-flatpickr';
 import { Subscription } from 'rxjs';
 import { Gender } from 'src/app/shared/models/gender.model';
 import { SettingsService } from 'src/app/shared/services/settings.service';
+import * as moment from 'moment';
+import Russian from 'flatpickr/dist/l10n/ru.js';
+
 
 @Component({
     selector: 'app-customer',
@@ -22,8 +25,13 @@ export class CustomerComponent implements OnInit {
     clientForm: FormGroup;
     submitted = false;
 
+
     private subscription = new Subscription();
 
+    dateOptions: FlatpickrOptions = {
+        locale: Russian.ru,
+        maxDate: moment().subtract(18, 'years').format('YYYY-MM-DD')
+    };
     constructor(
         private builder: FormBuilder,
         private settingService: SettingsService
