@@ -47,6 +47,9 @@
                             <app-label-form for="team" name="{{ 'client_create.team' | translate }}"></app-label-form>
                             <input formControlName="team" class="inputClass" id="team" type="text"
                                 placeholder="{{ 'client_create.team' | translate }}">
+                            <app-error-form *ngIf="submitted && f.team.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
                         </div>
                     </div>
 
@@ -56,12 +59,18 @@
                             <ng2-flatpickr formControlName="dob" #calendar addClass="inputClass" [config]="dateOptions"
                                 placeholder="{{ 'client_create.dob' | translate }}" (change)="changeDob($event)">
                             </ng2-flatpickr>
+                            <app-error-form *ngIf="submitted && f.dob.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
                         </div>
                         <div class="mt-3 mx-4 text-left">
                             <app-label-form for="job" name="{{ 'client_create.job' | translate }}">
                             </app-label-form>
                             <input formControlName="job" class="inputClass" id="job" type="text"
                                 placeholder="{{ 'client_create.job' | translate }}">
+                            <app-error-form *ngIf="submitted && f.job.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
                         </div>
                     </div>
 
@@ -84,13 +93,22 @@
                                 <input formControlName="mobile" class="inputClass_groups" id="mobile" type="number"
                                     placeholder="{{ 'client_create.mobile' | translate }}" min="0">
                             </div>
-
+                            <app-error-form *ngIf="submitted && f.mobile.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
                         </div>
                         <div class="mt-3 mx-4 text-left">
                             <app-label-form for="email" name="{{ 'client_create.email' | translate }}">
                             </app-label-form>
                             <input formControlName="email" class="inputClass" id="email" type="text"
                                 placeholder="{{ 'client_create.email' | translate }}">
+                            <ng-container *ngIf="submitted && f.email.errors">
+                                <app-error-form *ngIf="f.email.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                                <app-error-form *ngIf="f.email.errors.email" error="{{'errors.email' | translate}}">
+                                </app-error-form>
+                            </ng-container>
                         </div>
                     </div>
 

@@ -5,4 +5,6 @@ export interface User {
     name?: string;
     updated_at?: Date;
     token: string;
+    current_team_id?: number;
+    teams?: any;
 }

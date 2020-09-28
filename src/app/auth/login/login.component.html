@@ -38,6 +38,10 @@
                     </app-error-form>
                 </ng-container>
             </div>
+            <div class="mb-6" *ngIf="error">
+                <app-error-form *ngIf="error == 501" error="Unauthorized">
+                </app-error-form>
+            </div>
             <div class="flex items-center justify-between">
                 <button class="bg-nutriwell text-white border
                     hover:bg-white hover:text-nutriwell hover:border-nutriwell

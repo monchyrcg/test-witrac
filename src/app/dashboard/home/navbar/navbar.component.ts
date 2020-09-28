@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/auth/login/login.service';
@@ -14,23 +14,35 @@ import { CustomerComponent } from './customer/customer.component';
     styleUrls: ['./navbar.component.scss'],
 })
 
-export class NavBarComponent implements OnDestroy {
+export class NavBarComponent implements OnInit, OnDestroy {
 
     isOpen = false;
     isOpenMobile = true;
     isLanguage = false;
     openLocaleMobile = false;
+
+    // team
+    nameTeam: string;
+    divTeams = false;
+    totalTeams: number;
+    teams: any;
+
+    // locale
     locales = StaticData.locales;
     defaultLocale: string = localStorage.getItem('locale');
-
     private subscription = new Subscription();
 
     constructor(
-        private settingService: SettingsService,
+        public settingService: SettingsService,
         private loginService: LoginService,
         private router: Router,
         private modalService: ModalService
     ) { }
+
+
+    ngOnInit(): void {
+        this.settingService.getTeam();
+    }
 
 
     disabled() {
@@ -49,6 +61,11 @@ export class NavBarComponent implements OnDestroy {
 
         this.defaultLocale = lang;
         this.disabled();
+    }
+
+    changeTeam(id: number): void {
+        this.settingService.changeTeam(id);
+        this.divTeams = false;
     }
 
     showModal() {

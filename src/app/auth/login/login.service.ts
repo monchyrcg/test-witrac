@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { environment } from '../../../environments/environment';
 import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { User } from 'src/app/shared/models/user.model';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class LoginService {
@@ -25,8 +25,10 @@ export class LoginService {
         return this.http
             .post(`${environment.apiUrl}/api/login`, body)
             .pipe(map((response: any) => {
-                const result: User = response.data;
-                this.auth.setToken(result);
+                if (!response.error) {
+                    const result: User = response.data;
+                    this.auth.setToken(result);
+                }
             }));
     }
 
@@ -36,11 +38,12 @@ export class LoginService {
             .pipe(map((response: any) => {
                 const result: User = response.data;
                 result.token = JSON.parse(localStorage.getItem('currentUser')).token;
+
                 this.auth.setToken(result);
             }));
     }
 
-    logout(){
+    logout() {
         return this.http
             .get(`${environment.apiUrl}/api/logout`)
             .pipe(map((response: any) => {

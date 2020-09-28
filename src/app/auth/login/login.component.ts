@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 	submitted = false;
 	param = { year: new Date().getFullYear() };
 	passwordLength = 8;
+	error: number;
 
 	private subscription = new Subscription();
 
@@ -53,11 +54,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 							res => {
 								this.router.navigate(['/']);
 							}, error => {
-								console.log(error);
+								console.log(error.status);
 							}
 						)
 					}, error => {
-						console.log(error);
+						this.error = error.status;
+
 					}
 				)
 			}
