@@ -64,11 +64,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     }
 
     changeTeam(id: number) {
-        this.settingService.changeTeam(id).subscribe(
-            res => {
-                console.log(res);
-            }
-        );
+        this.subscription.add(this.settingService.changeTeam(id).subscribe());
         this.divTeams = false;
     }
 

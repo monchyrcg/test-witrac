@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
+import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Roles } from '../data/rol';
 import { User } from '../models/user.model';
 import { AuthenticationGeneralService } from './auth-general.service';
 
@@ -18,7 +20,13 @@ export class SettingsService {
 	private changeTeamSource = new BehaviorSubject<any>({});
 	public changeTeam$ = this.changeTeamSource.asObservable();
 
-	constructor(private http: HttpClient, private translateService: TranslateService, private authService: AuthenticationGeneralService) { }
+	constructor(
+		private http: HttpClient,
+		private translateService: TranslateService,
+		private authService: AuthenticationGeneralService,
+		private rolesService: NgxRolesService,
+		private permissionsService: NgxPermissionsService
+	) { }
 
 	setLang(lang) {
 		this.translateService.use(lang);
@@ -38,13 +46,23 @@ export class SettingsService {
 	getTeam() {
 		const user: User = this.authService.getUser();
 
-		const nameTeam = (user.teams).filter(x => x.id == user.current_team_id).map(u => u.name);
+		const currentTeam = (user.teams).filter(x => x.id == user.current_team_id)[0];
+		const nameTeam = currentTeam.name;
 
 		const totalTeams = (user.teams).length;
 
 		const teams = user.teams;
 
 		const current_team_id = user.current_team_id;
+
+		const rol = Roles.roles.filter(x => x.id == currentTeam.rol)[0];
+		// borramos y cargamos los permisos para el rol
+		this.permissionsService.flushPermissions();
+		this.permissionsService.loadPermissions(rol.permissions);
+
+		// borramos y cargamos el rol
+		this.rolesService.flushRoles();
+		this.rolesService.addRole(rol.name, rol.permissions);
 
 		this.changeTeamSource.next({ current_team_id: current_team_id, nameTeam: nameTeam, totalTeams: totalTeams, teams: teams });
 	}

@@ -39,6 +39,7 @@
     "flatpickr": "^4.6.6",
     "moment": "^2.26.0",
     "ng2-flatpickr": "^9.0.0",
+    "ngx-permissions": "^8.1.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

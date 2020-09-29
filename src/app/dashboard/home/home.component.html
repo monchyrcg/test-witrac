@@ -2,6 +2,8 @@
     <app-navbar></app-navbar>
 
     <main>
+        <p *ngxPermissionsOnly="'admin'">ADMIN</p>
+        <p *ngxPermissionsOnly="'secretary'">SECRETARY</p>
         <router-outlet></router-outlet>
     </main>
 </div>

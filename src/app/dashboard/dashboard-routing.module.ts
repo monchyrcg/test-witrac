@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 
 const routes: Routes = [
@@ -16,7 +17,14 @@ const routes: Routes = [
             { path: '', redirectTo: '', pathMatch: 'full' },
             {
                 path: 'calendar',
-                component: CalendarComponent
+                component: CalendarComponent,
+                canActivate: [NgxPermissionsGuard],
+                data: {
+                    permissions: {
+                        only: ['admin'],
+                        redirectTo: '/forbidden'
+                    }
+                }
                 // loadChildren: './components/profile/profile.module#ProfileModule',
             },
         ]

@@ -80,7 +80,8 @@
           },
           "allowedCommonJsDependencies": [
             "angular-calendar/date-adapters/date-fns",
-            "@mattlewis92/dom-autoscroller"
+            "@mattlewis92/dom-autoscroller",
+            "ng2-flatpickr"
           ]
         },
         "serve": {

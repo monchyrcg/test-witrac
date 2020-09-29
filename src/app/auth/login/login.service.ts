@@ -4,12 +4,14 @@ import { HttpClient } from "@angular/common/http";
 import { map } from "rxjs/operators";
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { User } from 'src/app/shared/models/user.model';
-import { Subject } from 'rxjs';
 
 @Injectable()
 export class LoginService {
 
-    constructor(private http: HttpClient, private auth: AuthenticationGeneralService) { }
+    constructor(
+        private http: HttpClient,
+        private auth: AuthenticationGeneralService,
+    ) { }
 
     sanctum() {
         return this.http

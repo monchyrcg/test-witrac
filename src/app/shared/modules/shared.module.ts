@@ -8,6 +8,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ModalComponent } from '../components/modal/modal.component';
 import { ErrorFormComponent } from '../components/form/error/error.component';
 import { LabelFormComponent } from '../components/form/label/label.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -25,7 +26,8 @@ export function createTranslateLoader(http: HttpClient) {
                 useFactory: createTranslateLoader,
                 deps: [HttpClient]
             }
-        })
+        }),
+        NgxPermissionsModule.forRoot()
     ],
     exports: [
         CommonModule,
@@ -33,7 +35,8 @@ export function createTranslateLoader(http: HttpClient) {
         FormsModule,
         ReactiveFormsModule,
         ErrorFormComponent,
-        LabelFormComponent
+        LabelFormComponent,
+        NgxPermissionsModule
     ],
     declarations: [
         ModalComponent,
