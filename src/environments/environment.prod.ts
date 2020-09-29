@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'api.nutriwell.test'
+  url: 'api.nutriwell.test',
+  apiUrl: 'http://api.nutriwell.test/api'
 };

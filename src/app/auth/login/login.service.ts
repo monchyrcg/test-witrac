@@ -13,7 +13,7 @@ export class LoginService {
 
     sanctum() {
         return this.http
-            .get(`${environment.apiUrl}/sanctum/csrf-cookie`)
+            .get(`${environment.url}/sanctum/csrf-cookie`)
             .pipe(map((response: any) => response));
     }
 
@@ -23,7 +23,7 @@ export class LoginService {
             password,
         };
         return this.http
-            .post(`${environment.apiUrl}/api/login`, body)
+            .post(`${environment.apiUrl}/login`, body)
             .pipe(map((response: any) => {
                 if (!response.error) {
                     const result: User = response.data;
@@ -34,7 +34,7 @@ export class LoginService {
 
     getUser() {
         return this.http
-            .get(`${environment.apiUrl}/api/user`)
+            .get(`${environment.apiUrl}/user`)
             .pipe(map((response: any) => {
                 const result: User = response.data;
                 result.token = JSON.parse(localStorage.getItem('currentUser')).token;
@@ -45,7 +45,7 @@ export class LoginService {
 
     logout() {
         return this.http
-            .get(`${environment.apiUrl}/api/logout`)
+            .get(`${environment.apiUrl}/logout`)
             .pipe(map((response: any) => {
                 this.auth.clearUser();
             }));

@@ -1,6 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user.model';
 import { AuthenticationGeneralService } from './auth-general.service';
 
@@ -15,7 +18,7 @@ export class SettingsService {
 	private changeTeamSource = new BehaviorSubject<any>({});
 	public changeTeam$ = this.changeTeamSource.asObservable();
 
-	constructor(private translateService: TranslateService, private authService: AuthenticationGeneralService) { }
+	constructor(private http: HttpClient, private translateService: TranslateService, private authService: AuthenticationGeneralService) { }
 
 	setLang(lang) {
 		this.translateService.use(lang);
@@ -41,13 +44,25 @@ export class SettingsService {
 
 		const teams = user.teams;
 
-		this.changeTeamSource.next({ nameTeam: nameTeam, totalTeams: totalTeams, teams: teams });
+		const current_team_id = user.current_team_id;
+
+		this.changeTeamSource.next({ current_team_id: current_team_id, nameTeam: nameTeam, totalTeams: totalTeams, teams: teams });
 	}
 
 	changeTeam(id: number) {
-		let user = this.authService.getUser();
-		user.current_team_id = id;
-		this.authService.setToken(user);
-		this.getTeam();
+		const body = {
+			id
+		};
+		return this.http
+			.put(`${environment.apiUrl}/change-team`, body)
+			.pipe(map((response: any) => {
+				if (!response.error) {
+					let user = this.authService.getUser();
+					user.current_team_id = id;
+					this.authService.setToken(user);
+					this.getTeam();
+				}
+			}));
+
 	}
 }

@@ -193,7 +193,10 @@
             *ngIf="divTeams">
             <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
                 aria-labelledby="user-menu">
-                <a class="navbar-a" role="menuitem" (click)="changeTeam(team.id)"
+                <a class="navbar-a" role="menuitem"
+                    [ngClass]="{ 'bg-nutriwell': team.id ==  (settingService.changeTeam$ | async).current_team_id}"
+                    [ngStyle]="{'color':team.id ==  (settingService.changeTeam$ | async).current_team_id ? 'white' : '' }"
+                    (click)="changeTeam(team.id)"
                     *ngFor="let team of (settingService.changeTeam$ | async).teams">{{ team.name }}</a>
             </div>
         </div>
