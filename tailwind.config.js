@@ -5,6 +5,9 @@ module.exports = {
   },
   purge: [],
   theme: {
+    fontFamily: {
+      'nutriwell': ['slim-joe, big-jhon', 'monserrat'],
+    },
     extend: {
       colors: {
         nutriwell: {
