@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SettingsService } from './shared/services/settings.service';
-import { StaticData } from './shared/settings/staticdata';
+import { Locales } from './shared/settings/locale';
 
 @Component({
 	selector: 'app-root',
@@ -9,7 +9,7 @@ import { StaticData } from './shared/settings/staticdata';
 
 export class AppComponent {
 
-	defaulLocal = StaticData.locales;
+	defaulLocal = Locales.locales;
 
 	constructor(private settingService: SettingsService) {
 

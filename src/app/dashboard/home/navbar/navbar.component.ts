@@ -5,7 +5,7 @@ import { LoginService } from 'src/app/auth/login/login.service';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
-import { StaticData } from 'src/app/shared/settings/staticdata';
+import { Locales } from 'src/app/shared/settings/locale';
 import { CustomerComponent } from './customer/customer.component';
 
 @Component({
@@ -28,7 +28,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     teams: any;
 
     // locale
-    locales = StaticData.locales;
+    locales = Locales.locales;
     defaultLocale: string = localStorage.getItem('locale');
     private subscription = new Subscription();
 

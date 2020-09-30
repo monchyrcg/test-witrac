@@ -5,7 +5,7 @@ import { NgxPermissionsService, NgxRolesService } from 'ngx-permissions';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Roles } from '../data/rol';
+import { Roles } from '../settings/rol';
 import { User } from '../models/user.model';
 import { AuthenticationGeneralService } from './auth-general.service';
 
@@ -56,11 +56,11 @@ export class SettingsService {
 		const current_team_id = user.current_team_id;
 
 		const rol = Roles.roles.filter(x => x.id == currentTeam.rol)[0];
-		// borramos y cargamos los permisos para el rol
+		// refresh permissions
 		this.permissionsService.flushPermissions();
 		this.permissionsService.loadPermissions(rol.permissions);
 
-		// borramos y cargamos el rol
+		// refresh roles
 		this.rolesService.flushRoles();
 		this.rolesService.addRole(rol.name, rol.permissions);
 
