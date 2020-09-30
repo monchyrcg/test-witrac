@@ -8,6 +8,12 @@ module.exports = {
     fontFamily: {
       'nutriwell': ['slim-joe, big-jhon', 'monserrat'],
     },
+    inset: {
+      '0': 0,
+      auto: 'auto',
+      '1/2': '50px',
+      '1/2%': '50%',
+    },
     extend: {
       colors: {
         nutriwell: {

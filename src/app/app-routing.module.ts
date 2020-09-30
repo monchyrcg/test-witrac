@@ -9,6 +9,7 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { LoginComponent } from './auth/login/login.component';
 
 import { AuthGuard } from './shared/guards/auth.guard';
+
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
@@ -20,7 +21,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     DashboardModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+
   ],
   exports: [RouterModule, DashboardModule]
 })

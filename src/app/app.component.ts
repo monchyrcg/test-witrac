@@ -19,7 +19,7 @@ export class AppComponent {
 			const browserLocale = (navigator.language).split('-')[0];
 
 			const setLocale = this.defaulLocal.includes(browserLocale) ? browserLocale : 'en';
-
+			console.log(setLocale);
 			this.settingService.changeLang(setLocale);
 		}
 	}

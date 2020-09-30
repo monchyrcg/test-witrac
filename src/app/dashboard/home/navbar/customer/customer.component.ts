@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { Subscription } from 'rxjs';
@@ -6,6 +6,9 @@ import { Gender } from 'src/app/shared/models/gender.model';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import * as moment from 'moment';
 import Spanish from 'flatpickr/dist/l10n/es.js';
+import { CustomerService } from 'src/app/shared/services/customer.service';
+import { Customer } from 'src/app/shared/models/customer.model';
+import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 
 
 @Component({
@@ -14,7 +17,7 @@ import Spanish from 'flatpickr/dist/l10n/es.js';
     // styleUrls: ['./customer.component.scss'],
 })
 
-export class CustomerComponent implements OnInit {
+export class CustomerComponent implements OnInit, OnDestroy {
 
     @Input() title: string;
     @Input() text: string;
@@ -22,7 +25,7 @@ export class CustomerComponent implements OnInit {
     @Output() closeModal;
 
     genders: Gender[] = [];
-    clientForm: FormGroup;
+    customerForm: FormGroup;
     submitted = false;
 
     under: boolean = false;
@@ -37,19 +40,20 @@ export class CustomerComponent implements OnInit {
     };
     constructor(
         private builder: FormBuilder,
-        private settingService: SettingsService
+        private settingService: SettingsService,
+        private customerService: CustomerService,
+        private snackbarService: SnackbarService
     ) { }
-
 
     ngOnInit(): void {
         this.genders.push({ id: 1, text: this.settingService.getLangText('genders.male') });
         this.genders.push({ id: 2, text: this.settingService.getLangText('genders.female') });
 
-        this.clientForm = this.builder.group({
+        this.customerForm = this.builder.group({
             name: ['', [Validators.required]],
             gender: ['', [Validators.required]],
             team: ['', [Validators.required]],
-            dob: ['', [Validators.required]],
+            dob: [null, [Validators.required]],
             job: ['', [Validators.required]],
             prefix: ['', [Validators.required]],
             mobile: ['', [Validators.required]],
@@ -60,15 +64,29 @@ export class CustomerComponent implements OnInit {
         });
     }
 
-    get f() { return this.clientForm.controls; }
+    get f() { return this.customerForm.controls; }
 
     onSubmit() {
+
         this.submitted = true;
 
-        if (this.clientForm.invalid) {
+        if (this.customerForm.invalid) {
             return;
         }
 
+        let customer: Customer = this.customerForm.value;
+        customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
+        console.log(customer);
+
+        this.subscription.add(this.customerService.saveCustomer(customer).subscribe(
+            (response) => {
+                console.log(response);
+            },
+            (error) => {
+                this.closeModalF();
+                this.snackbarService.show('This is test', 'danger');
+            }
+        ));
     }
 
     changeDob($event) {
@@ -79,23 +97,29 @@ export class CustomerComponent implements OnInit {
         const legalFields = ['legal_checkbox', 'legal_name', 'legal_identity'];
         if (dobFormat.isAfter(last, 'day')) {
             legalFields.forEach(element => {
-                this.clientForm.get(element).setValidators([Validators.required]);
+                this.customerForm.get(element).setValidators([Validators.required]);
             });
 
             this.under = true;
         } else {
             legalFields.forEach(element => {
-                this.clientForm.get(element).clearValidators();
+                let currentElement = this.customerForm.get(element);
+                currentElement.clearValidators();
+                currentElement.setValue('');
             });
 
             this.under = false;
         }
         legalFields.forEach(element => {
-            this.clientForm.get(element).updateValueAndValidity();
+            this.customerForm.get(element).updateValueAndValidity();
         });
     }
 
     closeModalF() {
         this.closeModal();
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }

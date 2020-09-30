@@ -25,6 +25,7 @@
 }
 
 .modal {
+    @apply cursor-pointer;
     @apply text-white;
     @apply bg-gray-700;
 }
@@ -35,7 +36,7 @@
 }
 
 .navbar-a {
-    cursor: pointer;
+    @apply cursor-pointer;
     @apply block;
     @apply px-4;
     @apply py-2;

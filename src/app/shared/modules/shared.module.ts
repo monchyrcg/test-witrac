@@ -10,6 +10,8 @@ import { ErrorFormComponent } from '../components/form/error/error.component';
 import { LabelFormComponent } from '../components/form/label/label.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
+import { SnackbarComponent } from '../components/snackbar/snackbar.component';
+
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -27,7 +29,8 @@ export function createTranslateLoader(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
-        NgxPermissionsModule.forRoot()
+        NgxPermissionsModule.forRoot(),
+
     ],
     exports: [
         CommonModule,
@@ -36,12 +39,14 @@ export function createTranslateLoader(http: HttpClient) {
         ReactiveFormsModule,
         ErrorFormComponent,
         LabelFormComponent,
-        NgxPermissionsModule
+        NgxPermissionsModule,
+        SnackbarComponent
     ],
     declarations: [
         ModalComponent,
         ErrorFormComponent,
-        LabelFormComponent
+        LabelFormComponent,
+        SnackbarComponent
     ],
     entryComponents: [],
     providers: []

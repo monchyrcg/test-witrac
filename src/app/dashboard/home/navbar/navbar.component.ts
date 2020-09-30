@@ -77,7 +77,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
     }
 
     createCustomer() {
-        this.modalService.init(CustomerComponent, this.settingService.getLangText('client_create'), { closeModal: this.closeModal.bind(this) });
+        this.modalService.init(CustomerComponent, this.settingService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
     }
 
     ngOnDestroy(): void {

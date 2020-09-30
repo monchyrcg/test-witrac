@@ -21,6 +21,7 @@ import { NavBarComponent } from './home/navbar/navbar.component';
 import { CustomerComponent } from './home/navbar/customer/customer.component';
 
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 /* export function momentAdapterFactory(): DateAdapter {
@@ -41,12 +42,12 @@ registerLocaleData(localeIt);
     ],
     imports: [
         CommonModule,
-        CommonModule,
         SharedModule,
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
         DashboardRoutingModule,
         RouterModule,
-        Ng2FlatpickrModule
+        Ng2FlatpickrModule,
+        // NgxPermissionsModule.forChild()
     ],
     providers: [],
 })

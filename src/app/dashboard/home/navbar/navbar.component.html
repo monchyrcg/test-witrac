@@ -14,8 +14,8 @@
                             {{ 'dashboard.calendar' | translate }}
                         </a>
 
-                        <a routerLink="clients" routerLinkActive="active" class="text menu">
-                            {{ 'dashboard.clients' | translate }}
+                        <a routerLink="customers" routerLinkActive="active" class="text menu">
+                            {{ 'dashboard.customers' | translate }}
                         </a>
 
                         <a class="text menu modal">
@@ -23,7 +23,7 @@
                         </a>
 
                         <a class="text menu modal" (click)="createCustomer()">
-                            {{ 'dashboard.new_client' | translate }}
+                            {{ 'dashboard.new_customer' | translate }}
                         </a>
                         <a class="text menu modal" (click)="showModal()">
                             General modal
@@ -31,6 +31,7 @@
                     </div>
                 </div>
             </div>
+
             <div id="modal-container" class="hidden"></div>
             <div id="overlay" (click)="closeModal()" class="hidden"></div>
 
@@ -40,7 +41,12 @@
                         text-gray-400 rounded-full hover:text-white
                         focus:outline-none focus:text-white
                         focus:bg-gray-700" aria-label="Notifications" (click)="isLanguage= !isLanguage">
-                        {{ defaultLocale | uppercase }}
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
+                            </path>
+                        </svg>
                     </button>
 
 
@@ -81,8 +87,10 @@
                             mt-2 w-48 rounded-md shadow-lg" *ngIf="isLanguage">
                             <div class="py-1 rounded-md bg-white
                                 shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
-                                <a class="navbar-a" role="menuitem" *ngFor="let locale of
-                                    locales" (click)="changeLang(locale)">{{locale |
+                                <a class="navbar-a" role="menuitem"
+                                    [ngClass]="{ 'bg-nutriwell': defaultLocale ==  locale}"
+                                    [ngStyle]="{'color':defaultLocale ==  locale ? 'white' : '' }"
+                                    *ngFor="let locale of locales" (click)="changeLang(locale)">{{locale |
                                     uppercase}}</a>
                             </div>
                         </div>
@@ -117,8 +125,8 @@
             <a routerLink="calendar" routerLinkActive="active" class="block text menu">
                 {{ 'dashboard.calendar' | translate }}
             </a>
-            <a routerLink="clients" routerLinkActive="active" class="block text menu">
-                {{ 'dashboard.clients' | translate }}
+            <a routerLink="customers" routerLinkActive="active" class="block text menu">
+                {{ 'dashboard.customers' | translate }}
             </a>
 
             <a class="block text menu modal">
@@ -126,14 +134,13 @@
             </a>
 
             <a class="block text menu modal" (click)="createCustomer()">
-                {{ 'dashboard.new_client' | translate }}
+                {{ 'dashboard.new_customer' | translate }}
             </a>
             <a class="block text menu modal" (click)="showModal()">
                 General modal
             </a>
         </div>
-        <div class="pt-4 pb-3 border-t border-gray-700" style="cursor:
-                    pointer;">
+        <div class="pt-4 pb-3 border-t border-gray-700 cursor-pointer">
             <div class="flex items-center px-5 space-x-3" (click)="openLocaleMobile= !openLocaleMobile">
                 <div class="flex-shrink-0 font-medium text-gray-400">
                     Locale : {{ defaultLocale | uppercase }}
@@ -146,8 +153,7 @@
                 </a>
             </div>
         </div>
-        <div class="pt-4 pb-3 border-t border-gray-700" style="cursor:
-                    pointer;">
+        <div class="pt-4 pb-3 border-t border-gray-700 cursor-pointer">
             <div class="flex items-center px-5 space-x-3">
                 <div class="flex-shrink-0">
                     <img class="h-10 w-10 rounded-full"
@@ -183,12 +189,12 @@
         </h1>
 
         <ng-container *ngIf="(settingService.changeTeam$ | async).totalTeams > 0">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg" (click)="divTeams = !divTeams" style="cursor: pointer;">
+            <svg class="w-6 h-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" (click)="divTeams = !divTeams">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
         </ng-container>
-        <!-- </h1> -->
+
         <div class="transition ease-in duration-75  origin-top-le absolute ml-16 mt-10 w-48 rounded-md shadow-lg"
             *ngIf="divTeams">
             <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
