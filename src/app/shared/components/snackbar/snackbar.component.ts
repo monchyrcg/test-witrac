@@ -32,7 +32,6 @@ import { trigger, transition, animate, style } from '@angular/animations';
 
 export class SnackbarComponent implements OnInit, OnDestroy {
 
-
 	show = false;
 	private message: string = 'This is snackbar';
 	private type: string = 'success';
@@ -51,18 +50,13 @@ export class SnackbarComponent implements OnInit, OnDestroy {
 					}
 					this.message = state.message;
 					this.show = state.show;
-					// setTimeout(() => {
-					// 	this.show = false;
-					// }, 3000);
+					setTimeout(() => {
+						this.show = false;
+					}, 3000);
 				});
 	}
 
 	ngOnDestroy() {
 		this.snackbarSubscription.unsubscribe();
 	}
-
-
-
-
-
 }

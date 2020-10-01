@@ -76,17 +76,22 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
         let customer: Customer = this.customerForm.value;
         customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
-        console.log(customer);
 
         this.subscription.add(this.customerService.saveCustomer(customer).subscribe(
             (response) => {
-                console.log(response);
+                this.showSnackBar('Todo ha ido bien ....', 'success');
             },
             (error) => {
-                this.closeModalF();
-                this.snackbarService.show('This is test', 'danger');
+                this.showSnackBar('Algo ha pasado ....', 'danger');
             }
         ));
+    }
+
+    showSnackBar(text: string, _class: string) {
+        this.closeModalF();
+        console.log(text);
+        console.log(_class);
+        this.snackbarService.show(text, _class);
     }
 
     changeDob($event) {
