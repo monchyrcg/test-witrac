@@ -9,6 +9,7 @@ import Spanish from 'flatpickr/dist/l10n/es.js';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Customer } from 'src/app/shared/models/customer.model';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
+import { UtilsService } from 'src/app/shared/services/util.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
     private subscription = new Subscription();
 
     dateOptions: FlatpickrOptions = {
-        locale: Spanish.es,
+        // locale: Spanish.es,
         dateFormat: 'd-m-Y',
         maxDate: moment().format('DD-MM-YYYY'),
         disableMobile: true
@@ -42,7 +43,8 @@ export class CustomerComponent implements OnInit, OnDestroy {
         private builder: FormBuilder,
         private settingService: SettingsService,
         private customerService: CustomerService,
-        private snackbarService: SnackbarService
+        private snackbarService: SnackbarService,
+        private utilService: UtilsService
     ) { }
 
     ngOnInit(): void {
@@ -58,9 +60,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
             prefix: ['', [Validators.required]],
             mobile: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email]],
-            legal_checkbox: [''],
-            legal_name: [''],
-            legal_identity: [''],
+            legal_checkbox: [null],
+            legal_name: [null],
+            legal_identity: [null],
         });
     }
 
@@ -74,12 +76,12 @@ export class CustomerComponent implements OnInit, OnDestroy {
             return;
         }
 
-        let customer: Customer = this.customerForm.value;
+        let customer: Customer = this.utilService.clear(this.customerForm.value);
         customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
 
         this.subscription.add(this.customerService.saveCustomer(customer).subscribe(
             (response) => {
-                this.showSnackBar('Todo ha ido bien ....', 'success');
+                this.showSnackBar('Customer created successfully.', 'success');
             },
             (error) => {
                 this.showSnackBar('Algo ha pasado ....', 'danger');
@@ -89,8 +91,6 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     showSnackBar(text: string, _class: string) {
         this.closeModalF();
-        console.log(text);
-        console.log(_class);
         this.snackbarService.show(text, _class);
     }
 

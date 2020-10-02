@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SettingsService } from './shared/services/settings.service';
-import { Locales } from './shared/settings/locale';
+import { Countries } from './shared/settings/country';
 
 @Component({
 	selector: 'app-root',
@@ -9,18 +9,20 @@ import { Locales } from './shared/settings/locale';
 
 export class AppComponent {
 
-	defaulLocal = Locales.locales;
+	defaultCountry = Countries.countries;
 
 	constructor(private settingService: SettingsService) {
 
-		if (localStorage.getItem('locale')) {
-			this.settingService.setLang(localStorage.getItem('locale'));
+		if (localStorage.getItem('country')) {
+			const locale = Countries.settingCountry[localStorage.getItem('country')].locale;
+			this.settingService.setLang(locale);
 		} else {
+			console.log(navigator);
 			const browserLocale = (navigator.language).split('-')[0];
 
-			const setLocale = this.defaulLocal.includes(browserLocale) ? browserLocale : 'en';
-			console.log(setLocale);
-			this.settingService.changeLang(setLocale);
+			const setLocale = this.defaultCountry.includes(browserLocale) ? browserLocale : 'en';
+
+			this.settingService.changeCountry(setLocale);
 		}
 	}
 }

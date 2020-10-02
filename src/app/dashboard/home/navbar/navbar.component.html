@@ -4,9 +4,7 @@
 
             <div class="flex items-center">
                 <div class="flex-shrink-0">
-                    <img class="h-8 w-8"
-                        src="https://scontent-mad1-1.xx.fbcdn.net/v/t1.0-0/p370x247/116716516_10157120818772132_7411954467248381520_n.jpg?_nc_cat=106&_nc_sid=85a577&_nc_ohc=einXARSO3QcAX8d8icK&_nc_ht=scontent-mad1-1.xx&tp=6&oh=7e7c3a2dd0132df4e2d231a6d72b5475&oe=5F79B9C7"
-                        alt="Workflow logo">
+                    <img class="h-8 w-8" src="assets/images/logo" alt="Workflow logo">
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -40,12 +38,11 @@
                     <button class="p-1 border-2 border-transparent
                         text-gray-400 rounded-full hover:text-white
                         focus:outline-none focus:text-white
-                        focus:bg-gray-700" aria-label="Notifications" (click)="isLanguage= !isLanguage">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129">
-                            </path>
+                        focus:bg-gray-700" aria-label="Notifications" (click)="isCountry= !isCountry">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z"
+                                clip-rule="evenodd"></path>
                         </svg>
                     </button>
 
@@ -63,7 +60,7 @@
                                 alt="">
                         </button>
 
-                        <button *ngIf="isOpen || isLanguage" (click)="disabled()" tabindex="-1" class="fixed
+                        <button *ngIf="isOpen || isCountry" (click)="disabled()" tabindex="-1" class="fixed
                             inset-0 h-full w-full
                             bg-black opacity-50 cursor-nutriwell">
                         </button>
@@ -84,14 +81,15 @@
                         <div class="transition ease-in duration-75
                             origin-top-right
                             absolute right-0
-                            mt-2 w-48 rounded-md shadow-lg" *ngIf="isLanguage">
+                            mt-2 w-48 rounded-md shadow-lg" *ngIf="isCountry">
                             <div class="py-1 rounded-md bg-white
                                 shadow-xs" role="menu" aria-orientation="vertical" aria-labelledby="user-menu">
                                 <a class="navbar-a" role="menuitem"
-                                    [ngClass]="{ 'bg-nutriwell': defaultLocale ==  locale}"
-                                    [ngStyle]="{'color':defaultLocale ==  locale ? 'white' : '' }"
-                                    *ngFor="let locale of locales" (click)="changeLang(locale)">{{locale |
-                                    uppercase}}</a>
+                                    [ngClass]="{ 'bg-nutriwell': defaultCountry ==  country}"
+                                    [ngStyle]="{'color':defaultCountry ==  country ? 'white' : '' }"
+                                    *ngFor="let country of countries" (click)="changeCountry(country)">
+                                    {{country | uppercase}}
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -141,12 +139,12 @@
             </a>
         </div>
         <div class="pt-4 pb-3 border-t border-gray-700 cursor-pointer">
-            <div class="flex items-center px-5 space-x-3" (click)="openLocaleMobile= !openLocaleMobile">
+            <div class="flex items-center px-5 space-x-3" (click)="openCountryMobile= !openCountryMobile">
                 <div class="flex-shrink-0 font-medium text-gray-400">
-                    Locale : {{ defaultLocale | uppercase }}
+                    Country : {{ defaultCountry | uppercase }}
                 </div>
             </div>
-            <div class="mt-3 px-2 space-y-1" *ngIf="openLocaleMobile">
+            <div class="mt-3 px-2 space-y-1" *ngIf="openCountryMobile">
                 <a class="block text navbar-mobile" (click)="changeLang(locale)" *ngFor="let locale of
                             locales">
                     {{ locale | uppercase }}

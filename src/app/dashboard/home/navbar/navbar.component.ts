@@ -5,7 +5,7 @@ import { LoginService } from 'src/app/auth/login/login.service';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
-import { Locales } from 'src/app/shared/settings/locale';
+import { Countries } from 'src/app/shared/settings/country';
 import { CustomerComponent } from './customer/customer.component';
 
 @Component({
@@ -18,8 +18,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     isOpen = false;
     isOpenMobile = true;
-    isLanguage = false;
-    openLocaleMobile = false;
+    isCountry = false;
+    openCountryMobile = false;
 
     // team
     nameTeam: string;
@@ -28,8 +28,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     teams: any;
 
     // locale
-    locales = Locales.locales;
-    defaultLocale: string = localStorage.getItem('locale');
+    countries = Countries.countries;
+    defaultCountry: string = localStorage.getItem('country');
     private subscription = new Subscription();
 
     constructor(
@@ -47,19 +47,19 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     disabled() {
         this.isOpen = false;
-        this.isLanguage = false;
+        this.isCountry = false;
         this.isOpenMobile = true;
-        this.openLocaleMobile = false;
+        this.openCountryMobile = false;
     }
 
     logout() {
         this.subscription.add(this.loginService.logout().subscribe(() => this.router.navigate(['/login'])));
     }
 
-    changeLang(lang: string): void {
-        this.settingService.changeLang(lang);
+    changeCountry(country: string): void {
+        this.settingService.changeCountry(country);
 
-        this.defaultLocale = lang;
+        this.defaultCountry = country;
         this.disabled();
     }
 

@@ -8,14 +8,16 @@ import { environment } from 'src/environments/environment';
 import { Roles } from '../settings/rol';
 import { User } from '../models/user.model';
 import { AuthenticationGeneralService } from './auth-general.service';
+import { Countries } from '../settings/country';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class SettingsService {
 
-	private changeLocaleSource = new BehaviorSubject<any>({ locale: localStorage.getItem('locale'), start: 1 });
-	public changeLocal$ = this.changeLocaleSource.asObservable();
+	public country = localStorage.getItem('country') ?? 'es';
+	private changeCountrySource = new BehaviorSubject<any>({ locale: Countries.settingCountry[this.country].locale, weekStartsOn: Countries.settingCountry[this.country].weekStartsOn, weekendDays: Countries.settingCountry[this.country].weekendDays });
+	public changeCountry$ = this.changeCountrySource.asObservable();
 
 	private changeTeamSource = new BehaviorSubject<any>({});
 	public changeTeam$ = this.changeTeamSource.asObservable();
@@ -32,11 +34,12 @@ export class SettingsService {
 		this.translateService.use(lang);
 	}
 
-	changeLang(lang: string): void {
-		this.setLang(lang);
-		localStorage.setItem('locale', lang);
+	changeCountry(country: string): void {
+		const locale = Countries.settingCountry[country].locale;
+		this.setLang(locale);
+		localStorage.setItem('country', country);
 
-		this.changeLocaleSource.next({ locale: lang, start: 1 });
+		this.changeCountrySource.next({ locale: locale, weekStartsOn: Countries.settingCountry[country].weekStartsOn, weekendDays: Countries.settingCountry[country].weekendDays });
 	}
 
 	getLangText(target: string) {
