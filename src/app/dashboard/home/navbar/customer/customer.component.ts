@@ -30,15 +30,17 @@ export class CustomerComponent implements OnInit, OnDestroy {
     submitted = false;
 
     under: boolean = false;
+    legal_age: number;
 
     private subscription = new Subscription();
 
     dateOptions: FlatpickrOptions = {
-        // locale: Spanish.es,
+        locale: Spanish.es,
         dateFormat: 'd-m-Y',
         maxDate: moment().format('DD-MM-YYYY'),
         disableMobile: true
     };
+
     constructor(
         private builder: FormBuilder,
         private settingService: SettingsService,
@@ -46,6 +48,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
         private snackbarService: SnackbarService,
         private utilService: UtilsService
     ) { }
+
 
     ngOnInit(): void {
         this.genders.push({ id: 1, text: this.settingService.getLangText('genders.male') });
@@ -64,6 +67,15 @@ export class CustomerComponent implements OnInit, OnDestroy {
             legal_name: [null],
             legal_identity: [null],
         });
+
+        this.settingService.changeCountry$.subscribe(
+            (settings) => {
+                this.legal_age = settings.legal_age;
+                this.dateOptions.locale = settings.flatpickr;
+            }
+
+
+        );
     }
 
     get f() { return this.customerForm.controls; }
@@ -97,7 +109,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
     changeDob($event) {
         const dob = $event.target.value;
         const dobFormat = moment(dob, 'DD-MM-YYYY');
-        const last = moment().subtract(18, 'years');
+        const last = moment().subtract(this.legal_age, 'years');
 
         const legalFields = ['legal_checkbox', 'legal_name', 'legal_identity'];
         if (dobFormat.isAfter(last, 'day')) {

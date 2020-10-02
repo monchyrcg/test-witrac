@@ -35,7 +35,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
 	locale: string = localStorage.getItem('locale');
 
-
 	weekStartsOn: number = DAYS_OF_WEEK.MONDAY;
 
 	weekendDays: number[] = [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY];

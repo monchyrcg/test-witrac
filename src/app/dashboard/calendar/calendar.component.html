@@ -24,7 +24,7 @@
         </div>
         <div class="w-full md:w-1/3 px-2">
             <div class="text-center">
-                <h3>
+                <h3 style="text-transform: capitalize;">
                     {{ viewDate | calendarDate:(view + 'ViewTitle'): (settingService.changeCountry$ | async).locale: (settingService.changeCountry$ | async).weekStartsOn }}
                 </h3>
             </div>
@@ -58,20 +58,20 @@
     <div class="px-4 py-6 sm:px-0">
         <div [ngSwitch]="view">
             <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-                [locale]="(settingService.changeCountry$ | async).locale"
+                style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                 [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
                 [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
                 [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
                 (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
             </mwl-calendar-month-view>
             <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
-                [locale]="(settingService.changeCountry$ | async).locale"
+                style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                 [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
                 [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
                 (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
             </mwl-calendar-week-view>
             <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
-                [locale]="(settingService.changeCountry$ | async).locale"
+                style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                 [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
                 [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
                 (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">

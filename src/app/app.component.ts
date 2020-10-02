@@ -17,7 +17,6 @@ export class AppComponent {
 			const locale = Countries.settingCountry[localStorage.getItem('country')].locale;
 			this.settingService.setLang(locale);
 		} else {
-			console.log(navigator);
 			const browserLocale = (navigator.language).split('-')[0];
 
 			const setLocale = this.defaultCountry.includes(browserLocale) ? browserLocale : 'en';

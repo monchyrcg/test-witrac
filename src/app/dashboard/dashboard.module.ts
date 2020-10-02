@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
+
 import localeEs from '@angular/common/locales/es';
 import localeEn from '@angular/common/locales/en';
 import localeFr from '@angular/common/locales/it';
 import localeIt from '@angular/common/locales/fr';
+
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 
 // import { adapterFactory } from 'angular-calendar/date-adapters/moment';
@@ -21,7 +23,6 @@ import { NavBarComponent } from './home/navbar/navbar.component';
 import { CustomerComponent } from './home/navbar/customer/customer.component';
 
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 /* export function momentAdapterFactory(): DateAdapter {
