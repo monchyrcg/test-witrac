@@ -60,21 +60,17 @@
             <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
                 style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                 [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
-                [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-                (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh">
             </mwl-calendar-month-view>
             <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
                 style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                 [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
-                (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh">
             </mwl-calendar-week-view>
             <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
                 style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                 [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
-                (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh">
             </mwl-calendar-day-view>
         </div>
 

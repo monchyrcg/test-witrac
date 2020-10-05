@@ -23,6 +23,7 @@ import { NavBarComponent } from './home/navbar/navbar.component';
 import { CustomerComponent } from './home/navbar/customer/customer.component';
 
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { CustomerListComponent } from './customer-list/cutomer-list.component';
 
 
 /* export function momentAdapterFactory(): DateAdapter {
@@ -39,16 +40,19 @@ registerLocaleData(localeIt);
         HomeComponent,
         NavBarComponent,
         CalendarComponent,
-        CustomerComponent
+        CustomerComponent,
+        CustomerListComponent
     ],
     imports: [
-        CommonModule,
         SharedModule,
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
         DashboardRoutingModule,
         RouterModule,
         Ng2FlatpickrModule,
         // NgxPermissionsModule.forChild()
+    ],
+    exports: [
+        SharedModule
     ],
     providers: [],
 })

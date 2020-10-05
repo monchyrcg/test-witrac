@@ -1,0 +1,16 @@
+.group-hover {
+  display: none;
+}
+.group:hover .group-hover {
+  display: block !important;
+}
+
+ @media (min-width: 640px) {
+        table {
+            display: inline-table !important;
+        }
+
+        thead tr:not(:first-child) {
+            display: none;
+        }
+    }

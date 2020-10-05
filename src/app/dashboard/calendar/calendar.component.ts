@@ -4,6 +4,7 @@ import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMo
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsService } from 'src/app/shared/services/settings.service';
+import { Countries } from 'src/app/shared/settings/country';
 
 const colors: any = {
 	red: {

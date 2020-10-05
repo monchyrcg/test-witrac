@@ -17,6 +17,12 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
+    declarations: [
+        ModalComponent,
+        ErrorFormComponent,
+        LabelFormComponent,
+        SnackbarComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,
@@ -29,21 +35,14 @@ export function createTranslateLoader(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
-        NgxPermissionsModule.forRoot(),
-
+        NgxPermissionsModule.forRoot()
     ],
     exports: [
         CommonModule,
-        TranslateModule,
         FormsModule,
         ReactiveFormsModule,
-        ErrorFormComponent,
-        LabelFormComponent,
+        TranslateModule,
         NgxPermissionsModule,
-        SnackbarComponent
-    ],
-    declarations: [
-        ModalComponent,
         ErrorFormComponent,
         LabelFormComponent,
         SnackbarComponent
