@@ -7,7 +7,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 @Component({
     selector: 'app-appointment',
     templateUrl: './appointment.component.html',
-    // styleUrls: ['./appointment.component.scss'],
+    styleUrls: ['./appointment.component.scss'],
 })
 
 export class AppointmentComponent implements OnInit, OnDestroy {
