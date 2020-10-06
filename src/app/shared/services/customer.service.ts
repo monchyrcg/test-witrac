@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -9,15 +9,25 @@ import { environment } from 'src/environments/environment';
 })
 export class CustomerService {
 
-    private listCustomerSource = new Subject<any>();
-    public listCustomer$ = this.listCustomerSource.asObservable();
+    private listCustomersSource = new BehaviorSubject<any>([]);
+    public listCustomers$ = this.listCustomersSource.asObservable();
 
     constructor(private http: HttpClient) { }
 
-    listCustomer() {
-        this.listCustomer$ = this.http.get(`${environment.apiUrl}/customers`);
-        console.log(this.listCustomer$);
-        this.listCustomerSource.next();
+    listCustomer(page?, per_page?) {
+        if (!page) {
+            page = 1;
+        }
+        if (!per_page) {
+            per_page = 15;
+        }
+
+        const params = new HttpParams()
+            .set('page', page)
+            .set('per_page', per_page);
+
+        const data = this.http.get(`${environment.apiUrl}/customers`, { params }).pipe();
+        this.listCustomersSource.next(data);
     }
 
     saveCustomer(customer) {
@@ -28,4 +38,6 @@ export class CustomerService {
                 this.listCustomer();
             }));
     }
+
+
 }

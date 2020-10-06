@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 
 @Component({
@@ -11,27 +11,69 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 export class CustomerListComponent implements OnInit, OnDestroy {
 
     customers;
-    subscriptionCustomers: Subscription;
+    listCustomerSubscription: Subscription = null;
+
+    // pagination
+    page = 1;
+    per_page = 15;
+    from: number;
+    to: number;
+    total: number;
+    current_page: number;
+    first_page: boolean = true;
+    last_page: boolean = false;
+    links: [];
 
     constructor(
         private customerService: CustomerService
-    ) {
-        this.customerService.listCustomer();
-    }
+    ) { }
 
     ngOnInit(): void {
-        this.subscriptionCustomers = this.customerService.listCustomer$.subscribe(
+        this.customerService.listCustomer(this.page, this.per_page);
+
+        this.listCustomerSubscription = this.customerService.listCustomers$.subscribe(
             (response) => {
-                this.customers = response['data'];
-                console.log(this.customers);
+                response.subscribe(
+                    (data) => {
+                        this.customers = data['data'];
+
+                        // pagination
+                        const meta = data['meta'];
+
+                        this.from = meta.from;
+                        this.to = meta.to;
+                        this.total = meta.total;
+                        this.current_page = meta.current_page;
+                        this.first_page = meta.current_page == 1 ? true : false;
+                        this.last_page = meta.last_page === meta.current_page ? true : false;
+                        this.links = meta.links;
+                    }
+                )
             }
-        );
+        )
     }
 
+    nextPage(page) {
+        if (page == '+')
+            page = ++this.page;
+
+        if (page == '-')
+            page = --this.page;
+
+        this.page = page;
+
+        this.customerService.listCustomer(page, this.per_page);
+    }
+
+    showPerPage(number): boolean {
+        if (number >= this.page && number != 0 && number != (this.links.length - 1) && number < (this.page + 2))
+            return true;
+        return false;
+    }
 
     ngOnDestroy(): void {
-        if (this.subscriptionCustomers) {
-            this.subscriptionCustomers.unsubscribe();
+        if (this.listCustomerSubscription) {
+            this.listCustomerSubscription.unsubscribe();
         }
     }
 }
