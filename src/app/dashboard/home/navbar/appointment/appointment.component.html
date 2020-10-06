@@ -1,0 +1,55 @@
+<div class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+        <div class="fixed inset-0 transition-opacity" (click)="closeModalF()">
+            <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
+
+
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-lg md:w-11/12 md:max-w-screen-md lg:w-11/12 lg:max-w-screen-md xl:w-1/2 xl:max-w-screen-xl"
+            role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+            <div class="bg-gray-50 px-4 pt-3 sm:px-6 sm:flex sm:flex-row-reverse cursor-pointer">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg" (click)="closeModalF()">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </div>
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="flex flex-wrap mb-4">
+                    <div class="w-full h-12 flex flex-col text-2xl text-center">
+                        {{title}}
+                    </div>
+
+                    <div class="flex flex-wrap w-full">
+                        <div class="w-full p-2">
+                            <app-label-form for="name" name="{{ 'customer_create.name' | translate }}">
+                            </app-label-form>
+                            <input class="inputClass" id="name" type="text" placeholder="Type a customer name"
+                                [(ngModel)]="searchText">
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" *ngFor="let c of characters | appFilter: searchText"
+                                appHighlight [searchedWord]="searchText" [content]="c"
+                                [classToApply]="'font-weight-bold'" [setTitle]="'true'">
+                                {{c}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <span class="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
+                    <button type="submit"
+                        class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-nutriwell text-base leading-6 font-medium text-white shadow-sm hover:bg-nutriwell-500 focus:outline-none focus:border-nutriwell-700 focus:shadow-outline-nutriwell transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                        {{text_button_create}}
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

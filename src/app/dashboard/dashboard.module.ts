@@ -24,7 +24,7 @@ import { CustomerComponent } from './home/navbar/customer/customer.component';
 
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { CustomerListComponent } from './customer-list/cutomer-list.component';
-
+import { AppointmentComponent } from './home/navbar/appointment/appointment.component';
 
 /* export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
@@ -41,7 +41,8 @@ registerLocaleData(localeIt);
         NavBarComponent,
         CalendarComponent,
         CustomerComponent,
-        CustomerListComponent
+        CustomerListComponent,
+        AppointmentComponent,
     ],
     imports: [
         SharedModule,

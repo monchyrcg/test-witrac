@@ -36,6 +36,10 @@
         "mobile": "Movil",
         "email": "Correo electŕonico"
     },
+    "appointment_create": {
+        "title": "Crea tu cita",
+        "text_button_create": "Crear"
+    },
     "genders": {
         "male": "Masculino",
         "female": "Feminino"

@@ -23,13 +23,17 @@ import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { AuthenticationGeneralService } from './shared/services/auth-general.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { FilterPipe } from './shared/pipes/filter.pipe';
+import { HighlightDirective } from './shared/directives/highlight.directive';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NopagefoundComponent
+    NopagefoundComponent,
+    // HighlightDirective,
+    // FilterPipe
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { ModalComponent } from 'src/app/shared/components/modal/modal.component'
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { Countries } from 'src/app/shared/settings/country';
+import { AppointmentComponent } from './appointment/appointment.component';
 import { CustomerComponent } from './customer/customer.component';
 
 @Component({
@@ -83,6 +84,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     createCustomer() {
         this.modalService.init(CustomerComponent, this.settingService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
+    }
+
+    createAppointment() {
+        this.modalService.init(AppointmentComponent, this.settingService.getLangText('appointment_create'), { closeModal: this.closeModal.bind(this) })
     }
 
     ngOnDestroy(): void {
