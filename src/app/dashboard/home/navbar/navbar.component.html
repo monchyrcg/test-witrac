@@ -79,7 +79,7 @@
                             </div>
                         </div>
 
-                        <div class="transition ease-in duration-75
+                        <div class="z-10 transition ease-in duration-75
                             origin-top-right
                             absolute right-0
                             mt-2 w-48 rounded-md shadow-lg" *ngIf="isCountry">
@@ -188,22 +188,21 @@
         </h1>
 
         <ng-container *ngIf="(settingService.changeTeam$ | async).totalTeams > 0">
-            <svg class="w-6 h-6 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg" (click)="divTeams = !divTeams">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-        </ng-container>
+            <div class="group">
+                <svg class="w-6 h-6 cursor-pointer group" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg" (click)="divTeams = !divTeams">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
 
-        <div class="transition ease-in duration-75  origin-top-le absolute ml-16 mt-10 w-48 rounded-md shadow-lg"
-            *ngIf="divTeams">
-            <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
-                aria-labelledby="user-menu">
-                <a class="navbar-a" role="menuitem"
-                    [ngClass]="{ 'bg-nutriwell': team.id ==  (settingService.changeTeam$ | async).current_team_id}"
-                    [ngStyle]="{'color':team.id ==  (settingService.changeTeam$ | async).current_team_id ? 'white' : '' }"
-                    (click)="changeTeam(team.id)"
-                    *ngFor="let team of (settingService.changeTeam$ | async).teams">{{ team.name }}</a>
+                <div #teamDiv class="absolute py-1 rounded-md bg-white shadow-xs group-hover" role="menu"
+                    aria-orientation="vertical" aria-labelledby="user-menu">
+                    <a class="navbar-a" role="menuitem"
+                        [ngClass]="{ 'bg-nutriwell': team.id ==  (settingService.changeTeam$ | async).current_team_id}"
+                        [ngStyle]="{'color':team.id ==  (settingService.changeTeam$ | async).current_team_id ? 'white' : '' }"
+                        (click)="changeTeam(team.id)"
+                        *ngFor="let team of (settingService.changeTeam$ | async).teams">{{ team.name }}</a>
+                </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </header>

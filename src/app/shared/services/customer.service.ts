@@ -14,7 +14,7 @@ export class CustomerService {
 
     constructor(private http: HttpClient) { }
 
-    listCustomer(page?, per_page?) {
+    listCustomer(page?, per_page?, fields?) {
         if (!page) {
             page = 1;
         }
@@ -22,9 +22,19 @@ export class CustomerService {
             per_page = 15;
         }
 
-        const params = new HttpParams()
-            .set('page', page)
-            .set('per_page', per_page);
+        let params = new HttpParams();
+        params = params.append('page', page);
+        params = params.append('per_page', per_page);
+
+        if (fields) {
+            console.log(fields);
+            console.log(typeof fields);
+            for (const varName in fields) {
+                if (!(fields[varName] == null || fields[varName].toString().trim() === '')) {
+                    params = params.append(varName, fields[varName]);
+                }
+            }
+        }
 
         const data = this.http.get(`${environment.apiUrl}/customers`, { params }).pipe();
         this.listCustomersSource.next(data);

@@ -1,5 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 
 @Component({
@@ -13,6 +15,10 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     customers;
     listCustomerSubscription: Subscription = null;
 
+    name: string;
+    customerForm: FormGroup;
+    private debounce: number = 200;
+
     // pagination
     page = 1;
     per_page = 15;
@@ -25,11 +31,12 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     links: [];
 
     constructor(
+        private builder: FormBuilder,
         private customerService: CustomerService
     ) { }
 
     ngOnInit(): void {
-        this.customerService.listCustomer(this.page, this.per_page);
+        this.listCustomer();
 
         this.listCustomerSubscription = this.customerService.listCustomers$.subscribe(
             (response) => {
@@ -50,7 +57,22 @@ export class CustomerListComponent implements OnInit, OnDestroy {
                     }
                 )
             }
-        )
+        );
+        this.customerForm = this.builder.group({
+            name: [''],
+            email: [''],
+        });
+
+        this.customerForm.valueChanges
+            .pipe(debounceTime(this.debounce), distinctUntilChanged())
+            .subscribe(query => {
+                this.page = 1;
+                this.listCustomer(query);
+            });
+    }
+
+    listCustomer(query?) {
+        this.customerService.listCustomer(this.page, this.per_page, query);
     }
 
     nextPage(page) {
@@ -62,7 +84,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
         this.page = page;
 
-        this.customerService.listCustomer(page, this.per_page);
+        this.listCustomer();
     }
 
     showPerPage(number): boolean {

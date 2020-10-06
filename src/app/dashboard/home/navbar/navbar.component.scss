@@ -61,3 +61,10 @@
     @apply text-white;
     @apply bg-gray-700;
 }
+
+.group-hover {
+  display: none;
+}
+.group:hover .group-hover {
+  display: block;
+}

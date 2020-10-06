@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/auth/login/login.service';
@@ -32,6 +32,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     defaultCountry: string = localStorage.getItem('country');
     private subscription = new Subscription();
 
+    @ViewChild("teamDiv") teamDiv: ElementRef;
+
     constructor(
         public settingService: SettingsService,
         private loginService: LoginService,
@@ -41,6 +43,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
+
         this.settingService.getTeam();
     }
 
@@ -64,6 +67,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
     }
 
     changeTeam(id: number) {
+        this.teamDiv.nativeElement.style.display = 'none !important';
+
         this.subscription.add(this.settingService.changeTeam(id).subscribe());
         this.divTeams = false;
     }
