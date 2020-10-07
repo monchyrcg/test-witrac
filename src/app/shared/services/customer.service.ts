@@ -1,8 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ReturnStatement } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { UtilsService } from './util.service';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +14,7 @@ export class CustomerService {
     private listCustomersSource = new BehaviorSubject<any>([]);
     public listCustomers$ = this.listCustomersSource.asObservable();
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private utilService: UtilsService) { }
 
     listCustomer(page?, per_page?, fields?) {
         if (!page) {
@@ -27,17 +29,23 @@ export class CustomerService {
         params = params.append('per_page', per_page);
 
         if (fields) {
-            console.log(fields);
-            console.log(typeof fields);
-            for (const varName in fields) {
-                if (!(fields[varName] == null || fields[varName].toString().trim() === '')) {
-                    params = params.append(varName, fields[varName]);
-                }
-            }
+            params = this.utilService.addToParam(params, fields);
         }
 
         const data = this.http.get(`${environment.apiUrl}/customers`, { params }).pipe();
         this.listCustomersSource.next(data);
+    }
+
+    listCustomerFilter(fields) {
+        let params = new HttpParams();
+        if (fields) {
+            params = this.utilService.addToParam(params, fields);
+        }
+
+        return this.http.get(`${environment.apiUrl}/customers/filter`, { params })
+            .pipe(map((response: any) => {
+                return response.data;
+            }));
     }
 
     saveCustomer(customer) {
@@ -48,6 +56,4 @@ export class CustomerService {
                 this.listCustomer();
             }));
     }
-
-
 }

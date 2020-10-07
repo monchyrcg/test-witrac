@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/auth/login/login.service';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { CustomerService } from 'src/app/shared/services/customer.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { Countries } from 'src/app/shared/settings/country';
@@ -39,12 +40,12 @@ export class NavBarComponent implements OnInit, OnDestroy {
         public settingService: SettingsService,
         private loginService: LoginService,
         private router: Router,
-        private modalService: ModalService
+        private modalService: ModalService,
+        private customerService: CustomerService,
     ) { }
 
 
     ngOnInit(): void {
-
         this.settingService.getTeam();
     }
 
@@ -70,8 +71,10 @@ export class NavBarComponent implements OnInit, OnDestroy {
     changeTeam(id: number) {
         this.teamDiv.nativeElement.style.display = 'none !important';
 
-        this.subscription.add(this.settingService.changeTeam(id).subscribe());
+        this.subscription.add(this.settingService.changeTeam(id).subscribe(() => this.customerService.listCustomer(1, 15)));
         this.divTeams = false;
+
+
     }
 
     showModal() {

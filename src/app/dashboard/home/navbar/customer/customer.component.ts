@@ -43,7 +43,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     constructor(
         private builder: FormBuilder,
-        private settingService: SettingsService,
+        public settingService: SettingsService,
         private customerService: CustomerService,
         private snackbarService: SnackbarService,
         private utilService: UtilsService
@@ -57,7 +57,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
         this.customerForm = this.builder.group({
             name: ['', [Validators.required]],
             gender: ['', [Validators.required]],
-            team: ['', [Validators.required]],
+            team_id: ['', [Validators.required]],
             dob: [null, [Validators.required]],
             job: ['', [Validators.required]],
             prefix: ['', [Validators.required]],
@@ -73,8 +73,6 @@ export class CustomerComponent implements OnInit, OnDestroy {
                 this.legal_age = settings.legal_age;
                 this.dateOptions.locale = settings.flatpickr;
             }
-
-
         );
     }
 

@@ -61,6 +61,7 @@ export class SettingsService {
 		const current_team_id = user.current_team_id;
 
 		const rol = Roles.roles.filter(x => x.id == currentTeam.rol)[0];
+
 		// refresh permissions
 		this.permissionsService.flushPermissions();
 		this.permissionsService.loadPermissions(rol.permissions);

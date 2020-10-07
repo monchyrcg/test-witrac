@@ -38,6 +38,9 @@
     },
     "appointment_create": {
         "title": "Crea tu cita",
+        "date": "Fecha visita",
+        "team": "Lugar de consulta",
+        "user": "Usuario",
         "text_button_create": "Crear"
     },
     "genders": {

@@ -19,6 +19,11 @@ export class AuthenticationGeneralService {
         return JSON.parse(localStorage.getItem('currentUser'));
     }
 
+    getUserVariable(name) {
+        const user = this.getUser();
+        return user[name];
+    }
+
     setToken(user: User) {
         localStorage.setItem('currentUser', JSON.stringify(user));
     }

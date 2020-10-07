@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -13,5 +14,15 @@ export class UtilsService {
         }
 
         return obj;
+    }
+
+    addToParam(params: HttpParams, obj) {
+        for (const varName in obj) {
+            if ((obj[varName] == null || obj[varName].toString().trim() === '')) {
+                params = params.append(varName, obj[varName]);
+            }
+        }
+
+        return params;
     }
 }
