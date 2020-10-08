@@ -39,9 +39,10 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     submitted = false;
     dateOptions: FlatpickrOptions = {
         locale: Spanish.es,
-        dateFormat: 'd-m-Y',
+        dateFormat: 'd-m-Y H:i',
         minDate: moment().format('DD-MM-YYYY'),
-        disableMobile: true
+        disableMobile: true,
+        enableTime: true
     };
     users: User[];
 
@@ -99,6 +100,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 name: data,
                 email: data
             }
+
             this.subscription.add(this.customerService.listCustomerFilter(query).subscribe(
                 (response) => {
                     this.customers = response;
@@ -139,7 +141,10 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         }
 
         let appointment: Appointment = this.utilService.clear(this.appointmentForm.value);
+
+        const hour = moment(appointment.date[0]).format('HH:mm');
         appointment.date = moment(appointment.date[0]).format('YYYY-MM-DD');
+        appointment.hour = hour;
         appointment.team_id = this.appointmentForm.controls['team_id'].value;
 
         this.subscription.add(this.appointmentService.saveAppointment(appointment).subscribe(

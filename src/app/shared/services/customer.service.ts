@@ -37,10 +37,11 @@ export class CustomerService {
     }
 
     listCustomerFilter(fields) {
-        let params = new HttpParams();
+        let params = new HttpParams;
         if (fields) {
             params = this.utilService.addToParam(params, fields);
         }
+
 
         return this.http.get(`${environment.apiUrl}/customers/filter`, { params })
             .pipe(map((response: any) => {

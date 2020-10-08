@@ -1,10 +1,11 @@
 import { Component, ViewChild, TemplateRef, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, DAYS_OF_WEEK } from 'angular-calendar';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsService } from 'src/app/shared/services/settings.service';
-import { Countries } from 'src/app/shared/settings/country';
+import { AppointmentService } from 'src/app/shared/services/appointment.service';
+import * as moment from 'moment';
 
 const colors: any = {
 	red: {
@@ -112,12 +113,22 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
 	activeDayIsOpen = true;
 
-	constructor(private modal: NgbModal, public settingService: SettingsService) {
+	events$: Observable<CalendarEvent<{}>[]>;
+
+
+	currentDay = moment().format('YYYY-MM-DD');
+
+	constructor(
+		private modal: NgbModal,
+		public settingService: SettingsService,
+		public appointmentService: AppointmentService
+	) {
 
 	}
 
 	ngOnInit(): void {
 
+		this.events$ = this.appointmentService.listAppointment(this.currentDay);
 	}
 
 	dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -183,6 +194,14 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	}
 
 	closeOpenMonthViewDay(): void {
+		const newDay = moment(this.viewDate).format('YYYY-MM-DD');
+
+		if (moment(newDay).format('MM') != moment(this.currentDay).format('MM')) {
+			this.currentDay = newDay;
+
+			this.events$ = this.appointmentService.listAppointment(newDay);
+		}
+
 		this.activeDayIsOpen = false;
 	}
 

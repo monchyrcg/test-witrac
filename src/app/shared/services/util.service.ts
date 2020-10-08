@@ -18,7 +18,7 @@ export class UtilsService {
 
     addToParam(params: HttpParams, obj) {
         for (const varName in obj) {
-            if ((obj[varName] == null || obj[varName].toString().trim() === '')) {
+            if ((obj[varName] !== null || obj[varName].toString().trim() !== '')) {
                 params = params.append(varName, obj[varName]);
             }
         }
