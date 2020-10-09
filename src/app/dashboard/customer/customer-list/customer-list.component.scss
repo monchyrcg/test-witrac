@@ -1,0 +1,29 @@
+.group-hover {
+  display: none;
+}
+.group:hover .group-hover {
+  display: block !important;
+}
+
+ @media (min-width: 640px) {
+    table {
+        display: inline-table !important;
+    }
+
+    thead tr:not(:first-child) {
+        display: none;
+    }
+}
+
+.navbar-a {
+    @apply cursor-pointer;
+    @apply block;
+    @apply px-4;
+    @apply py-2;
+    @apply text-sm;
+    @apply text-gray-700;
+    @apply text-left;
+}
+.navbar-a:hover {
+    @apply bg-gray-100;
+}

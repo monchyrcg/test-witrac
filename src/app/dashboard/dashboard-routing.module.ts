@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { NgxPermissionsGuard } from 'ngx-permissions';
-import { CustomerListComponent } from './customer-list/cutomer-list.component';
+import { CustomerListComponent } from './customer/customer-list/cutomer-list.component';
 
 
 const routes: Routes = [
@@ -29,7 +29,7 @@ const routes: Routes = [
             },
             {
                 path: 'customers',
-                component: CustomerListComponent
+                loadChildren: './customer/customer.module#CustomerModule'
             },
         ]
     }
