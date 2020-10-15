@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
+import { SettingsService } from 'src/app/shared/services/settings.service';
 
 @Component({
     selector: 'app-customer-list',
@@ -32,7 +33,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
     constructor(
         private builder: FormBuilder,
-        private customerService: CustomerService
+        private customerService: CustomerService,
+        public settingService: SettingsService
     ) { }
 
     ngOnInit(): void {
