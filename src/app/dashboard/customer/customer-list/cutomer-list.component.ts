@@ -4,6 +4,8 @@ import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
+import { TwilioService } from 'src/app/shared/services/twilio.service';
+import * as Twilio from 'twilio-client';
 
 @Component({
     selector: 'app-customer-list',
@@ -31,14 +33,28 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     last_page: boolean = false;
     links: [];
 
+    device = new Twilio.Device();
+
     constructor(
         private builder: FormBuilder,
         private customerService: CustomerService,
-        public settingService: SettingsService
+        public settingService: SettingsService,
+        private twilioService: TwilioService
     ) { }
 
     ngOnInit(): void {
         this.listCustomer();
+
+        this.twilioService.getToken().subscribe(
+            (response) => {
+                // thi device = new Twilio.Device();
+
+                this.device.setup(response);
+                // console.log(device);
+
+
+            }
+        );
 
         this.listCustomerSubscription = this.customerService.listCustomers$.subscribe(
             (response) => {
@@ -71,6 +87,10 @@ export class CustomerListComponent implements OnInit, OnDestroy {
                 this.page = 1;
                 this.listCustomer(query);
             });
+    }
+
+    call() {
+        this.device.connect({ phoneNumber: '++34680508794' });
     }
 
     listCustomer(query?) {
