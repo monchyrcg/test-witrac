@@ -79,7 +79,6 @@ export class CustomerComponent implements OnInit, OnDestroy {
     get f() { return this.customerForm.controls; }
 
     onSubmit() {
-
         this.submitted = true;
 
         if (this.customerForm.invalid) {

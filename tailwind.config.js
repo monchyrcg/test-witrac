@@ -6,7 +6,7 @@ module.exports = {
   purge: [],
   theme: {
     fontFamily: {
-      'nutriwell': ['slim-joe, big-jhon', 'monserrat'],
+      'nutriwell': ['Muller', 'Roboto'],
     },
     inset: {
       '0': 0,
@@ -17,7 +17,12 @@ module.exports = {
     extend: {
       colors: {
         nutriwell: {
-          default: '#004d44'
+          default: '#006C5B',
+          stone: '#86897E',
+          sansivera: '#6FBFA4',
+          mustela: '#256741',
+          sand: '#E1915D',
+          sun: '#EEAE64',
         },
         facebook: {
           default: '#4267b2',

@@ -47,12 +47,9 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
         this.twilioService.getToken().subscribe(
             (response) => {
-                // thi device = new Twilio.Device();
-
                 this.device.setup(response);
-                // console.log(device);
 
-
+                console.log(this.device.status());
             }
         );
 
@@ -90,7 +87,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     }
 
     call() {
-        this.device.connect({ phoneNumber: '++34680508794' });
+        console.log(this.device.status());
+        this.device.connect({ phoneNumber: '+34680508794' });
     }
 
     listCustomer(query?) {
