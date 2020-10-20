@@ -57,4 +57,11 @@ export class CustomerService {
                 this.listCustomer();
             }));
     }
+
+    getCustomer(customer_id: string) {
+        return this.http.get(`${environment.apiUrl}/customers/${customer_id}`,)
+            .pipe(map((response: any) => {
+                return response.data;
+            }));
+    }
 }

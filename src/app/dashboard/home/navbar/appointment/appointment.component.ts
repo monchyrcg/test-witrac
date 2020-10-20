@@ -4,7 +4,7 @@ import Spanish from 'flatpickr/dist/l10n/es.js';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Customer } from 'src/app/shared/models/customer.model';
+import { CustomerList } from 'src/app/shared/models/customers.model';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import * as moment from 'moment';
 import { SettingsService } from 'src/app/shared/services/settings.service';
@@ -30,8 +30,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     @Output() closeModal;
 
     searchText: FormControl;
-    customers: Customer[];
-    customer: Customer;
+    customers: CustomerList[];
+    customer: CustomerList;
     showCustomers: string = 'none';
     subscription: Subscription = new Subscription;
 

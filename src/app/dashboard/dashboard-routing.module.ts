@@ -6,8 +6,6 @@ import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { NgxPermissionsGuard } from 'ngx-permissions';
-import { CustomerListComponent } from './customer/customer-list/cutomer-list.component';
-
 
 const routes: Routes = [
     {

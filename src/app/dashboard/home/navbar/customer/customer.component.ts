@@ -7,7 +7,7 @@ import { SettingsService } from 'src/app/shared/services/settings.service';
 import * as moment from 'moment';
 import Spanish from 'flatpickr/dist/l10n/es.js';
 import { CustomerService } from 'src/app/shared/services/customer.service';
-import { Customer } from 'src/app/shared/models/customer.model';
+import { Customer, CustomerCreated } from 'src/app/shared/models/customers.model';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
 
@@ -85,7 +85,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
             return;
         }
 
-        let customer: Customer = this.utilService.clear(this.customerForm.value);
+        let customer: CustomerCreated = this.utilService.clear(this.customerForm.value);
         customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
 
         this.subscription.add(this.customerService.saveCustomer(customer).subscribe(

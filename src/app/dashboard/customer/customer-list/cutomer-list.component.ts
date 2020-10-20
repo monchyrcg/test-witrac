@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { CustomerList } from 'src/app/shared/models/customers.model';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { TwilioService } from 'src/app/shared/services/twilio.service';
@@ -15,7 +16,7 @@ import * as Twilio from 'twilio-client';
 
 export class CustomerListComponent implements OnInit, OnDestroy {
 
-    customers;
+    customers: CustomerList;
     listCustomerSubscription: Subscription = null;
 
     name: string;
