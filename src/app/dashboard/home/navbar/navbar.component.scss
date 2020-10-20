@@ -11,7 +11,7 @@
 }
 .menu:hover {
     @apply text-white;
-    @apply bg-gray-900
+    @apply bg-nutriwell-sansivera
 }
 .menu:focus {
     @apply outline-none;
@@ -21,18 +21,18 @@
 
 .active {
     @apply text-white;
-    @apply bg-gray-900;
+    @apply bg-nutriwell-sansivera;
 }
 
 .modal {
     @apply cursor-pointer;
     @apply text-white;
-    @apply bg-gray-700;
+    @apply bg-nutriwell-stone;
 }
 .modal:focus {
     @apply outline-none;
     @apply text-white;
-    @apply bg-gray-700;
+    @apply bg-nutriwell-stone;
 }
 
 .navbar-a {
@@ -41,10 +41,10 @@
     @apply px-4;
     @apply py-2;
     @apply text-sm;
-    @apply text-gray-700;
+    @apply text-nutriwell-mustela;
 }
 .navbar-a:hover {
-    @apply bg-gray-100;
+    @apply bg-nutriwell-sansivera;
 }
 
 .navbar-mobile {
