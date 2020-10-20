@@ -35,6 +35,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
             }
         );
     }
+
     ngOnDestroy(): void {
         if (this.customerSubscription) {
             this.customerSubscription.unsubscribe();

@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { SharedModule } from 'src/app/shared/modules/shared.module';
+import { createTranslateLoader, SharedModule } from 'src/app/shared/modules/shared.module';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerListComponent } from './customer-list/cutomer-list.component';
 import { CustomerRoutingModule } from './customer-routing.module';
@@ -12,17 +12,16 @@ import { CustomerRoutingModule } from './customer-routing.module';
     declarations: [
         CustomerListComponent,
         CustomerEditComponent
+
     ],
     imports: [
         CommonModule,
-        RouterModule,
         SharedModule,
         Ng2FlatpickrModule,
         CustomerRoutingModule
     ],
     exports: [
         SharedModule,
-        // RouterModule
     ],
     providers: [],
 })
