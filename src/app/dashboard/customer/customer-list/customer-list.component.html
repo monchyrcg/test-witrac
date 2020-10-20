@@ -89,8 +89,7 @@
                                         <ul
                                             class="absolute group-hover left-auto mt-10 p-2 rounded-lg shadow-lg top-0 text-left bg-white z-10">
                                             <li class="navbar-a">
-                                                <a class="px-2 py-1" routerLink="{{customer.id}}"
-                                                    routerLinkActive="active">
+                                                <a class="px-2 py-1" (click)="edit(customer.id)">
                                                     <span>Editar</span>
                                                 </a>
                                             </li>

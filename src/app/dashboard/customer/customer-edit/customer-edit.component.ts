@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Customer } from 'src/app/shared/models/customers.model';
 import { CustomerService } from 'src/app/shared/services/customer.service';

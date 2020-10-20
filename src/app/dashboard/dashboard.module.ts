@@ -23,7 +23,8 @@ import { NavBarComponent } from './home/navbar/navbar.component';
 import { CustomerComponent } from './home/navbar/customer/customer.component';
 
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { CustomerListComponent } from './customer/customer-list/cutomer-list.component';
+import { CustomerListComponent } from './customer/customer-list/customer-list.component';
+import { CustomerEditComponent } from './customer/customer-edit/customer-edit.component';
 import { AppointmentComponent } from './home/navbar/appointment/appointment.component';
 import { CustomerModule } from './customer/customer.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
