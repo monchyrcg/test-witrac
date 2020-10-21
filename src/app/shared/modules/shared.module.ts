@@ -13,6 +13,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { SnackbarComponent } from '../components/snackbar/snackbar.component';
 import { HighlightDirective } from '../directives/highlight.directive';
 import { FilterPipe } from '../pipes/filter.pipe';
+import { TabsComponent } from '../components/tabs/tabs.component';
+import { TabComponent } from '../components/tab/tab.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -25,7 +29,9 @@ export function createTranslateLoader(http: HttpClient) {
         LabelFormComponent,
         SnackbarComponent,
         HighlightDirective,
-        FilterPipe
+        FilterPipe,
+        TabsComponent,
+        TabComponent
     ],
     imports: [
         CommonModule,
@@ -33,7 +39,8 @@ export function createTranslateLoader(http: HttpClient) {
         ReactiveFormsModule,
         HttpClientModule,
         TranslateModule,
-        NgxPermissionsModule.forRoot()
+        NgxPermissionsModule.forRoot(),
+        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
     ],
     exports: [
         CommonModule,
@@ -45,7 +52,10 @@ export function createTranslateLoader(http: HttpClient) {
         LabelFormComponent,
         SnackbarComponent,
         HighlightDirective,
-        FilterPipe
+        FilterPipe,
+        TabsComponent,
+        TabComponent,
+        CalendarModule
     ],
     entryComponents: [],
     providers: []

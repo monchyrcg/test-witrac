@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Customer } from 'src/app/shared/models/customers.model';
+import { Customer } from 'src/app/shared/interfaces/customers.interface';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 
@@ -18,6 +18,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     customer_id: string;
     customer: Customer = null;
     customerSubscription: Subscription = null;
+    isOpen = false;
 
     constructor(
         private route: ActivatedRoute,

@@ -6,7 +6,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { AuthenticationGeneralService } from '../services/auth-general.service';
-import { User } from '../models/user.model';
+import { User } from '../interfaces/user.interface';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

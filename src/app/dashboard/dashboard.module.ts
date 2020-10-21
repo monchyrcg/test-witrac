@@ -50,13 +50,13 @@ registerLocaleData(localeIt);
     imports: [
         CommonModule,
         SharedModule,
-        CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+        // CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
         DashboardRoutingModule,
         RouterModule,
         Ng2FlatpickrModule,
     ],
     exports: [
-        SharedModule,
+        SharedModule
     ],
     providers: [],
 })

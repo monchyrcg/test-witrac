@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxRolesService, NgxPermissionsService } from 'ngx-permissions';
-import { User } from '../models/user.model';
+import { User } from '../interfaces/user.interface';
 import { Roles } from '../settings/rol';
 
 @Injectable()

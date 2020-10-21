@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Roles } from '../settings/rol';
-import { User } from '../models/user.model';
+import { User } from '../interfaces/user.interface';
 import { AuthenticationGeneralService } from './auth-general.service';
 import { Countries } from '../settings/country';
 

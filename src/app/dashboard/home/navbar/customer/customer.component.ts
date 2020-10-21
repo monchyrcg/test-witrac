@@ -2,12 +2,12 @@ import { Component, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { Subscription } from 'rxjs';
-import { Gender } from 'src/app/shared/models/gender.model';
+import { Gender } from 'src/app/shared/interfaces/gender.interface';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import * as moment from 'moment';
 import Spanish from 'flatpickr/dist/l10n/es.js';
 import { CustomerService } from 'src/app/shared/services/customer.service';
-import { Customer, CustomerCreated } from 'src/app/shared/models/customers.model';
+import { Customer, CustomerCreated } from 'src/app/shared/interfaces/customers.interface';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
 
