@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { Customer } from 'src/app/shared/interfaces/customers.interface';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
@@ -20,6 +21,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     customerSubscription: Subscription = null;
     isOpen = false;
 
+    customer$: Observable<Customer>;
+
     constructor(
         private route: ActivatedRoute,
         private customerService: CustomerService,
@@ -30,11 +33,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.customer_id = this.route.snapshot.paramMap.get('hash');
 
-        this.customerSubscription = this.customerService.getCustomer(this.customer_id).subscribe(
-            (response) => {
-                this.customer = response;
-            }
-        );
+        this.customer$ = this.customerService.getCustomer(this.customer_id);
     }
 
     ngOnDestroy(): void {

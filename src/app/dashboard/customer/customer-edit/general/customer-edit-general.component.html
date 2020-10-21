@@ -1,19 +1,24 @@
 <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6">
     <div class="md:grid md:grid-cols-3 md:gap-6">
         <div class="md:col-span-1">
-            <h3 class="text-lg font-medium leading-6 text-gray-900">Personal Information</h3>
+            <h3 class="text-lg font-medium leading-6 text-gray-900">Informaciones del cliente
+            </h3>
             <p class="mt-1 text-sm leading-5 text-gray-500">
-                Use a permanent address where you can receive mail.
+                Actualiza las informaciones personales del cliente
             </p>
         </div>
         <div class="mt-5 md:mt-0 md:col-span-2">
             <form action="#" method="POST">
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-3">
-                        <label for="first_name" class="block text-sm font-medium leading-5 text-gray-700">First
-                            name</label>
-                        <input id="first_name"
-                            class="mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5">
+                        <app-label-form for="name" name="{{ 'customer_create.name' | translate }}"></app-label-form>
+
+                        <input class="inputClass" id="name" type="text"
+                            placeholder="{{ 'customer_create.name' | translate }}">
+                        <ng-container>
+                            <app-error-form error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                        </ng-container>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
