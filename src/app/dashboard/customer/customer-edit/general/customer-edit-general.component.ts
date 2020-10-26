@@ -13,10 +13,10 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
     @Input() customer;
 
     ngOnInit(): void {
-        console.log(this.customer);// throw new Error('Method not implemented.');
+
     }
     ngOnDestroy(): void {
-        // throw new Error('Method not implemented.');
+
     }
 
 }

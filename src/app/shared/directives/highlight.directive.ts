@@ -12,7 +12,6 @@ export class HighlightDirective implements OnChanges {
     constructor(private el: ElementRef, private renderer: Renderer2) { }
 
     ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
         if (!this.content) {
             return;
         }

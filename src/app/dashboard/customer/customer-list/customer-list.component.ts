@@ -50,7 +50,6 @@ export class CustomerListComponent implements OnInit, OnDestroy {
         this.twilioService.getToken().subscribe(
             (response) => {
                 this.device.setup(response);
-
                 console.log(this.device.status());
             }
         );
@@ -75,6 +74,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
                 )
             }
         );
+
         this.customerForm = this.builder.group({
             name: [''],
             email: [''],
@@ -88,17 +88,16 @@ export class CustomerListComponent implements OnInit, OnDestroy {
             });
     }
 
+    listCustomer(query?) {
+        this.customerService.listCustomer(this.page, this.per_page, query);
+    }
+
     call() {
-        console.log(this.device.status());
         this.device.connect({ phoneNumber: '+34680508794' });
     }
 
     edit(id: number) {
         this.router.navigate(['/customers/' + id]);
-    }
-
-    listCustomer(query?) {
-        this.customerService.listCustomer(this.page, this.per_page, query);
     }
 
     nextPage(page) {
