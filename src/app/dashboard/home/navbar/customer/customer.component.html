@@ -61,9 +61,6 @@
                                 </option>
                             </select>
 
-                            <!--   <input formControlName="team" class="inputClass" id="team" type="text"
-                                placeholder="{{ 'customer_create.team' | translate }}"> -->
-
                             <ng-container *ngIf="submitted && f.team_id.errors">
                                 <app-error-form *ngIf="f.team_id.errors.required"
                                     error="{{'errors.required' | translate}}">

@@ -17,7 +17,15 @@ export class SettingsService {
 
 	public country = localStorage.getItem('country') ?? 'es';
 	public settings = Countries.settingCountry[this.country];
-	private changeCountrySource = new BehaviorSubject<any>({ locale: this.settings.locale, weekStartsOn: this.settings.weekStartsOn, weekendDays: this.settings.weekendDays, legal_age: this.settings.legal_age, flatpickr: this.settings.flatpickr });
+	private changeCountrySource = new BehaviorSubject<any>({
+		locale: this.settings.locale,
+		weekStartsOn: this.settings.weekStartsOn,
+		weekendDays: this.settings.weekendDays,
+		legal_age: this.settings.legal_age,
+		flatpickr: this.settings.flatpickr,
+		formatMoment: this.settings.formatMoment,
+		formatFlatpickr: this.settings.formatFlatpickr
+	});
 	public changeCountry$ = this.changeCountrySource.asObservable();
 
 	private changeTeamSource = new BehaviorSubject<any>({});
@@ -41,7 +49,15 @@ export class SettingsService {
 		this.setLang(locale);
 		localStorage.setItem('country', country);
 
-		this.changeCountrySource.next({ locale: locale, weekStartsOn: countrySettings.weekStartsOn, weekendDays: countrySettings.weekendDays, legal_age: countrySettings.legal_age, flatpickr: countrySettings.flatpickr });
+		this.changeCountrySource.next({
+			locale: locale,
+			weekStartsOn: countrySettings.weekStartsOn,
+			weekendDays: countrySettings.weekendDays,
+			legal_age: countrySettings.legal_age,
+			flatpickr: countrySettings.flatpickr,
+			formatMoment: countrySettings.formatMoment,
+			formatFlatpickr: countrySettings.formatFlatpickr
+		});
 	}
 
 	getLangText(target: string) {

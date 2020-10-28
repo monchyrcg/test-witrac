@@ -17,35 +17,45 @@ export class Countries {
             'legal_age': 18,
             'weekStartsOn': DAYS_OF_WEEK.MONDAY,
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
-            'flatpickr': Spanish.es
+            'flatpickr': Spanish.es,
+            'formatMoment': 'DD-MM-YYYY',
+            'formatFlatpickr': 'd-m-Y'
         },
         'us': {
             'locale': 'en',
             'legal_age': 21,
             'weekStartsOn': DAYS_OF_WEEK.SUNDAY,
             'weekendDays': [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY],
-            'flatpickr': english
+            'flatpickr': english,
+            'formatMoment': 'MM-DD-YYYY',
+            'formatFlatpickr': 'm-d-Y'
         },
         'fr': {
             'locale': 'fr',
             'legal_age': 18,
             'weekStartsOn': DAYS_OF_WEEK.MONDAY,
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
-            'flatpickr': French.fr
+            'flatpickr': French.fr,
+            'formatMoment': 'DD-MM-YYYY',
+            'formatFlatpickr': 'd-m-Y'
         },
         'it': {
             'locale': 'it',
             'legal_age': 18,
             'weekStartsOn': DAYS_OF_WEEK.MONDAY,
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
-            'flatpickr': Italian.it
+            'flatpickr': Italian.it,
+            'formatMoment': 'DD-MM-YYYY',
+            'formatFlatpickr': 'd-m-Y'
         },
         'pl': {
             'locale': 'en',
             'legal_age': 18,
             'weekStartsOn': DAYS_OF_WEEK.MONDAY,
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
-            'flatpickr': Polish.pl
+            'flatpickr': Polish.pl,
+            'formatMoment': 'DD-MM-YYYY',
+            'formatFlatpickr': 'd-m-Y'
         },
     };
 }

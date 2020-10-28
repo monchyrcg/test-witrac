@@ -34,12 +34,13 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     private subscription = new Subscription();
 
-    dateOptions: FlatpickrOptions = {
+    /* dateOptions: FlatpickrOptions = {
         locale: Spanish.es,
         dateFormat: 'd-m-Y',
         maxDate: moment().format('DD-MM-YYYY'),
         disableMobile: true
-    };
+    }; */
+    dateOptions: FlatpickrOptions;
 
     constructor(
         private builder: FormBuilder,
@@ -47,7 +48,14 @@ export class CustomerComponent implements OnInit, OnDestroy {
         private customerService: CustomerService,
         private snackbarService: SnackbarService,
         private utilService: UtilsService
-    ) { }
+    ) {
+        this.dateOptions = {
+            locale: this.settingService.settings.flatpickr,
+            dateFormat: this.settingService.settings.formatFlatpickr,
+            maxDate: moment().format(this.settingService.settings.formatMoment),
+            disableMobile: true,
+        };
+    }
 
 
     ngOnInit(): void {
@@ -71,7 +79,6 @@ export class CustomerComponent implements OnInit, OnDestroy {
         this.settingService.changeCountry$.subscribe(
             (settings) => {
                 this.legal_age = settings.legal_age;
-                this.dateOptions.locale = settings.flatpickr;
             }
         );
     }
@@ -105,7 +112,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     changeDob($event) {
         const dob = $event.target.value;
-        const dobFormat = moment(dob, 'DD-MM-YYYY');
+        const dobFormat = moment(dob, this.settingService.settings.formatFlatpickr);
         const last = moment().subtract(this.legal_age, 'years');
 
         const legalFields = ['legal_checkbox', 'legal_name', 'legal_identity'];
