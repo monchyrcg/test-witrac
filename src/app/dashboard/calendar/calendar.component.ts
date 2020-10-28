@@ -115,19 +115,15 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
 	events$: Observable<CalendarEvent<{}>[]>;
 
-
 	currentDay = moment().format('YYYY-MM-DD');
 
 	constructor(
 		private modal: NgbModal,
 		public settingService: SettingsService,
 		public appointmentService: AppointmentService
-	) {
-
-	}
+	) { }
 
 	ngOnInit(): void {
-
 		this.events$ = this.appointmentService.listAppointment(this.currentDay);
 	}
 
