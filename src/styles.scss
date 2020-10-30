@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 // tailwind
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
@@ -8,6 +9,8 @@
 // html{
 //   font-family: 'slim-joe, big-john';
 // }
+
+@import 'assets/fonts/muller/muller.scss';
 
 .inputClass {
    @apply shadow;

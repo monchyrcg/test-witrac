@@ -34,12 +34,13 @@
                 <ng-container *ngIf="submitted && f.password.errors">
                     <app-error-form *ngIf="f.password.errors.required" error="{{'errors.required' | translate}}">
                     </app-error-form>
-                    <app-error-form *ngIf="f.password.errors.minlength" error="{{'errors.minLength' | translate:'8'}}">
+                    <app-error-form *ngIf="f.password.errors.minlength"
+                        error="{{'errors.minLength' | translate:passwordLength}}">
                     </app-error-form>
                 </ng-container>
             </div>
             <div class="mb-6" *ngIf="error">
-                <app-error-form *ngIf="error == 501" error="Unauthorized">
+                <app-error-form *ngIf="error == 500" error="Password or username invalid">
                 </app-error-form>
             </div>
             <div class="flex items-center justify-between">

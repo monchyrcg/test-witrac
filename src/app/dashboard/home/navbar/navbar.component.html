@@ -186,7 +186,7 @@
             Team {{(settingService.changeTeam$ | async).nameTeam}}
         </h1>
 
-        <ng-container *ngIf="(settingService.changeTeam$ | async).totalTeams > 0">
+        <ng-container *ngIf="(settingService.changeTeam$ | async).totalTeams > 1">
             <div class="group">
                 <svg class="w-6 h-6 cursor-pointer group" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg" (click)="divTeams = !divTeams">

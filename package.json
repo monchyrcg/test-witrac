@@ -9,12 +9,12 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "local": "ng serve -o -c local --host app.nutriwell.test --disableHostCheck --ssl --ssl-key /home/monchyrcg/projects/certificate/localhost.key  --ssl-cert /home/monchyrcg/projects/certificate/localhost.crt",
-    "develop-no": "ng build --prod --aot -c production",
-    "updated:dev": "aws s3 rm s3://{{url}} --recursive && aws s3 cp ./dist s3://{{url}} --recursive",
-    "updated:pro": "aws s3 rm s3://{{url}} --recursive && aws s3 cp ./dist s3://{{url}} --recursive",
     "develop": "ng build --prod --aot -c dev && npm run updated:dev",
+    "develop-no": "ng build --prod --aot -c production",
+    "updated:dev": "scp -r dist forge@188.166.106.234:/home/forge/app.naturhousedigital.com",
     "production": "ng build --prod --aot -c production  && npm run updated:pro",
-    "production-no": "ng build --prod --aot -c production"
+    "production-no": "ng build --prod --aot -c production",
+    "updated:pro": "aws s3 rm s3://{{url}} --recursive && aws s3 cp ./dist s3://{{url}} --recursive"
   },
   "private": true,
   "dependencies": {
