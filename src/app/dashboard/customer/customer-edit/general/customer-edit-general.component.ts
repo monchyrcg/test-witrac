@@ -65,6 +65,7 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
             prefix: [this.customer.prefix, [Validators.required]],
             mobile: [this.customer.mobile, [Validators.required]],
             email: [this.customer.email, [Validators.required, Validators.email]],
+            legal_checkbox: [this.customer.legal ? this.customer.legal.name : null],
             legal_name: [this.customer.legal ? this.customer.legal.name : null],
             legal_identity: [this.customer.legal ? this.customer.legal.identity : null],
         });

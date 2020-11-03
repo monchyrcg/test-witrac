@@ -1,4 +1,12 @@
+import { OnDestroy } from '@angular/core';
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { LoginService } from 'src/app/auth/login/login.service';
+import { SettingsService } from 'src/app/shared/services/settings.service';
+import { Countries } from 'src/app/shared/settings/country';
+import { NavBarComponent } from './navbar/navbar.component';
 
 @Component({
     selector: 'app-home',
@@ -6,7 +14,43 @@ import { Component } from '@angular/core';
     styleUrls: ['./home.component.scss'],
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
 
-    constructor() { }
+    isOpen = false;
+    isCountry = false;
+
+    // locale
+    countries = Countries.countries;
+    defaultCountry: string = localStorage.getItem('country');
+    private subscription = new Subscription();
+
+    constructor(
+        public settingService: SettingsService,
+        private loginService: LoginService,
+        private router: Router
+    ) { }
+
+    ngOnInit(): void {
+        this.settingService.getTeam();
+    }
+
+    disabled() {
+        this.isOpen = false;
+        this.isCountry = false;
+    }
+
+    logout() {
+        this.subscription.add(this.loginService.logout().subscribe(() => this.router.navigate(['/login'])));
+    }
+
+    changeCountry(country: string): void {
+        this.settingService.changeCountry(country);
+
+        this.defaultCountry = country;
+        this.disabled();
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
+    }
 }

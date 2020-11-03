@@ -1,28 +1,31 @@
 .text {
-    @apply px-3; 
+    @apply text-white;
+    @apply font-medium;
+    @apply text-sm;
+    @apply px-2; 
     @apply py-2;
     @apply rounded-md;
 }
 
 .menu {
-    @apply text-sm;
-    @apply font-medium;
-    @apply text-gray-300;
+    @apply flex;
+    @apply items-center;
+    @apply leading-5;
 }
 .menu:hover {
-    @apply text-white;
     @apply bg-nutriwell-sansivera
 }
 .menu:focus {
+    @apply bg-nutriwell-sansivera;
     @apply outline-none;
-    @apply text-white;
-    @apply bg-gray-700;
 }
 
 .active {
     @apply text-white;
     @apply bg-nutriwell-sansivera;
 }
+
+
 
 .modal {
     @apply cursor-pointer;

@@ -41,8 +41,8 @@ registerLocaleData(localeIt);
 
 @NgModule({
     declarations: [
-        HomeComponent,
         NavBarComponent,
+        HomeComponent,
         CalendarComponent,
         CustomerComponent,
         AppointmentComponent,
@@ -56,7 +56,8 @@ registerLocaleData(localeIt);
         Ng2FlatpickrModule,
     ],
     exports: [
-        SharedModule
+        SharedModule,
+        NavBarComponent
     ],
     providers: [],
 })

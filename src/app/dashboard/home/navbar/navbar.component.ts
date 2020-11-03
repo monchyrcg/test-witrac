@@ -1,27 +1,19 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/auth/login/login.service';
+import { Component } from '@angular/core';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
-import { CustomerService } from 'src/app/shared/services/customer.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
-import { Countries } from 'src/app/shared/settings/country';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { CustomerComponent } from './customer/customer.component';
 
 @Component({
     selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
+    templateUrl: './navbar2.component.html',
     styleUrls: ['./navbar.component.scss'],
 })
 
-export class NavBarComponent implements OnInit, OnDestroy {
+export class NavBarComponent {
 
-    isOpen = false;
     isOpenMobile = true;
-    isCountry = false;
-    openCountryMobile = false;
 
     // team
     nameTeam: string;
@@ -29,53 +21,23 @@ export class NavBarComponent implements OnInit, OnDestroy {
     totalTeams: number;
     teams: any;
 
-    // locale
-    countries = Countries.countries;
-    defaultCountry: string = localStorage.getItem('country');
-    private subscription = new Subscription();
-
-    @ViewChild("teamDiv") teamDiv: ElementRef;
+    // @ViewChild("teamDiv") teamDiv: ElementRef;
 
     constructor(
         public settingService: SettingsService,
-        private loginService: LoginService,
-        private router: Router,
         private modalService: ModalService,
-        private customerService: CustomerService,
     ) { }
 
-
-    ngOnInit(): void {
-        this.settingService.getTeam();
+    changeValue() {
+        this.isOpenMobile = !this.isOpenMobile;
     }
 
-
-    disabled() {
-        this.isOpen = false;
-        this.isCountry = false;
-        this.isOpenMobile = true;
-        this.openCountryMobile = false;
-    }
-
-    logout() {
-        this.subscription.add(this.loginService.logout().subscribe(() => this.router.navigate(['/login'])));
-    }
-
-    changeCountry(country: string): void {
-        this.settingService.changeCountry(country);
-
-        this.defaultCountry = country;
-        this.disabled();
-    }
-
-    changeTeam(id: number) {
+    /* changeTeam(id: number) {
         this.teamDiv.nativeElement.style.display = 'none !important';
 
         this.subscription.add(this.settingService.changeTeam(id).subscribe(() => this.customerService.listCustomer(1, 15)));
         this.divTeams = false;
-
-
-    }
+    } */
 
     showModal() {
         this.modalService.init(ModalComponent, this.settingService.getLangText('modal'), { closeModal: this.closeModal.bind(this) });
@@ -91,9 +53,5 @@ export class NavBarComponent implements OnInit, OnDestroy {
 
     createAppointment() {
         this.modalService.init(AppointmentComponent, this.settingService.getLangText('appointment_create'), { closeModal: this.closeModal.bind(this) })
-    }
-
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
     }
 }

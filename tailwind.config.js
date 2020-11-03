@@ -6,7 +6,7 @@ module.exports = {
   purge: [],
   theme: {
     fontFamily: {
-      'nutriwell': ['Muller-Thin'],
+      'nutriwell': ['Muller-Hairline'],
     },
     inset: {
       '0': 0,
