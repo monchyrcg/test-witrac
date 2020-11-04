@@ -17,6 +17,7 @@ import { TabsComponent } from '../components/tabs/tabs.component';
 import { TabComponent } from '../components/tab/tab.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -31,7 +32,8 @@ export function createTranslateLoader(http: HttpClient) {
         HighlightDirective,
         FilterPipe,
         TabsComponent,
-        TabComponent
+        TabComponent,
+        BreadcrumbComponent
     ],
     imports: [
         CommonModule,
@@ -55,7 +57,8 @@ export function createTranslateLoader(http: HttpClient) {
         FilterPipe,
         TabsComponent,
         TabComponent,
-        CalendarModule
+        CalendarModule,
+        BreadcrumbComponent
     ],
     entryComponents: [],
     providers: []

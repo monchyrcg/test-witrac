@@ -6,18 +6,19 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { CustomerComponent } from './customer/customer.component';
 
 @Component({
-    selector: 'app-navbar',
-    templateUrl: './navbar2.component.html',
-    styleUrls: ['./navbar.component.scss'],
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.scss'],
 })
 
-export class NavBarComponent {
+export class MenuComponent {
 
     isOpenMobile = true;
 
     // team
     nameTeam: string;
     divTeams = false;
+
     totalTeams: number;
     teams: any;
 
@@ -28,18 +29,19 @@ export class NavBarComponent {
         private modalService: ModalService,
     ) { }
 
-    changeValue() {
-        this.isOpenMobile = !this.isOpenMobile;
+    changeValue(value?) {
+        this.isOpenMobile = value ? value : !this.isOpenMobile;
     }
 
     /* changeTeam(id: number) {
         this.teamDiv.nativeElement.style.display = 'none !important';
-
+    
         this.subscription.add(this.settingService.changeTeam(id).subscribe(() => this.customerService.listCustomer(1, 15)));
         this.divTeams = false;
     } */
 
     showModal() {
+        this.changeValue(true);
         this.modalService.init(ModalComponent, this.settingService.getLangText('modal'), { closeModal: this.closeModal.bind(this) });
     }
 
@@ -48,10 +50,12 @@ export class NavBarComponent {
     }
 
     createCustomer() {
+        this.changeValue(true);
         this.modalService.init(CustomerComponent, this.settingService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
     }
 
     createAppointment() {
+        this.changeValue(true);
         this.modalService.init(AppointmentComponent, this.settingService.getLangText('appointment_create'), { closeModal: this.closeModal.bind(this) })
     }
 }

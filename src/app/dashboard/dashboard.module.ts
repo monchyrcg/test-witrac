@@ -19,13 +19,11 @@ import { createTranslateLoader, SharedModule } from '../shared/modules/shared.mo
 
 import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
-import { NavBarComponent } from './home/navbar/navbar.component';
-import { CustomerComponent } from './home/navbar/customer/customer.component';
+import { MenuComponent } from './home/menu/menu.component';
+import { CustomerComponent } from './home/menu/customer/customer.component';
 
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
-import { CustomerListComponent } from './customer/customer-list/customer-list.component';
-import { CustomerEditComponent } from './customer/customer-edit/customer-edit.component';
-import { AppointmentComponent } from './home/navbar/appointment/appointment.component';
+import { AppointmentComponent } from './home/menu/appointment/appointment.component';
 import { CustomerModule } from './customer/customer.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
@@ -41,7 +39,7 @@ registerLocaleData(localeIt);
 
 @NgModule({
     declarations: [
-        NavBarComponent,
+        MenuComponent,
         HomeComponent,
         CalendarComponent,
         CustomerComponent,
@@ -56,8 +54,7 @@ registerLocaleData(localeIt);
         Ng2FlatpickrModule,
     ],
     exports: [
-        SharedModule,
-        NavBarComponent
+        SharedModule
     ],
     providers: [],
 })

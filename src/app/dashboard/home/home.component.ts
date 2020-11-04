@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/auth/login/login.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { Countries } from 'src/app/shared/settings/country';
-import { NavBarComponent } from './navbar/navbar.component';
 
 @Component({
     selector: 'app-home',

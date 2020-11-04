@@ -192,20 +192,37 @@
 
 /* @import must be at top of file, otherwise CSS will not work */
 @import url("//hello.myfonts.net/count/3c85b9");
-  
+
 @font-face {
-  font-family: 'Muller-BlackItalic';
-  src: url('assets/fonts/muller/Muller-BlackItalic/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-BlackItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'Muller-Black';
-  src: url('assets/fonts/muller/Muller-Black/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Black/font.woff') format('woff');
+  font-family: 'Muller-Light';
+  src: url('assets/fonts/muller/Muller-Light/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Light/font.woff') format('woff');
 }
 @font-face {
   font-family: 'Muller-Bold';
   src: url('assets/fonts/muller/Muller-Bold/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Bold/font.woff') format('woff');
 }
 @font-face {
+  font-family: 'Muller-Thin';
+  src: url('assets/fonts/muller/Muller-Thin/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Thin/font.woff') format('woff');
+}
+@font-face {
+  font-family: 'Muller-Regular';
+  src: url('assets/fonts/muller/Muller-Regular/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Regular/font.woff') format('woff');
+}
+@font-face {
+  font-family: 'Muller-Medium';
+  src: url('assets/fonts/muller/Muller-Medium/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Medium/font.woff') format('woff');
+}
+/* @font-face {
+  font-family: 'Muller-BlackItalic';
+  src: url('assets/fonts/muller/Muller-BlackItalic/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-BlackItalic/font.woff') format('woff');
+}
+@font-face {
+  font-family: 'Muller-Black';
+  src: url('assets/fonts/muller/Muller-Black/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Black/font.woff') format('woff');
+} */
+
+/* @font-face {
   font-family: 'Muller-ExtraBold';
   src: url('assets/fonts/muller/Muller-ExtraBold/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-ExtraBold/font.woff') format('woff');
 }
@@ -220,7 +237,7 @@
 @font-face {
   font-family: 'MullerNarrow-UltraLight';
   src: url('assets/fonts/muller/MullerNarrow-UltraLight/font.woff2') format('woff2'), url('assets/fonts/muller/MullerNarrow-UltraLight/font.woff') format('woff');
-}
+} 
 @font-face {
   font-family: 'MullerNarrow-Thin';
   src: url('assets/fonts/muller/MullerNarrow-Thin/font.woff2') format('woff2'), url('assets/fonts/muller/MullerNarrow-Thin/font.woff') format('woff');
@@ -232,8 +249,8 @@
 @font-face {
   font-family: 'MullerNarrow-MediumItalic';
   src: url('assets/fonts/muller/MullerNarrow-MediumItalic/font.woff2') format('woff2'), url('assets/fonts/muller/MullerNarrow-MediumItalic/font.woff') format('woff');
-}
-@font-face {
+} */
+/* @font-face {
   font-family: 'MullerNarrow-Regular';
   src: url('assets/fonts/muller/MullerNarrow-Regular/font.woff2') format('woff2'), url('assets/fonts/muller/MullerNarrow-Regular/font.woff') format('woff');
 }
@@ -316,28 +333,18 @@
 @font-face {
   font-family: 'Muller-UltraLight';
   src: url('assets/fonts/muller/Muller-UltraLight/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-UltraLight/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'Muller-Thin';
-  src: url('assets/fonts/muller/Muller-Thin/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Thin/font.woff') format('woff');
-}
-@font-face {
+} */
+
+/* @font-face {
   font-family: 'Muller-RegularItalic';
   src: url('assets/fonts/muller/Muller-RegularItalic/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-RegularItalic/font.woff') format('woff');
 }
 @font-face {
   font-family: 'MullerNarrow-Hairline';
   src: url('assets/fonts/muller/MullerNarrow-Hairline/font.woff2') format('woff2'), url('assets/fonts/muller/MullerNarrow-Hairline/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'Muller-Regular';
-  src: url('assets/fonts/muller/Muller-Regular/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Regular/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'Muller-Medium';
-  src: url('assets/fonts/muller/Muller-Medium/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Medium/font.woff') format('woff');
-}
-@font-face {
+} */
+
+/* @font-face {
   font-family: 'Muller-MediumItalic';
   src: url('assets/fonts/muller/Muller-MediumItalic/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-MediumItalic/font.woff') format('woff');
 }
@@ -352,12 +359,9 @@
 @font-face {
   font-family: 'Muller-HairlineItalic';
   src: url('assets/fonts/muller/Muller-HairlineItalic/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-HairlineItalic/font.woff') format('woff');
-}
-@font-face {
-  font-family: 'Muller-Light';
-  src: url('assets/fonts/muller/Muller-Light/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Light/font.woff') format('woff');
-}
-@font-face {
+} */
+
+/* @font-face {
   font-family: 'Muller-Heavy';
   src: url('assets/fonts/muller/Muller-Heavy/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Heavy/font.woff') format('woff');
 }
@@ -368,5 +372,5 @@
 @font-face {
   font-family: 'Muller-Hairline';
   src: url('assets/fonts/muller/Muller-Black/font.woff2') url('assets/fonts/muller/Muller-Hairline/font.woff2') format('woff2'), url('assets/fonts/muller/Muller-Hairline/font.woff') format('woff');
-}
+} */
 
