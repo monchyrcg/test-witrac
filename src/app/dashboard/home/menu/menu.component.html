@@ -101,7 +101,7 @@
 <!-- Static sidebar for desktop -->
 <div class="hidden md:flex md:flex-shrink-0 h-full">
 
-    <div class="flex flex-col w-64">
+    <div class="flex flex-col w-64" *ngIf="!showSmallNavBar">
 
         <!-- Sidebar component, swap this element with another sidebar if you like -->
         <div class="flex flex-col flex-grow bg-nutriwell pt-5 pb-4 overflow-y-auto">
@@ -149,28 +149,104 @@
             </div>
 
             <div class="flex-col flex border-t border-nutriwell-stone pt-4">
+                <nav class="flex-1 px-2 space-y-1">
+                    <a (click)="createAppointment()" class="group text menu active">
+                        <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        {{ 'dashboard.new_appointment' | translate }}
+                    </a>
 
-                <a (click)="createAppointment()" class="group text menu active">
-                    <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </div>
-                    {{ 'dashboard.new_appointment' | translate }}
-                </a>
+                    <a (click)="createCustomer()" class="group text menu bg-nutriwell-mustela">
+                        <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+                                </path>
+                            </svg>
+                        </div>
+                        {{ 'dashboard.new_customer' | translate }}
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
 
-                <a (click)="createCustomer()" class="group text menu bg-nutriwell-mustela">
-                    <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
-                            </path>
-                        </svg>
-                    </div>
-                    {{ 'dashboard.new_customer' | translate }}
-                </a>
+    <div class="flex flex-col w-16" *ngIf="showSmallNavBar">
+
+        <!-- Sidebar component, swap this element with another sidebar if you like -->
+        <div class="flex flex-col flex-grow bg-nutriwell pt-5 pb-4 overflow-y-auto">
+
+            <div class="items-center flex-shrink-0 px-4">
+                <img src="assets/images/logo" alt="Nutriwell">
+            </div>
+
+            <div class="mt-5 flex-1 flex flex-col">
+                <nav class="flex-1 px-2 bg-nutriwell space-y-1 tooltip">
+                    <a [routerLink]="['/']" class="group text menu rounded-md"
+                        aria-label="Click to Switch to Solid Icons">
+                        <div class="bg-nutriwell-sun flex items-center mr-3 p-1.5 rounded-full">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                </path>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <a [routerLink]="['/calendar']" routerLinkActive="active" class="group text menu rounded-md">
+                        <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
+                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                    </a>
+
+                    <a routerLink="customers" routerLinkActive="active" class="group text menu rounded-md">
+                        <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
+                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                            </svg>
+                        </div>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="flex-col flex border-t border-nutriwell-stone pt-4">
+                <nav class="flex-1 px-2 bg-nutriwell space-y-1">
+                    <a (click)="createAppointment()" class="group text menu">
+                        <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <a (click)="createCustomer()" class="group text menu">
+                        <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+                                </path>
+                            </svg>
+                        </div>
+                    </a>
+                </nav>
             </div>
         </div>
     </div>

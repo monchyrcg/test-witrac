@@ -5,6 +5,18 @@
 
     <div class="flex flex-col w-0 flex-1 overflow-hidden">
         <div class="relative z-10 flex-shrink-0 flex h-16 bg-white shadow">
+            <div class="pl-4 md:flex justify-between hidden">
+                <button (click)="menu.smallNavBar()"
+                    class="p-1 text-gray-400 rounded-full focus:outline-none focus:text-gray-500">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+
             <button (click)="menu.changeValue()"
                 class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
                 aria-label="Open sidebar">
@@ -12,6 +24,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
                 </svg>
             </button>
+
             <div class="flex-1 px-4 flex justify-between">
                 <div class="flex-1 flex">
                     <app-breadcrumb></app-breadcrumb>

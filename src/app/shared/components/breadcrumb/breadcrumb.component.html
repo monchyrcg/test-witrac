@@ -1,4 +1,4 @@
-<nav class="flex pt-2.5" aria-label="Breadcrumb">
+<nav class="flex" aria-label="Breadcrumb" [ngClass]="{ 'pt-5': menuItems.length == 0 , 'pt-2.5': menuItems.length > 0}">
     <ol class="bg-white rounded-md px-6 flex space-x-4">
         <li class="flex">
             <div class="flex items-center">

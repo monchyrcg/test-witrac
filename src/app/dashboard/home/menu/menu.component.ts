@@ -14,6 +14,7 @@ import { CustomerComponent } from './customer/customer.component';
 export class MenuComponent {
 
     isOpenMobile = true;
+    showSmallNavBar = false;
 
     // team
     nameTeam: string;
@@ -33,6 +34,9 @@ export class MenuComponent {
         this.isOpenMobile = value ? value : !this.isOpenMobile;
     }
 
+    smallNavBar() {
+        this.showSmallNavBar = !this.showSmallNavBar;
+    }
     /* changeTeam(id: number) {
         this.teamDiv.nativeElement.style.display = 'none !important';
     
