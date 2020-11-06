@@ -64,8 +64,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
         let day = '';
         if (this.appointmentDay) {
-            day = moment(this.appointmentDay).format('DD-MM-YYYY HH:mm');
-            this.dateOptions.defaultDate = day;
+            day = moment(this.appointmentDay).format('YYYY-MM-DD HH:mm');
+            this.dateOptions.defaultDate = moment(this.appointmentDay).format('DD-MM-YYYY HH:mm');
+            console.log(this.dateOptions);
         }
 
         this.current_team_id = this.authService.getUserVariable('current_team_id');
@@ -80,7 +81,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
         this.appointmentForm = this.builder.group({
             customer_id: ['', [Validators.required]],
-            date: [day, [Validators.required]],
+            date: [{ 0: day }, [Validators.required]],
             team_id: [{ value: this.current_team_id, disabled: true }, [Validators.required]],
             user_id: [{ value: this.authService.getUserVariable('id') }, [Validators.required]],
         });
@@ -154,7 +155,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         appointment.date = moment(appointment.date[0]).format('YYYY-MM-DD');
         appointment.hour = hour;
         appointment.team_id = this.appointmentForm.controls['team_id'].value;
-
         this.subscription.add(this.appointmentService.saveAppointment(appointment).subscribe(
             (response) => {
                 this.showSnackBar('Appointment created successfully.', 'success');
@@ -163,7 +163,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 this.showSnackBar('Algo ha pasado ....', 'danger');
             }
         ));
-
     }
 
     showSnackBar(text: string, _class: string) {

@@ -10,9 +10,12 @@ import { UtilsService } from './util.service';
 })
 export class AppointmentService {
 
+    date;
+
     constructor(private http: HttpClient, private utilService: UtilsService) { }
 
     listAppointment(date?) {
+        this.date = date;
         let params = new HttpParams;
         if (date) {
             params = params.append('date', date);
@@ -32,11 +35,13 @@ export class AppointmentService {
                 });
             }));
     }
+
     saveAppointment(appointment) {
         return this.http
             .post(`${environment.apiUrl}/appointments`, appointment)
             .pipe(map((response: any) => {
                 response.data;
+                this.listAppointment(this.date);
             }));
     }
 }
