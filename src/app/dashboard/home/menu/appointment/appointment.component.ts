@@ -27,6 +27,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     @Input() title: string;
     @Input() text_button_create: string;
+    @Input() appointmentDay;
     @Output() closeModal;
 
     searchText: FormControl;
@@ -60,6 +61,13 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+
+        let day = '';
+        if (this.appointmentDay) {
+            day = moment(this.appointmentDay).format('DD-MM-YYYY HH:mm');
+            this.dateOptions.defaultDate = day;
+        }
+
         this.current_team_id = this.authService.getUserVariable('current_team_id');
 
         this.searchText = new FormControl('');
@@ -72,9 +80,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
         this.appointmentForm = this.builder.group({
             customer_id: ['', [Validators.required]],
-            date: ['', [Validators.required]],
+            date: [day, [Validators.required]],
             team_id: [{ value: this.current_team_id, disabled: true }, [Validators.required]],
-            user_id: ['', [Validators.required]],
+            user_id: [{ value: this.authService.getUserVariable('id') }, [Validators.required]],
         });
 
         this.subscription.add(this.settingService.changeCountry$.subscribe(

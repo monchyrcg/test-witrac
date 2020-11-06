@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import * as moment from 'moment';
+import { MenuComponent } from '../home/menu/menu.component';
 
 const colors: any = {
 	red: {
@@ -111,8 +112,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
 		},
 	];
 
-	activeDayIsOpen = true;
-
 	events$: Observable<CalendarEvent<{}>[]>;
 
 	currentDay = moment().format('YYYY-MM-DD');
@@ -120,25 +119,20 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	constructor(
 		private modal: NgbModal,
 		public settingService: SettingsService,
-		public appointmentService: AppointmentService
+		public appointmentService: AppointmentService,
+		public menuComponent: MenuComponent
 	) { }
 
 	ngOnInit(): void {
 		this.events$ = this.appointmentService.listAppointment(this.currentDay);
 	}
 
-	dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-		if (isSameMonth(date, this.viewDate)) {
-			if (
-				(isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-				events.length === 0
-			) {
-				this.activeDayIsOpen = false;
-			} else {
-				this.activeDayIsOpen = true;
-			}
-			this.viewDate = date;
-		}
+	dayClicked(date: Date): void {
+		this.menuComponent.createAppointment(date)
+	}
+
+	eventClicked(event) {
+		console.log(event);
 	}
 
 	eventTimesChanged({
@@ -197,8 +191,6 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
 			this.events$ = this.appointmentService.listAppointment(newDay);
 		}
-
-		this.activeDayIsOpen = false;
 	}
 
 	ngOnDestroy() {

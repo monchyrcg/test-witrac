@@ -50,7 +50,6 @@ export class CustomerListComponent implements OnInit, OnDestroy {
         this.twilioService.getToken().subscribe(
             (response) => {
                 this.device.setup(response);
-                console.log(this.device.status());
             }
         );
 

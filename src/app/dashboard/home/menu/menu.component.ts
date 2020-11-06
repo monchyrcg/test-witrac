@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
 import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
@@ -10,7 +11,9 @@ import { CustomerComponent } from './customer/customer.component';
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss'],
 })
-
+/* @Injectable({
+    providedIn: 'root' // just before your class
+}) */
 export class MenuComponent {
 
     isOpenMobile = true;
@@ -58,8 +61,11 @@ export class MenuComponent {
         this.modalService.init(CustomerComponent, this.settingService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
     }
 
-    createAppointment() {
+    createAppointment(date?) {
         this.changeValue(true);
-        this.modalService.init(AppointmentComponent, this.settingService.getLangText('appointment_create'), { closeModal: this.closeModal.bind(this) })
+        let inputs = this.settingService.getLangText('appointment_create');
+        inputs.appointmentDay = date;
+
+        this.modalService.init(AppointmentComponent, inputs, { closeModal: this.closeModal.bind(this) })
     }
 }

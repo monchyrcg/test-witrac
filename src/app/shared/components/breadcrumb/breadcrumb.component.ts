@@ -18,8 +18,6 @@ export class BreadcrumbComponent implements OnInit {
 
     ngOnInit(): void {
         this.createBreadcrumbs();
-
-        console.log(this.menuItems);
     }
 
     private createBreadcrumbs() {
@@ -34,7 +32,6 @@ export class BreadcrumbComponent implements OnInit {
 
                 routerList = routerUrl.slice(1).split('/');
                 routerList.forEach((router, index) => {
-                    console.log(router);
                     /* target = target.find(page => {
                         console.log(page);
                         page.path.slice(2) === router;
@@ -50,8 +47,6 @@ export class BreadcrumbComponent implements OnInit {
                     //     target = target.children;
                     // }
                 });
-
-                console.log(this.menuItems);
             }
         });
     }

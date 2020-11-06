@@ -75,17 +75,20 @@
                 <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
                     style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                     [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh">
+                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
+                    (dayClicked)="dayClicked($event.day.date)" (eventClicked)="eventClicked($event)">
                 </mwl-calendar-month-view>
                 <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
                     style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                     [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh">
+                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
+                    (hourSegmentClicked)="dayClicked($event.date)" (eventClicked)="eventClicked($event)">
                 </mwl-calendar-week-view>
                 <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
                     style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
                     [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh">
+                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
+                    (hourSegmentClicked)="dayClicked($event.date)" (eventClicked)="eventClicked($event)">
                 </mwl-calendar-day-view>
             </div>
         </ng-container>

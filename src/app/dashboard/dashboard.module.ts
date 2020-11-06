@@ -54,7 +54,8 @@ registerLocaleData(localeIt);
         Ng2FlatpickrModule,
     ],
     exports: [
-        SharedModule
+        SharedModule,
+        MenuComponent
     ],
     providers: [],
 })
