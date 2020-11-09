@@ -7,6 +7,7 @@ import { Gender } from 'src/app/shared/interfaces/gender.interface';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import * as moment from 'moment';
 import { Countries } from 'src/app/shared/settings/country';
+import { Validations } from 'src/app/shared/settings/validation';
 
 @Component({
     selector: 'app-customer-edit-general',
@@ -24,6 +25,8 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
     legal_age: number;
     under: boolean;
+
+    validationMaxString = Validations.validationMaxString;
 
     dateOptions: FlatpickrOptions;
 
@@ -57,17 +60,19 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
         this.genders.push({ id: 2, text: this.settingService.getLangText('genders.female') });
 
         this.customerForm = this.builder.group({
-            name: [this.customer.name, [Validators.required]],
+            name: [this.customer.name, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
+            surnames: [this.customer.surnames, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             gender: [this.customer.gender, [Validators.required]],
             team_id: [this.customer.team_id, [Validators.required]],
             dob: [this.customer.dob, [Validators.required]],
-            job: [this.customer.job, [Validators.required]],
+            job: [this.customer.job, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             prefix: [this.customer.prefix, [Validators.required]],
             mobile: [this.customer.mobile, [Validators.required]],
-            email: [this.customer.email, [Validators.required, Validators.email]],
+            email: [this.customer.email, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
             legal_checkbox: [this.customer.legal ? this.customer.legal.name : null],
-            legal_name: [this.customer.legal ? this.customer.legal.name : null],
-            legal_identity: [this.customer.legal ? this.customer.legal.identity : null],
+            legal_name: [this.customer.legal ? this.customer.legal.name : null, [Validators.maxLength(this.validationMaxString.short_string)]],
+            legal_surnames: [this.customer.legal ? this.customer.legal.surnames : null, [Validators.maxLength(this.validationMaxString.long_string)]],
+            legal_identity: [this.customer.legal ? this.customer.legal.identity : null, [Validators.maxLength(this.validationMaxString.short_string)]],
         });
     }
 

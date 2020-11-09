@@ -66,7 +66,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         if (this.appointmentDay) {
             day = moment(this.appointmentDay).format('YYYY-MM-DD HH:mm');
             this.dateOptions.defaultDate = moment(this.appointmentDay).format('DD-MM-YYYY HH:mm');
-            console.log(this.dateOptions);
         }
 
         this.current_team_id = this.authService.getUserVariable('current_team_id');
@@ -98,6 +97,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 this.appointmentForm.controls['user_id'].setValue('');
             }
         ));
+
+
     }
 
     get f() { return this.appointmentForm.controls; }

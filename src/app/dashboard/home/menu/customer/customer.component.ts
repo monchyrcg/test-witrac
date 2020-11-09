@@ -10,6 +10,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Customer, CustomerCreated } from 'src/app/shared/interfaces/customers.interface';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
+import { Validations } from 'src/app/shared/settings/validation';
 
 
 @Component({
@@ -31,6 +32,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     under: boolean = false;
     legal_age: number;
+    validationMaxString = Validations.validationMaxString;
 
     private subscription = new Subscription();
 
@@ -55,6 +57,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
             maxDate: moment().format(this.settingService.settings.formatMoment),
             disableMobile: true,
         };
+        console.log(this.dateOptions);
     }
 
 
@@ -63,17 +66,19 @@ export class CustomerComponent implements OnInit, OnDestroy {
         this.genders.push({ id: 2, text: this.settingService.getLangText('genders.female') });
 
         this.customerForm = this.builder.group({
-            name: ['', [Validators.required]],
+            name: ['', [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
+            surnames: ['', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             gender: ['', [Validators.required]],
             team_id: ['', [Validators.required]],
             dob: [null, [Validators.required]],
-            job: ['', [Validators.required]],
+            job: ['', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             prefix: ['', [Validators.required]],
             mobile: ['', [Validators.required]],
-            email: ['', [Validators.required, Validators.email]],
+            email: ['', [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
             legal_checkbox: [null],
-            legal_name: [null],
-            legal_identity: [null],
+            legal_name: [null, [Validators.maxLength(this.validationMaxString.short_string)]],
+            legal_surnames: [null, [Validators.maxLength(this.validationMaxString.long_string)]],
+            legal_identity: [null, [Validators.maxLength(this.validationMaxString.short_string)]],
         });
 
         this.settingService.changeCountry$.subscribe(
@@ -112,10 +117,10 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     changeDob($event) {
         const dob = $event.target.value;
-        const dobFormat = moment(dob, this.settingService.settings.formatFlatpickr);
+        const dobFormat = moment(dob, this.settingService.settings.formatMoment);
         const last = moment().subtract(this.legal_age, 'years');
 
-        const legalFields = ['legal_checkbox', 'legal_name', 'legal_identity'];
+        const legalFields = ['legal_checkbox', 'legal_name', 'legal_surnames', 'legal_identity'];
         if (dobFormat.isAfter(last, 'day')) {
             legalFields.forEach(element => {
                 this.customerForm.get(element).setValidators([Validators.required]);

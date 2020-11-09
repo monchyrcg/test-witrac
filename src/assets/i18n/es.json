@@ -2,7 +2,8 @@
     "errors": {
         "required": "The field is required",
         "email": "The field must be a valid email",
-        "minLength": "The field must have at least {{ number }} characteres"
+        "minLength": "The field must have at least {{ number }} characters",
+        "maxLength": "The field cannot have more than {{ number }} characters"
     },
     "login": {
         "username": "Username",
@@ -11,13 +12,13 @@
         "error_password": "Please choose a password.",
         "sign_in": "Sign in",
         "forgot": "Forgot Password?",
-        "signed": "{{year}} nutriwell. All rights reserved."
+        "signed": "{{year}} Nutriwell. All rights reserved."
     },
     "dashboard": {
         "calendar": "Calendar",
-        "customers": "Clientes",
-        "new_appointment": "Nueva cita",
-        "new_customer": "Nuevo cliente"
+        "customers": "Customers",
+        "new_appointment": "New appointment",
+        "new_customer": "New customer"
     },
     "modal": {
         "title": "Lorem ipsum",
@@ -29,6 +30,7 @@
         "text": "Registra tu cliente y sigue programando la cita",
         "text_button_register": "Registrar cliente",
         "name": "Nombre",
+        "surnames": "Apellidos",
         "gender": "Genero",
         "team": "Lugar consulta",
         "dob": "Fecha de nacimiento",
@@ -44,7 +46,7 @@
         "text_button_create": "Crear"
     },
     "genders": {
-        "male": "Masculino",
-        "female": "Feminino"
+        "male": "Male",
+        "female": "Female"
     }
 }

@@ -11,6 +11,7 @@ module.exports = {
     inset: {
       '0': 0,
       auto: 'auto',
+      '1/5': '20px',
       '1/2': '50px',
       '1/2%': '50%',
     },

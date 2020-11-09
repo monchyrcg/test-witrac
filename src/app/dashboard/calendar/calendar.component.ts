@@ -32,7 +32,7 @@ const colors: any = {
 
 export class CalendarComponent implements OnInit, OnDestroy {
 
-	@ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
+	activeDayIsOpen: boolean = true;
 
 	view: CalendarView = CalendarView.Month;
 
@@ -51,73 +51,13 @@ export class CalendarComponent implements OnInit, OnDestroy {
 		event: CalendarEvent;
 	};
 
-	actions: CalendarEventAction[] = [
-		{
-			label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-			a11yLabel: 'Edit',
-			onClick: ({ event }: { event: CalendarEvent }): void => {
-				this.handleEvent('Edited', event);
-			},
-		},
-		{
-			label: '<i class="fas fa-fw fa-trash-alt"></i>',
-			a11yLabel: 'Delete',
-			onClick: ({ event }: { event: CalendarEvent }): void => {
-				this.events = this.events.filter((iEvent) => iEvent !== event);
-				this.handleEvent('Deleted', event);
-			},
-		},
-	];
-
 	refresh: Subject<any> = new Subject();
-
-	events: CalendarEvent[] = [
-		{
-			start: subDays(startOfDay(new Date()), 1),
-			end: addDays(new Date(), 1),
-			title: 'A 3 day event',
-			color: colors.red,
-			actions: this.actions,
-			allDay: true,
-			resizable: {
-				beforeStart: true,
-				afterEnd: true,
-			},
-			draggable: true,
-		},
-		{
-			start: startOfDay(new Date()),
-			title: 'An event with no end date',
-			color: colors.yellow,
-			actions: this.actions,
-		},
-		{
-			start: subDays(endOfMonth(new Date()), 3),
-			end: addDays(endOfMonth(new Date()), 3),
-			title: 'A long event that spans 2 months',
-			color: colors.blue,
-			allDay: true,
-		},
-		{
-			start: addHours(startOfDay(new Date()), 2),
-			end: addHours(new Date(), 2),
-			title: 'A draggable and resizable event',
-			color: colors.yellow,
-			actions: this.actions,
-			resizable: {
-				beforeStart: true,
-				afterEnd: true,
-			},
-			draggable: true,
-		},
-	];
 
 	events$: Observable<CalendarEvent<{}>[]>;
 
 	currentDay = moment().format('YYYY-MM-DD');
 
 	constructor(
-		private modal: NgbModal,
 		public settingService: SettingsService,
 		public appointmentService: AppointmentService,
 		public menuComponent: MenuComponent
@@ -135,62 +75,12 @@ export class CalendarComponent implements OnInit, OnDestroy {
 		console.log(event);
 	}
 
-	eventTimesChanged({
-		event,
-		newStart,
-		newEnd,
-	}: CalendarEventTimesChangedEvent): void {
-		this.events = this.events.map((iEvent) => {
-			if (iEvent === event) {
-				return {
-					...event,
-					start: newStart,
-					end: newEnd,
-				};
-			}
-			return iEvent;
-		});
-		this.handleEvent('Dropped or resized', event);
-	}
-
-	handleEvent(action: string, event: CalendarEvent): void {
-		this.modalData = { event, action };
-		this.modal.open(this.modalContent, { size: 'lg' });
-	}
-
-	addEvent(): void {
-		this.events = [
-			...this.events,
-			{
-				title: 'New event',
-				start: startOfDay(new Date()),
-				end: endOfDay(new Date()),
-				color: colors.red,
-				draggable: true,
-				resizable: {
-					beforeStart: true,
-					afterEnd: true,
-				},
-			},
-		];
-	}
-
-	deleteEvent(eventToDelete: CalendarEvent): void {
-		this.events = this.events.filter((event) => event !== eventToDelete);
-	}
-
 	setView(view: CalendarView): void {
 		this.view = view;
 	}
 
-	closeOpenMonthViewDay(): void {
-		const newDay = moment(this.viewDate).format('YYYY-MM-DD');
-
-		if (moment(newDay).format('MM') != moment(this.currentDay).format('MM')) {
-			this.currentDay = newDay;
-
-			this.events$ = this.appointmentService.listAppointment(newDay);
-		}
+	closeOpenMonthViewDay() {
+		this.activeDayIsOpen = false;
 	}
 
 	ngOnDestroy() {

@@ -2,7 +2,8 @@
     "errors": {
         "required": "The field is required",
         "email": "The field must be a valid email",
-        "minLength": "The field must have at least {{ number }} characteres"
+        "minLength": "The field must have at least {{ number }} characters",
+        "maxLength": "The field cannot have more than {{ number }} characters"
     },
     "login": {
         "username": "Username",
@@ -28,19 +29,23 @@
         "title": "Registrar el cliente",
         "text": "Registra tu cliente y sigue programando la cita",
         "text_button_register": "Registrar cliente",
-        "name": "Nombre",
-        "gender": "Genero",
-        "team": "Lugar consulta",
-        "dob": "Fecha de nacimiento",
-        "job": "Ocupación",
-        "mobile": "Movil",
-        "email": "Correo electŕonico"
+        "name": "Name",
+        "surnames": "Surnames",
+        "gender": "Gender",
+        "team": "Team",
+        "dob": "Birth date",
+        "job": "Job",
+        "mobile": "Mobile",
+        "email": "Email",
+        "legal_name": "Legal representative name",
+        "legal_surnames": "Legal representative surnames",
+        "legal_identity": "Legal representative ID"
     },
     "appointment_create": {
-        "title": "Crea tu cita",
-        "date": "Fecha visita",
-        "team": "Lugar de consulta",
-        "user": "Usuario",
+        "title": "Crea an appointment",
+        "date": "Date",
+        "team": "Team",
+        "user": "Usuer",
         "text_button_create": "Crear"
     },
     "genders": {

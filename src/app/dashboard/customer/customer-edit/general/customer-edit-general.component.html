@@ -19,6 +19,26 @@
                         <ng-container *ngIf="submitted && f.name.errors">
                             <app-error-form *ngIf="f.name.errors.required" error="{{'errors.required' | translate}}">
                             </app-error-form>
+                            <app-error-form *ngIf="f.name.errors.maxlength"
+                                error="{{'errors.maxLength' | translate:{number: validationMaxString.short_string} }}">
+                            </app-error-form>
+                        </ng-container>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <app-label-form for="name" name="{{ 'customer_create.surnames' | translate }}">
+                        </app-label-form>
+
+                        <input formControlName="surnames" class="inputClass" id="surnames" type="text"
+                            [ngClass]="{ 'border border-red-500': submitted && f.surnames.errors }"
+                            placeholder="{{ 'customer_create.surnames' | translate }}">
+                        <ng-container *ngIf="submitted && f.surnames.errors">
+                            <app-error-form *ngIf="f.surnames.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                            <app-error-form *ngIf="f.surnames.errors.maxlength"
+                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                            </app-error-form>
                         </ng-container>
                     </div>
 
@@ -70,6 +90,9 @@
                         <ng-container *ngIf="submitted && f.job.errors">
                             <app-error-form *ngIf="f.job.errors.required" error="{{'errors.required' | translate}}">
                             </app-error-form>
+                            <app-error-form *ngIf="f.job.errors.maxlength"
+                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                            </app-error-form>
                         </ng-container>
                     </div>
 
@@ -108,6 +131,9 @@
                             </app-error-form>
                             <app-error-form *ngIf="f.email.errors.email" error="{{'errors.email' | translate}}">
                             </app-error-form>
+                            <app-error-form *ngIf="f.email.errors.maxlength"
+                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                            </app-error-form>
                         </ng-container>
                     </div>
                 </div>
@@ -126,23 +152,49 @@
             <div class="mt-5 md:mt-0 md:col-span-2">
                 <div class="grid grid-cols-6 gap-6">
                     <div class="col-span-6 sm:col-span-3">
+                        <app-label-form for="email" name="{{ 'customer_create.legal_name' | translate }}">
+                        </app-label-form>
                         <input formControlName="legal_name" class="inputClass" id="legal_name" type="text"
                             [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                            placeholder="Responsable legal">
+                            placeholder="{{ 'customer_create.legal_name' | translate }}">
                         <ng-container *ngIf="submitted && f.legal_name.errors">
                             <app-error-form *ngIf="f.legal_name.errors.required"
                                 error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                            <app-error-form *ngIf="f.legal_name.errors.maxlength"
+                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
                             </app-error-form>
                         </ng-container>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
+                        <app-label-form for="email" name="{{ 'customer_create.legal_surnames' | translate }}">
+                        </app-label-form>
+                        <input formControlName="legal_surnames" class="inputClass" id="legal_surnames" type="text"
+                            [ngClass]="{ 'border border-red-500': submitted && f.legal_surnames.errors }"
+                            placeholder="{{ 'customer_create.legal_surnames' | translate }}">
+                        <ng-container *ngIf="submitted && f.legal_surnames.errors">
+                            <app-error-form *ngIf="f.legal_surnames.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                            <app-error-form *ngIf="f.legal_surnames.errors.maxlength"
+                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                            </app-error-form>
+                        </ng-container>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <app-label-form for="email" name="{{ 'customer_create.legal_identity' | translate }}">
+                        </app-label-form>
                         <input formControlName="legal_identity" class="inputClass" id="legal_identity" type="text"
                             [ngClass]="{ 'border border-red-500': submitted && f.legal_identity.errors }"
-                            placeholder="Responsable legal_identity">
+                            placeholder="{{ 'customer_create.legal_identity' | translate }}">
                         <ng-container *ngIf="submitted && f.legal_identity.errors">
                             <app-error-form *ngIf="f.legal_identity.errors.required"
                                 error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                            <app-error-form *ngIf="f.legal_identity.errors.maxlength"
+                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
                             </app-error-form>
                         </ng-container>
                     </div>
