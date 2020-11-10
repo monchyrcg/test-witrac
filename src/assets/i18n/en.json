@@ -41,6 +41,14 @@
         "legal_surnames": "Legal representative surnames",
         "legal_identity": "Legal representative ID"
     },
+    "calendar": {
+        "previous": "Previous",
+        "today": "Today",
+        "next": "Next",
+        "month": "Month",
+        "week": "Week",
+        "day": "Day"
+    },
     "appointment_create": {
         "title": "Crea an appointment",
         "date": "Date",

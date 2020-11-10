@@ -1,97 +1,93 @@
-<div class="px-4 py-6 sm:px-6 lg:px-8">
-    <div class="flex flex-wrap -mx-2">
-        <div class="w-full md:w-1/3 px-2">
-            <div class="flex">
-                <div class="w-1/3 px-2">
-                    <button class="button_calendar" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-                        (viewDateChange)="closeOpenMonthViewDay()">
-                        Previous
-                    </button>
+<div class="py-6 sm:px-6 lg:px-8">
+    <div class="pb-6">
+        <span class="relative z-10 inline-flex shadow-sm rounded-md float-left">
+            <button type="button" class="middle-button rounded-l-md" mwlCalendarPreviousView [view]="view"
+                [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+            <button type="button" class="-ml-px middle-button" mwlCalendarToday [(viewDate)]="viewDate"
+                (viewDateChange)="closeOpenMonthViewDay()">
+                {{ 'calendar.today' | translate }}
+            </button>
+            <button type="button" class="-ml-px middle-button rounded-r-md" mwlCalendarNextView [view]="view"
+                [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
+                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                        clip-rule="evenodd" />
+                </svg>
+            </button>
+        </span>
+        <span class="relative z-10 inline-flex shadow-sm rounded-md float-right">
+            <button type="button" class="middle-button rounded-l-md">
+                {{ viewName ? viewName : 'calendar.month' | translate }}
+            </button>
+            <span class="-ml-px relative block">
+                <button type="button" class="middle-button rounded-r-md" aria-label="Expand"
+                    (click)="isOpenView= !isOpenView">
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </button>
+
+                <div class="origin-top-right absolute right-0 mt-2 -mr-1 w-32 rounded-md shadow-lg transition ease-out duration-100"
+                    [ngClass]="{ 'hidden': !isOpenView }">
+                    <div class="rounded-md bg-white shadow-xs">
+                        <div class="py-1">
+                            <a class="openViewbutton" (click)="setView(CalendarView.Month)">
+                                {{ 'calendar.month' | translate }}
+                            </a>
+                            <a class="openViewbutton" (click)="setView(CalendarView.Week)">
+                                {{ 'calendar.week' | translate }}
+                            </a>
+                            <a class="openViewbutton" (click)="setView(CalendarView.Day)">
+                                {{ 'calendar.day' | translate }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div class="w-1/3 px-2">
-                    <button class="button_calendar" mwlCalendarToday [(viewDate)]="viewDate" mwlCalendarToday
-                        [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-                        Today
-                    </button>
-                </div>
-                <div class="w-1/3 px-2">
-                    <button class="button_calendar" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-                        (viewDateChange)="closeOpenMonthViewDay()">
-                        Next
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="w-full md:w-1/3 px-2">
-            <div class="text-center">
-                <h3 style="text-transform: capitalize;">
-                    {{ viewDate | calendarDate:(view + 'ViewTitle'): (settingService.changeCountry$ | async).locale: (settingService.changeCountry$ | async).weekStartsOn }}
-                </h3>
-            </div>
-        </div>
-        <div class="w-full md:w-1/3 px-2">
-            <div class="flex">
-                <div class="w-1/3 px-2">
-                    <button class="button_calendar" (click)="setView(CalendarView.Month)" [class.active]="view ===
-                        CalendarView.Month">
-                        Month
-                    </button>
-                </div>
-                <div class="w-1/3 px-2">
-                    <button class="button_calendar" (click)="setView(CalendarView.Week)" [class.active]="view ===
-                        CalendarView.Week">
-                        Week
-                    </button>
-                </div>
-                <div class="w-1/3 px-2">
-                    <button class="button_calendar" (click)="setView(CalendarView.Day)" [class.active]="view ===
-                        CalendarView.Day">
-                        Day
-                    </button>
-                </div>
-            </div>
+            </span>
+        </span>
+        <div class="text-center">
+            <h3 style="text-transform: capitalize;">
+                {{ viewDate | calendarDate:(view + 'ViewTitle'): (settingService.changeCountry$ | async).locale: (settingService.changeCountry$ | async).weekStartsOn }}
+            </h3>
         </div>
     </div>
 </div>
 
-<div class="px-4 py-6 sm:px-6 lg:px-8">
+<div class="py-6 sm:px-6 lg:px-8">
     <ng-template #loading>
-        <div class="text-center">
-            <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css"
-                integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous">
-
-            <div class="w-full h-full fixed block top-0 left-0 bg-white opacity-75 z-50">
-                <span class="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style="
-                top: 50%;
-            ">
-                    <i class="fas fa-circle-notch fa-spin fa-5x"></i>
-                </span>
-            </div>
-        </div>
+        <app-loading></app-loading>
     </ng-template>
-    <div class="px-4 py-6 sm:px-0">
-        <ng-container *ngIf="events$ | async; else loading; let events">
-            <div [ngSwitch]="view">
-                <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-                    style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
-                    [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
-                    (dayClicked)="dayClicked($event.day.date)" (eventClicked)="eventClicked($event)">
-                </mwl-calendar-month-view>
-                <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
-                    style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
-                    [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
-                    (hourSegmentClicked)="dayClicked($event.date)" (eventClicked)="eventClicked($event)">
-                </mwl-calendar-week-view>
-                <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
-                    style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
-                    [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-                    [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
-                    (hourSegmentClicked)="dayClicked($event.date)" (eventClicked)="eventClicked($event)">
-                </mwl-calendar-day-view>
-            </div>
-        </ng-container>
 
-    </div>
+    <ng-container *ngIf="events$ | async; else loading; let events">
+        <div [ngSwitch]="view">
+            <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
+                style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
+                [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
+                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
+                (dayClicked)="dayClicked($event.day.date)" (eventClicked)="eventClicked($event)">
+            </mwl-calendar-month-view>
+            <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate" [events]="events"
+                style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
+                [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
+                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
+                (hourSegmentClicked)="dayClicked($event.date)" (eventClicked)="eventClicked($event)">
+            </mwl-calendar-week-view>
+            <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate" [events]="events"
+                style="text-transform: capitalize;" [locale]="(settingService.changeCountry$ | async).locale"
+                [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
+                [weekendDays]="(settingService.changeCountry$ | async).weekendDays" [refresh]="refresh"
+                (hourSegmentClicked)="dayClicked($event.date)" (eventClicked)="eventClicked($event)">
+            </mwl-calendar-day-view>
+        </div>
+    </ng-container>
+
 </div>

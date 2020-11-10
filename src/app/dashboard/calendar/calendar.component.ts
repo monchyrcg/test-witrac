@@ -8,21 +8,6 @@ import { AppointmentService } from 'src/app/shared/services/appointment.service'
 import * as moment from 'moment';
 import { MenuComponent } from '../home/menu/menu.component';
 
-const colors: any = {
-	red: {
-		primary: '#ad2122',
-		secondary: '#FAE3E3',
-	},
-	blue: {
-		primary: '#1e90ff',
-		secondary: '#D1E8FF',
-	},
-	yellow: {
-		primary: '#e3bc08',
-		secondary: '#FDF1BA',
-	},
-};
-
 @Component({
 	selector: 'app-calendar',
 	templateUrl: './calendar.component.html',
@@ -31,8 +16,6 @@ const colors: any = {
 })
 
 export class CalendarComponent implements OnInit, OnDestroy {
-
-	activeDayIsOpen: boolean = true;
 
 	view: CalendarView = CalendarView.Month;
 
@@ -46,16 +29,15 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
 	viewDate: Date = new Date();
 
-	modalData: {
-		action: string;
-		event: CalendarEvent;
-	};
-
 	refresh: Subject<any> = new Subject();
 
 	events$: Observable<CalendarEvent<{}>[]>;
 
 	currentDay = moment().format('YYYY-MM-DD');
+
+	isOpenView: boolean = false;
+
+	viewName: string;
 
 	constructor(
 		public settingService: SettingsService,
@@ -76,11 +58,20 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	}
 
 	setView(view: CalendarView): void {
+		this.isOpenView = false;
 		this.view = view;
+		this.viewName = this.settingService.getLangText('calendar.' + view);
 	}
 
-	closeOpenMonthViewDay() {
-		this.activeDayIsOpen = false;
+	closeOpenMonthViewDay(): void {
+		const newDay = moment(this.viewDate).format('YYYY-MM-DD');
+
+		if (moment(newDay).format('MM') != moment(this.currentDay).format('MM')) {
+			this.currentDay = newDay;
+
+			this.events$ = this.appointmentService.listAppointment(newDay);
+		}
+
 	}
 
 	ngOnDestroy() {

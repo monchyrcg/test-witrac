@@ -18,6 +18,7 @@ import { TabComponent } from '../components/tab/tab.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
+import { LoadingComponent } from '../components/loading/loading.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -33,7 +34,8 @@ export function createTranslateLoader(http: HttpClient) {
         FilterPipe,
         TabsComponent,
         TabComponent,
-        BreadcrumbComponent
+        BreadcrumbComponent,
+        LoadingComponent
     ],
     imports: [
         CommonModule,
@@ -58,7 +60,8 @@ export function createTranslateLoader(http: HttpClient) {
         TabsComponent,
         TabComponent,
         CalendarModule,
-        BreadcrumbComponent
+        BreadcrumbComponent,
+        LoadingComponent
     ],
     entryComponents: [],
     providers: []
