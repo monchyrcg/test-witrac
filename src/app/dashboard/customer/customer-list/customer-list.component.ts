@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
@@ -25,7 +25,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
     // pagination
     page = 1;
-    per_page = 15;
+    per_page = 5;
     from: number;
     to: number;
     total: number;
@@ -35,6 +35,9 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     links: [];
 
     device = new Twilio.Device();
+
+    loadingShow: boolean = false;
+    listCustomer$ = Observable;
 
     constructor(
         private builder: FormBuilder,
@@ -57,6 +60,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
             (response) => {
                 response.subscribe(
                     (data) => {
+                        this.loadingShow = true;
+
                         this.customers = data['data'];
 
                         // pagination
@@ -69,8 +74,11 @@ export class CustomerListComponent implements OnInit, OnDestroy {
                         this.first_page = meta.current_page == 1 ? true : false;
                         this.last_page = meta.last_page === meta.current_page ? true : false;
                         this.links = meta.links;
+
+                        this.loadingShow = false;
                     }
                 )
+                this.listCustomer$ = response;
             }
         );
 
