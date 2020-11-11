@@ -91,8 +91,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
         this.customerService.listCustomer(this.page, this.per_page, query);
     }
 
-    call() {
-        this.device.connect({ phoneNumber: '+34680508794' });
+    call(customer) {
+        this.device.connect({ phoneNumber: customer.phone });
     }
 
     edit(id: number) {
