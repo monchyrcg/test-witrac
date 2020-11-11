@@ -50,10 +50,10 @@
         "day": "Day"
     },
     "appointment_create": {
-        "title": "Crea an appointment",
+        "title": "Create an appointment",
         "date": "Date",
         "team": "Team",
-        "user": "Usuer",
+        "user": "User",
         "text_button_create": "Crear"
     },
     "genders": {
