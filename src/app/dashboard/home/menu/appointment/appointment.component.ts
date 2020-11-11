@@ -28,6 +28,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     @Input() title: string;
     @Input() text_button_create: string;
     @Input() appointmentDay;
+    @Input() customerI;
     @Output() closeModal;
 
     searchText: FormControl;
@@ -41,7 +42,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     dateOptions: FlatpickrOptions = {
         locale: Spanish.es,
         dateFormat: 'd-m-Y H:i',
-        minDate: moment().format('DD-MM-YYYY'),
         disableMobile: true,
         enableTime: true
     };
@@ -61,6 +61,9 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+        if (this.customerI) {
+            this.customer = this.customerI;
+        }
 
         let day = '';
         if (this.appointmentDay) {

@@ -2,9 +2,11 @@ import { Input } from '@angular/core';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { Observable } from 'rxjs';
+
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import * as moment from 'moment';
+import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 
 
 @Component({
@@ -16,7 +18,7 @@ import * as moment from 'moment';
 
 export class CustomerEditCalendarComponent implements OnInit, OnDestroy {
 
-    @Input() customer_id;
+    @Input() customer;
 
     isOpenView: boolean = false;
 
@@ -34,7 +36,8 @@ export class CustomerEditCalendarComponent implements OnInit, OnDestroy {
 
     constructor(
         public settingService: SettingsService,
-        public appointmentService: AppointmentService
+        public appointmentService: AppointmentService,
+        public menuComponent: MenuComponent
     ) {
         this.viewName = this.settingService.getLangText('calendar.month');
     }
@@ -50,13 +53,17 @@ export class CustomerEditCalendarComponent implements OnInit, OnDestroy {
     }
 
     listAppointments(newDay?) {
-        this.appointmentService.listAppointmentCustomer(this.customer_id, newDay ? newDay : this.currentDay);
+        this.appointmentService.listAppointmentCustomer(this.customer.id, newDay ? newDay : this.currentDay);
     }
 
     setView(view: CalendarView): void {
         this.isOpenView = false;
         this.view = view;
         this.viewName = this.settingService.getLangText('calendar.' + view);
+    }
+
+    dayClicked(date: Date): void {
+        this.menuComponent.createAppointment(date, this.customer)
     }
 
     closeOpenMonthViewDay(): void {

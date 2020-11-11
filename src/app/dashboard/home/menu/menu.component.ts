@@ -61,10 +61,15 @@ export class MenuComponent {
         this.modalService.init(CustomerComponent, this.settingService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
     }
 
-    createAppointment(date?) {
+    createAppointment(date?, customer?) {
         this.changeValue(true);
         let inputs = this.settingService.getLangText('appointment_create');
-        inputs.appointmentDay = date;
+        if (date) {
+            inputs.appointmentDay = date;
+        }
+        if (customer) {
+            inputs.customerI = customer;
+        }
 
         this.modalService.init(AppointmentComponent, inputs, { closeModal: this.closeModal.bind(this) })
     }

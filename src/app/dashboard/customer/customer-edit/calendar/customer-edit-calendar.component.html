@@ -65,19 +65,22 @@
             style="text-transform: capitalize;" [events]="events"
             [locale]="(settingService.changeCountry$ | async).locale"
             [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-            [weekendDays]="(settingService.changeCountry$ | async).weekendDays">
+            [weekendDays]="(settingService.changeCountry$ | async).weekendDays"
+            (dayClicked)="dayClicked($event.day.date)">
         </mwl-calendar-month-view>
         <mwl-calendar-week-view *ngSwitchCase="CalendarView.Week" [viewDate]="viewDate"
             style="text-transform: capitalize;" [events]="events"
             [locale]="(settingService.changeCountry$ | async).locale"
             [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-            [weekendDays]="(settingService.changeCountry$ | async).weekendDays">
+            [weekendDays]="(settingService.changeCountry$ | async).weekendDays"
+            (hourSegmentClicked)="dayClicked($event.date)">
         </mwl-calendar-week-view>
         <mwl-calendar-day-view *ngSwitchCase="CalendarView.Day" [viewDate]="viewDate"
             style="text-transform: capitalize;" [events]="events"
             [locale]="(settingService.changeCountry$ | async).locale"
             [weekStartsOn]="(settingService.changeCountry$ | async).weekStartsOn"
-            [weekendDays]="(settingService.changeCountry$ | async).weekendDays">
+            [weekendDays]="(settingService.changeCountry$ | async).weekendDays"
+            (hourSegmentClicked)="dayClicked($event.date)">
         </mwl-calendar-day-view>
     </div>
 

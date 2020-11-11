@@ -46,7 +46,7 @@
             </div>
             <div class="mt-5 flex lg:mt-0 lg:ml-4">
                 <span class="hidden sm:block shadow-sm rounded-md">
-                    <button type="button"
+                    <button (click)="createAppointment()" type="button"
                         class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out">
                         <!-- Heroicon name: pencil -->
                         <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +121,7 @@
             <app-customer-edit-general [customer]="customer$"></app-customer-edit-general>
         </app-tab>
         <app-tab title="Acompañmiento">
-            <app-customer-edit-calendar [customer_id]="customer$.id"></app-customer-edit-calendar>
+            <app-customer-edit-calendar [customer]="customer$"></app-customer-edit-calendar>
         </app-tab>
         <app-tab title="Mediciones">
             <!-- // search -->

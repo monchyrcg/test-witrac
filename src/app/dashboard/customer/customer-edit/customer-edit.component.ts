@@ -9,6 +9,7 @@ import { Customer } from 'src/app/shared/interfaces/customers.interface';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { MagentoService } from 'src/app/shared/services/magento.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
+import { MenuComponent } from '../../home/menu/menu.component';
 
 
 
@@ -52,7 +53,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
         private customerService: CustomerService,
         public settingService: SettingsService,
         private magentoService: MagentoService,
-        private builder: FormBuilder
+        private builder: FormBuilder,
+        private menuComponent: MenuComponent
     ) { }
 
 
@@ -89,6 +91,13 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
     private listProducts(query?) {
         this.magentoService.listProducts(this.page, this.per_page, query);
+    }
+
+    createAppointment(): void {
+        this.customer$.subscribe((customer) => {
+            this.menuComponent.createAppointment(null, customer)
+        })
+
     }
 
     ngOnDestroy(): void {
