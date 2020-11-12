@@ -3,13 +3,12 @@
         <div
             class="pb-5 border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
-                Customers Lists
+                {{ 'customer_list.title' | translate }}
             </h3>
         </div>
     </div>
 
-    <div class="px-4 py-6 sm:px-6 lg:px-8">
-
+    <div class="px-4 sm:px-6 lg:px-8">
         <!-- // search -->
         <div class="flex flex-wrap" [formGroup]="customerForm">
             <div class="w-full sm:w-1/2 p-2">
@@ -28,7 +27,7 @@
 
         <!-- // table -->
         <div class="flex flex-col">
-            <div class="-my-2  sm:-mx-6 lg:-mx-8">
+            <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                     <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg inline">
                         <table class="min-w-full divide-y divide-gray-200">
@@ -36,15 +35,15 @@
                                 <tr>
                                     <th
                                         class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        Name
+                                        {{ 'customer_list.table.name' | translate }}
                                     </th>
                                     <th
                                         class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        Proxima consulta
+                                        {{ 'customer_list.table.appointment' | translate }}
                                     </th>
                                     <th
                                         class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-                                        Team
+                                        {{ 'customer_list.table.phone' | translate }}
                                     </th>
                                     <th class="px-6 py-3 bg-gray-50"></th>
                                 </tr>
@@ -75,7 +74,7 @@
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap">
                                         <div class="text-sm leading-5 text-gray-900">
-                                            {{customer.team}}
+                                            {{customer.phone}}
                                         </div>
                                     </td>
                                     <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
@@ -91,17 +90,23 @@
                                                 class="absolute group-hover left-auto mt-10 p-2 rounded-lg shadow-lg top-0 text-left bg-white z-10">
                                                 <li class="navbar-a">
                                                     <a class="px-2 py-1" (click)="edit(customer.id)">
-                                                        <span>Editar</span>
+                                                        <span>
+                                                            {{ 'customer_list.table.menu.edit' | translate }}
+                                                        </span>
                                                     </a>
                                                 </li>
                                                 <li class="navbar-a">
                                                     <a class="px-2 py-1">
-                                                        <span class="">Eliminar</span>
+                                                        <span class="">
+                                                            {{ 'customer_list.table.menu.delete' | translate }}
+                                                        </span>
                                                     </a>
                                                 </li>
                                                 <li class="navbar-a">
                                                     <a class=" px-2 py-1" (click)="call(customer)">
-                                                        <span class="">Llamar</span>
+                                                        <span class="">
+                                                            {{ 'customer_list.table.menu.call' | translate }}
+                                                        </span>
                                                     </a>
                                                 </li>
                                             </ul>
@@ -118,60 +123,49 @@
         <!-- // pagination -->
         <div class="px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
             <div class="flex-1 flex justify-between sm:hidden">
-                <a href="#"
-                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                    Previous
+                <a *ngIf="!first_page" (click)="nextPage('-')" class="pagination mobile">
+                    {{ 'customer_list.table.pagination.previous' | translate }}
                 </a>
-                <a href="#"
-                    class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                    Next
+                <a *ngIf="!last_page" (click)="nextPage('+')" class="ml-3 pagination mobile">
+                    {{ 'customer_list.table.pagination.next' | translate }}
                 </a>
             </div>
             <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                <div>
-                    <p class="text-sm leading-5 text-gray-700">
-                        Showing
-                        <span class="font-medium">{{from}}</span>
-                        to
-                        <span class="font-medium">{{to}}</span>
-                        of
-                        <span class="font-medium">{{total}}</span>
-                        results
-                    </p>
-                </div>
-                <div>
-                    <nav class="relative z-0 inline-flex shadow-sm">
-                        <a *ngIf="!first_page" (click)="nextPage('-')"
-                            class="relative inline-flex cursor-pointer items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
-                            aria-label="Previous">
+                <p class="text-sm leading-5 text-gray-700">
+                    {{ 'customer_list.table.pagination.show' | translate }}
+                    <span class="font-medium">{{from}}</span>
+                    {{ 'customer_list.table.pagination.to' | translate }}
+                    <span class="font-medium">{{to}}</span>
+                    {{ 'customer_list.table.pagination.of' | translate }}
+                    <span class="font-medium">{{total}}</span>
+                    {{ 'customer_list.table.pagination.results' | translate }}
+                </p>
+                <nav class="relative z-0 inline-flex shadow-sm">
 
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
+                    <a *ngIf="!first_page" (click)="nextPage('-')" class="px-2 py-2 rounded-l-md pagination"
+                        aria-label="{{ 'customer_list.table.pagination.previous' | translate }}">
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+
+                    <ng-container *ngFor="let link of links; let i=index">
+                        <a *ngIf="showPerPage(i)" (click)="nextPage(link.label)" class="-ml-px px-4 py-2 pagination">
+                            {{link.label}}
                         </a>
-                        <ng-container *ngFor="let link of links; let i=index">
-                            <a *ngIf="showPerPage(i)" (click)="nextPage(link.label)"
-                                class="-ml-px relative cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
-                                {{link.label}}
-                            </a>
-                        </ng-container>
+                    </ng-container>
 
-                        <a *ngIf="!last_page" (click)="nextPage('+')"
-                            class="-ml-px relative cursor-pointer inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
-                            aria-label="Next">
-
-                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                    </nav>
-                </div>
+                    <a *ngIf="!last_page" (click)="nextPage('+')" class="-ml-px px-2 py-2 pagination"
+                        aria-label="{{ 'customer_list.table.pagination.next' | translate }}">
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </nav>
             </div>
         </div>
     </div>

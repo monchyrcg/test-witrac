@@ -5,7 +5,6 @@ import { Tab } from '../../interfaces/tab.interface';
 @Component({
     selector: 'app-tabs',
     templateUrl: './tabs.component.html',
-    // styleUrls: ['./customer-edit.component.scss']
 })
 
 export class TabsComponent implements OnInit {
@@ -29,7 +28,10 @@ export class TabsComponent implements OnInit {
         for (let tab of this.tabs) {
             tab.isActive = false;
         }
-
         tab.isActive = true;
+    }
+
+    selectTabMobile(index: number) {
+        this.selectTab(this.tabs[index]);
     }
 }

@@ -15,8 +15,7 @@ import { Validations } from 'src/app/shared/settings/validation';
 
 @Component({
     selector: 'app-customer',
-    templateUrl: './customer.component.html',
-    // styleUrls: ['./customer.component.scss'],
+    templateUrl: './customer.component.html'
 })
 
 export class CustomerComponent implements OnInit, OnDestroy {

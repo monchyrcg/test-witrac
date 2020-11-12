@@ -1,0 +1,69 @@
+.customer-info {
+   @apply mt-2;
+   @apply flex;
+   @apply items-center;
+   @apply text-sm;
+   @apply leading-5;
+   @apply text-gray-500;
+}
+
+.customer-info-svg {
+    @apply flex-shrink-0;
+    @apply  h-5;
+    @apply  w-5;
+    @apply  text-nutriwell;
+    @apply  mr-1.5;
+}
+
+.customer-info-button {
+    @apply inline-flex;
+    @apply  items-center;
+    @apply  px-4;
+    @apply  py-2;
+    @apply  border;
+    @apply  border-gray-300;
+    @apply  text-sm;
+    @apply  leading-5;
+    @apply  font-medium;
+    @apply  rounded-md;
+    @apply transition;
+    @apply duration-150;
+    @apply ease-in-out;
+}
+
+.customer-info-button-white {
+    @apply customer-info-button;
+    @apply text-gray-700;
+    @apply  bg-white;
+}
+
+.customer-info-button-white:hover {
+    @apply text-gray-500;
+}
+
+.customer-info-button-white:focus {
+    @apply outline-none;
+    @apply shadow-outline-blue;
+}
+
+.customer-info-button-reverse {
+    @apply customer-info-button;
+    @apply text-white;
+    @apply bg-nutriwell;
+}
+
+.customer-info-button-reverse:hover {
+    @apply bg-nutriwell;
+}
+
+.customer-info-button-reverse:focus {
+    @apply outline-none;
+    @apply border-nutriwell;
+}
+
+.customer-info-button-svg {
+    @apply -ml-1;
+    @apply mr-2;
+    @apply  h-5;
+    @apply  w-5;
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
+import { ModalInfoComponent } from 'src/app/shared/components/modals/info/modal-info.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { AppointmentComponent } from './appointment/appointment.component';
@@ -49,7 +49,7 @@ export class MenuComponent {
 
     showModal() {
         this.changeValue(true);
-        this.modalService.init(ModalComponent, this.settingService.getLangText('modal'), { closeModal: this.closeModal.bind(this) });
+        this.modalService.init(ModalInfoComponent, this.settingService.getLangText('modal'), { closeModal: this.closeModal.bind(this) });
     }
 
     closeModal() {
@@ -70,7 +70,7 @@ export class MenuComponent {
         if (customer) {
             inputs.customerI = customer;
         }
-
+        console.log(inputs);
         this.modalService.init(AppointmentComponent, inputs, { closeModal: this.closeModal.bind(this) })
     }
 }

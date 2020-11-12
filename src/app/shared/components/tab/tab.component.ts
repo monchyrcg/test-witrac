@@ -6,7 +6,6 @@ import { TabsComponent } from '../tabs/tabs.component';
 @Component({
     selector: 'app-tab',
     templateUrl: './tab.component.html',
-    // styleUrls: ['./customer-edit.component.scss']
 })
 export class TabComponent implements OnInit, Tab {
 

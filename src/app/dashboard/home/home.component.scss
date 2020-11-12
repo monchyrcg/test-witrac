@@ -1,0 +1,39 @@
+.icons {
+    @apply max-w-xs;
+    @apply flex;
+    @apply items-center;
+    @apply text-sm;
+    @apply rounded-full; 
+}
+.icons:focus {
+    @apply outline-none;
+    @apply shadow-outline;
+}
+.div_dropdown {
+    @apply z-10;
+    @apply origin-top-right;
+    @apply absolute;
+    @apply right-0;
+    @apply mt-2;
+    @apply w-48;
+    @apply rounded-md;
+    @apply shadow-lg;
+}
+.sub_div_dropdown {
+    @apply py-1;
+    @apply rounded-md;
+    @apply bg-white;
+    @apply shadow-xs; 
+}
+
+.menu {
+    @apply block;  
+    @apply px-4;
+    @apply py-2;
+    @apply text-sm;
+    @apply text-gray-700;
+}
+
+.menu:hover {
+    @apply bg-gray-100; 
+}

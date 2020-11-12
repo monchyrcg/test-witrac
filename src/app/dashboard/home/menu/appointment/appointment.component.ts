@@ -19,8 +19,7 @@ import { AppointmentService } from 'src/app/shared/services/appointment.service'
 
 @Component({
     selector: 'app-appointment',
-    templateUrl: './appointment.component.html',
-    styleUrls: ['./appointment.component.scss'],
+    templateUrl: './appointment.component.html'
 })
 
 export class AppointmentComponent implements OnInit, OnDestroy {
@@ -124,7 +123,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
                 this.cleanCustomers();
             }
         }
-
     }
 
     cleanCustomers() {

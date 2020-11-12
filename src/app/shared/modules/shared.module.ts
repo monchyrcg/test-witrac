@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ModalComponent } from '../components/modal/modal.component';
+import { ModalInfoComponent } from '../components/modals/info/modal-info.component';
 import { ErrorFormComponent } from '../components/form/error/error.component';
 import { LabelFormComponent } from '../components/form/label/label.component';
 import { NgxPermissionsModule } from 'ngx-permissions';
@@ -26,7 +26,7 @@ export function createTranslateLoader(http: HttpClient) {
 
 @NgModule({
     declarations: [
-        ModalComponent,
+        ModalInfoComponent,
         ErrorFormComponent,
         LabelFormComponent,
         SnackbarComponent,

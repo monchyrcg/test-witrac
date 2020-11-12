@@ -5,15 +5,6 @@
   display: block !important;
 }
 
-@media (min-width: 640px) {
-    table {
-        display: inline-table !important;
-    }
-
-    thead tr:not(:first-child) {
-        display: none;
-    }
-}
 
 .navbar-a {
     @apply cursor-pointer;
@@ -26,4 +17,34 @@
 }
 .navbar-a:hover {
     @apply bg-gray-100;
+}
+
+.pagination {
+   @apply relative; 
+   @apply cursor-pointer;
+   @apply inline-flex; 
+   @apply items-center; 
+   @apply border; 
+   @apply border-gray-300; 
+   @apply text-sm; 
+   @apply leading-5; 
+   @apply font-medium; 
+   @apply rounded-md; 
+   @apply text-gray-700; 
+   @apply bg-white;
+}
+
+.mobile {
+    @apply px-4; 
+    @apply py-2;    
+}
+
+.pagination:hover {
+    @apply text-gray-500;
+}
+
+.pagination:focus {
+   @apply outline-none; 
+   @apply shadow-outline-blue; 
+   @apply border-blue-300;
 }

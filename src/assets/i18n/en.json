@@ -15,6 +15,7 @@
         "signed": "{{year}} Nutriwell. All rights reserved."
     },
     "dashboard": {
+        "dashboard": "Dashboard",
         "calendar": "Calendar",
         "customers": "Customers",
         "new_appointment": "New appointment",
@@ -24,6 +25,11 @@
         "title": "Lorem ipsum",
         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis libero sit amet erat vehicula faucibus. Integer ultricies magna sed tellus bibendum, vitae iaculis mi dignissim. Donec at enim in ex molestie blandit. In lobortis lorem blandit, rutrum orci sollicitudin, pretium lectus. Mauris accumsan dignissim faucibus. Quisque vestibulum mauris ut magna mollis, eget tempus nulla dignissim.",
         "text_button_cancel": "Close"
+    },
+    "profile": {
+        "profile": "Your profile",
+        "settings": "Settings",
+        "logout": "Logout"
     },
     "customer_create": {
         "title": "Registrar el cliente",
@@ -37,9 +43,42 @@
         "job": "Job",
         "mobile": "Mobile",
         "email": "Email",
+        "legal_text": "Texto legal",
         "legal_name": "Legal representative name",
         "legal_surnames": "Legal representative surnames",
         "legal_identity": "Legal representative ID"
+    },
+    "customer_list": {
+        "title": "Customers List",
+        "table": {
+            "name": "Name",
+            "appointment": "Next Appointment",
+            "phone": "Phone",
+            "menu": {
+                "edit": "Edit",
+                "delete": "Delete",
+                "call": "Call"
+            },
+            "pagination": {
+                "previous": "Previous",
+                "next": "Next",
+                "show": "Showing",
+                "to": "to",
+                "of": "of",
+                "results": "results"
+            }
+        }
+    },
+    "customer_edit": {
+        "appointment": "Create Appointment",
+        "message": "Send message",
+        "save": "Save",
+        "more": "More",
+        "tabs": {
+            "data": "Personal Data",
+            "calendar": "Appointments",
+            "shop": "Shop"
+        }
     },
     "calendar": {
         "previous": "Previous",

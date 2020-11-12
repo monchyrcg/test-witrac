@@ -5,6 +5,8 @@
 
     <div class="flex flex-col w-0 flex-1 overflow-hidden">
         <div class="relative z-20 flex-shrink-0 flex h-16 bg-white shadow">
+
+            <!-- short menu -->
             <div class="pl-4 md:flex justify-between hidden">
                 <button (click)="menu.smallNavBar()"
                     class="p-1 text-gray-400 rounded-full focus:outline-none focus:text-gray-500">
@@ -17,6 +19,7 @@
                 </button>
             </div>
 
+            <!-- menu mobile -->
             <button (click)="menu.changeValue()"
                 class="px-4 border-r border-gray-200 text-gray-500 focus:outline-none focus:bg-gray-100 focus:text-gray-600 md:hidden"
                 aria-label="Open sidebar">
@@ -30,9 +33,8 @@
                     <app-breadcrumb></app-breadcrumb>
                 </div>
                 <div class="ml-4 flex items-center md:ml-6">
-                    <button
-                        class="p-1 text-gray-400 rounded-full hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:shadow-outline focus:text-gray-500"
-                        aria-label="Notifications" (click)="isCountry= !isCountry">
+
+                    <button class="icons pr-2" (click)="isCountry= !isCountry">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -41,49 +43,40 @@
                         </svg>
                     </button>
 
-                    <!-- Profile dropdown -->
+                    <button class="icons" (click)="isOpen= !isOpen">
+                        <img class="w-6 h-6 rounded-full"
+                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                            alt="">
+                    </button>
+
+                    <button *ngIf="isOpen || isCountry" (click)="disabled()" tabindex="-1"
+                        class="fixed inset-0 h-full w-full bg-black opacity-50 cursor-nutriwell">
+                    </button>
+
+                    <!-- dropdown -->
                     <div class="ml-3 relative">
-                        <div>
-                            <button (click)="isOpen= !isOpen"
-                                class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:shadow-outline"
-                                id="user-menu" aria-label="User menu" aria-haspopup="true">
-                                <img class="h-8 w-8 rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="">
-                            </button>
-
-                            <button *ngIf="isOpen || isCountry" (click)="disabled()" tabindex="-1" class="fixed
-                                                        inset-0 h-full w-full
-                                                        bg-black opacity-50 cursor-nutriwell">
-                            </button>
-                        </div>
-
-                        <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg" *ngIf="isOpen">
-                            <div class="py-1 rounded-md bg-white shadow-xs" role="menu" aria-orientation="vertical"
+                        <div class="div_dropdown" *ngIf="isOpen">
+                            <div class="sub_div_dropdown" role="menu" aria-orientation="vertical"
                                 aria-labelledby="user-menu">
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                    role="menuitem">Your Profile</a>
+                                <a class="menu" role="menuitem">
+                                    {{ 'profile.profile' | translate }}
+                                </a>
 
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                    role="menuitem">Settings</a>
+                                <a class="menu" role="menuitem">
+                                    {{ 'profile.settings' | translate }}
+                                </a>
 
-                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                    (click)="logout()">
-                                    Sign Out
+                                <a class="menu" (click)="logout()">
+                                    {{ 'profile.logout' | translate }}
                                 </a>
                             </div>
                         </div>
-                        <div class="z-10 transition ease-in duration-75
-                                                    origin-top-right
-                                                    absolute right-0
-                                                    mt-2 w-48 rounded-md shadow-lg" *ngIf="isCountry">
-                            <div class="py-1 rounded-md bg-white
-                                                        shadow-xs" role="menu" aria-orientation="vertical"
+
+                        <div class="div_dropdown" *ngIf="isCountry">
+                            <div class="sub_div_dropdown" role="menu" aria-orientation="vertical"
                                 aria-labelledby="user-menu">
-                                <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition ease-in-out duration-150"
-                                    role="menuitem" [ngClass]="{ 'bg-nutriwell-sansivera': defaultCountry ==  country}"
+                                <a class="menu" role="menuitem"
+                                    [ngClass]="{ 'bg-nutriwell-sansivera': defaultCountry ==  country}"
                                     [ngStyle]="{'color':defaultCountry ==  country ? 'white' : '' }"
                                     *ngFor="let country of countries" (click)="changeCountry(country)">
                                     {{country | uppercase}}

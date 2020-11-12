@@ -4,7 +4,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/auth/login/login.service';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { Countries } from 'src/app/shared/settings/country';
@@ -29,7 +28,6 @@ export class HomeComponent implements OnInit, OnDestroy {
         public settingService: SettingsService,
         private loginService: LoginService,
         private router: Router,
-        private modalService: ModalService,
     ) { }
 
     ngOnInit(): void {

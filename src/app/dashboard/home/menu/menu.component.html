@@ -1,3 +1,4 @@
+<!-- menu mobile -->
 <div [ngClass]="{ hidden:isOpenMobile}" class="md:hidden">
     <div class="fixed inset-0 flex z-40">
 
@@ -27,22 +28,23 @@
                 <nav class="flex-1 px-2 bg-nutriwell space-y-1">
                     <a [routerLink]="['/']" class="group text menu rounded-md">
                         <div class="bg-nutriwell-sun flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                                 </path>
                             </svg>
                         </div>
-                        Dashboard
+                        {{ 'dashboard.dashboard' | translate }}
                     </a>
 
                     <a [routerLink]="['/calendar']" routerLinkActive="active" class="group text menu rounded-md">
                         <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
                             </svg>
                         </div>
                         {{ 'dashboard.calendar' | translate }}
@@ -65,10 +67,10 @@
 
                 <a (click)="createAppointment()" class="group text menu active">
                     <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                clip-rule="evenodd"></path>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                         </svg>
                     </div>
                     {{ 'dashboard.new_appointment' | translate }}
@@ -76,9 +78,10 @@
 
                 <a (click)="createCustomer()" class="group text menu bg-nutriwell-mustela">
                     <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
                             </path>
                         </svg>
                     </div>
@@ -97,9 +100,10 @@
 <div id="modal-container" class="hidden"></div>
 <div id="overlay" (click)="closeModal()" class="hidden"></div>
 
-<!-- Static sidebar for desktop -->
+<!-- menu desktop -->
 <div class="hidden md:flex md:flex-shrink-0 h-full">
 
+    <!-- long menu -->
     <div class="flex flex-col w-64" *ngIf="!showSmallNavBar">
 
         <!-- Sidebar component, swap this element with another sidebar if you like -->
@@ -113,14 +117,14 @@
                 <nav class="flex-1 px-2 bg-nutriwell space-y-1">
                     <a [routerLink]="['/']" class="group text menu rounded-md">
                         <div class="bg-nutriwell-sun flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                                 </path>
                             </svg>
                         </div>
-                        Dashboard
+                        {{ 'dashboard.dashboard' | translate }}
                     </a>
 
                     <a [routerLink]="['/calendar']" routerLinkActive="active" class="group text menu rounded-md">
@@ -151,11 +155,10 @@
                 <nav class="flex-1 px-2 space-y-1">
                     <a (click)="createAppointment()" class="group text menu active">
                         <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                    clip-rule="evenodd"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
                         {{ 'dashboard.new_appointment' | translate }}
@@ -163,10 +166,10 @@
 
                     <a (click)="createCustomer()" class="group text menu bg-nutriwell-mustela">
                         <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
                                 </path>
                             </svg>
                         </div>
@@ -177,6 +180,7 @@
         </div>
     </div>
 
+    <!-- short menu -->
     <div class="flex flex-col w-16" *ngIf="showSmallNavBar">
 
         <!-- Sidebar component, swap this element with another sidebar if you like -->
@@ -191,10 +195,10 @@
                     <a [routerLink]="['/']" class="group text menu rounded-md"
                         aria-label="Click to Switch to Solid Icons">
                         <div class="bg-nutriwell-sun flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                                 </path>
                             </svg>
                         </div>
@@ -202,10 +206,11 @@
 
                     <a [routerLink]="['/calendar']" routerLinkActive="active" class="group text menu rounded-md">
                         <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                                </path>
                             </svg>
                         </div>
                     </a>
@@ -226,21 +231,20 @@
                 <nav class="flex-1 px-2 bg-nutriwell space-y-1">
                     <a (click)="createAppointment()" class="group text menu">
                         <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
-                                    clip-rule="evenodd"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
                         </div>
                     </a>
 
                     <a (click)="createCustomer()" class="group text menu">
                         <div class="bg-nutriwell-stone flex items-center mr-3 p-1.5 rounded-full">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                 xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z">
                                 </path>
                             </svg>
                         </div>
