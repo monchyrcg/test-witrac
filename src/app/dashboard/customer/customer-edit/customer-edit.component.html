@@ -118,6 +118,9 @@
         <app-tab title="{{ 'customer_edit.tabs.calendar' | translate }}">
             <app-customer-edit-calendar [customer]="customer$"></app-customer-edit-calendar>
         </app-tab>
+        <app-tab title="Antropométricos">
+            <div echarts [options]="options" class="demo-chart"></div>
+        </app-tab>
         <app-tab title="{{ 'customer_edit.tabs.shop' | translate }}">
             <!-- // search -->
             <div class="flex flex-wrap" [formGroup]="productForm">

@@ -19,6 +19,7 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { BreadcrumbComponent } from '../components/breadcrumb/breadcrumb.component';
 import { LoadingComponent } from '../components/loading/loading.component';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -45,6 +46,9 @@ export function createTranslateLoader(http: HttpClient) {
         TranslateModule,
         NgxPermissionsModule.forRoot(),
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+        NgxEchartsModule.forRoot({
+            echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+        }),
     ],
     exports: [
         CommonModule,
@@ -61,7 +65,8 @@ export function createTranslateLoader(http: HttpClient) {
         TabComponent,
         CalendarModule,
         BreadcrumbComponent,
-        LoadingComponent
+        LoadingComponent,
+        NgxEchartsModule
     ],
     entryComponents: [],
     providers: []

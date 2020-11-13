@@ -28,7 +28,6 @@ import { HighlightDirective } from './shared/directives/highlight.directive';
 import { MenuComponent } from './dashboard/home/menu/menu.component';
 
 
-
 @NgModule({
 	declarations: [
 		AppComponent,

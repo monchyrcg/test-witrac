@@ -1,4 +1,4 @@
-import { query } from '@angular/animations';
+import { ElementRef, ViewChild } from '@angular/core';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -10,7 +10,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 import { MagentoService } from 'src/app/shared/services/magento.service';
 import { SettingsService } from 'src/app/shared/services/settings.service';
 import { MenuComponent } from '../../home/menu/menu.component';
-
+import { EChartOption } from 'echarts';
 
 
 @Component({
@@ -48,6 +48,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     links: [];
     hasMore: boolean = true;
 
+    options: any;
+
     constructor(
         private route: ActivatedRoute,
         private customerService: CustomerService,
@@ -56,7 +58,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
         private builder: FormBuilder,
         private menuComponent: MenuComponent
     ) { }
-
 
     ngOnInit(): void {
         this.listProducts();
@@ -87,6 +88,49 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
                 this.page = 1;
                 this.listProducts(query);
             });
+
+        const xAxisData = [];
+        const data1 = [];
+        const data2 = [];
+
+        for (let i = 0; i < 100; i++) {
+            xAxisData.push('category' + i);
+            data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
+            data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
+        }
+
+        this.options = {
+            legend: {
+                data: ['bar', 'bar2'],
+                align: 'left',
+            },
+            tooltip: {},
+            xAxis: {
+                data: xAxisData,
+                silent: false,
+                splitLine: {
+                    show: false,
+                },
+            },
+            yAxis: {},
+            series: [
+                {
+                    name: 'bar',
+                    type: 'bar',
+                    data: data1,
+                    animationDelay: (idx) => idx * 10,
+                },
+                {
+                    name: 'bar2',
+                    type: 'bar',
+                    data: data2,
+                    animationDelay: (idx) => idx * 10 + 100,
+                },
+            ],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: (idx) => idx * 5,
+
+        }
     }
 
     private listProducts(query?) {
