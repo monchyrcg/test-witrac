@@ -138,7 +138,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
             },
             legend: {
                 data: ['Water', 'Fat'],
-                selectedMode: 'single'
+                selectedMode: 'multiple'
             },
             xAxis: {
                 data: ['a', 'b', 'c', 'd', 'e'],

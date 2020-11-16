@@ -64,4 +64,11 @@ export class CustomerService {
                 return response.data;
             }));
     }
+
+    getCustomerCrypt(customer: string) {
+        return this.http.get(`${environment.apiUrl}/sign-privacy/${customer}`,)
+            .pipe(map((response: any) => {
+                return response.data;
+            }));
+    }
 }

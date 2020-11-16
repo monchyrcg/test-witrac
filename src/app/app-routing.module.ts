@@ -9,20 +9,21 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { LoginComponent } from './auth/login/login.component';
 
 import { AuthGuard } from './shared/guards/auth.guard';
+import { SignPrivayComponent } from './signprivacy/signprivacy.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: '**', component: NopagefoundComponent },
+  { path: 'sign-privacy/:customer', component: SignPrivayComponent },
+  { path: '**', component: NopagefoundComponent }
 ];
 
 @NgModule({
   imports: [
     RouterModule.forRoot(routes),
     DashboardModule,
-    AuthRoutingModule,
-
+    AuthRoutingModule
   ],
   exports: [RouterModule, DashboardModule]
 })

@@ -27,7 +27,6 @@ import { FilterPipe } from './shared/pipes/filter.pipe';
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { MenuComponent } from './dashboard/home/menu/menu.component';
 
-
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -48,7 +47,6 @@ import { MenuComponent } from './dashboard/home/menu/menu.component';
 				deps: [HttpClient]
 			}
 		}),
-
 	],
 	exports: [],
 	providers: [

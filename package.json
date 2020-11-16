@@ -39,6 +39,7 @@
     "date-fns": "^2.16.1",
     "echarts": "^4.9.0",
     "flatpickr": "^4.6.6",
+    "jspdf": "^1.5.3",
     "moment": "^2.29.1",
     "ng2-flatpickr": "^9.0.0",
     "ngx-echarts": "^5.2.1",
