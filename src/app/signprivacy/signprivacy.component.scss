@@ -1,0 +1,10 @@
+.on {
+    @apply opacity-100;
+    @apply ease-in;
+    @apply duration-200;
+}
+.off {
+    @apply opacity-0;
+    @apply ease-out;
+    @apply duration-100;
+}

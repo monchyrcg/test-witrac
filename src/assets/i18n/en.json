@@ -80,6 +80,9 @@
             "shop": "Shop"
         }
     },
+    "customer_privacy": {
+        "button": "Aceptar"
+    },
     "calendar": {
         "previous": "Previous",
         "today": "Today",
