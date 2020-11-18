@@ -43,6 +43,7 @@ export class SignPrivayComponent implements OnInit {
         } else {
             this.signPrivacyService.saveCustomerCrypt(this.customerCrypt).subscribe(
                 (response) => {
+                    this.customer = null;
                     this.is_signed = true;
                 }
             );
