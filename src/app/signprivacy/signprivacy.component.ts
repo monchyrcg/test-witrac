@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CustomerService } from '../shared/services/customer.service';
+import { SignPrivacyService } from './signprivacy.service';
 
 @Component({
     selector: 'app-signprivacy',
@@ -10,32 +10,42 @@ import { CustomerService } from '../shared/services/customer.service';
 export class SignPrivayComponent implements OnInit {
 
     customer;
+    customerCrypt;
     isOpenMobile = true;
     selected = false;
-    is_signed = true;
+    is_clicked = true;
+    is_signed = false;
 
     constructor(
         private route: ActivatedRoute,
-        private customerService: CustomerService
+        private signPrivacyService: SignPrivacyService
     ) { }
 
 
     ngOnInit(): void {
-        let customer = this.route.snapshot.paramMap.get("customer");
+        this.customerCrypt = this.route.snapshot.paramMap.get("customer");
 
 
-        this.customerService.getCustomerCrypt(customer).subscribe(
+        this.signPrivacyService.getCustomerCrypt(this.customerCrypt).subscribe(
             (response) => {
-                this.customer = response;
+                if (!response.signed) {
+                    this.customer = response;
+                } else {
+                    this.is_signed = true;
+                }
             }
         );
     }
 
     submit() {
         if (!this.selected) {
-            this.is_signed = false;
+            this.is_clicked = false;
         } else {
-
+            this.signPrivacyService.saveCustomerCrypt(this.customerCrypt).subscribe(
+                (response) => {
+                    this.customer = response;
+                }
+            );
         }
     }
 }

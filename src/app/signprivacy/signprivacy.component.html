@@ -94,9 +94,9 @@
     </div>
 </nav>
 
-<div class="py-12 bg-gray-100" id="htmlData" #htmlData *ngIf="customer; else loading;">
-    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-
+<div [ngClas]="{'py-12': !is_signed}" class="bg-gray-100" id="htmlData" #htmlData
+    *ngIf="customer || is_signed; else loading;">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="customer; else is_signedDiv">
         <div class="mt-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 border-b-2">
                 <div class="ml-4 pb-2">
@@ -104,7 +104,6 @@
                         PROTECCIÓN DE DATOS PERSONALES
                     </h4>
                 </div>
-
 
                 <div class="ml-4 pb-2">
                     <h4 class="text-lg leading-6 font-medium text-gray-900">
@@ -192,7 +191,7 @@
                 </div>
             </div>
             <div class="gap-x-8 gap-y-10 grid grid-cols-1">
-                <div class="ml-4 pb-2">
+                <div class="ml-4 pb-2 flex">
                     <span role="checkbox" tabindex="0" aria-checked="false" (click)="selected = !selected"
                         class="relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none"
                         [ngClass]="{'bg-gray-200': !selected, 'bg-nutriwell': selected}">
@@ -217,19 +216,38 @@
                             </span>
                         </span>
                     </span>
-                    <p *ngIf="!is_signed && !selected" class="text-nutriwell">Esto es obligatorio</p>
+                    <p class="ml-2" *ngIf="!is_clicked && !selected" class="text-nutriwell">Esto es obligatorio</p>
                 </div>
             </div>
             <div class="mt-5 sm:mt-8 sm:flex justify-center">
-                <div class="rounded-md shadow">
+                <div>
                     <a (click)="submit()"
-                        class="cursor-pointer w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-nutriwell hover:bg-nutriwell focus:outline-none focus:border-nutriwell focus:shadow-outline-nutriwell transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+                        class="cursor-pointer w-full flex items-center justify-center px-8 py-3 border border-white text-base leading-6 font-medium rounded-3xl text-white bg-nutriwell hover:bg-nutriwell focus:outline-none focus:border-nutriwell focus:shadow-outline-nutriwell transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
                         {{ 'customer_privacy.button' | translate }}
                     </a>
                 </div>
             </div>
         </div>
     </div>
+
+    <ng-template #is_signedDiv>
+        <div class="flex flex-col justify-center items-center" style="height: 93vh;">
+            <p>
+                USTED YA FIRMO LA POLITICA DE PRIVACIDAD
+            </p>
+            <p>
+                MUCHAS GRACIAS
+            </p>
+            <div class="mt-5 sm:mt-8 sm:flex justify-center">
+                <div class="">
+                    <a href="https://naturhouse.es"
+                        class="cursor-pointer w-full flex items-center justify-center px-8 py-3 border border-white text-base leading-6 font-medium rounded-3xl text-white bg-nutriwell hover:bg-nutriwell focus:outline-none focus:border-nutriwell focus:shadow-outline-nutriwell transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10">
+                        Ir a Naturhouse
+                    </a>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </div>
 
 <ng-template #loading>
