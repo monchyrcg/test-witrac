@@ -1,0 +1,37 @@
+.customer-info-button-svg {
+    @apply -ml-1;
+    @apply mr-2;
+    @apply  h-5;
+    @apply  w-5;
+}
+
+.customer-info-button {
+    @apply inline-flex;
+    @apply  items-center;
+    @apply  px-4;
+    @apply  py-2;
+    @apply  border;
+    @apply  border-gray-300;
+    @apply  text-sm;
+    @apply  leading-5;
+    @apply  font-medium;
+    @apply  rounded-md;
+    @apply transition;
+    @apply duration-150;
+    @apply ease-in-out;
+}
+
+.customer-info-button-reverse {
+    @apply customer-info-button;
+    @apply text-white;
+    @apply bg-nutriwell;
+}
+
+.customer-info-button-reverse:hover {
+    @apply bg-nutriwell;
+}
+
+.customer-info-button-reverse:focus {
+    @apply outline-none;
+    @apply border-nutriwell;
+}

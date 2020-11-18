@@ -28,6 +28,7 @@ import { CustomerModule } from './customer/customer.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { ModalDataComponent } from '../shared/components/modals/data/modal-data.component';
+import { SettingsComponent } from './settings/settings.component';
 
 /* export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
@@ -46,6 +47,7 @@ registerLocaleData(localeIt);
         ModalDataComponent,
         CustomerComponent,
         AppointmentComponent,
+        SettingsComponent
     ],
     imports: [
         CommonModule,

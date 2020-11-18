@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { NgxPermissionsGuard } from 'ngx-permissions';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,10 @@ const routes: Routes = [
                 path: 'customers',
                 loadChildren: './customer/customer.module#CustomerModule'
             },
+            {
+                path: 'settings',
+                component: SettingsComponent
+            }
         ]
     }
 ];

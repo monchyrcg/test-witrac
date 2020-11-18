@@ -1,0 +1,126 @@
+<div class="px-4 py-6 sm:px-6 lg:px-8">
+    <div
+        class="pb-5 border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
+        <h3 class="text-lg leading-6 font-medium text-gray-900">
+            Settings
+        </h3>
+
+        <span class="sm:ml-3 flex rounded-md">
+            <button type="button" class="customer-info-button-reverse">
+                <!-- Heroicon name: check -->
+                <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                    fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd" />
+                </svg>
+                {{ 'customer_edit.save' | translate }}
+            </button>
+        </span>
+    </div>
+
+    <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 mb-10" *ngIf="!false">
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Team</h3>
+                <p class="mt-1 text-sm leading-5 text-gray-500">
+                    Change current team
+                </p>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <div class="grid">
+                    <div class="col-span-12 sm:col-span-3">
+                        <app-label-form for="name" name="{{ 'customer_create.team' | translate }}"></app-label-form>
+
+                        <select [(ngModel)]="current_team_id" class="bg-white inputClass" id="team">
+                            <option hidden selected value="">{{ 'customer_create.team' | translate }}</option>
+                            <option value="{{ team.id }}"
+                                *ngFor="let team of (settingService.changeTeam$ | async).teams">{{ team.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 mb-10" *ngIf="!false">
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+            <div class="md:col-span-1">
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Tipos de citas</h3>
+                <p class="mt-1 text-sm leading-5 text-gray-500">
+                    Elige el color de las citas que apareceran en el calendario
+                </p>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+                <div class="grid grid-cols-6 gap-6">
+                    <div class="col-span-6 sm:col-span-3">
+                        <app-label-form for="name" name="Tipo de cita"></app-label-form>
+
+                        <div class="relative">
+                            <span class="inline-block w-full rounded-md shadow-sm">
+                                <button type="button" (click)="showListKind = !showListKind"
+                                    class="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:outline-none transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+                                    <div class="flex items-center space-x-3">
+                                        <span aria-label="Online"
+                                            class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
+                                            [ngStyle]="{'background-color': kindColor}"></span>
+                                        <span class="block truncate">
+                                            {{kindName}}
+                                        </span>
+                                    </div>
+                                    <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                                        <svg class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="none"
+                                            stroke="currentColor">
+                                            <path d="M7 7l3-3 3 3m0 6l-3 3-3-3" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            </span>
+
+                            <div class="absolute mt-1 w-full rounded-md bg-white shadow-lg opacity-0"
+                                [class.opacity-100]=showListKind>
+                                <ul tabindex="-1" role="listbox" aria-labelledby="listbox-label"
+                                    aria-activedescendant="listbox-item-3"
+                                    class="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+
+                                    <li id="listbox-item-0"
+                                        (click)="changeKind({'name':'Estabilizacion', 'color': '#4c51bf'})"
+                                        class="cursor-default select-none relative py-2 pl-3 pr-9">
+                                        <div class="flex items-center space-x-3">
+                                            <span [ngStyle]="{'background-color': '#4c51bf'}"
+                                                class="flex-shrink-0 inline-block h-2 w-2 rounded-full"></span>
+                                            <span class="font-normal block truncate">
+                                                Estabilizacion
+                                            </span>
+                                        </div>
+                                    </li>
+
+                                    <li id="listbox-item-0" (click)="changeKind({'name':'Estudio', 'color': '#f6e05e'})"
+                                        class="cursor-default select-none relative py-2 pl-3 pr-9">
+                                        <div class="flex items-center space-x-3">
+                                            <span [ngStyle]="{'background-color': '#f6e05e'}"
+                                                class="flex-shrink-0 inline-block h-2 w-2 rounded-full"></span>
+                                            <span class="font-normal block truncate">
+                                                Estudio
+                                            </span>
+                                        </div>
+                                    </li>
+
+                                    <!-- More options... -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-span-6 sm:col-span-3">
+                        <app-label-form for="name" name="Color"></app-label-form>
+
+                        <input class="border sm:h-1/2 rounded w-full" id="name" type="color"
+                            [(ngModel)]="currentColor" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
