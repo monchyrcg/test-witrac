@@ -94,8 +94,7 @@
     </div>
 </nav>
 
-<div [ngClas]="{'py-12': !is_signed}" class="bg-gray-100" id="htmlData" #htmlData
-    *ngIf="customer || is_signed; else loading;">
+<div class="py-2 bg-gray-100" *ngIf="customer || is_signed; else loading;">
     <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="customer; else is_signedDiv">
         <div class="mt-10">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10 border-b-2">
@@ -233,7 +232,7 @@
     <ng-template #is_signedDiv>
         <div class="flex flex-col justify-center items-center" style="height: 93vh;">
             <p>
-                USTED YA FIRMO LA POLITICA DE PRIVACIDAD
+                USTED YA HA FIRMADO LA POLITICA DE PRIVACIDAD
             </p>
             <p>
                 MUCHAS GRACIAS
