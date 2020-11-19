@@ -38,7 +38,7 @@
                             </path>
                         </svg>
                         Next appointment at
-                        {{customer$.next_appointment ? ((customer$.next_appointment.date+' '+customer$.next_appointment.hour) | date: 'short' : '' : ((settingService.changeCountry$ | async).locale))  : 'N/A'}}
+                        {{customer$.next_appointment ? ((customer$.next_appointment.date+' '+customer$.next_appointment.hour) | date: 'short' : '' : ((settingGeneralService.changeCountry$ | async).locale))  : 'N/A'}}
                     </div>
                 </div>
             </div>

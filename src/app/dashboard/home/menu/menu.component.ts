@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
 import { ModalInfoComponent } from 'src/app/shared/components/modals/info/modal-info.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { CustomerComponent } from './customer/customer.component';
 
@@ -29,7 +29,7 @@ export class MenuComponent {
     // @ViewChild("teamDiv") teamDiv: ElementRef;
 
     constructor(
-        public settingService: SettingsService,
+        public settingGeneralService: SettingGeneralService,
         private modalService: ModalService,
     ) { }
 
@@ -43,13 +43,13 @@ export class MenuComponent {
     /* changeTeam(id: number) {
         this.teamDiv.nativeElement.style.display = 'none !important';
     
-        this.subscription.add(this.settingService.changeTeam(id).subscribe(() => this.customerService.listCustomer(1, 15)));
+        this.subscription.add(this.settingGeneralService.changeTeam(id).subscribe(() => this.customerService.listCustomer(1, 15)));
         this.divTeams = false;
     } */
 
     showModal() {
         this.changeValue(true);
-        this.modalService.init(ModalInfoComponent, this.settingService.getLangText('modal'), { closeModal: this.closeModal.bind(this) });
+        this.modalService.init(ModalInfoComponent, this.settingGeneralService.getLangText('modal'), { closeModal: this.closeModal.bind(this) });
     }
 
     closeModal() {
@@ -58,12 +58,12 @@ export class MenuComponent {
 
     createCustomer() {
         this.changeValue(true);
-        this.modalService.init(CustomerComponent, this.settingService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
+        this.modalService.init(CustomerComponent, this.settingGeneralService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
     }
 
     createAppointment(date?, customer?) {
         this.changeValue(true);
-        let inputs = this.settingService.getLangText('appointment_create');
+        let inputs = this.settingGeneralService.getLangText('appointment_create');
         if (date) {
             inputs.appointmentDay = date;
         }

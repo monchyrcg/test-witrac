@@ -101,5 +101,13 @@
     "genders": {
         "male": "Male",
         "female": "Female"
+    },
+    "kind_appointments": {
+        "stabilization": "Stabilization",
+        "study": "study",
+        "new": "New",
+        "revision": "Revision",
+        "maintenance": "Maintenance",
+        "recovered": "Recovered"
     }
 }

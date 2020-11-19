@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CustomerService } from 'src/app/shared/services/customer.service';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { TwilioService } from 'src/app/shared/services/twilio.service';
 import * as Twilio from 'twilio-client';
 
@@ -42,7 +42,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     constructor(
         private builder: FormBuilder,
         private customerService: CustomerService,
-        public settingService: SettingsService,
+        public settingGeneralService: SettingGeneralService,
         private twilioService: TwilioService,
         private router: Router
     ) { }

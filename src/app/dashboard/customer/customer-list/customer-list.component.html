@@ -67,7 +67,7 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 <div class="text-sm leading-5 text-gray-900">
-                                    {{customer.appointment ? ((customer.appointment.date+' '+customer.appointment.hour) | date: 'short' : '' : ((settingService.changeCountry$ | async).locale))  : 'N/A'}}
+                                    {{customer.appointment ? ((customer.appointment.date+' '+customer.appointment.hour) | date: 'short' : '' : ((settingGeneralService.changeCountry$ | async).locale))  : 'N/A'}}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LoginService } from 'src/app/auth/login/login.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { Countries } from 'src/app/shared/settings/country';
 
 @Component({
@@ -25,13 +25,13 @@ export class HomeComponent implements OnInit, OnDestroy {
     private subscription = new Subscription();
 
     constructor(
-        public settingService: SettingsService,
+        public settingGeneralService: SettingGeneralService,
         private loginService: LoginService,
         private router: Router,
     ) { }
 
     ngOnInit(): void {
-        this.settingService.getTeam();
+        this.settingGeneralService.getTeam();
     }
 
     disabled() {
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     changeCountry(country: string): void {
-        this.settingService.changeCountry(country);
+        this.settingGeneralService.changeCountry(country);
 
         this.defaultCountry = country;
         this.disabled();

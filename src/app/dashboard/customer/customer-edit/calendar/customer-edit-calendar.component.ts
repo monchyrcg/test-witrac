@@ -4,7 +4,7 @@ import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { Observable } from 'rxjs';
 
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import * as moment from 'moment';
 import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 
@@ -35,11 +35,11 @@ export class CustomerEditCalendarComponent implements OnInit, OnDestroy {
     viewName: string;
 
     constructor(
-        public settingService: SettingsService,
+        public settingGeneralService: SettingGeneralService,
         public appointmentService: AppointmentService,
         public menuComponent: MenuComponent
     ) {
-        this.viewName = this.settingService.getLangText('calendar.month');
+        this.viewName = this.settingGeneralService.getLangText('calendar.month');
     }
 
     ngOnInit(): void {
@@ -59,7 +59,7 @@ export class CustomerEditCalendarComponent implements OnInit, OnDestroy {
     setView(view: CalendarView): void {
         this.isOpenView = false;
         this.view = view;
-        this.viewName = this.settingService.getLangText('calendar.' + view);
+        this.viewName = this.settingGeneralService.getLangText('calendar.' + view);
     }
 
     dayClicked(date: Date): void {

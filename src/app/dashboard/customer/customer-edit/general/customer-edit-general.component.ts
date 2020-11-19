@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Spanish from 'flatpickr/dist/l10n/es.js';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { Gender } from 'src/app/shared/interfaces/gender.interface';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import * as moment from 'moment';
 import { Countries } from 'src/app/shared/settings/country';
 import { Validations } from 'src/app/shared/settings/validation';
@@ -32,21 +32,21 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
     constructor(
         private builder: FormBuilder,
-        public settingService: SettingsService
+        public settingGeneralService: SettingGeneralService
     ) {
         this.dateOptions = {
-            locale: this.settingService.settings.flatpickr,
-            dateFormat: this.settingService.settings.formatFlatpickr,
-            maxDate: moment().format(this.settingService.settings.formatMoment),
+            locale: this.settingGeneralService.settings.flatpickr,
+            dateFormat: this.settingGeneralService.settings.formatFlatpickr,
+            maxDate: moment().format(this.settingGeneralService.settings.formatMoment),
             disableMobile: true,
         };
     }
 
     ngOnInit(): void {
         this.under = this.customer.legal ? true : false;
-        this.dateOptions.defaultDate = moment(this.customer.dob).format(this.settingService.settings.formatMoment);
+        this.dateOptions.defaultDate = moment(this.customer.dob).format(this.settingGeneralService.settings.formatMoment);
 
-        this.settingService.changeCountry$.subscribe(
+        this.settingGeneralService.changeCountry$.subscribe(
             (settings) => {
                 this.legal_age = settings.legal_age;
                 this.dateOptions.locale = settings.flatpickr;
@@ -56,8 +56,8 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
             }
         );
 
-        this.genders.push({ id: 1, text: this.settingService.getLangText('genders.male') });
-        this.genders.push({ id: 2, text: this.settingService.getLangText('genders.female') });
+        this.genders.push({ id: 1, text: this.settingGeneralService.getLangText('genders.male') });
+        this.genders.push({ id: 2, text: this.settingGeneralService.getLangText('genders.female') });
 
         this.customerForm = this.builder.group({
             name: [this.customer.name, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
@@ -80,8 +80,8 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
     changeDob($event) {
         const dob = $event.target.value;
-        const dobFormat = moment(dob, this.settingService.settings.formatMoment);
-        const last = moment().subtract(this.legal_age, 'years').format(this.settingService.settings.formatMoment);
+        const dobFormat = moment(dob, this.settingGeneralService.settings.formatMoment);
+        const last = moment().subtract(this.legal_age, 'years').format(this.settingGeneralService.settings.formatMoment);
 
         const legalFields = ['legal_checkbox', 'legal_name', 'legal_identity'];
         if (dobFormat.isAfter(last, 'day')) {

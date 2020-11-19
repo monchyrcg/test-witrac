@@ -13,7 +13,7 @@ import { Countries } from '../settings/country';
 @Injectable({
 	providedIn: 'root'
 })
-export class SettingsService {
+export class SettingGeneralService {
 
 	public country = localStorage.getItem('country') ?? 'es';
 	public settings = Countries.settingCountry[this.country];

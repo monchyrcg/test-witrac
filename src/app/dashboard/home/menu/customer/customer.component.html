@@ -51,7 +51,8 @@
                 <app-label-form for="team" name="{{ 'customer_create.team' | translate }}"></app-label-form>
                 <select formControlName="team_id" class="bg-white inputClass" id="team">
                     <option hidden selected value="">{{ 'customer_create.team' | translate }}</option>
-                    <option value="{{ team.id }}" *ngFor="let team of (settingService.changeTeam$ | async).teams">
+                    <option value="{{ team.id }}"
+                        *ngFor="let team of (settingGeneralService.changeTeam$ | async).teams">
                         {{ team.name }}
                     </option>
                 </select>

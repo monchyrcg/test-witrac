@@ -7,7 +7,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { CustomerList } from 'src/app/shared/interfaces/customers.interface';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import * as moment from 'moment';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { User } from 'src/app/shared/interfaces/user.interface';
 import { TeamService } from 'src/app/shared/services/team.service';
 import { Appointment } from 'src/app/shared/interfaces/appointment.interface';
@@ -51,7 +51,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     constructor(
         private builder: FormBuilder,
         private customerService: CustomerService,
-        public settingService: SettingsService,
+        public settingGeneralService: SettingGeneralService,
         private teamService: TeamService,
         private utilService: UtilsService,
         private authService: AuthenticationGeneralService,
@@ -87,7 +87,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             user_id: [{ value: this.authService.getUserVariable('id') }, [Validators.required]],
         });
 
-        this.subscription.add(this.settingService.changeCountry$.subscribe(
+        this.subscription.add(this.settingGeneralService.changeCountry$.subscribe(
             (settings) => {
                 this.dateOptions.locale = settings.flatpickr;
             }

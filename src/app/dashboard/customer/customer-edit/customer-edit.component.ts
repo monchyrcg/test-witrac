@@ -8,7 +8,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { Customer } from 'src/app/shared/interfaces/customers.interface';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { MagentoService } from 'src/app/shared/services/magento.service';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { MenuComponent } from '../../home/menu/menu.component';
 import { EChartOption } from 'echarts';
 
@@ -53,7 +53,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private customerService: CustomerService,
-        public settingService: SettingsService,
+        public settingGeneralService: SettingGeneralService,
         private magentoService: MagentoService,
         private builder: FormBuilder,
         private menuComponent: MenuComponent

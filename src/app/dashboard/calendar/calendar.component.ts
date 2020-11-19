@@ -3,7 +3,7 @@ import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesCha
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SettingsService } from 'src/app/shared/services/settings.service';
+import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import * as moment from 'moment';
 import { MenuComponent } from '../home/menu/menu.component';
@@ -40,7 +40,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	viewName: string;
 
 	constructor(
-		public settingService: SettingsService,
+		public settingGeneralService: SettingGeneralService,
 		public appointmentService: AppointmentService,
 		public menuComponent: MenuComponent
 	) { }
@@ -60,7 +60,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	setView(view: CalendarView): void {
 		this.isOpenView = false;
 		this.view = view;
-		this.viewName = this.settingService.getLangText('calendar.' + view);
+		this.viewName = this.settingGeneralService.getLangText('calendar.' + view);
 	}
 
 	closeOpenMonthViewDay(): void {
