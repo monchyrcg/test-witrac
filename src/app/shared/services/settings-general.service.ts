@@ -89,10 +89,12 @@ export class SettingGeneralService {
 		this.changeTeamSource.next({ current_team_id: current_team_id, nameTeam: nameTeam, totalTeams: totalTeams, teams: teams });
 	}
 
-	changeTeam(id: number) {
+	changeSettings(id: number, kindsAppointments) {
 		const body = {
-			id
+			id,
+			kindsAppointments
 		};
+		console.log(body);
 		return this.http
 			.put(`${environment.apiUrl}/change-team`, body)
 			.pipe(map((response: any) => {

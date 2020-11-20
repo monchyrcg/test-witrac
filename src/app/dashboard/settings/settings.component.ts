@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { SettingService } from './setting.service';
@@ -20,17 +21,21 @@ export class SettingsComponent implements OnInit {
     constructor(
         public settingGeneralService: SettingGeneralService,
         private authService: AuthenticationGeneralService,
-        private settingService: SettingService
+        private settingService: SettingService,
+        private snackbarService: SnackbarService
     ) { }
 
     ngOnInit(): void {
         this.current_team_id = this.authService.getUserVariable('current_team_id');
 
+        this.getColor(this.current_team_id);
+    }
+
+    getColor(team_id) {
+        this.kindsAppointments = null;
         this.settingService.getColors(this.current_team_id).subscribe(
             (response) => {
                 response.forEach((element, key) => {
-                    console.log(key);
-                    console.log(this.findName(key));
                     response[key].name = this.findName(key);
                 });
                 this.kindsAppointments = response;
@@ -38,6 +43,11 @@ export class SettingsComponent implements OnInit {
                 this.currentColor = this.firstKindAppointment.color;
             }
         )
+    }
+
+    changeTeam(team_id) {
+        this.current_team_id = team_id;
+        this.getColor(team_id);
     }
 
     changeKind(kind) {
@@ -51,7 +61,18 @@ export class SettingsComponent implements OnInit {
     }
 
     submit() {
-        console.log(this.kindsAppointments);
+        this.settingGeneralService.changeSettings(this.current_team_id, this.kindsAppointments).subscribe(
+            (response) => {
+                this.showSnackBar('Seetings updated successfully.', 'success');
+            },
+            (error) => {
+                this.showSnackBar('Algo ha pasado ....', 'danger');
+            }
+        )
+    }
+
+    showSnackBar(text: string, _class: string) {
+        this.snackbarService.show(text, _class);
     }
 
     private findName(key): string {

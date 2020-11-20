@@ -1,4 +1,4 @@
-<div class="px-4 py-6 sm:px-6 lg:px-8">
+<div class="px-4 py-6 sm:px-6 lg:px-8" *ngIf="kindsAppointments; else loading;">
     <div
         class="pb-5 border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
@@ -32,7 +32,8 @@
                     <div class="col-span-12 sm:col-span-3">
                         <app-label-form for="name" name="{{ 'customer_create.team' | translate }}"></app-label-form>
 
-                        <select [(ngModel)]="current_team_id" class="bg-white inputClass" id="team">
+                        <select [(ngModel)]="current_team_id" class="bg-white inputClass" id="team"
+                            (change)="changeTeam($event.target.value)">
                             <option hidden selected value="">{{ 'customer_create.team' | translate }}</option>
                             <option value="{{ team.id }}"
                                 *ngFor="let team of (settingGeneralService.changeTeam$ | async).teams">{{ team.name }}
@@ -110,3 +111,7 @@
         </div>
     </div>
 </div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
