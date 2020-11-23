@@ -94,7 +94,7 @@ export class SettingGeneralService {
 			id,
 			kindsAppointments
 		};
-		console.log(body);
+
 		return this.http
 			.put(`${environment.apiUrl}/change-team`, body)
 			.pipe(map((response: any) => {

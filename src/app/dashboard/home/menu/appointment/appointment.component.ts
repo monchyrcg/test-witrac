@@ -15,6 +15,7 @@ import { UtilsService } from 'src/app/shared/services/util.service';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
+import { SettingService } from 'src/app/shared/services/setting.service';
 
 
 @Component({
@@ -48,6 +49,10 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     current_team_id: number;
 
+    kindsAppointments;
+    firstKindAppointment;
+    showListKind = false;
+
     constructor(
         private builder: FormBuilder,
         private customerService: CustomerService,
@@ -56,7 +61,8 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         private utilService: UtilsService,
         private authService: AuthenticationGeneralService,
         private snackbarService: SnackbarService,
-        private appointmentService: AppointmentService
+        private appointmentService: AppointmentService,
+        private settingService: SettingService
     ) { }
 
     ngOnInit(): void {
@@ -100,7 +106,12 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             }
         ));
 
-
+        this.subscription.add(this.settingService.getColors(this.current_team_id).subscribe(
+            (response) => {
+                this.kindsAppointments = response;
+                this.firstKindAppointment = this.kindsAppointments[0];
+            }
+        ));
     }
 
     get f() { return this.appointmentForm.controls; }
@@ -157,6 +168,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         appointment.date = moment(appointment.date[0]).format('YYYY-MM-DD');
         appointment.hour = hour;
         appointment.team_id = this.appointmentForm.controls['team_id'].value;
+        appointment.kind_appointment_id = this.firstKindAppointment.kind_appointment_id;
         this.subscription.add(this.appointmentService.saveAppointment(appointment).subscribe(
             (response) => {
                 this.showSnackBar('Appointment created successfully.', 'success');
@@ -174,6 +186,11 @@ export class AppointmentComponent implements OnInit, OnDestroy {
 
     closeModalF() {
         this.closeModal();
+    }
+
+    changeKind(kind) {
+        this.showListKind = false;
+        this.firstKindAppointment = kind;
     }
 
     ngOnDestroy() {

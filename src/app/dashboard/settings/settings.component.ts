@@ -1,18 +1,22 @@
+import { OnDestroy } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
+import { SettingService } from 'src/app/shared/services/setting.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
-import { SettingService } from './setting.service';
+
 
 @Component({
     selector: 'app-settings',
     templateUrl: './settings.component.html',
     styleUrls: ['./settings.component.scss']
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent implements OnInit, OnDestroy {
 
     current_team_id: number;
     showListKind = false;
+    subscription: Subscription = new Subscription;
 
     kindsAppointments;
     firstKindAppointment;
@@ -25,19 +29,17 @@ export class SettingsComponent implements OnInit {
         private snackbarService: SnackbarService
     ) { }
 
+
     ngOnInit(): void {
         this.current_team_id = this.authService.getUserVariable('current_team_id');
 
-        this.getColor(this.current_team_id);
+        this.getColor();
     }
 
-    getColor(team_id) {
+    getColor() {
         this.kindsAppointments = null;
         this.settingService.getColors(this.current_team_id).subscribe(
             (response) => {
-                response.forEach((element, key) => {
-                    response[key].name = this.findName(key);
-                });
                 this.kindsAppointments = response;
                 this.firstKindAppointment = this.kindsAppointments[0];
                 this.currentColor = this.firstKindAppointment.color;
@@ -47,7 +49,7 @@ export class SettingsComponent implements OnInit {
 
     changeTeam(team_id) {
         this.current_team_id = team_id;
-        this.getColor(team_id);
+        this.getColor();
     }
 
     changeKind(kind) {
@@ -75,29 +77,7 @@ export class SettingsComponent implements OnInit {
         this.snackbarService.show(text, _class);
     }
 
-    private findName(key): string {
-        let name;
-        switch (key) {
-            case 0:
-                name = this.settingGeneralService.getLangText('kind_appointments.stabilization')
-                break;
-            case 1:
-                name = this.settingGeneralService.getLangText('kind_appointments.study')
-                break;
-            case 2:
-                name = this.settingGeneralService.getLangText('kind_appointments.new')
-                break;
-            case 3:
-                name = this.settingGeneralService.getLangText('kind_appointments.revision')
-                break;
-            case 4:
-                name = this.settingGeneralService.getLangText('kind_appointments.maintenance')
-                break;
-            case 5:
-                name = this.settingGeneralService.getLangText('kind_appointments.recovered')
-                break;
-        }
-
-        return name;
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 }

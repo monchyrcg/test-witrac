@@ -4,6 +4,7 @@ export interface Appointment {
     user_id: number;
     date: any;
     hour: any;
+    kind_appointment_id: number;
 }
 
 export interface AppointmentCalendar {
@@ -11,4 +12,5 @@ export interface AppointmentCalendar {
     title: string;
     start: any;
     allDay: boolean;
+    color: string;
 }

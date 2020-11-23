@@ -56,7 +56,6 @@ export class CustomerComponent implements OnInit, OnDestroy {
             maxDate: moment().format(this.settingGeneralService.settings.formatMoment),
             disableMobile: true,
         };
-        console.log(this.dateOptions);
     }
 
 

@@ -70,7 +70,7 @@ export class MenuComponent {
         if (customer) {
             inputs.customerI = customer;
         }
-        console.log(inputs);
+
         this.modalService.init(AppointmentComponent, inputs, { closeModal: this.closeModal.bind(this) })
     }
 }

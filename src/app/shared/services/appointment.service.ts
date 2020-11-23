@@ -33,6 +33,7 @@ export class AppointmentService {
                         title: appointmentCalendar.title,
                         start: new Date(appointmentCalendar.start),
                         allDay: appointmentCalendar.allDay,
+                        color: { 'primary': appointmentCalendar.color },
                         meta: {
                             appointmentCalendar,
                         },
