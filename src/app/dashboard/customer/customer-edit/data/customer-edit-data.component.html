@@ -1,0 +1,46 @@
+<div [formGroup]="customerDataForm">
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
+        <div class="px-4 py-5 sm:px-6">
+            ANTECEDENTES
+        </div>
+        <div class="px-4 py-5 sm:p-6">
+            <div class="grid grid-cols-6 gap-6">
+                <div class="col-span-6 sm:col-span-3">
+                    <app-label-form for="name" name="{{ 'customer_create.name' | translate }}"></app-label-form>
+
+                    <textarea class="inputClass" id="name" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+                        placeholder="{{ 'customer_create.name' | translate }}"> </textarea>
+                    <ng-container *ngIf="submitted && f.name.errors">
+                        <app-error-form *ngIf="f.name.errors.required" error="{{'errors.required' | translate}}">
+                        </app-error-form>
+                        <app-error-form *ngIf="f.name.errors.maxlength"
+                            error="{{'errors.maxLength' | translate:{number: validationMaxString.short_string} }}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
+        <div class=" px-4 py-5 sm:px-6">
+            CITA 1
+        </div>
+        <div class="px-4 py-5 sm:p-6">
+            <!-- Content goes here -->
+        </div>
+    </div>
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
+    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
+        <div class="px-4 py-5 sm:px-6">
+            CITA 2
+        </div>
+        <div class="px-4 py-5 sm:p-6">
+            <!-- Content goes here -->
+        </div>
+    </div>
+</div>
