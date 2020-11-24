@@ -37,7 +37,7 @@
 
             <div class="origin-top-right absolute right-0 mt-2 -mr-1 w-32 rounded-md shadow-lg transition ease-out duration-100"
                 [ngClass]="{ 'hidden': !isOpenView }">
-                <div class="rounded-md bg-white shadow-xs">
+                <div class="rounded-md bg-white ring-1 ring-black ring-opacity-5">
                     <div class="py-1">
                         <a class="openViewbutton" (click)="setView(CalendarView.Month)">
                             {{ 'calendar.month' | translate }}

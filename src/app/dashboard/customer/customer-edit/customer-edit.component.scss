@@ -46,7 +46,7 @@
 
 .customer-info-button-white:focus {
     @apply outline-none;
-    @apply shadow-outline-blue;
+    @apply ring-blue-100;
 }
 
 .customer-info-button-reverse {

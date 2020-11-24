@@ -1,47 +1,41 @@
 module.exports = {
+  // darkMode: 'media',
   future: {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
   purge: {
-    enabled: true,
-    content: ['./src/**/*.html', './src/**/*.ts'],
+    // enabled: true,
+    // content: ['./src/**/*.html', './src/**/*.ts']
   },
   theme: {
     fontFamily: {
-      'nutriwell': ['Muller-Regular'],
+      'nutriwell': ['Muller-Regular']
     },
     inset: {
       '0': 0,
       auto: 'auto',
       '1/5': '20px',
       '1/2': '50px',
-      '1/2%': '50%',
+      '1/2%': '50%'
     },
     extend: {
       colors: {
         nutriwell: {
-          default: '#006C5B',
+          DEFAULT: '#006C5B',
           stone: '#86897E',
           sansivera: '#6FBFA4',
           mustela: '#256741',
           sand: '#E1915D',
-          sun: '#EEAE64',
-        },
-        facebook: {
-          default: '#4267b2',
-        },
-        twitter: {
-          default: '#1da0f2',
-        },
-        github: {
-          default: '#333',
+          sun: '#EEAE64'
         }
       }
     },
   },
   variants: {},
   plugins: [
-    require('@tailwindcss/ui'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio')
   ]
 }

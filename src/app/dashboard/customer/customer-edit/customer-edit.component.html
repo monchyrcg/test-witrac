@@ -44,7 +44,7 @@
             </div>
 
             <div class="mt-5 flex lg:mt-0 lg:ml-4">
-                <span class="hidden sm:block shadow-sm rounded-md">
+                <span class="hidden lg:block shadow-sm rounded-md">
                     <button (click)="createAppointment()" type="button" class="customer-info-button-white">
                         <!-- Heroicon name: pencil -->
                         <svg class="customer-info-button-svg text-gray-500" fill="none" stroke="currentColor"
@@ -57,7 +57,7 @@
                     </button>
                 </span>
 
-                <span class="hidden sm:block ml-3 shadow-sm rounded-md">
+                <span class="hidden lg:block ml-3 shadow-sm rounded-md">
                     <button type="button" class="customer-info-button-white">
                         <!-- Heroicon name: link -->
                         <svg class="customer-info-button-svg text-gray-500" xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +84,7 @@
                 </span>
 
                 <!-- Dropdown -->
-                <span class="ml-3 relative shadow-sm rounded-md sm:hidden">
+                <span class="ml-3 relative shadow-sm rounded-md lg:hidden">
                     <button type="button" class="customer-info-button-white" (click)="isOpen= !isOpen">
                         {{ 'customer_edit.more' | translate }}
                         <!-- Heroicon name: chevron-down -->
@@ -98,7 +98,7 @@
 
                     <div class="origin-top-right absolute right-0 mt-2 -mr-1 w-48 rounded-md shadow-lg transition ease-out duration-200"
                         aria-labelledby="mobile-menu" role="menu" *ngIf="isOpen">
-                        <div class="py-1 rounded-md bg-white shadow-xs">
+                        <div class="py-1 rounded-md bg-white ring-1 ring-black ring-opacity-5">
                             <a (click)="createAppointment()"
                                 class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
                                 role="menuitem">{{ 'customer_edit.appointment' | translate }}</a>
@@ -122,6 +122,8 @@
             <app-customer-edit-data></app-customer-edit-data>
         </app-tab>
         <app-tab title="Antropométricos">
+            <div echarts [options]="options2" class="demo-chart"></div>
+            <div echarts [options]="options3" class="demo-chart"></div>
             <div echarts [options]="options" class="demo-chart"></div>
         </app-tab>
         <app-tab title="{{ 'customer_edit.tabs.shop' | translate }}">

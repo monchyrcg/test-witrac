@@ -138,7 +138,7 @@
                         <div class="mt-1 w-full rounded-md bg-white shadow-lg" *ngIf="showListKind">
                             <ul tabindex="-1" role="listbox" aria-labelledby="listbox-label"
                                 aria-activedescendant="listbox-item-3"
-                                class="max-h-60 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5">
+                                class="max-h-60 rounded-md py-1 text-base leading-6 ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm sm:leading-5">
 
                                 <li id="listbox-item-0" *ngFor="let kinds of kindsAppointments"
                                     (click)="changeKind(kinds)"
@@ -176,7 +176,7 @@
 
     <div button>
         <button type="submit" *ngIf="customer" (click)="createAppointment()"
-            class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-nutriwell text-base leading-6 font-medium text-white shadow-sm hover:bg-nutriwell-500 focus:outline-none focus:border-nutriwell-700 focus:shadow-outline-nutriwell transition ease-in-out duration-150 sm:text-sm sm:leading-5">
+            class="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-nutriwell text-base leading-6 font-medium text-white shadow-sm focus:outline-none focus:border-nutriwell focus:ring-nutriwell transition ease-in-out duration-150 sm:text-sm sm:leading-5">
             {{text_button_create}}
         </button>
     </div>

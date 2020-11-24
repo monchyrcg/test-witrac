@@ -1,24 +1,83 @@
-<div [formGroup]="customerDataForm">
+<div>
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
-        <div class="px-4 py-5 sm:px-6">
+        <div class="px-4 py-5 sm:px-6" (click)="showBackground = !showBackground">
             ANTECEDENTES
         </div>
-        <div class="px-4 py-5 sm:p-6">
-            <div class="grid grid-cols-6 gap-6">
-                <div class="col-span-6 sm:col-span-3">
-                    <app-label-form for="name" name="{{ 'customer_create.name' | translate }}"></app-label-form>
+        <div class="px-4 py-5 sm:p-6" *ngIf="showBackground" [@enterAnimation]>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="name" name="Antecedentes"></app-label-form>
 
                     <textarea class="inputClass" id="name" type="text"
                         [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
-                        placeholder="{{ 'customer_create.name' | translate }}"> </textarea>
-                    <ng-container *ngIf="submitted && f.name.errors">
-                        <app-error-form *ngIf="f.name.errors.required" error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                        <app-error-form *ngIf="f.name.errors.maxlength"
-                            error="{{'errors.maxLength' | translate:{number: validationMaxString.short_string} }}">
-                        </app-error-form>
-                    </ng-container>
+                        placeholder="Antecedentes"> </textarea>
+                </div>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="name" name="Fármacos"></app-label-form>
+
+                    <textarea class="inputClass" id="name" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+                        placeholder="Fármacos"> </textarea>
+                </div>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="name" name="Alergías"></app-label-form>
+
+                    <textarea class="inputClass" id="name" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+                        placeholder="Alergías"> </textarea>
+                </div>
+                <div class="col-span-3">
+                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Estatura"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Estatura">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Peso inicial"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Peso inicial">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Objetivo peso"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Objetivo peso">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-span-3">
+                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Digestión"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Digestión">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Agua"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Agua">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Baño"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Baño">
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -26,21 +85,159 @@
 
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
-        <div class=" px-4 py-5 sm:px-6">
-            CITA 1
+        <div class=" px-4 py-5 sm:px-6" (click)="showAppointmentF(0)">
+            CITA 07/11/2020 18:00
         </div>
-        <div class="px-4 py-5 sm:p-6">
-            <!-- Content goes here -->
+        <div class="px-4 py-5 sm:p-6" *ngIf="getAppointmentF(0)" [@enterAnimation]>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3">
+                    <app-label-form for="name" name="Anotaciones"></app-label-form>
+
+                    <textarea class="inputClass" id="name" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+                        placeholder="Anotaciones"> </textarea>
+                </div>
+                <div class="col-span-3">
+                    <div class="grid grid-cols-2 gap-5 lg:gap-10">
+                        <div class="col-span-2 sm:col-span-1">
+                            <app-label-form for="name" name="¿Has hecho las cinco comidas?"></app-label-form>
+
+                            <select class="bg-white inputClass" id="gender">
+                                <option value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <app-label-form for="name" name="Objetivo peso"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Objetivo peso">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-span-3">
+                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Digestión"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Digestión">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Agua"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Agua">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Baño"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Baño">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-span-3 flex flex-row-reverse">
+                    <span class="shadow-sm rounded-md">
+                        <button type="button" class="customer-info-button-reverse">
+                            <!-- Heroicon name: check -->
+                            <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            {{ 'customer_edit.save' | translate }}
+                        </button>
+                    </span>
+
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
-        <div class="px-4 py-5 sm:px-6">
-            CITA 2
+        <div class="px-4 py-5 sm:px-6" (click)="showAppointmentF(1)">
+            CITA 14/11/2020 15:30
         </div>
-        <div class="px-4 py-5 sm:p-6">
-            <!-- Content goes here -->
+        <div class="px-4 py-5 sm:p-6" *ngIf="getAppointmentF(1)" [@enterAnimation]>
+            <div class="grid grid-cols-3 gap-6">
+                <div class="col-span-3">
+                    <app-label-form for="name" name="Anotaciones"></app-label-form>
+
+                    <textarea class="inputClass" id="name" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+                        placeholder="Anotaciones"> </textarea>
+                </div>
+                <div class="col-span-3">
+                    <div class="grid grid-cols-2 gap-5 lg:gap-10">
+                        <div class="col-span-2 sm:col-span-1">
+                            <app-label-form for="name" name="¿Has hecho las cinco comidas?"></app-label-form>
+
+                            <select class="bg-white inputClass" id="gender">
+                                <option value="1">Sí</option>
+                                <option value="0">No</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <app-label-form for="name" name="Objetivo peso"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Objetivo peso">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-span-3">
+                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Digestión"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Digestión">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Agua"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Agua">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="name" name="Baño"></app-label-form>
+
+                            <input class="inputClass" id="legal_name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                                placeholder="Baño">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-span-3 flex flex-row-reverse">
+                    <span class="shadow-sm rounded-md">
+                        <button type="button" class="customer-info-button-reverse">
+                            <!-- Heroicon name: check -->
+                            <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            {{ 'customer_edit.save' | translate }}
+                        </button>
+                    </span>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>

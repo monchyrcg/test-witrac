@@ -7,7 +7,7 @@
 }
 .icons:focus {
     @apply outline-none;
-    @apply shadow-outline;
+    @apply ring;
 }
 .div_dropdown {
     @apply z-10;
@@ -23,7 +23,9 @@
     @apply py-1;
     @apply rounded-md;
     @apply bg-white;
-    @apply shadow-xs; 
+    @apply ring-1;
+    @apply ring-black;
+    @apply ring-opacity-5; 
 }
 
 .menu {

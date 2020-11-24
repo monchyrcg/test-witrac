@@ -45,6 +45,6 @@
 
 .pagination:focus {
    @apply outline-none; 
-   @apply shadow-outline-blue; 
+   @apply ring-blue-100; 
    @apply border-blue-300;
 }

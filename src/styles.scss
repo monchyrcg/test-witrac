@@ -25,8 +25,9 @@
 }
 
 .inputClass:focus {
-    @apply outline-none;
-    @apply border-nutriwell;
+    
+    @apply ring-nutriwell;
+    @apply ring-opacity-50;
 }
 
 .inputClass_groups {

@@ -49,6 +49,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     hasMore: boolean = true;
 
     options: any;
+    options2: any;
+    options3: any;
 
     constructor(
         private route: ActivatedRoute,
@@ -134,11 +136,14 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
         };
 
         this.options = {
+            title: {
+                text: 'Graficos de nivel agua / grasa'
+            },
             tooltip: {
             },
             legend: {
                 data: ['Water', 'Fat'],
-                selectedMode: 'multiple'
+                selectedMode: 'single'
             },
             xAxis: {
                 data: ['a', 'b', 'c', 'd', 'e'],
@@ -235,7 +240,84 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
                     }]
                 }]
 
+        };
+
+        this.options2 = {
+            title: {
+                text: 'Peso'
+            },
+            xAxis: {
+                type: 'category',
+                data: ['Appoint. 1', 'Appoint. 2', 'Appoint. 3', 'Appoint. 4', 'Appoint. 5', 'Appoint. 6', 'Appoint. 7']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [132.0, 133.0, 129.0, 93.4, '93.2', 82.0, 81.8],
+                type: 'line',
+                smooth: true
+            }]
+        };
+
+        var xAxisData = [];
+        var data1 = [];
+        var data2 = [];
+        for (var i = 0; i < 100; i++) {
+            xAxisData.push('Compras' + i);
+            data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
+            data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
         }
+
+        this.options3 = {
+            title: {
+                text: 'Compras Customer vs Compras Totales'
+            },
+            legend: {
+                data: ['customer', 'totales']
+            },
+            toolbox: {
+                // y: 'bottom',
+                feature: {
+                    magicType: {
+                        type: ['stack', 'tiled']
+                    },
+                    dataView: {},
+                    saveAsImage: {
+                        pixelRatio: 2
+                    }
+                }
+            },
+            tooltip: {},
+            xAxis: {
+                data: xAxisData,
+                splitLine: {
+                    show: false
+                }
+            },
+            yAxis: {
+            },
+            series: [{
+                name: 'customer',
+                type: 'bar',
+                data: data1,
+                animationDelay: function (idx) {
+                    return idx * 10;
+                }
+            }, {
+                name: 'totales',
+                type: 'bar',
+                data: data2,
+                animationDelay: function (idx) {
+                    return idx * 10 + 100;
+                }
+            }],
+            animationEasing: 'elasticOut',
+            animationDelayUpdate: function (idx) {
+                return idx * 5;
+            }
+        };
+
     }
 
     private listProducts(query?) {
