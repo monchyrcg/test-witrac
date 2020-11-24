@@ -263,10 +263,10 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
         var xAxisData = [];
         var data1 = [];
         var data2 = [];
-        for (var i = 0; i < 100; i++) {
-            xAxisData.push('Compras' + i);
-            data1.push((Math.sin(i / 5) * (i / 5 - 10) + i / 6) * 5);
-            data2.push((Math.cos(i / 5) * (i / 5 - 10) + i / 6) * 5);
+        for (var i = 1; i < 12; i++) {
+            xAxisData.push('Month' + i);
+            data1.push(Math.floor(Math.random() * (80 - 30)) + 30);
+            data2.push(Math.floor(Math.random() * (80 - 30)) + 30);
         }
 
         this.options3 = {
