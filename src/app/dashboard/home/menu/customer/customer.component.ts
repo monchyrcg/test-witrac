@@ -11,6 +11,7 @@ import { Customer, CustomerCreated } from 'src/app/shared/interfaces/customers.i
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
 import { Validations } from 'src/app/shared/settings/validation';
+import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 
 
 @Component({
@@ -48,7 +49,8 @@ export class CustomerComponent implements OnInit, OnDestroy {
         public settingGeneralService: SettingGeneralService,
         private customerService: CustomerService,
         private snackbarService: SnackbarService,
-        private utilService: UtilsService
+        private utilService: UtilsService,
+        private authService: AuthenticationGeneralService,
     ) {
         this.dateOptions = {
             locale: this.settingGeneralService.settings.flatpickr,
@@ -70,7 +72,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
             mobile: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
             gender: ['', []],
-            team_id: ['', [Validators.required]],
+            team_id: [this.authService.getUserVariable('current_team_id'), [Validators.required]],
             dob: [null, []],
             job: ['', [Validators.maxLength(this.validationMaxString.long_string)]],
             legal_checkbox: [null],

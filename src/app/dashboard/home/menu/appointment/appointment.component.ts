@@ -66,6 +66,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
+
         if (this.customerI) {
             this.customer = this.customerI;
         }
@@ -87,7 +88,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             });
 
         this.appointmentForm = this.builder.group({
-            customer_id: ['', [Validators.required]],
+            customer_id: [this.customerI ? this.customerI.id : '', [Validators.required]],
             date: [{ 0: day }, [Validators.required]],
             team_id: [{ value: this.current_team_id, disabled: true }, [Validators.required]],
             user_id: [{ value: this.authService.getUserVariable('id') }, [Validators.required]],
@@ -156,7 +157,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     createAppointment() {
-        console.log(this.firstKindAppointment);
+        console.log(this.appointmentForm.value);
         this.submitted = true;
 
         if (this.appointmentForm.invalid) {
