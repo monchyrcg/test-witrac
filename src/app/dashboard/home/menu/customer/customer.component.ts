@@ -66,13 +66,13 @@ export class CustomerComponent implements OnInit, OnDestroy {
         this.customerForm = this.builder.group({
             name: ['', [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
             surnames: ['', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-            gender: ['', [Validators.required]],
-            team_id: ['', [Validators.required]],
-            dob: [null, [Validators.required]],
-            job: ['', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             prefix: ['', [Validators.required]],
             mobile: ['', [Validators.required]],
             email: ['', [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
+            gender: ['', []],
+            team_id: ['', [Validators.required]],
+            dob: [null, []],
+            job: ['', [Validators.maxLength(this.validationMaxString.long_string)]],
             legal_checkbox: [null],
             legal_name: [null, [Validators.maxLength(this.validationMaxString.short_string)]],
             legal_surnames: [null, [Validators.maxLength(this.validationMaxString.long_string)]],
@@ -96,7 +96,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
         }
 
         let customer: CustomerCreated = this.utilService.clear(this.customerForm.value);
-        customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
+        // customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
 
         this.subscription.add(this.customerService.saveCustomer(customer).subscribe(
             (response) => {
