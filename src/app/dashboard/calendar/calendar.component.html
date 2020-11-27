@@ -71,8 +71,7 @@
         {{events}}
         <div [ngSwitch]="view">
             <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
-                [refresh]="refresh" style=" text-transform: capitalize;"
-                [locale]="(settingGeneralService.changeCountry$ | async).locale"
+                style=" text-transform: capitalize;" [locale]="(settingGeneralService.changeCountry$ | async).locale"
                 [weekStartsOn]="(settingGeneralService.changeCountry$ | async).weekStartsOn"
                 [weekendDays]="(settingGeneralService.changeCountry$ | async).weekendDays" [refresh]="refresh"
                 (dayClicked)="dayClicked($event.day.date)" (eventClicked)="eventClicked($event)">
