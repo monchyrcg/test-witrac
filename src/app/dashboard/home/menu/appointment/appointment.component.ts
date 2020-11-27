@@ -157,7 +157,6 @@ export class AppointmentComponent implements OnInit, OnDestroy {
     }
 
     createAppointment() {
-        console.log(this.appointmentForm.value);
         this.submitted = true;
 
         if (this.appointmentForm.invalid) {

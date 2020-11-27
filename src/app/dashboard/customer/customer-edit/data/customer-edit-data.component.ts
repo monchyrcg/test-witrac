@@ -38,7 +38,7 @@ export class CustomerEditDataComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit(): void {
-        console.log(this.showAppointment[0]);
+
     }
 
     get f() { return this.customerDataForm.controls; }
@@ -48,9 +48,7 @@ export class CustomerEditDataComponent implements OnInit, OnDestroy {
     }
 
     showAppointmentF(index) {
-        console.log(this.showAppointment[index]);
         this.showAppointment[index] = !this.showAppointment[index];
-        console.log(this.showAppointment[index]);
     }
 
     getAppointmentF(index) {

@@ -15,7 +15,7 @@ import { Countries } from '../settings/country';
 })
 export class SettingGeneralService {
 
-	public country = localStorage.getItem('country') ?? 'es';
+	public country = localStorage.getItem('country') ? localStorage.getItem('country') : 'us';
 	public settings = Countries.settingCountry[this.country];
 	private changeCountrySource = new BehaviorSubject<any>({
 		locale: this.settings.locale,

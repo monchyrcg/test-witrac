@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { browser } from 'protractor';
 import { SettingGeneralService } from './shared/services/settings-general.service';
 import { Countries } from './shared/settings/country';
 
@@ -19,7 +20,7 @@ export class AppComponent {
 		} else {
 			const browserLocale = (navigator.language).split('-')[0];
 
-			const setLocale = this.defaultCountry.includes(browserLocale) ? browserLocale : 'en';
+			const setLocale = this.defaultCountry.includes(browserLocale) ? browserLocale : 'us';
 
 			this.settingGeneralService.changeCountry(setLocale);
 		}

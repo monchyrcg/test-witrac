@@ -1,4 +1,3 @@
-import { ɵangular_packages_platform_browser_platform_browser_h } from '@angular/platform-browser';
 import { DAYS_OF_WEEK } from 'angular-calendar';
 
 import Spanish from 'flatpickr/dist/l10n/es.js';
