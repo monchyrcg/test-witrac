@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { CustomerMedicalInformation } from '../interfaces/customers.interface';
 import { UtilsService } from './util.service';
 
 @Injectable({
@@ -62,6 +63,14 @@ export class CustomerService {
         return this.http.get(`${environment.apiUrl}/customers/${customer_id}`,)
             .pipe(map((response: any) => {
                 return response.data;
+            }));
+    }
+
+    saveMedicalInformation(customer_id: number, medicalInformation: CustomerMedicalInformation) {
+        return this.http
+            .post(`${environment.apiUrl}/customers/${customer_id}/medical-history`, medicalInformation)
+            .pipe(map((response: any) => {
+                response.data;
             }));
     }
 }

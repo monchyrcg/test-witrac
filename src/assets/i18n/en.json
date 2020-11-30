@@ -109,5 +109,18 @@
         "revision": "Revision",
         "maintenance": "Maintenance",
         "recovered": "Recovered"
+    },
+    "builds": {
+        "thin": "Thin",
+        "normal": "Normal",
+        "robust": "Robust"
+    },
+    "physicals": {
+        "rest": "Rest",
+        "v_light": "Very light",
+        "light": "Light",
+        "normal": "Normal",
+        "intensive": "Intensive",
+        "v_intensive": "Very intensive"
     }
 }

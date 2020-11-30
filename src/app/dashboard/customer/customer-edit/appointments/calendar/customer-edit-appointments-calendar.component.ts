@@ -10,13 +10,13 @@ import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 
 
 @Component({
-    selector: 'app-customer-edit-calendar',
-    templateUrl: './customer-edit-calendar.component.html',
-    styleUrls: ['./customer-edit-calendar.component.scss'],
+    selector: 'app-customer-edit-appointments-calendar',
+    templateUrl: './customer-edit-appointments-calendar.component.html',
+    styleUrls: ['./customer-edit-appointments-calendar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class CustomerEditCalendarComponent implements OnInit, OnDestroy {
+export class CustomerEditAppointmentsCalendarComponent implements OnInit, OnDestroy {
 
     @Input() customer;
 

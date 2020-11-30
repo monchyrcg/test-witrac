@@ -1,12 +1,12 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 
 
 @Component({
-    selector: 'app-customer-edit-data',
-    templateUrl: './customer-edit-data.component.html',
+    selector: 'app-customer-edit-appointments-list',
+    templateUrl: './customer-edit-appointments-list.component.html',
     animations: [
         trigger(
             'enterAnimation', [
@@ -21,11 +21,12 @@ import { SettingGeneralService } from 'src/app/shared/services/settings-general.
         ]
         )
     ],
-    styleUrls: ['../customer-edit.component.scss']
+    styleUrls: ['../../customer-edit.component.scss']
 })
 
-export class CustomerEditDataComponent implements OnInit, OnDestroy {
+export class CustomerEditAppointmentsListComponent implements OnInit, OnDestroy {
 
+    @Input() customer;
     customerDataForm: FormGroup;
     submitted = false;
 

@@ -70,20 +70,6 @@
                     </button>
                 </span>
 
-                <span class="sm:ml-3 shadow-sm rounded-md">
-                    <button type="button" class="customer-info-button-reverse">
-                        <!-- Heroicon name: check -->
-                        <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        {{ 'customer_edit.save' | translate }}
-                    </button>
-                </span>
-
-                <!-- Dropdown -->
                 <span class="ml-3 relative shadow-sm rounded-md lg:hidden">
                     <button type="button" class="customer-info-button-white" (click)="isOpen= !isOpen">
                         {{ 'customer_edit.more' | translate }}
@@ -115,12 +101,14 @@
         <app-tab title="{{ 'customer_edit.tabs.data' | translate }}">
             <app-customer-edit-general [customer]="customer$"></app-customer-edit-general>
         </app-tab>
-        <app-tab title="{{ 'customer_edit.tabs.calendar' | translate }}">
-            <app-customer-edit-calendar [customer]="customer$"></app-customer-edit-calendar>
+        <app-tab title="Historial Médico">
+            <app-customer-edit-medical-history [customer_id]="customer$.id" [medical]="customer$.medical">
+            </app-customer-edit-medical-history>
         </app-tab>
-        <app-tab title="General Data">
-            <app-customer-edit-data></app-customer-edit-data>
+        <app-tab title="Appointments">
+            <app-customer-edit-appointments [customer]="customer$"></app-customer-edit-appointments>
         </app-tab>
+
         <app-tab title="Antropométricos">
             <div echarts [options]="options2" class="demo-chart"></div>
             <div echarts [options]="options3" class="demo-chart"></div>

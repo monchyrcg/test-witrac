@@ -4,5 +4,6 @@ export class Validations {
         {
             short_string: 45,
             long_string: 90,
+            text: 65400,
         };
 }

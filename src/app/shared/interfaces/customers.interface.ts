@@ -37,3 +37,14 @@ export interface Customer {
     legal_identity?: string,
     next_appointment: any,
 }
+
+export interface CustomerMedicalInformation {
+    history: string;
+    drugs: string;
+    allergies: string;
+    weight: number;
+    height: number;
+    weight_objetive: number;
+    build: number;
+    physical_activity: number;
+}

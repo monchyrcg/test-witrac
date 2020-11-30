@@ -68,7 +68,6 @@
     </ng-template>
 
     <ng-container *ngIf="events$ | async; else loading; let events">
-        {{events}}
         <div [ngSwitch]="view">
             <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
                 style=" text-transform: capitalize;" [locale]="(settingGeneralService.changeCountry$ | async).locale"

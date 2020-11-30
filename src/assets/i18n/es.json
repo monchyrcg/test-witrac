@@ -48,5 +48,14 @@
     "genders": {
         "male": "Male",
         "female": "Female"
+    },
+    "builds": {
+        "thin": "Thin",
+        "normal": "Normal",
+        "robust": "Robust"
+    },
+    "physicals": {
+        "male": "Male",
+        "female": "Female"
     }
 }

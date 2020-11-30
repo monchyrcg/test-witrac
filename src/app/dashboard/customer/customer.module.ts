@@ -4,20 +4,24 @@ import { NgModule } from '@angular/core';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
 import { SharedModule } from 'src/app/shared/modules/shared.module';
-import { CustomerEditCalendarComponent } from './customer-edit/calendar/customer-edit-calendar.component';
-import { CustomerEditComponent } from './customer-edit/customer-edit.component';
-import { CustomerEditDataComponent } from './customer-edit/data/customer-edit-data.component';
-import { CustomerEditGeneralComponent } from './customer-edit/general/customer-edit-general.component';
-import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerRoutingModule } from './customer-routing.module';
+import { CustomerListComponent } from './customer-list/customer-list.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { CustomerEditGeneralComponent } from './customer-edit/general/customer-edit-general.component';
+import { CustomerEditMedicalHistoryComponent } from './customer-edit/medical-history/customer-edit-medical-history.component';
+import { CustomerEditAppointmentComponent } from './customer-edit/appointments/customer-edit-appointments.component';
+import { CustomerEditAppointmentsCalendarComponent } from './customer-edit/appointments/calendar/customer-edit-appointments-calendar.component';
+import { CustomerEditAppointmentsListComponent } from './customer-edit/appointments/list/customer-edit-appointments-list.component';
 
 @NgModule({
     declarations: [
         CustomerListComponent,
         CustomerEditComponent,
         CustomerEditGeneralComponent,
-        CustomerEditCalendarComponent,
-        CustomerEditDataComponent
+        CustomerEditMedicalHistoryComponent,
+        CustomerEditAppointmentComponent,
+        CustomerEditAppointmentsCalendarComponent,
+        CustomerEditAppointmentsListComponent,
     ],
     imports: [
         CommonModule,
