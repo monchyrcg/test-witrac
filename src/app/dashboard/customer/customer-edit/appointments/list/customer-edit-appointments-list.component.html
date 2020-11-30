@@ -1,159 +1,143 @@
-<div>
+<div *ngIf="!showAppointment" [@enterAnimation]>
+    <h2 class="text-gray-500 text-xs font-medium uppercase tracking-wide">Pinned Projects</h2>
+    <ul class="mt-3 grid grid-cols-1 gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-{{appointments.length}}">
+        <li class="col-span-1 flex shadow-sm rounded-md h-12" *ngFor="let appointment of appointments"
+            (click)="changeShowAppointment(true, appointment)">
+            <div [ngStyle]="{'background-color': appointment.color}"
+                class="flex-shrink-0 flex items-center justify-center w-16 text-white text-sm font-medium rounded-l-md">
 
-    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
-        <div class=" px-4 py-5 sm:px-6" (click)="showAppointmentF(0)">
-            CITA 07/11/2020 18:00
-        </div>
-        <div class="px-4 py-5 sm:p-6" *ngIf="getAppointmentF(0)" [@enterAnimation]>
-            <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3">
-                    <app-label-form for="name" name="Anotaciones"></app-label-form>
-
-                    <textarea class="inputClass" id="name" type="text"
-                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
-                        placeholder="Anotaciones"> </textarea>
+            </div>
+            <div
+                class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                <div class="flex-1 px-4 py-2 text-sm truncate">
+                    <a href="#" class="text-gray-900 font-medium hover:text-gray-600">
+                        {{ ((appointment.date+' '+appointment.hour) | date: 'short' : '' :
+                        ((settingGeneralService.changeCountry$ | async).locale)) }}
+                    </a>
                 </div>
-                <div class="col-span-3">
-                    <div class="grid grid-cols-2 gap-5 lg:gap-10">
-                        <div class="col-span-2 sm:col-span-1">
-                            <app-label-form for="name" name="¿Has hecho las cinco comidas?"></app-label-form>
-
-                            <select class="bg-white inputClass" id="gender">
-                                <option value="1">Sí</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <app-label-form for="name" name="Objetivo peso"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Objetivo peso">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-span-3">
-                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
-                        <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="name" name="Digestión"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Digestión">
-                        </div>
-                        <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="name" name="Agua"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Agua">
-                        </div>
-                        <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="name" name="Baño"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Baño">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-span-3 flex flex-row-reverse">
-                    <span class="shadow-sm rounded-md">
-                        <button type="button" class="customer-info-button-reverse">
-                            <!-- Heroicon name: check -->
-                            <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            {{ 'customer_edit.save' | translate }}
-                        </button>
-                    </span>
-
+                <div class="flex-shrink-0 pr-2">
+                    <button
+                        class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-nutriwell">
+                        <span class="sr-only">Open options</span>
+                        <!-- Heroicon name: dots-vertical -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                            </path>
+                        </svg>
+                    </button>
                 </div>
             </div>
+        </li>
+    </ul>
+</div>
+
+<div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4" *ngIf="showAppointment"
+    [@enterAnimation]>
+    <div class="px-4 py-5 sm:px-6 cursor-pointer flex justify-between">
+        <p>
+            Informaciones de la cita
+        </p>
+        <div class="px-4 pt-3 sm:px-6 cursor-pointer">
+            <svg class="w-6 h-6 pb-2 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" (click)="changeShowAppointment(false)">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                </path>
+            </svg>
         </div>
     </div>
+    <div class="px-4 py-5 sm:p-6">
+        <div class="grid grid-cols-3 gap-7" [formGroup]="appointmentDataForm">
+            <div class="col-span-3">
+                <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                    <div class="col-span-3 sm:col-span-1">
+                        <app-label-form for="five_meals" name="¿Has hecho las 5 comidas?"></app-label-form>
 
-    <!-- This example requires Tailwind CSS v2.0+ -->
-    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
-        <div class="px-4 py-5 sm:px-6" (click)="showAppointmentF(1)">
-            CITA 14/11/2020 15:30
-        </div>
-        <div class="px-4 py-5 sm:p-6" *ngIf="getAppointmentF(1)" [@enterAnimation]>
-            <div class="grid grid-cols-3 gap-6">
-                <div class="col-span-3">
-                    <app-label-form for="name" name="Anotaciones"></app-label-form>
-
-                    <textarea class="inputClass" id="name" type="text"
-                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
-                        placeholder="Anotaciones"> </textarea>
-                </div>
-                <div class="col-span-3">
-                    <div class="grid grid-cols-2 gap-5 lg:gap-10">
-                        <div class="col-span-2 sm:col-span-1">
-                            <app-label-form for="name" name="¿Has hecho las cinco comidas?"></app-label-form>
-
-                            <select class="bg-white inputClass" id="gender">
-                                <option value="1">Sí</option>
-                                <option value="0">No</option>
-                            </select>
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <app-label-form for="name" name="Objetivo peso"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Objetivo peso">
-                        </div>
+                        <select formControlName="five_meals" class="bg-white inputClass" id="five_meals">
+                            <option hidden selected value="">¿Has hecho las 5 comidas?</option>
+                            <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
+                            </option>
+                        </select>
+                        <ng-container *ngIf="submitted && f.five_meals.errors">
+                            <app-error-form *ngIf="f.five_meals.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                        </ng-container>
                     </div>
+                    <div class="col-span-3 sm:col-span-1">
+                        <app-label-form for="weight" name="Peso actual"></app-label-form>
 
-                </div>
-                <div class="col-span-3">
-                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
-                        <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="name" name="Digestión"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Digestión">
-                        </div>
-                        <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="name" name="Agua"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Agua">
-                        </div>
-                        <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="name" name="Baño"></app-label-form>
-
-                            <input class="inputClass" id="legal_name" type="text"
-                                [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
-                                placeholder="Baño">
-                        </div>
+                        <input formControlName="weight" class="inputClass" id="weight" type="number" step="0.01" min="0"
+                            [ngClass]="{ 'border border-red-500': submitted && f.weight.errors }"
+                            placeholder="Peso actual">
+                        <ng-container *ngIf="submitted && f.weight.errors">
+                            <app-error-form *ngIf="f.weight.errors.required" error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                        </ng-container>
                     </div>
+                    <div class="col-span-3 sm:col-span-1">
+                        <app-label-form for="weight_objetive" name="Objetivo peso siguiente"></app-label-form>
 
+                        <input formControlName="weight_objetive" class="inputClass" id="weight_objetive" type="number"
+                            step="0.01" min="0"
+                            [ngClass]="{ 'border border-red-500': submitted && f.weight_objetive.errors }"
+                            placeholder="Objetivo peso siguiente">
+                        <ng-container *ngIf="submitted && f.weight_objetive.errors">
+                            <app-error-form *ngIf="f.weight_objetive.errors.required"
+                                error="{{'errors.required' | translate}}">
+                            </app-error-form>
+                        </ng-container>
+                    </div>
                 </div>
-                <div class="col-span-3 flex flex-row-reverse">
-                    <span class="shadow-sm rounded-md">
-                        <button type="button" class="customer-info-button-reverse">
-                            <!-- Heroicon name: check -->
-                            <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            {{ 'customer_edit.save' | translate }}
-                        </button>
-                    </span>
 
-                </div>
+            </div>
+            <div class="col-span-3 lg:col-span-1">
+                <app-label-form name="Agua"></app-label-form>
+
+                <input formControlName="water" class="inputClass" id="water" type="text"
+                    [ngClass]="{ 'border border-red-500': submitted && f.water.errors }" placeholder="Agua">
+                <ng-container *ngIf="submitted && f.water.errors">
+                    <app-error-form *ngIf="f.water.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+            <div class="col-span-3 lg:col-span-1">
+                <app-label-form for="drugs" name="Digestión"></app-label-form>
+
+                <input formControlName="digestion" class="inputClass" id="digestion" type="text"
+                    [ngClass]="{ 'border border-red-500': submitted && f.digestion.errors }" placeholder="Digestión">
+                <ng-container *ngIf="submitted && f.digestion.errors">
+                    <app-error-form *ngIf="f.digestion.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+            <div class="col-span-3 lg:col-span-1">
+                <app-label-form for="allergies" name="Heces"></app-label-form>
+
+                <input formControlName="stools" class="inputClass" id="stools" type="text"
+                    [ngClass]="{ 'border border-red-500': submitted && f.stools.errors }" placeholder="Heces">
+                <ng-container *ngIf="submitted && f.stools.errors">
+                    <app-error-form *ngIf="f.stools.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+            <div class="col-span-3">
+                <app-label-form name="Notes"></app-label-form>
+
+                <textarea formControlName="notes" class="inputClass" id="name" type="text"
+                    [ngClass]="{ 'border border-red-500': submitted && f.notes.errors }"
+                    placeholder="Notes"> </textarea>
+                <ng-container *ngIf="submitted && f.notes.errors">
+                    <app-error-form *ngIf="f.notes.errors.required" error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                    <app-error-form *ngIf="f.notes.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    </app-error-form>
+                </ng-container>
             </div>
         </div>
+
     </div>
 </div>

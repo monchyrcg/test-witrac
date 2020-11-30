@@ -122,5 +122,9 @@
         "normal": "Normal",
         "intensive": "Intensive",
         "v_intensive": "Very intensive"
+    },
+    "options": {
+        "yes": "Yes",
+        "no": "No"
     }
 }

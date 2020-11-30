@@ -12,7 +12,7 @@ import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 @Component({
     selector: 'app-customer-edit-appointments-calendar',
     templateUrl: './customer-edit-appointments-calendar.component.html',
-    styleUrls: ['./customer-edit-appointments-calendar.component.scss'],
+    styleUrls: ['../customer-edit-appointments.component.scss', './customer-edit-appointments-calendar.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 

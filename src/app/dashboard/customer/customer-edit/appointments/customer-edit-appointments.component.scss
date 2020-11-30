@@ -1,0 +1,31 @@
+.middle-button {
+    @apply relative; 
+    @apply inline-flex; 
+    @apply items-center;
+    @apply px-4;
+    @apply py-2;
+    @apply border;
+    @apply border-gray-300;
+    @apply bg-white;
+    @apply text-sm;
+    @apply leading-5;
+    @apply font-medium;
+    @apply transition;
+    @apply ease-in-out;
+    @apply duration-150;
+    @apply cursor-pointer;
+}
+
+.middle-button:focus {
+   @apply border-nutriwell-sansivera;
+    @apply outline-none;
+}
+
+.middle-button:active {
+    @apply bg-nutriwell;
+}
+
+.active {
+    @apply bg-nutriwell;
+    @apply text-white;
+}

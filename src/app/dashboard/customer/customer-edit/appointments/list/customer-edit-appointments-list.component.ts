@@ -1,7 +1,9 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { OptionI } from 'src/app/shared/interfaces/option.interface';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
+import { Validations } from 'src/app/shared/settings/validation';
 
 
 @Component({
@@ -27,32 +29,47 @@ import { SettingGeneralService } from 'src/app/shared/services/settings-general.
 export class CustomerEditAppointmentsListComponent implements OnInit, OnDestroy {
 
     @Input() customer;
-    customerDataForm: FormGroup;
+    appointmentDataForm: FormGroup;
     submitted = false;
 
-    showBackground = false;
-    showAppointment = [false, false];
+    showAppointment = false;
+
+    appointments;
+
+    validationMaxString = Validations.validationMaxString;
+
+    options: OptionI[] = [];
 
     constructor(
         private builder: FormBuilder,
         public settingGeneralService: SettingGeneralService
-    ) { }
-
-    ngOnInit(): void {
-
+    ) {
+        this.options.push({ id: 1, text: this.settingGeneralService.getLangText('options.yes') });
+        this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
     }
 
-    get f() { return this.customerDataForm.controls; }
+    ngOnInit(): void {
+        this.appointments = this.customer.appointments;
+    }
+
+    get f() { return this.appointmentDataForm.controls; }
 
     ngOnDestroy(): void {
 
     }
 
-    showAppointmentF(index) {
-        this.showAppointment[index] = !this.showAppointment[index];
-    }
-
-    getAppointmentF(index) {
-        return this.showAppointment[index];
+    changeShowAppointment(value: boolean, appointment?) {
+        this.showAppointment = value;
+        if (value) {
+            this.appointmentDataForm = this.builder.group({
+                weight: [appointment ? appointment.weight : '', [Validators.required]],
+                weight_objetive: [appointment ? appointment.weight_objetive : '', [Validators.required]],
+                five_meals: [appointment ? appointment.five_meals : '', [Validators.required]],
+                water: [appointment ? appointment.water : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                digestion: [appointment ? appointment.digestion : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                stools: [appointment ? appointment.stools : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                notes: [appointment ? appointment.notes : '', [Validators.required, Validators.maxLength(this.validationMaxString.text)]],
+            });
+        }
     }
 }

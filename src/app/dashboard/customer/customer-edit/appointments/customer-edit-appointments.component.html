@@ -1,8 +1,12 @@
-<app-tabs>
-    <app-tab title="Calendario">
-        <app-customer-edit-appointments-calendar [customer]="customer"></app-customer-edit-appointments-calendar>
-    </app-tab>
-    <app-tab title="Listado">
-        <app-customer-edit-appointments-list [customer]="customer"></app-customer-edit-appointments-list>
-    </app-tab>
-</app-tabs>
+<span class="relative z-0 inline-flex shadow-sm rounded-md mb-5">
+    <button type="button" (click)="changeView(true)" class="middle-button rounded-l-md"
+        [ngClass]="{'active': calendar}">Calendario
+    </button>
+    <button type="button" (click)="changeView(false)" class="-ml-px middle-button rounded-r-md"
+        [ngClass]="{'active': !calendar}">Listado
+    </button>
+</span>
+
+<app-customer-edit-appointments-calendar [customer]="customer" *ngIf="calendar">
+</app-customer-edit-appointments-calendar>
+<app-customer-edit-appointments-list [customer]="customer" *ngIf="!calendar"></app-customer-edit-appointments-list>
