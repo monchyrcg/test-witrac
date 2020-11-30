@@ -8,11 +8,16 @@ import { SettingGeneralService } from 'src/app/shared/services/settings-general.
 import * as moment from 'moment';
 import { Countries } from 'src/app/shared/settings/country';
 import { Validations } from 'src/app/shared/settings/validation';
+import { Subscription } from 'rxjs';
+import { CustomerCreated } from 'src/app/shared/interfaces/customers.interface';
+import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
+import { UtilsService } from 'src/app/shared/services/util.service';
+import { CustomerService } from 'src/app/shared/services/customer.service';
 
 @Component({
     selector: 'app-customer-edit-general',
     templateUrl: './customer-edit-general.component.html',
-    // styleUrls: ['./customer-edit.component.scss']
+    styleUrls: ['../customer-edit.component.scss']
 })
 
 export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
@@ -30,10 +35,18 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
     dateOptions: FlatpickrOptions;
 
+    private subscription = new Subscription();
+
     constructor(
         private builder: FormBuilder,
-        public settingGeneralService: SettingGeneralService
+        public settingGeneralService: SettingGeneralService,
+        private utilService: UtilsService,
+        private snackbarService: SnackbarService,
+        private customerService: CustomerService
     ) {
+        this.genders.push({ id: 1, text: this.settingGeneralService.getLangText('genders.male') });
+        this.genders.push({ id: 2, text: this.settingGeneralService.getLangText('genders.female') });
+
         this.dateOptions = {
             locale: this.settingGeneralService.settings.flatpickr,
             dateFormat: this.settingGeneralService.settings.formatFlatpickr,
@@ -56,10 +69,8 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
             }
         );
 
-        this.genders.push({ id: 1, text: this.settingGeneralService.getLangText('genders.male') });
-        this.genders.push({ id: 2, text: this.settingGeneralService.getLangText('genders.female') });
-
         this.customerForm = this.builder.group({
+            id: this.customer.id,
             name: [this.customer.name, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
             surnames: [this.customer.surnames, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             gender: [this.customer.gender, [Validators.required]],
@@ -104,8 +115,29 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnDestroy(): void {
+    onSubmit() {
+        this.submitted = true;
 
+        if (this.customerForm.invalid) {
+            return;
+        }
+
+        let customer: CustomerCreated = this.utilService.clear(this.customerForm.value);
+        // customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
+
+        this.subscription.add(this.customerService.updateCustomer(customer).subscribe(
+            (response) => {
+                this.snackbarService.show('Customer updated successfully.', 'success');
+            },
+            (error) => {
+                this.snackbarService.show('Algo ha pasado ....', 'danger');
+            }
+        ));
+    }
+
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 
 }

@@ -15,20 +15,6 @@ import { Validations } from 'src/app/shared/settings/validation';
 @Component({
     selector: 'app-customer-edit-medical-history',
     templateUrl: './customer-edit-medical-history.component.html',
-    animations: [
-        trigger(
-            'enterAnimation', [
-            transition(':enter', [
-                style({ transform: 'translateY(100%)', opacity: 0 }),
-                animate('500ms', style({ transform: 'translateY(0)', opacity: 1 }))
-            ]),
-            transition(':leave', [
-                style({ transform: 'translateY(0)', opacity: 1 }),
-                animate('500ms', style({ transform: 'translateY(100%)', opacity: 0 }))
-            ])
-        ]
-        )
-    ],
     styleUrls: ['../customer-edit.component.scss']
 })
 

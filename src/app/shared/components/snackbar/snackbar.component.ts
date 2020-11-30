@@ -56,6 +56,10 @@ export class SnackbarComponent implements OnInit, OnDestroy {
 				});
 	}
 
+	close() {
+		this.show = false;
+	}
+
 	ngOnDestroy() {
 		this.snackbarSubscription.unsubscribe();
 	}

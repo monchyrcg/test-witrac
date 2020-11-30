@@ -59,6 +59,14 @@ export class CustomerService {
             }));
     }
 
+    updateCustomer(customer) {
+        return this.http
+            .put(`${environment.apiUrl}/customers/${customer.id}`, customer)
+            .pipe(map((response: any) => {
+                response.data;
+            }));
+    }
+
     getCustomer(customer_id: string) {
         return this.http.get(`${environment.apiUrl}/customers/${customer_id}`,)
             .pipe(map((response: any) => {
