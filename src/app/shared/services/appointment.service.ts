@@ -68,12 +68,21 @@ export class AppointmentService {
                         start: new Date(appointmentCalendar.start),
                         allDay: appointmentCalendar.allDay,
                         meta: {
-                            appointmentCalendar,
+                            data: appointmentCalendar.data,
                         },
                     };
                 });
             }));
 
         this.listAppointmentCustomerSubject.next(data);
+    }
+
+    updateAppointment(appointment_id, appointment) {
+        return this.http
+            .post(`${environment.apiUrl}/appointments/${appointment_id}/data`, appointment)
+            .pipe(map((response: any) => {
+                response.data;
+                this.listAppointment(this.date);
+            }));
     }
 }

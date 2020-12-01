@@ -13,4 +13,15 @@ export interface AppointmentCalendar {
     start: any;
     allDay: boolean;
     color: string;
+    data: any;
+}
+
+export interface AppointmentData {
+    weight: number;
+    weight_objetive: number;
+    five_meals: boolean;
+    water: string;
+    digestion: string;
+    stools: string;
+    notes: string;
 }

@@ -74,7 +74,6 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
         this.submitted = true;
 
         if (this.customerHistoryMedical.invalid) {
-            console.log('invalid');
             return;
         }
 

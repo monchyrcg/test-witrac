@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { EventEmitter, Input, Output } from '@angular/core';
 import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CalendarEvent, CalendarView } from 'angular-calendar';
 import { Observable } from 'rxjs';
@@ -19,6 +19,7 @@ import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 export class CustomerEditAppointmentsCalendarComponent implements OnInit, OnDestroy {
 
     @Input() customer;
+    @Output() showAppointmentOutput = new EventEmitter<any>();
 
     isOpenView: boolean = false;
 
@@ -74,6 +75,10 @@ export class CustomerEditAppointmentsCalendarComponent implements OnInit, OnDest
 
             this.listAppointments(newDay);
         }
+    }
+
+    eventClicked($event) {
+        this.showAppointmentOutput.emit($event.event);
     }
 
     ngOnDestroy(): void {
