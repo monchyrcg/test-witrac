@@ -74,13 +74,13 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     showAppointmentO(appointment) {
         let data = appointment.data;
+        this.appointment_id = appointment.id
         if (this.calendar) {
             data = appointment.meta.data;
+            this.appointment_id = appointment.meta.id;
         }
+
         this.showAppointment = true;
-
-        this.appointment_id = this.calendar ? data.appointment_id : appointment.id;
-
 
         this.appointmentDataForm = this.builder.group({
             weight: [null !== data ? data.weight : '', [Validators.required]],
@@ -105,7 +105,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
         this.subscription.add(this.appointmentService.updateAppointment(this.appointment_id, appointmentDataInformation).subscribe(
             (response) => {
-                this.appointmentDataForm.reset;
+                this.submitted = false;
                 this.snackbarService.show('Appointment updated successfully', 'success');
             },
             (error) => {

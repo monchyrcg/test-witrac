@@ -68,6 +68,7 @@ export class AppointmentService {
                         start: new Date(appointmentCalendar.start),
                         allDay: appointmentCalendar.allDay,
                         meta: {
+                            id: appointmentCalendar.id,
                             data: appointmentCalendar.data,
                         },
                     };
