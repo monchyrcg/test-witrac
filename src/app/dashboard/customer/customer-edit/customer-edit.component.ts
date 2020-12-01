@@ -23,7 +23,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
     customer_id: string;
     customer: Customer = null;
-    customerSubscription: Subscription = null;
     isOpen = false;
 
     customer$: Observable<Customer>;
@@ -332,12 +331,12 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if (this.customerSubscription) {
-            this.customerSubscription.unsubscribe();
-        }
-
         if (this.listProductsSubscription) {
             this.listProductsSubscription.unsubscribe();
         }
+    }
+
+    reloadCustomer() {
+        this.customer$ = this.customerService.getCustomer(this.customer_id);
     }
 }

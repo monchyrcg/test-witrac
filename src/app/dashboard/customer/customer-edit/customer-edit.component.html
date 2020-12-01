@@ -101,12 +101,15 @@
         <app-tab title="{{ 'customer_edit.tabs.data' | translate }}">
             <app-customer-edit-general [customer]="customer$"></app-customer-edit-general>
         </app-tab>
+
         <app-tab title="Historial Médico">
             <app-customer-edit-medical-history [customer_id]="customer$.id" [medical]="customer$.medical">
             </app-customer-edit-medical-history>
         </app-tab>
+
         <app-tab title="Appointments">
-            <app-customer-edit-appointments [customer]="customer$"></app-customer-edit-appointments>
+            <app-customer-edit-appointments [customer]="customer$" (reloadCustomer)="reloadCustomer()">
+            </app-customer-edit-appointments>
         </app-tab>
 
         <app-tab title="Antropométricos">
@@ -114,6 +117,7 @@
             <div echarts [options]="options3" class="demo-chart"></div>
             <div echarts [options]="options" class="demo-chart"></div>
         </app-tab>
+
         <app-tab title="{{ 'customer_edit.tabs.shop' | translate }}">
             <!-- // search -->
             <div class="flex flex-wrap" [formGroup]="productForm">

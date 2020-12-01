@@ -1,5 +1,5 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
@@ -34,6 +34,8 @@ import { Validations } from 'src/app/shared/settings/validation';
 export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     @Input() customer;
+    @Output() reloadCustomer = new EventEmitter<void>();
+
     calendar: boolean = true;
 
     showAppointment: boolean = false;
@@ -107,6 +109,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             (response) => {
                 this.submitted = false;
                 this.snackbarService.show('Appointment updated successfully', 'success');
+                this.reloadCustomer.emit();
             },
             (error) => {
                 this.snackbarService.show('Something was wrong', 'danger');
