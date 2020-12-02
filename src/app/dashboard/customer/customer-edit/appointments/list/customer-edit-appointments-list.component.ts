@@ -13,6 +13,7 @@ export class CustomerEditAppointmentsListComponent implements OnInit {
     @Output() showAppointmentOutput = new EventEmitter<any>();
 
     appointments;
+    lengthLg: number;
 
     constructor(
         public settingGeneralService: SettingGeneralService,
@@ -20,6 +21,8 @@ export class CustomerEditAppointmentsListComponent implements OnInit {
 
     ngOnInit(): void {
         this.appointments = this.customer.appointments;
+
+        this.lengthLg = this.appointments.length > 4 ? 4 : this.appointments.length;
     }
 
     changeShowAppointment(appointment?) {
