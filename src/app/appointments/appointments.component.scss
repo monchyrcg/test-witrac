@@ -1,0 +1,39 @@
+.on {
+    @apply opacity-100;
+    @apply ease-in;
+    @apply duration-200;
+}
+.off {
+    @apply opacity-0;
+    @apply ease-out;
+    @apply duration-100;
+}
+
+@mixin scrollbars($sizeW, $sizeH, $foreground-color, $background-color: mix($foreground-color, white,  10%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+      border-radius: 2%;
+    width:  $sizeW;
+    height: $sizeH;
+  }
+
+  &::-webkit-scrollbar-thumb {
+      border-radius: 2%;
+    background: $foreground-color;
+  }
+
+  &::-webkit-scrollbar-track {
+      border-radius: 2%;
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+.custom-scroll {
+  @include scrollbars(.5em, .1em, slategray);
+}

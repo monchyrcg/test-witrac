@@ -1,0 +1,208 @@
+<nav class="bg-nutriwell border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+            <div class="flex">
+                <div class="flex-shrink-0 flex items-center">
+                    <img class="block lg:hidden h-8 w-auto" src="assets/images/logo-pdf-white.png" alt="Naturhouse">
+                    <img class="hidden lg:block h-8 w-auto" src="assets/images/logo-pdf-white.png" alt="Naturhouse">
+                </div>
+                <div class="hidden sm:-my-px sm:ml-6 space-x-8 sm:flex">
+                    <a class="inline-flex items-center px-1 pt-1 text-white transition duration-150 ease-in-out"
+                        href="https://naturhouse.es/alimentacion" target="_blank">
+                        Alimentación
+                    </a>
+
+                    <a class="inline-flex items-center px-1 pt-1 text-white transition duration-150 ease-in-out"
+                        href="https://naturhouse.es/adelgazamiento" target="_blank">
+                        Adelgazamiento
+                    </a>
+
+                    <a class="inline-flex items-center px-1 pt-1 text-white transition duration-150 ease-in-out"
+                        href="https://naturhouse.es/detox" target="_blank">
+                        Detox
+                    </a>
+
+                    <a class="inline-flex items-center px-1 pt-1 text-white transition duration-150 ease-in-out"
+                        href="https://naturhouse.es/belleza" target="_blank">
+                        Belleza
+                    </a>
+
+                    <a class="inline-flex items-center px-1 pt-1 text-white transition duration-150 ease-in-out"
+                        href="https://naturhouse.es/bienstar" target="_blank">
+                        Bienstar
+                    </a>
+
+                    <a class="inline-flex items-center px-1 pt-1 text-white transition duration-150 ease-in-out"
+                        href="https://naturhouse.es/packs" target="_blank">
+                        Packs
+                    </a>
+                </div>
+            </div>
+            <div class="-mr-2 flex items-center sm:hidden">
+                <!-- Mobile menu button -->
+                <button (click)="isOpenMobile = !isOpenMobile"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+                    <!-- Menu open: "hidden", Menu closed: "block" -->
+                    <svg class="block h-6 w-6" [ngClass]="{ hidden:!isOpenMobile}" stroke="currentColor" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                    <!-- Menu open: "block", Menu closed: "hidden" -->
+                    <svg class="hidden h-6 w-6" [ngClass]="{ hidden:isOpenMobile}" stroke="currentColor" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sm:hidden" [ngClass]="{ hidden:isOpenMobile}">
+        <div class="pt-2 pb-3 space-y-1">
+            <a class="block pl-3 pr-4 py-2 text-white transition duration-150 ease-in-out"
+                href="https://naturhouse.es/alimentacion" target="_blank">
+                Alimentación
+            </a>
+
+            <a class="block pl-3 pr-4 py-2 text-white transition duration-150 ease-in-out"
+                href="https://naturhouse.es/adelgazamiento" target="_blank">
+                Adelgazamiento
+            </a>
+
+            <a class="block pl-3 pr-4 py-2 text-white transition duration-150 ease-in-out"
+                href="https://naturhouse.es/detox" target="_blank">
+                Detox
+            </a>
+
+            <a class="block pl-3 pr-4 py-2 text-white transition duration-150 ease-in-out"
+                href="https://naturhouse.es/belleza" target="_blank">
+                Belleza
+            </a>
+
+            <a class="block pl-3 pr-4 py-2 text-white transition duration-150 ease-in-out"
+                href="https://naturhouse.es/bienstar" target="_blank">
+                Bienstar
+            </a>
+
+            <a class="block pl-3 pr-4 py-2 text-white transition duration-150 ease-in-out"
+                href="https://naturhouse.es/packs" target="_blank">
+                Packs
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="customer || is_signed; else loading;">
+    <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
+    <div class="max-w-3xl mx-auto">
+        <div>
+            <ul class="grid grid-cols-1 gap-6">
+                <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
+                    <div class="flex-1 flex flex-col p-8">
+                        <img class="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-full"
+                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
+                            alt="">
+                        <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper</h3>
+                        <dl class="mt-1 flex-grow flex flex-col justify-between">
+                            <dt class="sr-only">Title</dt>
+                            <dd class="text-gray-500 text-sm">Paradigm Representative</dd>
+                            <dt class="sr-only">Role</dt>
+                            <dd class="mt-3">
+                                <span
+                                    class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Admin</span>
+                            </dd>
+                        </dl>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="flex items-center p-3 flex-col sm:flex-row">
+            <div class="flex-1">
+                <ng2-flatpickr #calendar addClass="inputClass hidden" [config]="dateOptions">
+                </ng2-flatpickr>
+            </div>
+
+            <div class="h-64 overflow-y-auto w-full sm:w-1/2 pt-10 sm:pt-0 custom-scroll pr-2">
+
+                <ul class="space-y-4" role="radiogroup" aria-labelledby="radiogroup-label">
+                    <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
+                        class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+                        <div
+                            class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm">
+                            <p class="font-medium text-gray-900">
+                                12:30
+                            </p>
+                        </div>
+                    </li>
+
+                    <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
+                        class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+                        <div
+                            class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm">
+                            <p class="font-medium text-gray-900">
+                                12:30
+                            </p>
+                        </div>
+                    </li>
+
+                    <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
+                        class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+                        <div
+                            class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm">
+                            <p class="font-medium text-gray-900">
+                                12:30
+                            </p>
+                        </div>
+                    </li>
+
+                    <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
+                        class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+                        <div
+                            class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm">
+                            <p class="font-medium text-gray-900">
+                                12:30
+                            </p>
+                        </div>
+                    </li>
+
+                    <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
+                        class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+                        <div
+                            class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm">
+                            <p class="font-medium text-gray-900">
+                                12:30
+                            </p>
+                        </div>
+                    </li>
+
+                    <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
+                        class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+                        <div
+                            class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm">
+                            <p class="font-medium text-gray-900">
+                                12:30
+                            </p>
+                        </div>
+                    </li>
+
+                    <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
+                        class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-500">
+                        <div
+                            class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm">
+                            <p class="font-medium text-gray-900">
+                                12:30
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>

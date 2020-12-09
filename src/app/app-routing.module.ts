@@ -10,12 +10,14 @@ import { LoginComponent } from './auth/login/login.component';
 
 import { AuthGuard } from './shared/guards/auth.guard';
 import { SignPrivayComponent } from './signprivacy/signprivacy.component';
+import { AppointmentsModule } from './appointments/appointments.module';
 
 const routes: Routes = [
   { path: '', redirectTo: '', pathMatch: 'full' },
   { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'sign-privacy/:customer', component: SignPrivayComponent },
+  { path: 'appointments', loadChildren: './appointments/appointments.module#AppointmentsModule', },
   { path: '**', component: NopagefoundComponent }
 ];
 
@@ -23,7 +25,8 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     DashboardModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    AppointmentsModule
   ],
   exports: [RouterModule, DashboardModule]
 })
