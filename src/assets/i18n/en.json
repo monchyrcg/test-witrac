@@ -93,6 +93,7 @@
     },
     "appointment_create": {
         "title": "Create an appointment",
+        "duration": "Duration",
         "date": "Date",
         "team": "Team",
         "user": "User",

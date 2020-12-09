@@ -96,18 +96,13 @@
                     </ng-container>
                 </div>
                 <div class="w-full sm:w-1/2 p-2">
-                    <app-label-form for="team" name="{{ 'appointment_create.team' | translate }}">
+                    <app-label-form for="duration" name="{{ 'appointment_create.duration' | translate }}">
                     </app-label-form>
-                    <select formControlName="team_id" class="bg-white inputClass" id="team" (change)="changeTeam()">
-                        <option hidden selected value="">{{ 'appointment_create.team' | translate }}
-                        </option>
-                        <option value="{{ team.id }}"
-                            *ngFor="let team of (settingGeneralService.changeTeam$ | async).teams">
-                            {{ team.name }}
-                        </option>
-                    </select>
-                    <ng-container *ngIf="submitted && f.team_id.errors">
-                        <app-error-form *ngIf="f.team_id.errors.required" error="{{'errors.required' | translate}}">
+                    <input formControlName="duration" class="inputClass" id="duration" type="number" min="0"
+                        [ngClass]="{ 'border border-red-500': submitted && f.duration.errors }"
+                        placeholder="{{ 'appointment_create.duration' | translate }}">
+                    <ng-container *ngIf="submitted && f.duration.errors">
+                        <app-error-form *ngIf="f.duration.errors.required" error="{{'errors.required' | translate}}">
                         </app-error-form>
                     </ng-container>
                 </div>

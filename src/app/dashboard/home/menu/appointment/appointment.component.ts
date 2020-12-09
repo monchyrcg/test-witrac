@@ -90,6 +90,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.appointmentForm = this.builder.group({
             customer_id: [this.customerI ? this.customerI.id : '', [Validators.required]],
             date: [{ 0: day }, [Validators.required]],
+            duration: ['', [Validators.required]],
             team_id: [{ value: this.current_team_id, disabled: true }, [Validators.required]],
             user_id: [{ value: this.authService.getUserVariable('id') }, [Validators.required]],
         });
