@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { FlatpickrOptions } from 'ng2-flatpickr';
+import { AppointmentExternal } from '../shared/interfaces/appointment.interface';
 import { SettingGeneralService } from '../shared/services/settings-general.service';
+import { UtilsService } from '../shared/services/util.service';
 import { AppointmentsService } from './appointments.service';
 
 @Component({
@@ -21,13 +23,19 @@ export class AppointmentsComponent implements OnInit {
 
     dateOptions: FlatpickrOptions;
 
-    disableDays = ["12-25-2020", "12-31-2020", "01-01-2021"];
+    disableDays = ["25-12-2020", "12-31-2020", "01-01-2021"];
+
+    setHours = null;
+    hours = ["09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30"];
+
+    appointmentForm: FormGroup;
+
     constructor(
-        private route: ActivatedRoute,
+        private builder: FormBuilder,
         private signPrivacyService: AppointmentsService,
-        public settingGeneralService: SettingGeneralService
+        public settingGeneralService: SettingGeneralService,
+        private utilService: UtilsService
     ) {
-        console.log(this.settingGeneralService.settings.formatFlatpickr);
         this.dateOptions = {
             wrap: false,
             inline: true,
@@ -35,25 +43,41 @@ export class AppointmentsComponent implements OnInit {
             dateFormat: this.settingGeneralService.settings.formatFlatpickr,
             minDate: moment().format(this.settingGeneralService.settings.formatMoment),
             disableMobile: true,
-            disable: this.disableDays,
+            disable: this.disableDays
         };
     }
 
 
     ngOnInit(): void {
         this.customer = 'a';
+        this.setHours = this.hours;
+        this.appointmentForm = this.builder.group({
+            date: [null, [Validators.required]],
+            hour: [null, [Validators.required]],
+            duration: [null, [Validators.required]],
+        });
     }
 
+    changeDay($event) {
+        this.setHours = null;
+        const dob = $event.target.value;
+        this.getHours();
+    }
+
+    getHours() {
+        setTimeout(() => {
+            this.setHours = this.hours;
+        }, 800);
+
+    }
+
+    setHour(hour) {
+        console.log(hour);
+    }
+
+
+
     submit() {
-        if (!this.selected) {
-            this.is_clicked = false;
-        } else {
-            this.signPrivacyService.saveCustomerCrypt(this.customerCrypt).subscribe(
-                (response) => {
-                    this.customer = null;
-                    this.is_signed = true;
-                }
-            );
-        }
+        let appointment: AppointmentExternal = this.utilService.clear(this.appointmentForm.value);
     }
 }

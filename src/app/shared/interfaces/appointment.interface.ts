@@ -26,3 +26,10 @@ export interface AppointmentData {
     stools: string;
     notes: string;
 }
+
+export interface AppointmentExternal {
+    duration: number;
+    date: any;
+    hour: any;
+    kind_appointment_id: number;
+}

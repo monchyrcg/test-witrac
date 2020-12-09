@@ -33,3 +33,7 @@
 .custom-scroll {
   @include scrollbars(.5em, .1em, slategray);
 }
+
+.flatpickr-day .selected {
+  background-color: red !important;
+}
