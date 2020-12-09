@@ -12,18 +12,15 @@
 @mixin scrollbars($sizeW, $sizeH, $foreground-color, $background-color: mix($foreground-color, white,  10%)) {
   // For Google Chrome
   &::-webkit-scrollbar {
-      border-radius: 2%;
     width:  $sizeW;
     height: $sizeH;
   }
 
   &::-webkit-scrollbar-thumb {
-      border-radius: 2%;
     background: $foreground-color;
   }
 
   &::-webkit-scrollbar-track {
-      border-radius: 2%;
     background: $background-color;
   }
 
