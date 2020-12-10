@@ -47,6 +47,7 @@
     "moment": "^2.29.1",
     "ng2-flatpickr": "^9.0.0",
     "ngx-echarts": "^5.2.1",
+    "ngx-google-places-autocomplete": "^2.0.5",
     "ngx-permissions": "^8.1.1",
     "postcss": "^7.0.35",
     "rxjs": "~6.5.5",

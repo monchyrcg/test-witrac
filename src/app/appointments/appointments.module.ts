@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Ng2FlatpickrModule } from 'ng2-flatpickr';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { SharedModule } from '../shared/modules/shared.module';
 import { AppointmentsRoutingModule } from './appointments-routing.module';
 import { AppointmentsComponent } from './appointments.component';
@@ -13,7 +14,8 @@ import { AppointmentsComponent } from './appointments.component';
         CommonModule,
         SharedModule,
         AppointmentsRoutingModule,
-        Ng2FlatpickrModule
+        Ng2FlatpickrModule,
+        GooglePlaceModule
     ],
     exports: [
         SharedModule,
@@ -23,3 +25,4 @@ import { AppointmentsComponent } from './appointments.component';
 })
 
 export class AppointmentsModule { }
+
