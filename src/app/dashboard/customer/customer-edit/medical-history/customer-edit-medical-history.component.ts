@@ -15,7 +15,7 @@ import { Validations } from 'src/app/shared/settings/validation';
 @Component({
     selector: 'app-customer-edit-medical-history',
     templateUrl: './customer-edit-medical-history.component.html',
-    styleUrls: ['../customer-edit.component.scss']
+    // styleUrls: ['../customer-edit.component.scss']
 })
 
 export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {

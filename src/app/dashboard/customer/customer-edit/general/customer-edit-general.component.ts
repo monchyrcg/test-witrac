@@ -17,7 +17,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 @Component({
     selector: 'app-customer-edit-general',
     templateUrl: './customer-edit-general.component.html',
-    styleUrls: ['../customer-edit.component.scss']
+    // styleUrls: ['../customer-edit.component.scss']
 })
 
 export class CustomerEditGeneralComponent implements OnInit, OnDestroy {

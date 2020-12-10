@@ -14,7 +14,7 @@ import { Validations } from 'src/app/shared/settings/validation';
 @Component({
     selector: 'app-customer-edit-appointments',
     templateUrl: './customer-edit-appointments.component.html',
-    styleUrls: ['../customer-edit.component.scss', './customer-edit-appointments.component.scss'],
+    styleUrls: ['./customer-edit-appointments.component.scss'],
     animations: [
         trigger(
             'enterAnimation', [

@@ -16,7 +16,7 @@ import { EChartOption } from 'echarts';
 @Component({
     selector: 'app-customer-edit',
     templateUrl: './customer-edit.component.html',
-    styleUrls: ['./customer-edit.component.scss']
+    // styleUrls: ['./customer-edit.component.scss']
 })
 
 export class CustomerEditComponent implements OnInit, OnDestroy {

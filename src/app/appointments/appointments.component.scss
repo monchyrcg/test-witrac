@@ -34,6 +34,7 @@
   @include scrollbars(.5em, .1em, slategray);
 }
 
-.flatpickr-day .selected {
-  background-color: red !important;
+:host ::ng-deep .flatpickr-day.selected {
+  @apply bg-nutriwell;
+  @apply border-nutriwell;
 }
