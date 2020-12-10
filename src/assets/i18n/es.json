@@ -15,6 +15,7 @@
         "signed": "{{year}} Nutriwell. All rights reserved."
     },
     "dashboard": {
+        "dashboard": "Dashboard",
         "calendar": "Calendar",
         "customers": "Customers",
         "new_appointment": "New appointment",
@@ -25,29 +26,90 @@
         "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc facilisis libero sit amet erat vehicula faucibus. Integer ultricies magna sed tellus bibendum, vitae iaculis mi dignissim. Donec at enim in ex molestie blandit. In lobortis lorem blandit, rutrum orci sollicitudin, pretium lectus. Mauris accumsan dignissim faucibus. Quisque vestibulum mauris ut magna mollis, eget tempus nulla dignissim.",
         "text_button_cancel": "Close"
     },
+    "profile": {
+        "profile": "Your profile",
+        "settings": "Settings",
+        "logout": "Logout"
+    },
     "customer_create": {
         "title": "Registrar el cliente",
         "text": "Registra tu cliente y sigue programando la cita",
         "text_button_register": "Registrar cliente",
-        "name": "Nombre",
-        "surnames": "Apellidos",
-        "gender": "Genero",
-        "team": "Lugar consulta",
-        "dob": "Fecha de nacimiento",
-        "job": "Ocupación",
-        "mobile": "Movil",
-        "email": "Correo electŕonico"
+        "name": "Name",
+        "surnames": "Surnames",
+        "gender": "Gender",
+        "team": "Team",
+        "dob": "Birth date",
+        "job": "Job",
+        "mobile": "Mobile",
+        "email": "Email",
+        "legal_text": "Texto legal",
+        "legal_name": "Legal representative name",
+        "legal_surnames": "Legal representative surnames",
+        "legal_identity": "Legal representative ID"
+    },
+    "customer_list": {
+        "title": "Customers List",
+        "table": {
+            "name": "Name",
+            "appointment": "Next Appointment",
+            "phone": "Phone",
+            "menu": {
+                "edit": "Edit",
+                "delete": "Delete",
+                "call": "Call"
+            },
+            "pagination": {
+                "previous": "Previous",
+                "next": "Next",
+                "show": "Showing",
+                "to": "to",
+                "of": "of",
+                "results": "results"
+            }
+        }
+    },
+    "customer_edit": {
+        "appointment": "Create Appointment",
+        "message": "Send message",
+        "save": "Save",
+        "more": "More",
+        "tabs": {
+            "data": "Personal Data",
+            "calendar": "Appointments",
+            "shop": "Shop"
+        }
+    },
+    "customer_privacy": {
+        "button": "Aceptar"
+    },
+    "calendar": {
+        "previous": "Previous",
+        "today": "Today",
+        "next": "Next",
+        "month": "Month",
+        "week": "Week",
+        "day": "Day"
     },
     "appointment_create": {
-        "title": "Crea tu cita",
-        "date": "Fecha visita",
-        "team": "Lugar de consulta",
-        "user": "Usuario",
+        "title": "Create an appointment",
+        "duration": "Duration",
+        "date": "Date",
+        "team": "Team",
+        "user": "User",
         "text_button_create": "Crear"
     },
     "genders": {
         "male": "Male",
         "female": "Female"
+    },
+    "kind_appointments": {
+        "stabilization": "Stabilization",
+        "study": "study",
+        "new": "New",
+        "revision": "Revision",
+        "maintenance": "Maintenance",
+        "recovered": "Recovered"
     },
     "builds": {
         "thin": "Thin",
@@ -55,7 +117,20 @@
         "robust": "Robust"
     },
     "physicals": {
-        "male": "Male",
-        "female": "Female"
+        "rest": "Rest",
+        "v_light": "Very light",
+        "light": "Light",
+        "normal": "Normal",
+        "intensive": "Intensive",
+        "v_intensive": "Very intensive"
+    },
+    "options": {
+        "yes": "Yes",
+        "no": "No"
+    },
+    "illnesses": {
+        "diabetes": "Diabetes",
+        "heart": "Heart illnes",
+        "cancer": "Some kind of cancer"
     }
 }

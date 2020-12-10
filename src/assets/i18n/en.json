@@ -127,5 +127,10 @@
     "options": {
         "yes": "Yes",
         "no": "No"
+    },
+    "illnesses": {
+        "diabetes": "Diabetes",
+        "heart": "Heart illnes",
+        "cancer": "Some kind of cancer"
     }
 }

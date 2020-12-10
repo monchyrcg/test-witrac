@@ -237,17 +237,31 @@
                     </ng-container>
                 </div>
 
-
                 <div class="col-span-2 lg:col-span-1">
                     <app-label-form for="illnesses" name="Enfermedades">
                     </app-label-form>
                     <select formControlName="illnesses" class="bg-white inputClass" id="gender">
                         <option hidden selected value="">Enfermedades</option>
-                        <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
+                        <option value="{{ illnes.id }}" *ngFor="let illnes of illnesses">{{ illnes.text }}
                         </option>
                     </select>
                     <ng-container *ngIf="submitted && f.illnesses.errors">
                         <app-error-form *ngIf="f.illnesses.errors.required" error="{{'errors.required' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+
+                <div class="col-span-2">
+                    <app-label-form for="name" name="{{ 'customer_create.name' | translate }}"></app-label-form>
+
+                    <input formControlName="name" class="inputClass" id="name" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+                        placeholder="{{ 'customer_create.name' | translate }}">
+                    <ng-container *ngIf="submitted && f.name.errors">
+                        <app-error-form *ngIf="f.name.errors.required" error="{{'errors.required' | translate}}">
+                        </app-error-form>
+                        <app-error-form *ngIf="f.name.errors.maxlength"
+                            error="{{'errors.maxLength' | translate:{number: validationMaxString.short_string} }}">
                         </app-error-form>
                     </ng-container>
                 </div>

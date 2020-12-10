@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { AppointmentExternal } from '../shared/interfaces/appointment.interface';
+import { Illnes } from '../shared/interfaces/illnes.interface';
 import { OptionI } from '../shared/interfaces/option.interface';
 import { SettingGeneralService } from '../shared/services/settings-general.service';
 import { UtilsService } from '../shared/services/util.service';
@@ -51,6 +52,7 @@ export class AppointmentsComponent implements OnInit {
     stepNumber: number = 1;
 
     options: OptionI[] = [];
+    illnesses: Illnes[] = [];
 
     constructor(
         private builder: FormBuilder,
@@ -60,6 +62,10 @@ export class AppointmentsComponent implements OnInit {
     ) {
         this.options.push({ id: 1, text: this.settingGeneralService.getLangText('options.yes') });
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
+
+        this.illnesses.push({ id: 1, text: this.settingGeneralService.getLangText('illnesses.diabetes') });
+        this.illnesses.push({ id: 2, text: this.settingGeneralService.getLangText('illnesses.heart') });
+        this.illnesses.push({ id: 3, text: this.settingGeneralService.getLangText('illnesses.cancer') });
 
         this.dateOptions = {
             wrap: false,
@@ -77,7 +83,7 @@ export class AppointmentsComponent implements OnInit {
         this.customer = 'a';
         this.setHours = this.hours;
         this.appointmentForm = this.builder.group({
-            date: [null, [Validators.required]],
+            date: [{ 0: moment().format(this.settingGeneralService.settings.formatMoment) }, [Validators.required]],
             hour: [null, [Validators.required]],
             duration: [30, [Validators.required]],
             name: [null, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
@@ -87,6 +93,7 @@ export class AppointmentsComponent implements OnInit {
             prefix: ['', [Validators.required]],
             mobile: [null, [Validators.required]],
             email: [null, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
+            cp: [null, [Validators.required]]
         });
     }
 
