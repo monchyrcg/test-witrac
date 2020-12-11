@@ -149,6 +149,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     comeBack() {
         this.submitted = false;
         this.customerExternalForm.reset();
+        this.f.date.setValue({ 0: moment().format(this.settingGeneralService.settings.formatMoment) });
         this.stepNumber = 1;
     }
 
@@ -163,7 +164,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         let customerExternal: CustomerExternal = this.utilService.clear(this.customerExternalForm.value);
         customerExternal.date = moment(customerExternal.date[0]).format('YYYY-MM-DD');
 
-        console.log(customerExternal);
         this.subscription.add(this.appointmentsService.saveCustomerAppointment(customerExternal).subscribe(
             (response) => {
                 this.stepNumber = 3;
