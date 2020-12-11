@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { UtilsService } from '../shared/services/util.service';
 
 
 @Injectable({
@@ -10,20 +9,12 @@ import { UtilsService } from '../shared/services/util.service';
 })
 export class AppointmentsService {
 
-    constructor(private http: HttpClient, private utilService: UtilsService) { }
+    constructor(private http: HttpClient) { }
 
-    getCustomerCrypt(customer: string) {
-        return this.http.get(`${environment.apiUrl}/sign-privacy/${customer}`,)
+    saveCustomerAppointment(data) {
+        return this.http.post(`${environment.apiUrl}/external/customer-appointment`, data)
             .pipe(map((response: any) => {
                 return response.data;
-            }));
-    }
-
-    saveCustomerCrypt(customer: string) {
-        return this.http
-            .get(`${environment.apiUrl}/sign-privacy/signed/${customer}`,)
-            .pipe(map((response: any) => {
-                response.data;
             }));
     }
 }

@@ -47,7 +47,7 @@ export function createTranslateLoader(http: HttpClient) {
         NgxPermissionsModule.forRoot(),
         CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
         NgxEchartsModule.forRoot({
-            echarts: () => import('echarts'), // or import('./path-to-my-custom-echarts')
+            echarts: () => import('echarts')
         })
     ],
     exports: [

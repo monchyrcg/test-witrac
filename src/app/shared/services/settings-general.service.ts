@@ -33,7 +33,7 @@ export class SettingGeneralService {
 
 	constructor(
 		private http: HttpClient,
-		private translateService: TranslateService,
+		public translateService: TranslateService,
 		private authService: AuthenticationGeneralService,
 		private rolesService: NgxRolesService,
 		private permissionsService: NgxPermissionsService

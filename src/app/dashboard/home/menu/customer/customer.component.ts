@@ -62,6 +62,8 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
+
+
         this.genders.push({ id: 1, text: this.settingGeneralService.getLangText('genders.male') });
         this.genders.push({ id: 2, text: this.settingGeneralService.getLangText('genders.female') });
 

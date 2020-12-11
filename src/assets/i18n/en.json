@@ -132,5 +132,9 @@
         "diabetes": "Diabetes",
         "heart": "Heart illnes",
         "cancer": "Some kind of cancer"
+    },
+    "appointment_calendar": {
+        "confirm": "Confirm meeting",
+        "edit": "Edit"
     }
 }

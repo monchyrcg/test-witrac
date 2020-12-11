@@ -48,3 +48,15 @@ export interface CustomerMedicalInformation {
     build: number;
     physical_activity: number;
 }
+
+export interface CustomerExternal {
+    name: string;
+    email: string;
+    prefix: string,
+    mobile: string,
+    supplement: boolean;
+    illness: number;
+    cp: string;
+    date: any;
+    hour: any;
+}

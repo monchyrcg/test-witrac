@@ -113,11 +113,12 @@
                 </li>
             </ul>
         </div>
-        <div [formGroup]="appointmentForm">
+        <div [formGroup]="customerExternalForm">
+
             <div class="flex items-center p-3 flex-col sm:flex-row" *ngIf="stepNumber == 1" [@enterAnimation]>
                 <div class="flex-1">
-                    <ng2-flatpickr #calendar addClass="inputClass hidden" [config]="dateOptions"
-                        (change)="changeDay($event)" formControlName="date">
+                    <ng2-flatpickr #calendar addClass="inputClass hidden" [config]="dateOptions" (change)="changeDay()"
+                        formControlName="date">
                     </ng2-flatpickr>
                 </div>
 
@@ -150,7 +151,15 @@
                     </ng-template>
                 </div>
             </div>
+
             <div class="grid grid-cols-2 gap-8 p-3" *ngIf="stepNumber == 2" [@enterAnimation]>
+                <div class="col-span-2">
+                    <h4 class="text-2xl pb-2.5">{{ 'appointment_calendar.confirm' | translate }}</h4>
+                    {{f.date.value[0]}} {{f.hour.value}}
+                    <span class="text-sm cursor-pointer"
+                        (click)="comeBack()">{{ 'appointment_calendar.edit' | translate }}</span>
+                </div>
+
                 <div class="col-span-2 lg:col-span-1">
                     <app-label-form for="name" name="{{ 'customer_create.name' | translate }}"></app-label-form>
 
@@ -188,6 +197,7 @@
                     <div class="mt-1 relative rounded-md shadow-sm">
                         <div class="absolute inset-y-0 left-0 flex items-center">
                             <select aria-label="prefix" formControlName="prefix"
+                                [ngClass]="{ 'border border-red-500': submitted && f.prefix.errors }"
                                 class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5 focus:border-nutriwell-default">
                                 <option hidden selected value="">Prefix</option>
                                 <option value="+34">+34</option>
@@ -197,12 +207,12 @@
                                 <option value="+1">+1</option>
                             </select>
                         </div>
-                        <input formControlName="mobile" class="inputClass_groups" id="mobile" type="number"
-                            placeholder="{{ 'customer_create.mobile' | translate }}" min="0">
+                        <input formControlName="mobile" class="inputClass_groups"
+                            [ngClass]="{ 'border border-red-500': submitted && f.mobile.errors }" id="mobile"
+                            type="number" placeholder="{{ 'customer_create.mobile' | translate }}" min="0">
                     </div>
                     <ng-container *ngIf="submitted && (f.mobile.errors || f.prefix.errors)">
-                        <app-error-form *ngIf="f.mobile.errors.required || f.prefix.errors.required"
-                            error="{{'errors.required' | translate}}">
+                        <app-error-form error="{{'errors.required' | translate}}">
                         </app-error-form>
                     </ng-container>
                 </div>
@@ -210,7 +220,8 @@
                 <div class="col-span-2 lg:col-span-1">
                     <app-label-form for="email" name="{{ 'customer_create.email' | translate }}">
                     </app-label-form>
-                    <input formControlName="email" class="inputClass" id="email" type="text"
+                    <input formControlName="email" class="inputClass"
+                        [ngClass]="{ 'border border-red-500': submitted && f.mobile.errors }" id="email" type="text"
                         placeholder="{{ 'customer_create.email' | translate }}">
                     <ng-container *ngIf="submitted && f.email.errors">
                         <app-error-form *ngIf="f.email.errors.required" error="{{'errors.required' | translate}}">
@@ -224,38 +235,46 @@
                 </div>
 
                 <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="supplements" name="¿Estaría dispuesto a tomar suplementos?">
+                    <app-label-form for="supplement" name="¿Estaría dispuesto a tomar suplementos?">
                     </app-label-form>
-                    <select formControlName="supplements" class="bg-white inputClass" id="gender">
+                    <select formControlName="supplement" class="bg-white inputClass"
+                        [ngClass]="{ 'border border-red-500': submitted && f.supplement.errors }" id="supplement">
                         <option hidden selected value="">¿Estaría dispuesto a tomar suplementos?</option>
                         <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
                         </option>
                     </select>
-                    <ng-container *ngIf="submitted && f.supplements.errors">
-                        <app-error-form *ngIf="f.supplements.errors.required" error="{{'errors.required' | translate}}">
+                    <ng-container *ngIf="submitted && f.supplement.errors">
+                        <app-error-form error="{{'errors.required' | translate}}">
                         </app-error-form>
                     </ng-container>
                 </div>
 
                 <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="illnesses" name="Enfermedades">
+                    <app-label-form for="illness" name="Enfermedades">
                     </app-label-form>
-                    <select formControlName="illnesses" class="bg-white inputClass" id="gender">
+                    <select formControlName="illness" class="bg-white inputClass"
+                        [ngClass]="{ 'border border-red-500': submitted && f.illness.errors }" id="illness">
                         <option hidden selected value="">Enfermedades</option>
-                        <option value="{{ illnes.id }}" *ngFor="let illnes of illnesses">{{ illnes.text }}
+                        <option value="{{ illness.id }}" *ngFor="let illness of illnesses">{{ illness.text }}
                         </option>
                     </select>
-                    <ng-container *ngIf="submitted && f.illnesses.errors">
-                        <app-error-form *ngIf="f.illnesses.errors.required" error="{{'errors.required' | translate}}">
+                    <ng-container *ngIf="submitted && f.illness.errors">
+                        <app-error-form *ngIf="f.illness.errors.required" error="{{'errors.required' | translate}}">
                         </app-error-form>
                     </ng-container>
                 </div>
 
                 <div class="col-span-2">
-                    <app-label-form for="name" name="CP"></app-label-form>
+                    <app-label-form for="cp" name="CP"></app-label-form>
 
-                    <input ngx-google-places-autocomplete [options]='options' class="inputClass"
+                    <input ngx-google-places-autocomplete [options]='options' class="inputClass" formControlName="cp"
+                        [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }"
                         (onAddressChange)="handleAddressChange($event)" />
+
+                    <ng-container *ngIf="submitted && f.cp.errors">
+                        <app-error-form *ngIf="f.cp.errors.required" error="{{'errors.required' | translate}}">
+                        </app-error-form>
+                    </ng-container>
                 </div>
 
                 <div class="col-span-2 flex flex-row-reverse">
@@ -272,6 +291,10 @@
                         </button>
                     </span>
                 </div>
+            </div>
+
+            <div class="flex flex-col text-2xl text-center p-8" *ngIf="stepNumber == 3">
+                <p>MUCHAS GRACIAS SU CITA HA SIDO CONFIRMADA!!!</p>
             </div>
         </div>
     </div>
