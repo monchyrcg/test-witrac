@@ -13,6 +13,8 @@ import { CustomerCreated } from 'src/app/shared/interfaces/customers.interface';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
+import { Illnes } from 'src/app/shared/interfaces/illnes.interface';
+import { OptionI } from 'src/app/shared/interfaces/option.interface';
 
 @Component({
     selector: 'app-customer-edit-general',
@@ -22,7 +24,8 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 
 export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
-    genders: Gender[] = [];
+    options: OptionI[] = [];
+    illnesses: Illnes[] = [];
     customerForm: FormGroup;
     submitted = false;
 
@@ -44,8 +47,12 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
         private snackbarService: SnackbarService,
         private customerService: CustomerService
     ) {
-        this.genders.push({ id: 1, text: this.settingGeneralService.getLangText('genders.male') });
-        this.genders.push({ id: 2, text: this.settingGeneralService.getLangText('genders.female') });
+        this.options.push({ id: 1, text: this.settingGeneralService.getLangText("options.yes") });
+        this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
+
+        this.illnesses.push({ id: 1, text: this.settingGeneralService.getLangText('illnesses.diabetes') });
+        this.illnesses.push({ id: 2, text: this.settingGeneralService.getLangText('illnesses.heart') });
+        this.illnesses.push({ id: 3, text: this.settingGeneralService.getLangText('illnesses.cancer') });
 
         this.dateOptions = {
             locale: this.settingGeneralService.settings.flatpickr,
@@ -73,12 +80,13 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
             id: this.customer.id,
             name: [this.customer.name, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
             surnames: [this.customer.surnames, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-            gender: [this.customer.gender, [Validators.required]],
             team_id: [this.customer.team_id, [Validators.required]],
-            dob: [this.customer.dob, [Validators.required]],
-            job: [this.customer.job, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+            dob: [{ 0: this.customer.dob }, [Validators.required]],
             prefix: [this.customer.prefix, [Validators.required]],
             mobile: [this.customer.mobile, [Validators.required]],
+            supplement: [this.customer.supplement, [Validators.required]],
+            illness: [this.customer.illness, [Validators.required]],
+            cp: [this.customer.cp, [Validators.required]],
             email: [this.customer.email, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
             legal_checkbox: [this.customer.legal ? this.customer.legal.name : null],
             legal_name: [this.customer.legal ? this.customer.legal.name : null, [Validators.maxLength(this.validationMaxString.short_string)]],
@@ -123,7 +131,7 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
         }
 
         let customer: CustomerCreated = this.utilService.clear(this.customerForm.value);
-        // customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
+        customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
 
         this.subscription.add(this.customerService.updateCustomer(customer).subscribe(
             (response) => {

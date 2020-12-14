@@ -37,61 +37,6 @@
             </div>
 
             <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="gender" name="{{ 'customer_create.gender' | translate }}">
-                </app-label-form>
-                <select formControlName="gender" class="bg-white inputClass" id="gender">
-                    <option hidden selected value="">{{ 'customer_create.gender' | translate }}</option>
-                    <option value="{{ gender.id }}" *ngFor="let gender of genders">{{ gender.text }}
-                    </option>
-                </select>
-                <ng-container *ngIf="submitted && f.gender.errors">
-                    <app-error-form *ngIf="f.gender.errors.required" error="{{'errors.required' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
-
-            <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="team" name="{{ 'customer_create.team' | translate }}"></app-label-form>
-                <select formControlName="team_id" class="bg-white inputClass" id="team">
-                    <option hidden selected value="">{{ 'customer_create.team' | translate }}</option>
-                    <option value="{{ team.id }}"
-                        *ngFor="let team of (settingGeneralService.changeTeam$ | async).teams">
-                        {{ team.name }}
-                    </option>
-                </select>
-
-                <ng-container *ngIf="submitted && f.team_id.errors">
-                    <app-error-form *ngIf="f.team_id.errors.required" error="{{'errors.required' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
-
-            <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="dob" name="{{ 'customer_create.dob' | translate }}"></app-label-form>
-                <ng2-flatpickr formControlName="dob" #calendar addClass="inputClass" [config]="dateOptions"
-                    (change)="changeDob($event)" placeholder="{{ 'customer_create.dob' | translate }}">
-                </ng2-flatpickr>
-                <ng-container *ngIf="submitted && f.dob.errors">
-                    <app-error-form *ngIf="f.dob.errors.required" error="{{'errors.required' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
-
-            <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="job" name="{{ 'customer_create.job' | translate }}">
-                </app-label-form>
-                <input formControlName="job" class="inputClass" id="job" type="text"
-                    placeholder="{{ 'customer_create.job' | translate }}">
-                <ng-container *ngIf="submitted && f.job.errors">
-                    <app-error-form *ngIf="f.job.errors.required" error="{{'errors.required' | translate}}">
-                    </app-error-form>
-                    <app-error-form *ngIf="f.job.errors.maxlength"
-                        error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
-                    </app-error-form>
-                </ng-container>
-            </div>
-
-            <div class="col-span-2 lg:col-span-1">
                 <app-label-form for="mobile" name="{{ 'customer_create.mobile' | translate }}">
                 </app-label-form>
                 <div class="mt-1 relative rounded-md shadow-sm">
@@ -110,8 +55,7 @@
                         placeholder="{{ 'customer_create.mobile' | translate }}" min="0">
                 </div>
                 <ng-container *ngIf="submitted && (f.mobile.errors || f.prefix.errors)">
-                    <app-error-form *ngIf="f.mobile.errors.required || f.prefix.errors.required"
-                        error="{{'errors.required' | translate}}">
+                    <app-error-form error="{{'errors.required' | translate}}">
                     </app-error-form>
                 </ng-container>
             </div>
@@ -128,6 +72,60 @@
                     </app-error-form>
                     <app-error-form *ngIf="f.email.errors.maxlength"
                         error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+
+            <div class="col-span-2 lg:col-span-1">
+                <app-label-form for="supplement" name="¿Estaría dispuesto a tomar suplementos?">
+                </app-label-form>
+                <select formControlName="supplement" class="bg-white inputClass"
+                    [ngClass]="{ 'border border-red-500': submitted && f.supplement.errors }" id="supplement">
+                    <option hidden selected value="">¿Estaría dispuesto a tomar suplementos?</option>
+                    <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
+                    </option>
+                </select>
+                <ng-container *ngIf="submitted && f.supplement.errors">
+                    <app-error-form error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+
+            <div class="col-span-2 lg:col-span-1">
+                <app-label-form for="illness" name="Enfermedades">
+                </app-label-form>
+                <select formControlName="illness" class="bg-white inputClass"
+                    [ngClass]="{ 'border border-red-500': submitted && f.illness.errors }" id="illness">
+                    <option hidden selected value="">Enfermedades</option>
+                    <option value="{{ illness.id }}" *ngFor="let illness of illnesses">{{ illness.text }}
+                    </option>
+                </select>
+                <ng-container *ngIf="submitted && f.illness.errors">
+                    <app-error-form *ngIf="f.illness.errors.required" error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+
+            <div class="col-span-2 lg:col-span-1">
+                <app-label-form for="cp" name="CP"></app-label-form>
+
+                <input ngx-google-places-autocomplete [options]='options' class="inputClass" formControlName="cp"
+                    [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }"
+                    (onAddressChange)="handleAddressChange($event)" />
+
+                <ng-container *ngIf="submitted && f.cp.errors">
+                    <app-error-form *ngIf="f.cp.errors.required" error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+
+            <div class="col-span-2 lg:col-span-1">
+                <app-label-form for="dob" name="{{ 'customer_create.dob' | translate }}"></app-label-form>
+                <ng2-flatpickr formControlName="dob" #calendar addClass="inputClass" [config]="dateOptions"
+                    (change)="changeDob($event)" placeholder="{{ 'customer_create.dob' | translate }}">
+                </ng2-flatpickr>
+                <ng-container *ngIf="submitted && f.dob.errors">
+                    <app-error-form *ngIf="f.dob.errors.required" error="{{'errors.required' | translate}}">
                     </app-error-form>
                 </ng-container>
             </div>

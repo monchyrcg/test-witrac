@@ -15,7 +15,9 @@ export class CustomerService {
     private listCustomersSource = new BehaviorSubject<any>([]);
     public listCustomers$ = this.listCustomersSource.asObservable();
 
-    constructor(private http: HttpClient, private utilService: UtilsService) { }
+    constructor(private http: HttpClient, private utilService: UtilsService) {
+
+    }
 
     listCustomer(page?, per_page?, fields?) {
         if (!page) {

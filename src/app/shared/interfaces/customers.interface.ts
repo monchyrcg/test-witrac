@@ -1,11 +1,12 @@
 export interface CustomerCreated {
     id?: number;
     name: string;
-    gender: number;
     team: string;
     email: string;
-    dob: any,
-    job: string,
+    dob: any;
+    supplement: boolean;
+    illness: number;
+    cp: string;
     prefix: string,
     mobile: string,
     legal_checkbox?: string,

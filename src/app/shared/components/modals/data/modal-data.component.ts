@@ -1,3 +1,5 @@
+import { OnInit } from '@angular/core';
+import { AfterViewInit } from '@angular/core';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
@@ -6,12 +8,16 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
     styleUrls: ['./modal-data.component.scss'],
 })
 
-export class ModalDataComponent {
+export class ModalDataComponent implements OnInit {
 
     @Input() title: string;
     @Input() text: string;
     @Input() text_button_create: string;
     @Output() closeModal = new EventEmitter<any>();
+
+    ngOnInit() {
+
+    }
 
     closeModalF() {
         this.closeModal.emit();

@@ -29,6 +29,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { ModalDataComponent } from '../shared/components/modals/data/modal-data.component';
 import { SettingsComponent } from './settings/settings.component';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 /* export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
@@ -56,10 +57,12 @@ registerLocaleData(localeIt);
         DashboardRoutingModule,
         RouterModule,
         Ng2FlatpickrModule,
+        GooglePlaceModule
     ],
     exports: [
         SharedModule,
-        MenuComponent
+        MenuComponent,
+        GooglePlaceModule
     ],
     providers: [],
 })
