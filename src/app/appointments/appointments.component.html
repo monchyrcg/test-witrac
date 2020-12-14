@@ -156,8 +156,8 @@
                 <div class="col-span-2">
                     <h4 class="text-2xl pb-2.5">{{ 'appointment_calendar.confirm' | translate }}</h4>
                     {{f.date.value[0]}} {{f.hour.value}}
-                    <span class="text-sm cursor-pointer"
-                        (click)="comeBack()">{{ 'appointment_calendar.edit' | translate }}</span>
+                    <span class="text-sm cursor-pointer" (click)="comeBack()">{{ 'appointment_calendar.edit' | translate
+                        }}</span>
                 </div>
 
                 <div class="col-span-2 lg:col-span-1">
@@ -267,9 +267,8 @@
                 <div class="col-span-2">
                     <app-label-form for="cp" name="CP"></app-label-form>
 
-                    <input ngx-google-places-autocomplete [options]='options' class="inputClass" formControlName="cp"
-                        [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }"
-                        (onAddressChange)="handleAddressChange($event)" />
+                    <input ngx-google-places-autocomplete class="inputClass" formControlName="cp"
+                        [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }" />
 
                     <ng-container *ngIf="submitted && f.cp.errors">
                         <app-error-form *ngIf="f.cp.errors.required" error="{{'errors.required' | translate}}">

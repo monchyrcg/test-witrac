@@ -114,9 +114,8 @@
 
                 <app-label-form for="cp" name="CP"></app-label-form>
 
-                <input ngx-google-places-autocomplete [options]='options' class="inputClass" formControlName="cp"
-                    [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }"
-                    (onAddressChange)="handleAddressChange($event)" />
+                <input ngx-google-places-autocomplete class="inputClass" formControlName="cp"
+                    [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }" />
 
                 <ng-container *ngIf="submitted && f.cp.errors">
                     <app-error-form *ngIf="f.cp.errors.required" error="{{'errors.required' | translate}}">
