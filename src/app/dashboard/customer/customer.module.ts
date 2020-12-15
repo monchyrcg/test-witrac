@@ -12,6 +12,8 @@ import { CustomerEditMedicalHistoryComponent } from './customer-edit/medical-his
 import { CustomerEditAppointmentComponent } from './customer-edit/appointments/customer-edit-appointments.component';
 import { CustomerEditAppointmentsCalendarComponent } from './customer-edit/appointments/calendar/customer-edit-appointments-calendar.component';
 import { CustomerEditAppointmentsListComponent } from './customer-edit/appointments/list/customer-edit-appointments-list.component';
+import { CustomerEditNutritionalPlanComponent } from './customer-edit/nutritional-plan/customer-edit-nutritional-plan.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     declarations: [
@@ -22,15 +24,18 @@ import { CustomerEditAppointmentsListComponent } from './customer-edit/appointme
         CustomerEditAppointmentComponent,
         CustomerEditAppointmentsCalendarComponent,
         CustomerEditAppointmentsListComponent,
+        CustomerEditNutritionalPlanComponent
     ],
     imports: [
         CommonModule,
         SharedModule,
         Ng2FlatpickrModule,
-        CustomerRoutingModule
+        CustomerRoutingModule,
+        DragDropModule
     ],
     exports: [
         SharedModule,
+        DragDropModule
     ],
     providers: [],
 })

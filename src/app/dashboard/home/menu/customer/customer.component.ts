@@ -112,7 +112,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
         }
 
         let customer: CustomerCreated = this.utilService.clear(this.customerForm.value);
-        customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
+        if (customer.dob) {
+            customer.dob = moment(customer.dob[0]).format('YYYY-MM-DD');
+        }
 
         this.subscription.add(this.customerService.saveCustomer(customer).subscribe(
             (response) => {

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { CustomerEditNutritionalPlanComponent } from './customer-edit/nutritional-plan/customer-edit-nutritional-plan.component';
 
 
 
@@ -13,6 +14,10 @@ const routes: Routes = [
     {
         path: ':hash',
         component: CustomerEditComponent
+    },
+    {
+        path: ':hash/nutritional-plan',
+        component: CustomerEditNutritionalPlanComponent
     }
 ];
 
