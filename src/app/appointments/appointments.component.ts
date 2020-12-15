@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { Subscription } from 'rxjs';
-import { subscribeOn } from 'rxjs/operators';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { CustomerExternal } from '../shared/interfaces/customers.interface';
 import { Illnes } from '../shared/interfaces/illnes.interface';
 import { OptionI } from '../shared/interfaces/option.interface';
@@ -32,14 +32,12 @@ import { AppointmentsService } from './appointments.service';
         )
     ],
 })
+
 export class AppointmentsComponent implements OnInit, OnDestroy {
 
     customer;
-    customerCrypt;
-    isOpenMobile = true;
-    selected = false;
-    is_clicked = true;
-    is_signed = false;
+    isOpenMobile: boolean = true;
+    selected: boolean = false;
 
     dateOptions: FlatpickrOptions;
 
@@ -59,12 +57,19 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
 
     private subscription = new Subscription();
 
+    // mobile
+    isMobile: boolean = false;
+    notShowCalendar: boolean = false;
+
     constructor(
         private builder: FormBuilder,
         private appointmentsService: AppointmentsService,
         public settingGeneralService: SettingGeneralService,
-        private utilService: UtilsService
+        private utilService: UtilsService,
+        private deviceService: DeviceDetectorService
     ) {
+        this.isMobile = this.deviceService.isMobile();
+
         this.options.push({ id: 1, text: this.settingGeneralService.getLangText("options.yes") });
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
 
@@ -116,6 +121,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
             // Your Code
         }
     }
+
     get f() { return this.customerExternalForm.controls; }
 
     configDates() {
@@ -129,6 +135,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     }
 
     changeDay() {
+        this.notShowCalendar = true;
         this.setHours = null;
         this.getHours();
     }
@@ -150,6 +157,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         this.submitted = false;
         this.customerExternalForm.reset();
         this.f.date.setValue({ 0: moment().format(this.settingGeneralService.settings.formatMoment) });
+        this.notShowCalendar = false;
         this.stepNumber = 1;
     }
 
@@ -157,6 +165,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         this.submitted = true;
 
         if (this.customerExternalForm.invalid) {
+            console.log(this.customerExternalForm);
             return;
         }
 

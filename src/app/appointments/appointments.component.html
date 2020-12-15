@@ -89,7 +89,7 @@
 </nav>
 
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="customer || is_signed; else loading;">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="customer; else loading;">
     <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
     <div class="max-w-3xl mx-auto">
         <div>
@@ -116,13 +116,15 @@
         <div [formGroup]="customerExternalForm">
 
             <div class="flex items-center p-3 flex-col sm:flex-row" *ngIf="stepNumber == 1" [@enterAnimation]>
-                <div class="flex-1">
+
+                <div class="flex-1" [ngClass]="{'hidden': isMobile && notShowCalendar}">
                     <ng2-flatpickr #calendar addClass="inputClass hidden" [config]="dateOptions" (change)="changeDay()"
                         formControlName="date">
                     </ng2-flatpickr>
                 </div>
 
-                <div class="h-64 overflow-y-auto w-full sm:w-1/2 pt-10 sm:pt-0 custom-scroll pr-2 hidden sm:block">
+                <div class="h-64 overflow-y-auto w-full sm:w-1/2 pt-10 sm:pt-0 custom-scroll pr-2 sm:block"
+                    [ngClass]="{'hidden': isMobile && !notShowCalendar}">
 
                     <ul class="space-y-4" role="radiogroup" aria-labelledby="radiogroup-label"
                         *ngIf="setHours ; else loadingHours;">
@@ -155,7 +157,7 @@
             <div class="grid grid-cols-2 gap-8 p-3" *ngIf="stepNumber == 2" [@enterAnimation]>
                 <div class="col-span-2">
                     <h4 class="text-2xl pb-2.5">{{ 'appointment_calendar.confirm' | translate }}</h4>
-                    {{f.date.value[0]}} {{f.hour.value}}
+                    {{ f.date.value[0] | date }} {{f.hour.value}}
                     <span class="text-sm cursor-pointer" (click)="comeBack()">{{ 'appointment_calendar.edit' | translate
                         }}</span>
                 </div>
