@@ -9,30 +9,7 @@
     @apply duration-100;
 }
 
-@mixin scrollbars($sizeW, $sizeH, $foreground-color, $background-color: mix($foreground-color, white,  10%)) {
-  &::-webkit-scrollbar {
-    width:  $sizeW;
-    height: $sizeH;
-  }
 
-  &::-webkit-scrollbar-thumb {
-    background: $foreground-color;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $background-color;
-  }
-
-  // For Internet Explorer
-  & {
-    scrollbar-face-color: $foreground-color;
-    scrollbar-track-color: $background-color;
-  }
-}
-
-.custom-scroll {
-  @include scrollbars(.5em, .1em, slategray);
-}
 
 :host ::ng-deep .flatpickr-day.selected {
   @apply bg-nutriwell;

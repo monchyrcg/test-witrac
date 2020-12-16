@@ -34,7 +34,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
             name: 'Menu 4'
         },
     ];
-    meals = [
+    dishes = [
         {
             id: 1,
             type: 3,
@@ -94,7 +94,11 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
         },
     ];
 
-    basket = [];
+    breakfasts = [];
+    lunchs = [];
+    meals = [];
+    snacks = [];
+    dinners = [];
 
     ngOnInit(): void {
         this.items = this.products;
@@ -113,7 +117,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
                 return this.menus;
                 break;
             case '3':
-                return this.meals;
+                return this.dishes;
                 break;
         }
     }
@@ -133,8 +137,8 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
         }
     }
 
-    deleteElementBasket(event) {
-        this.basket = this.basket.filter(function (value, index, arr) {
+    deleteElement(type, event) {
+        this[type] = this[type].filter(function (value, index, arr) {
             if (value.id !== event.id) {
                 return value;
             }

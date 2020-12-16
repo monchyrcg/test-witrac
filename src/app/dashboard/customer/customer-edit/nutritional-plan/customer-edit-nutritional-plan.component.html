@@ -1,18 +1,18 @@
-<div cdkDropListGroup class="my-3 grid grid-cols-3 gap-4">
+<div cdkDropListGroup class="my-3 grid grid-cols-3 gap-4 h-screen">
 
     <div class="">
+        <h2>Types</h2>
         <div class="pb-3">
-            <label for="location" class="block text-sm font-medium text-gray-700">Types</label>
             <select id="location" name="location" (change)="changeType($event.target.value)"
-                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-nutriwell focus:border-nutriwell sm:text-sm rounded-md">
                 <option value="1">Products</option>
                 <option value="2">Menus</option>
                 <option value="3">Meals</option>
             </select>
         </div>
-        <div cdkDropList [cdkDropListData]="items" id="general-drop" class="example-list" cdkDropListSortingDisabled
+        <div cdkDropList [cdkDropListData]="items" id="general-drop" class="div-list" cdkDropListSortingDisabled
             (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="noReturnPredicate">
-            <ul class="my-3 grid grid-cols-1 gap-5">
+            <ul class="my-3 grid grid-cols-1 gap-5 h-80 overflow-y-auto custom-scroll">
                 <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of items" cdkDrag>
                     <div
                         class="flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm font-medium rounded-l-md">
@@ -34,37 +34,196 @@
 
     <div class="col-span-2">
         <h2>Nutritional Plan</h2>
+        <div class="border-2 border-nutriwell rounded">
+            <div class="div-meals">
+                <span class="w-full flex items-center justify-between p-6 text-gray-200 bg-nutriwell">
+                    Breakfast
+                </span>
 
-        <div cdkDropList [cdkDropListData]="basket" class="example-list" (cdkDropListDropped)="drop($event)">
-            <ul class="my-3 grid grid-cols-1 gap-5">
-                <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of basket" cdkDrag>
-                    <div class=" flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm
-                    font-medium rounded-l-md">
-                        <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
-                            alt="">
-                    </div>
-                    <div
-                        class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                        <div class="flex-1 px-4 py-2 text-sm truncate">
-                            <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
-                            <p class="text-gray-500">16 Kcal</p>
-                        </div>
-                        <div class="flex-shrink-0 pr-2">
-                            <button (click)="deleteElementBasket(item)"
-                                class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none">
-                                <span class="sr-only">Open options</span>
-                                <!-- Heroicon name: dots-vertical -->
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                <div cdkDropList [cdkDropListData]="breakfasts" class="div-list" (cdkDropListDropped)="drop($event)">
+                    <ul class="my-3 grid grid-cols-1 gap-5">
+                        <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of breakfasts" cdkDrag>
+                            <div class=" flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm
+                                                        font-medium rounded-l-md">
+                                <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
+                                    alt="">
+                            </div>
+                            <div
+                                class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                                <div class="flex-1 px-4 py-2 text-sm truncate">
+                                    <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
+                                    <p class="text-gray-500">16 Kcal</p>
+                                </div>
+                                <div class="flex-shrink-0 pr-2">
+                                    <button (click)="deleteElement('breakfasts', item)"
+                                        class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none">
+                                        <span class="sr-only">Delete</span>
+                                        <!-- Heroicon name: dots-vertical -->
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
 
-                </li>
-            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="div-meals">
+                <span class="w-full flex items-center justify-between p-6 text-gray-200 bg-nutriwell">
+                    Lunch
+                </span>
+
+                <div cdkDropList [cdkDropListData]="lunchs" class="div-list" (cdkDropListDropped)="drop($event)">
+                    <ul class="my-3 grid grid-cols-1 gap-5">
+                        <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of lunchs" cdkDrag>
+                            <div class=" flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm
+                                                                    font-medium rounded-l-md">
+                                <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
+                                    alt="">
+                            </div>
+                            <div
+                                class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                                <div class="flex-1 px-4 py-2 text-sm truncate">
+                                    <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
+                                    <p class="text-gray-500">16 Kcal</p>
+                                </div>
+                                <div class="flex-shrink-0 pr-2">
+                                    <button (click)="deleteElement('lunchs', item)"
+                                        class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none">
+                                        <span class="sr-only">Delete</span>
+                                        <!-- Heroicon name: dots-vertical -->
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="div-meals">
+                <span class="w-full flex items-center justify-between p-6 text-gray-200 bg-nutriwell">
+                    Meals
+                </span>
+
+                <div cdkDropList [cdkDropListData]="meals" class="div-list" (cdkDropListDropped)="drop($event)">
+                    <ul class="my-3 grid grid-cols-1 gap-5">
+                        <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of meals" cdkDrag>
+                            <div class=" flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm
+                                                                font-medium rounded-l-md">
+                                <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
+                                    alt="">
+                            </div>
+                            <div
+                                class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                                <div class="flex-1 px-4 py-2 text-sm truncate">
+                                    <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
+                                    <p class="text-gray-500">16 Kcal</p>
+                                </div>
+                                <div class="flex-shrink-0 pr-2">
+                                    <button (click)="deleteElement('meals', item)"
+                                        class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none">
+                                        <span class="sr-only">Delete</span>
+                                        <!-- Heroicon name: dots-vertical -->
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="div-meals">
+                <span class="w-full flex items-center justify-between p-6 text-gray-200 bg-nutriwell">
+                    Snack
+                </span>
+
+                <div cdkDropList [cdkDropListData]="snacks" class="div-list" (cdkDropListDropped)="drop($event)">
+                    <ul class="my-3 grid grid-cols-1 gap-5">
+                        <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of snacks" cdkDrag>
+                            <div class=" flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm
+                                                                                font-medium rounded-l-md">
+                                <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
+                                    alt="">
+                            </div>
+                            <div
+                                class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                                <div class="flex-1 px-4 py-2 text-sm truncate">
+                                    <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
+                                    <p class="text-gray-500">16 Kcal</p>
+                                </div>
+                                <div class="flex-shrink-0 pr-2">
+                                    <button (click)="deleteElement('snacks', item)"
+                                        class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none">
+                                        <span class="sr-only">Delete</span>
+                                        <!-- Heroicon name: dots-vertical -->
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="div-meals">
+                <span class="w-full flex items-center justify-between p-6 text-gray-200 bg-nutriwell">
+                    Dinner
+                </span>
+
+                <div cdkDropList [cdkDropListData]="dinners" class="div-list" (cdkDropListDropped)="drop($event)">
+                    <ul class="my-3 grid grid-cols-1 gap-5">
+                        <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of dinners" cdkDrag>
+                            <div class=" flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm
+                                                                font-medium rounded-l-md">
+                                <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
+                                    alt="">
+                            </div>
+                            <div
+                                class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
+                                <div class="flex-1 px-4 py-2 text-sm truncate">
+                                    <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
+                                    <p class="text-gray-500">16 Kcal</p>
+                                </div>
+                                <div class="flex-shrink-0 pr-2">
+                                    <button (click)="deleteElement('dinners', item)"
+                                        class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none">
+                                        <span class="sr-only">Delete</span>
+                                        <!-- Heroicon name: dots-vertical -->
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M6 18L18 6M6 6l12 12"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
