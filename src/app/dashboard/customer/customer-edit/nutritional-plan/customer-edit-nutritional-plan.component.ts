@@ -1,7 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import { fil } from "date-fns/locale";
-import { filter } from "rxjs/operators";
+import { CdkDrag, CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { Subscription } from "rxjs";
 import { MagentoService } from "src/app/shared/services/magento.service";
 
@@ -58,13 +56,35 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
             name: "Pescado frito"
         },
     ];
-    products = [];
+    products = [
+        {
+            id: 1,
+            type: 1,
+            name: "Levanat"
+        },
+        {
+            id: 2,
+            type: 1,
+            name: "Sobres"
+        },
+        {
+            id: 3,
+            type: 1,
+            name: "Pastillas"
+        },
+        {
+            id: 4,
+            type: 1,
+            name: "Natillas"
+        },
+    ];
 
     breakfasts = [];
     lunchs = [];
     meals = [];
     snacks = [];
     dinners = [];
+    complements = [];
 
     listProductsSubscription: Subscription = null;
     page = 1;
@@ -77,23 +97,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.listProducts();
-
-        this.listProductsSubscription = this.magentoService.listProducts$.subscribe(
-            (response) => {
-                response.subscribe(
-                    (data) => {
-                        this.products = data['data']['products'];
-                    }
-                )
-            }
-        );
-
         this.items = this.menus;
-    }
-
-    private listProducts(query?) {
-        this.magentoService.listProducts(this.page, this.per_page, query);
     }
 
     changeType(value) {
@@ -118,7 +122,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
         return false;
     }
 
-    drop(event: CdkDragDrop<string[]>) {
+    drop(event: CdkDragDrop<object[]>) {
         if (event.container.id !== event.previousContainer.id) {
             copyArrayItem(
                 event.previousContainer.data,
@@ -129,9 +133,13 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
         }
     }
 
-    deleteElement(type, event) {
-        this[type] = this[type].filter(function (value, index, arr) {
-            if (value.id !== event.id) {
+    isType(item: CdkDrag<any>) {
+        return item.data.type == 1;
+    }
+
+    deleteElement(body) {
+        this[body.type] = this[body.type].filter(function (value, index, arr) {
+            if (value.id !== body.event.id) {
                 return value;
             }
         });

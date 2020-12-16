@@ -31,11 +31,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         SharedModule,
         Ng2FlatpickrModule,
         CustomerRoutingModule,
-        DragDropModule
+        // DragDropModule
     ],
     exports: [
         SharedModule,
-        DragDropModule
+        // DragDropModule
     ],
     providers: [],
 })
