@@ -192,6 +192,7 @@
                     Dinner
                 </span>
 
+
                 <div cdkDropList [cdkDropListData]="dinners" class="div-list" (cdkDropListDropped)="drop($event)">
                     <ul class="my-3 grid grid-cols-1 gap-5">
                         <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of dinners" cdkDrag>
