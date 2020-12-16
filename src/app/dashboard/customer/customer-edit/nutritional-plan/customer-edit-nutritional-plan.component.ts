@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
 import { fil } from "date-fns/locale";
 import { filter } from "rxjs/operators";
+import { Subscription } from "rxjs";
+import { MagentoService } from "src/app/shared/services/magento.service";
 
 @Component({
     selector: "customer-edit-nutritional-plan",
@@ -56,43 +58,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
             name: "Pescado frito"
         },
     ];
-    products = [
-        {
-            id: 1,
-            type: 1,
-            name: "Carrots"
-        },
-        {
-            id: 2,
-            type: 1,
-            name: "Tomatoes"
-        },
-        {
-            id: 3,
-            type: 1,
-            name: "Onions"
-        },
-        {
-            id: 4,
-            type: 1,
-            name: "Apples"
-        },
-        {
-            id: 5,
-            type: 1,
-            name: "Avocados"
-        },
-        {
-            id: 6,
-            type: 1,
-            name: "Oranges"
-        },
-        {
-            id: 7,
-            type: 1,
-            name: "Bananas"
-        },
-    ];
+    products = [];
 
     breakfasts = [];
     lunchs = [];
@@ -100,8 +66,34 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     snacks = [];
     dinners = [];
 
+    listProductsSubscription: Subscription = null;
+    page = 1;
+    per_page = 1599;
+
+    name: string;
+
+    constructor(
+        private magentoService: MagentoService,
+    ) { }
+
     ngOnInit(): void {
-        this.items = this.products;
+        this.listProducts();
+
+        this.listProductsSubscription = this.magentoService.listProducts$.subscribe(
+            (response) => {
+                response.subscribe(
+                    (data) => {
+                        this.products = data['data']['products'];
+                    }
+                )
+            }
+        );
+
+        this.items = this.menus;
+    }
+
+    private listProducts(query?) {
+        this.magentoService.listProducts(this.page, this.per_page, query);
     }
 
     changeType(value) {

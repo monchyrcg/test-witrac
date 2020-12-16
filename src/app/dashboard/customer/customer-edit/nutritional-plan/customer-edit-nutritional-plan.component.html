@@ -5,8 +5,8 @@
         <div class="pb-3">
             <select id="location" name="location" (change)="changeType($event.target.value)"
                 class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-nutriwell focus:border-nutriwell sm:text-sm rounded-md">
-                <option value="1">Products</option>
                 <option value="2">Menus</option>
+                <option value="1">Products</option>
                 <option value="3">Meals</option>
             </select>
         </div>
@@ -16,7 +16,9 @@
                 <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of items" cdkDrag>
                     <div
                         class="flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm font-medium rounded-l-md">
-                        <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
+                        <img [src]="null != item.media_gallery_entries ? 
+                            'https://naturhouse.es/media/catalog/product/'+item.media_gallery_entries[0].file :
+                            'https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo='"
                             alt="">
                     </div>
                     <div
