@@ -77,6 +77,46 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
             type: 1,
             name: "Natillas"
         },
+        {
+            id: 1,
+            type: 1,
+            name: "Levanat"
+        },
+        {
+            id: 2,
+            type: 1,
+            name: "Sobres"
+        },
+        {
+            id: 3,
+            type: 1,
+            name: "Pastillas"
+        },
+        {
+            id: 4,
+            type: 1,
+            name: "Natillas"
+        },
+        {
+            id: 1,
+            type: 1,
+            name: "Levanat"
+        },
+        {
+            id: 2,
+            type: 1,
+            name: "Sobres"
+        },
+        {
+            id: 3,
+            type: 1,
+            name: "Pastillas"
+        },
+        {
+            id: 4,
+            type: 1,
+            name: "Natillas"
+        },
     ];
 
     breakfasts = [];
