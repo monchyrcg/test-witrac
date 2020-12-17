@@ -24,7 +24,6 @@ export class DragDropComponent {
     }
 
     deleteElement(type, event) {
-        console.log(type);
         let body = {
             type,
             event

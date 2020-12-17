@@ -76,11 +76,10 @@
         </div>
     </div>
 
-
-
     <div class="col-span-2">
         <h2>Nutritional Plan</h2>
-        <div class="border-2 border-nutriwell rounded">
+
+        <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
 
             <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
                 (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
@@ -106,3 +105,7 @@
         </div>
     </div>
 </div>
+
+<ng-container *ngIf="loading">
+    <app-loading></app-loading>
+</ng-container>

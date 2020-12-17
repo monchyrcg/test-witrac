@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { CdkDrag, CdkDragDrop, copyArrayItem, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
+import { CdkDrag, CdkDragDrop, copyArrayItem } from "@angular/cdk/drag-drop";
 import { Subscription } from "rxjs";
-import { MagentoService } from "src/app/shared/services/magento.service";
 
 @Component({
     selector: "customer-edit-nutritional-plan",
@@ -12,28 +11,6 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
 
     items = [];
 
-    menus = [
-        {
-            id: 1,
-            type: 2,
-            name: 'Menu 1'
-        },
-        {
-            id: 2,
-            type: 2,
-            name: 'Menu 2'
-        },
-        {
-            id: 3,
-            type: 2,
-            name: 'Menu 3'
-        },
-        {
-            id: 4,
-            type: 2,
-            name: 'Menu 4'
-        },
-    ];
     dishes = [
         {
             id: 1,
@@ -54,6 +31,29 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
             id: 4,
             type: 3,
             name: "Pescado frito"
+        },
+    ];
+    menus = [
+        {
+            id: 1,
+            type: 2,
+            name: 'Menu 1',
+            dishes: this.dishes
+        },
+        {
+            id: 2,
+            type: 2,
+            name: 'Menu 2'
+        },
+        {
+            id: 3,
+            type: 2,
+            name: 'Menu 3'
+        },
+        {
+            id: 4,
+            type: 2,
+            name: 'Menu 4'
         },
     ];
     products = [
@@ -132,9 +132,8 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
 
     name: string;
 
-    constructor(
-        private magentoService: MagentoService,
-    ) { }
+    loading: boolean = false;
+    constructor() { }
 
     ngOnInit(): void {
         this.items = this.menus;
@@ -164,13 +163,27 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
 
     drop(event: CdkDragDrop<object[]>) {
         if (event.container.id !== event.previousContainer.id) {
-            copyArrayItem(
-                event.previousContainer.data,
-                event.container.data,
-                event.previousIndex,
-                event.currentIndex
-            );
+            if (event.item.data.type == 2) {
+                this.loading = true;
+                setTimeout(() => {
+                    this.generateMenu(event.item.data.dishes);
+                }, 800);
+            } else {
+                copyArrayItem(
+                    event.previousContainer.data,
+                    event.container.data,
+                    event.previousIndex,
+                    event.currentIndex
+                );
+            }
         }
+    }
+
+    private generateMenu(dishes) {
+        this.breakfasts.push(dishes[0]);
+        this.lunchs.push(dishes[1]);
+        this.dinners.push(dishes[2]);
+        this.loading = false;
     }
 
     isType(item: CdkDrag<any>) {
