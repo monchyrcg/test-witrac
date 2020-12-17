@@ -5,14 +5,15 @@
         <div class="pb-3">
             <select id="location" name="location" (change)="changeType($event.target.value)"
                 class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-nutriwell focus:border-nutriwell sm:text-sm rounded-md">
-                <option value="2">Menus</option>
+                <option selected hidden>Types</option>
+                <option value="2">Diets</option>
                 <option value="3">Meals</option>
-                <option value="1">Products</option>
+                <option value="1">Complements</option>
             </select>
         </div>
 
         <div cdkDropList [cdkDropListData]="items" id="general-drop" class="div-list" cdkDropListSortingDisabled
-            (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="noReturnPredicate">
+            (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="noReturnPredicate" *ngIf="items">
             <ul class="my-3 grid grid-cols-1 gap-5 h-80 overflow-y-auto custom-scroll">
                 <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of items" cdkDrag [cdkDragData]="item">
                     <div
@@ -77,32 +78,200 @@
     </div>
 
     <div class="col-span-2">
-        <h2>Nutritional Plan</h2>
+        <h2 (click)="submit()">Nutritional Plan</h2>
 
-        <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+        <app-tabs>
+            <app-tab *ngFor="let day of week; index as i" title="{{day.name}}">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+                    <app-drag-drop *ngFor="let d of day.schedule" name="{{d.name}}" [items]="d.array"
+                        itemName="{{d.itemName}}" position="{{i}}" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+                </div>
+            </app-tab>
+            <!-- <app-tab title="Lunes">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
 
-            <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
-                (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
-            </app-drag-drop>
+                    <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
 
-            <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
-                (delete)="deleteElement($event)">
-            </app-drag-drop>
+                    <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
 
-            <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
-                (delete)="deleteElement($event)">
-            </app-drag-drop>
+                    <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
 
-            <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
-                (delete)="deleteElement($event)">
-            </app-drag-drop>
+                    <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
 
-            <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners" (cdkDropListDropped)="drop($event)"
-                (delete)="deleteElement($event)">
-            </app-drag-drop>
+                    <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
 
 
-        </div>
+                </div>
+            </app-tab>
+            <app-tab title="Martes">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+
+                    <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+
+                </div>
+            </app-tab>
+            <app-tab title="Miercoles">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+
+                    <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+
+                </div>
+            </app-tab>
+            <app-tab title="Jueves">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+
+                    <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+
+                </div>
+            </app-tab>
+            <app-tab title="Viernes">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+
+                    <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+
+                </div>
+            </app-tab>
+            <app-tab title="Sadado">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+
+                    <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+
+                </div>
+            </app-tab>
+            <app-tab title="Domingo">
+                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
+
+                    <app-drag-drop name="Breakfast" [items]="breakfasts" itemName="breakfasts"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Lunch" [items]="lunchs" itemName="lunchs" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Meals" [items]="meals" itemName="meals" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Snack" [items]="snacks" itemName="snacks" (cdkDropListDropped)="drop($event)"
+                        (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+                    <app-drag-drop name="Dinner" [items]="dinners" itemName="dinners"
+                        (cdkDropListDropped)="drop($event)" (delete)="deleteElement($event)">
+                    </app-drag-drop>
+
+
+                </div>
+            </app-tab> -->
+        </app-tabs>
     </div>
 </div>
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { CdkDrag, CdkDragDrop, copyArrayItem } from "@angular/cdk/drag-drop";
 import { Subscription } from "rxjs";
+import { CustomerEditNutritionalPlanService } from "./customer-edit-nutritional-plan.service";
+import { Day } from "src/app/shared/classes/day.class";
 
 @Component({
     selector: "customer-edit-nutritional-plan",
@@ -11,119 +13,20 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
 
     items = [];
 
-    dishes = [
-        {
-            id: 1,
-            type: 3,
-            name: "Arroz Cubana"
-        },
-        {
-            id: 2,
-            type: 3,
-            name: "Cocido"
-        },
-        {
-            id: 3,
-            type: 3,
-            name: "Tortilla"
-        },
-        {
-            id: 4,
-            type: 3,
-            name: "Pescado frito"
-        },
-    ];
-    menus = [
-        {
-            id: 1,
-            type: 2,
-            name: 'Menu 1',
-            dishes: this.dishes
-        },
-        {
-            id: 2,
-            type: 2,
-            name: 'Menu 2'
-        },
-        {
-            id: 3,
-            type: 2,
-            name: 'Menu 3'
-        },
-        {
-            id: 4,
-            type: 2,
-            name: 'Menu 4'
-        },
-    ];
-    products = [
-        {
-            id: 1,
-            type: 1,
-            name: "Levanat"
-        },
-        {
-            id: 2,
-            type: 1,
-            name: "Sobres"
-        },
-        {
-            id: 3,
-            type: 1,
-            name: "Pastillas"
-        },
-        {
-            id: 4,
-            type: 1,
-            name: "Natillas"
-        },
-        {
-            id: 1,
-            type: 1,
-            name: "Levanat"
-        },
-        {
-            id: 2,
-            type: 1,
-            name: "Sobres"
-        },
-        {
-            id: 3,
-            type: 1,
-            name: "Pastillas"
-        },
-        {
-            id: 4,
-            type: 1,
-            name: "Natillas"
-        },
-        {
-            id: 1,
-            type: 1,
-            name: "Levanat"
-        },
-        {
-            id: 2,
-            type: 1,
-            name: "Sobres"
-        },
-        {
-            id: 3,
-            type: 1,
-            name: "Pastillas"
-        },
-        {
-            id: 4,
-            type: 1,
-            name: "Natillas"
-        },
+    week = [
+        new Day('Lunes'),
+        new Day('Martes'),
+        new Day('Miercoles'),
+        new Day('Jueves'),
+        new Day('Viernes'),
+        new Day('Sabado'),
+        new Day('Domingo')
     ];
 
-    breakfasts = [];
-    lunchs = [];
-    meals = [];
-    snacks = [];
-    dinners = [];
+    dishes = [];
+    menus = [];
+    products = [];
+
     complements = [];
 
     listProductsSubscription: Subscription = null;
@@ -132,10 +35,20 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
 
     name: string;
 
-    loading: boolean = false;
-    constructor() { }
+    loading: boolean = true;
+    constructor(
+        private nutritionalPlanService: CustomerEditNutritionalPlanService
+    ) { console.log(this.week); }
 
     ngOnInit(): void {
+        this.nutritionalPlanService.getNutritionalPlan().subscribe(
+            response => {
+                this.dishes = response.meals;
+                this.menus = response.diets;
+                this.products = response.complements;
+                this.loading = false;
+            }
+        )
         this.items = this.menus;
     }
 
@@ -162,11 +75,12 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     }
 
     drop(event: CdkDragDrop<object[]>) {
+        console.log(event);
         if (event.container.id !== event.previousContainer.id) {
             if (event.item.data.type == 2) {
                 this.loading = true;
                 setTimeout(() => {
-                    this.generateMenu(event.item.data.dishes);
+                    this.generateMenu(event.item.data.meals);
                 }, 800);
             } else {
                 copyArrayItem(
@@ -180,9 +94,25 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     }
 
     private generateMenu(dishes) {
-        this.breakfasts.push(dishes[0]);
-        this.lunchs.push(dishes[1]);
-        this.dinners.push(dishes[2]);
+        /*  dishes.forEach(element => {
+             switch (element.type_schedule) {
+                 case 1:
+                     this.breakfasts.push(element);
+                     break;
+                 case 2:
+                     this.lunchs.push(element);
+                     break;
+                 case 3:
+                     this.meals.push(element);
+                     break;
+                 case 4:
+                     this.snacks.push(element);
+                     break;
+                 case 5:
+                     this.dinners.push(element);
+                     break;
+             }
+         }); */
         this.loading = false;
     }
 
@@ -191,10 +121,15 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     }
 
     deleteElement(body) {
+        console.log(this.week[body.position].schedule[0]);
         this[body.type] = this[body.type].filter(function (value, index, arr) {
             if (value.id !== body.event.id) {
                 return value;
             }
         });
+    }
+
+    submit() {
+        console.log(this.week);
     }
 }
