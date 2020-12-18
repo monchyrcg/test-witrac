@@ -30,15 +30,11 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     complements = [];
 
     listProductsSubscription: Subscription = null;
-    page = 1;
-    per_page = 1599;
-
-    name: string;
 
     loading: boolean = true;
     constructor(
         private nutritionalPlanService: CustomerEditNutritionalPlanService
-    ) { console.log(this.week); }
+    ) { }
 
     ngOnInit(): void {
         this.nutritionalPlanService.getNutritionalPlan().subscribe(
@@ -49,7 +45,6 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
                 this.loading = false;
             }
         )
-        this.items = this.menus;
     }
 
     changeType(value) {
@@ -75,12 +70,11 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     }
 
     drop(event: CdkDragDrop<object[]>) {
-        console.log(event);
         if (event.container.id !== event.previousContainer.id) {
             if (event.item.data.type == 2) {
                 this.loading = true;
                 setTimeout(() => {
-                    this.generateMenu(event.item.data.meals);
+                    this.generateMenu(event.item.data.days);
                 }, 800);
             } else {
                 copyArrayItem(
@@ -93,26 +87,30 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
         }
     }
 
-    private generateMenu(dishes) {
-        /*  dishes.forEach(element => {
-             switch (element.type_schedule) {
-                 case 1:
-                     this.breakfasts.push(element);
-                     break;
-                 case 2:
-                     this.lunchs.push(element);
-                     break;
-                 case 3:
-                     this.meals.push(element);
-                     break;
-                 case 4:
-                     this.snacks.push(element);
-                     break;
-                 case 5:
-                     this.dinners.push(element);
-                     break;
-             }
-         }); */
+    private generateMenu(days) {
+        let type_schedule = 0;
+        days.forEach(element => {
+            element.meals.forEach(meal => {
+                switch (meal.type_schedule) {
+                    case 1:
+                        type_schedule = 0;
+                        break;
+                    case 2:
+                        type_schedule = 1;
+                        break;
+                    case 3:
+                        type_schedule = 2;
+                        break;
+                    case 4:
+                        type_schedule = 3;
+                        break;
+                    case 5:
+                        type_schedule = 4;
+                        break;
+                }
+                this.week[element.day].schedule[type_schedule].array.push(meal);
+            });
+        });
         this.loading = false;
     }
 
@@ -121,9 +119,23 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     }
 
     deleteElement(body) {
-        console.log(this.week[body.position].schedule[0]);
-        this[body.type] = this[body.type].filter(function (value, index, arr) {
+        let type_schedule;
+        this.week[body.position].schedule.forEach((element, key) => {
+            if (element.itemName == body.type) {
+                type_schedule = key;
+            }
+        });
+
+        this.week[body.position].schedule[type_schedule].array = this.week[body.position].schedule[type_schedule].array.filter(function (value, index, arr) {
             if (value.id !== body.event.id) {
+                return value;
+            }
+        });
+    }
+
+    deleteComplement(complement) {
+        this.complements = this.complements.filter(function (value, index, arr) {
+            if (value.id !== complement.id) {
                 return value;
             }
         });

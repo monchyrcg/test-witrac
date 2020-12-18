@@ -16,9 +16,7 @@ export class DragDropComponent {
     @Output() cdkDropListDropped = new EventEmitter<any>();
     @Output() delete = new EventEmitter<any>();
 
-    constructor() {
-        console.log(this.position);
-    }
+
     drop($event) {
         this.cdkDropListDropped.emit($event);
     }
