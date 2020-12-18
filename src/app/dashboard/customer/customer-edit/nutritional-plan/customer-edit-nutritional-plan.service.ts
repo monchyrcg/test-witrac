@@ -16,4 +16,11 @@ export class CustomerEditNutritionalPlanService {
                 return response.data;
             }));
     }
+
+    saveNutritionalPlan(body) {
+        return this.http.post(`${environment.apiUrl}/nutritional-plan`, body)
+            .pipe(map((response: any) => {
+                return response.data;
+            }));
+    }
 }

@@ -1,6 +1,7 @@
 <div class="px-4 py-6 sm:px-6 lg:px-8">
     <div class="lg:hidden">
-        <select aria-label="Selected tab" #t class="form-select block w-full"
+        <select aria-label="Selected tab" #t
+            class="form-select block w-full focus:outline-none focus:ring-nutriwell focus:border-nutriwell rounded-md"
             (change)="selectTabMobile($event.target.value)">
             <option *ngFor="let tab of tabs; let i = index" value="{{i}}">{{tab.title}}</option>
         </select>

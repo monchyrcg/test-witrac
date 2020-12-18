@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CdkDrag, CdkDragDrop, copyArrayItem } from "@angular/cdk/drag-drop";
 import { Subscription } from "rxjs";
 import { CustomerEditNutritionalPlanService } from "./customer-edit-nutritional-plan.service";
@@ -9,7 +9,7 @@ import { Day } from "src/app/shared/classes/day.class";
     templateUrl: "./customer-edit-nutritional-plan.component.html",
     styleUrls: ["./customer-edit-nutritional-plan.component.scss"]
 })
-export class CustomerEditNutritionalPlanComponent implements OnInit {
+export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
 
     items = [];
 
@@ -29,22 +29,29 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
 
     complements = [];
 
-    listProductsSubscription: Subscription = null;
+    listProductsSubscription: Subscription = new Subscription;
 
     loading: boolean = true;
+    submitted: boolean = false;
+
+    duration: number;
+
     constructor(
         private nutritionalPlanService: CustomerEditNutritionalPlanService
-    ) { }
+    ) {
+        console.log(this.week);
+    }
+
 
     ngOnInit(): void {
-        this.nutritionalPlanService.getNutritionalPlan().subscribe(
+        this.listProductsSubscription.add(this.nutritionalPlanService.getNutritionalPlan().subscribe(
             response => {
                 this.dishes = response.meals;
                 this.menus = response.diets;
                 this.products = response.complements;
                 this.loading = false;
             }
-        )
+        ));
     }
 
     changeType(value) {
@@ -142,6 +149,27 @@ export class CustomerEditNutritionalPlanComponent implements OnInit {
     }
 
     submit() {
-        console.log(this.week);
+        if (this.complements.length == 0 || undefined == typeof this.duration) {
+            this.submitted = true;
+            return;
+        }
+
+        let body = {
+            'duration': this.duration,
+            'complements': this.complements,
+            'week': this.week
+        };
+
+        this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(body).subscribe(
+            response => {
+                console.log(response);
+            }
+        ));
+    }
+
+    ngOnDestroy(): void {
+        if (this.listProductsSubscription) {
+            this.listProductsSubscription.unsubscribe();
+        }
     }
 }
