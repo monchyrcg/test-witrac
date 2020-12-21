@@ -16,7 +16,7 @@ const routes: Routes = [
         component: CustomerEditComponent
     },
     {
-        path: ':hash/nutritional-plan',
+        path: ':customer/:appointment/nutritional-plan',
         component: CustomerEditNutritionalPlanComponent
     }
 ];

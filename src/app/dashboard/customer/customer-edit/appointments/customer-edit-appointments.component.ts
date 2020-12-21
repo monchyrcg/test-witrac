@@ -1,6 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { AppointmentData } from 'src/app/shared/interfaces/appointment.interface';
@@ -57,7 +58,8 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         public settingGeneralService: SettingGeneralService,
         private snackbarService: SnackbarService,
         private utilService: UtilsService,
-        private appointmentService: AppointmentService
+        private appointmentService: AppointmentService,
+        private router: Router
     ) {
         this.options.push({ id: 1, text: this.settingGeneralService.getLangText('options.yes') });
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
@@ -115,6 +117,10 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                 this.snackbarService.show('Something was wrong', 'danger');
             }
         ));
+    }
+
+    nutritionalPlan() {
+        this.router.navigate([`/customers/${this.customer.id}/${this.appointment_id}/nutritional-plan`]);
     }
 
     ngOnDestroy() {

@@ -3,6 +3,8 @@ import { CdkDrag, CdkDragDrop, copyArrayItem } from "@angular/cdk/drag-drop";
 import { Subscription } from "rxjs";
 import { CustomerEditNutritionalPlanService } from "./customer-edit-nutritional-plan.service";
 import { Day } from "src/app/shared/classes/day.class";
+import { ActivatedRoute } from "@angular/router";
+import { SnackbarService } from "src/app/shared/components/snackbar/snackbar.service";
 
 @Component({
     selector: "customer-edit-nutritional-plan",
@@ -11,17 +13,14 @@ import { Day } from "src/app/shared/classes/day.class";
 })
 export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
 
+    nutritional_id;
+    customer_id;
+    appointment_id;
+
     items = [];
 
-    week = [
-        new Day('Lunes'),
-        new Day('Martes'),
-        new Day('Miercoles'),
-        new Day('Jueves'),
-        new Day('Viernes'),
-        new Day('Sabado'),
-        new Day('Domingo')
-    ];
+    week = [];
+
 
     dishes = [];
     menus = [];
@@ -37,19 +36,43 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
     duration: number;
 
     constructor(
-        private nutritionalPlanService: CustomerEditNutritionalPlanService
-    ) {
-        console.log(this.week);
-    }
+        private route: ActivatedRoute,
+        private nutritionalPlanService: CustomerEditNutritionalPlanService,
+        private snackbarService: SnackbarService,
+    ) { }
 
 
     ngOnInit(): void {
-        this.listProductsSubscription.add(this.nutritionalPlanService.getNutritionalPlan().subscribe(
+        this.customer_id = this.route.snapshot.paramMap.get('customer');
+        this.appointment_id = this.route.snapshot.paramMap.get('appointment');
+
+        this.listProductsSubscription.add(this.nutritionalPlanService.getNutritionalPlanData().subscribe(
             response => {
                 this.dishes = response.meals;
                 this.menus = response.diets;
                 this.products = response.complements;
-                this.loading = false;
+
+                this.nutritionalPlanService.getNutritionalPlan(this.customer_id, this.appointment_id).subscribe(
+                    res => {
+                        this.complements = res.complements;
+                        this.duration = res.duration;
+                        this.week = res.week;
+                        this.nutritional_id = res.id;
+
+                        this.loading = false;
+                    }, error => {
+                        this.week = [
+                            new Day('Lunes'),
+                            new Day('Martes'),
+                            new Day('Miercoles'),
+                            new Day('Jueves'),
+                            new Day('Viernes'),
+                            new Day('Sabado'),
+                            new Day('Domingo')
+                        ];
+                        this.loading = false;
+                    }
+                )
             }
         ));
     }
@@ -155,14 +178,18 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         }
 
         let body = {
+            'id': this.nutritional_id,
             'duration': this.duration,
-            'complements': this.complements,
-            'week': this.week
+            'complements': JSON.stringify(this.complements),
+            'week': JSON.stringify(this.week)
         };
 
-        this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(body).subscribe(
+        this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(this.customer_id, this.appointment_id, body).subscribe(
             response => {
-                console.log(response);
+                this.snackbarService.show('Nutritional created successfully', 'success');
+            },
+            error => {
+                this.snackbarService.show('Something was wrong', 'danger');
             }
         ));
     }
