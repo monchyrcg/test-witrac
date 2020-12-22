@@ -14,6 +14,7 @@ import { CustomerEditAppointmentsCalendarComponent } from './customer-edit/appoi
 import { CustomerEditAppointmentsListComponent } from './customer-edit/appointments/list/customer-edit-appointments-list.component';
 import { CustomerEditNutritionalPlanComponent } from './customer-edit/nutritional-plan/customer-edit-nutritional-plan.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 
 @NgModule({
     declarations: [
@@ -31,10 +32,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         SharedModule,
         Ng2FlatpickrModule,
         CustomerRoutingModule,
+        GooglePlaceModule
         // DragDropModule
     ],
     exports: [
         SharedModule,
+        GooglePlaceModule
         // DragDropModule
     ],
     providers: [],

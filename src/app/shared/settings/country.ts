@@ -18,7 +18,8 @@ export class Countries {
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
             'flatpickr': Spanish.es,
             'formatMoment': 'DD-MM-YYYY',
-            'formatFlatpickr': 'd-m-Y'
+            'formatFlatpickr': 'd-m-Y',
+            'cp_maps': ['es']
         },
         'us': {
             'locale': 'en',
@@ -27,7 +28,8 @@ export class Countries {
             'weekendDays': [DAYS_OF_WEEK.FRIDAY, DAYS_OF_WEEK.SATURDAY],
             'flatpickr': english,
             'formatMoment': 'MM-DD-YYYY',
-            'formatFlatpickr': 'm-d-Y'
+            'formatFlatpickr': 'm-d-Y',
+            'cp_maps': ['gb', 'us']
         },
         'fr': {
             'locale': 'fr',
@@ -36,7 +38,8 @@ export class Countries {
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
             'flatpickr': French.fr,
             'formatMoment': 'DD-MM-YYYY',
-            'formatFlatpickr': 'd-m-Y'
+            'formatFlatpickr': 'd-m-Y',
+            'cp_maps': ['fr']
         },
         'it': {
             'locale': 'it',
@@ -45,7 +48,8 @@ export class Countries {
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
             'flatpickr': Italian.it,
             'formatMoment': 'DD-MM-YYYY',
-            'formatFlatpickr': 'd-m-Y'
+            'formatFlatpickr': 'd-m-Y',
+            'cp_maps': ['it']
         },
         'pl': {
             'locale': 'en',
@@ -54,7 +58,8 @@ export class Countries {
             'weekendDays': [DAYS_OF_WEEK.SATURDAY, DAYS_OF_WEEK.SUNDAY],
             'flatpickr': Polish.pl,
             'formatMoment': 'DD-MM-YYYY',
-            'formatFlatpickr': 'd-m-Y'
+            'formatFlatpickr': 'd-m-Y',
+            'cp_maps': ['pl']
         },
     };
 }

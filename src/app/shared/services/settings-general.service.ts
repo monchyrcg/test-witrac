@@ -24,7 +24,8 @@ export class SettingGeneralService {
 		legal_age: this.settings.legal_age,
 		flatpickr: this.settings.flatpickr,
 		formatMoment: this.settings.formatMoment,
-		formatFlatpickr: this.settings.formatFlatpickr
+		formatFlatpickr: this.settings.formatFlatpickr,
+		cp_maps: this.settings.cp_maps,
 	});
 	public changeCountry$ = this.changeCountrySource.asObservable();
 
@@ -56,7 +57,8 @@ export class SettingGeneralService {
 			legal_age: countrySettings.legal_age,
 			flatpickr: countrySettings.flatpickr,
 			formatMoment: countrySettings.formatMoment,
-			formatFlatpickr: countrySettings.formatFlatpickr
+			formatFlatpickr: countrySettings.formatFlatpickr,
+			cp_maps: countrySettings.cp_maps,
 		});
 	}
 

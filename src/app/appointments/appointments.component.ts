@@ -12,6 +12,7 @@ import { SettingGeneralService } from '../shared/services/settings-general.servi
 import { UtilsService } from '../shared/services/util.service';
 import { Validations } from '../shared/settings/validation';
 import { AppointmentsService } from './appointments.service';
+import { AutocompleteMapService } from '../shared/services/autcomplete-maps.service';
 
 @Component({
     selector: 'app-appointments',
@@ -61,12 +62,16 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     isMobile: boolean = false;
     notShowCalendar: boolean = false;
 
+    autocompleteOptions;
+    noCpError: boolean = false;
+
     constructor(
         private builder: FormBuilder,
         private appointmentsService: AppointmentsService,
         public settingGeneralService: SettingGeneralService,
         private utilService: UtilsService,
-        private deviceService: DeviceDetectorService
+        private deviceService: DeviceDetectorService,
+        private autocompleteService: AutocompleteMapService
     ) {
         this.isMobile = this.deviceService.isMobile();
 
@@ -89,32 +94,32 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        // install google maps
-        let node = document.createElement('script');
-        node.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1ilL7-RLiGsfPuDbTnNXIVSX0g_WbYeI&libraries=places&language=en';
-        node.type = 'text/javascript';
-        node.async = true;
-        document.getElementsByTagName('head')[0].appendChild(node);
+        this.autocompleteService.renderExternalScript(this.settingGeneralService.settings.locale).onload = () => {
+            this.autocompleteOptions = {
+                types: ['(regions)'],
+                componentRestrictions: { country: this.settingGeneralService.settings.cp_maps }
+            };
 
-        this.customer = 'a';
-        this.setHours = this.hours;
-        this.customerExternalForm = this.builder.group({
-            date: [{ 0: moment().format(this.settingGeneralService.settings.formatMoment) }, [Validators.required]],
-            hour: [null, [Validators.required]],
-            duration: [30, [Validators.required]],
-            name: [null, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
-            surnames: [null, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-            supplement: ['', [Validators.required]],
-            illness: ['', [Validators.required]],
-            prefix: ['', [Validators.required]],
-            mobile: [null, [Validators.required]],
-            email: [null, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
-            cp: [null, [Validators.required]]
-        });
+            this.customer = 'a';
+            this.setHours = this.hours;
+            this.customerExternalForm = this.builder.group({
+                date: [{ 0: moment().format(this.settingGeneralService.settings.formatMoment) }, [Validators.required]],
+                hour: [null, [Validators.required]],
+                duration: [30, [Validators.required]],
+                name: [null, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
+                surnames: [null, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                supplement: ['', [Validators.required]],
+                illness: ['', [Validators.required]],
+                prefix: ['', [Validators.required]],
+                mobile: [null, [Validators.required]],
+                email: [null, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
+                cp: [null, [Validators.required]]
+            });
+        }
+
     }
 
     show(errors) {
-        console.log(this.f.errors);
         for (let key in errors) {
             console.log(key);
             console.log(errors[key]);
@@ -165,7 +170,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         this.submitted = true;
 
         if (this.customerExternalForm.invalid) {
-            console.log(this.customerExternalForm);
             return;
         }
 
@@ -179,6 +183,17 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
                 this.customer = 'a';
             }
         ))
+    }
+
+    handleAddressChange($event) {
+        this.f['cp'].setValue(null);
+        this.noCpError = false;
+
+        this.f['cp'].setValue(this.autocompleteService.autoComplete($event));
+
+        if (null == this.f['cp'].value) {
+            this.noCpError = true;
+        }
     }
 
     ngOnDestroy(): void {

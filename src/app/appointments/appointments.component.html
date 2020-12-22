@@ -269,11 +269,16 @@
                 <div class="col-span-2">
                     <app-label-form for="cp" name="CP"></app-label-form>
 
-                    <input ngx-google-places-autocomplete class="inputClass" formControlName="cp"
+                    <input ngx-google-places-autocomplete class="inputClass"
+                        (onAddressChange)="handleAddressChange($event)" [options]='autocompleteOptions'
                         [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }" />
 
                     <ng-container *ngIf="submitted && f.cp.errors">
                         <app-error-form *ngIf="f.cp.errors.required" error="{{'errors.required' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                    <ng-container *ngIf="noCpError">
+                        <app-error-form error="Busque por su código postal">
                         </app-error-form>
                     </ng-container>
                 </div>

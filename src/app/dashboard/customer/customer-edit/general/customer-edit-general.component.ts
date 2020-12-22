@@ -15,6 +15,7 @@ import { UtilsService } from 'src/app/shared/services/util.service';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Illnes } from 'src/app/shared/interfaces/illnes.interface';
 import { OptionI } from 'src/app/shared/interfaces/option.interface';
+import { AutocompleteMapService } from 'src/app/shared/services/autcomplete-maps.service';
 
 @Component({
     selector: 'app-customer-edit-general',
@@ -40,12 +41,17 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
     private subscription = new Subscription();
 
+
+    autocompleteOptions;
+    noCpError: boolean = false;
+
     constructor(
         private builder: FormBuilder,
         public settingGeneralService: SettingGeneralService,
         private utilService: UtilsService,
         private snackbarService: SnackbarService,
-        private customerService: CustomerService
+        private customerService: CustomerService,
+        private autocompleteService: AutocompleteMapService
     ) {
         this.options.push({ id: 1, text: this.settingGeneralService.getLangText("options.yes") });
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
@@ -63,36 +69,43 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.under = this.customer.legal ? true : false;
-        this.dateOptions.defaultDate = moment(this.customer.dob).format(this.settingGeneralService.settings.formatMoment);
+        this.autocompleteService.renderExternalScript(this.settingGeneralService.settings.locale).onload = () => {
+            this.under = this.customer.legal ? true : false;
+            this.dateOptions.defaultDate = moment(this.customer.dob).format(this.settingGeneralService.settings.formatMoment);
 
-        this.settingGeneralService.changeCountry$.subscribe(
-            (settings) => {
-                this.legal_age = settings.legal_age;
-                this.dateOptions.locale = settings.flatpickr;
-                this.dateOptions.dateFormat = settings.formatFlatpickr;
-                this.dateOptions.maxDate = moment().format(settings.formatMoment);
-                this.dateOptions.defaultDate = moment(this.customer.dob).format(settings.formatMoment);
-            }
-        );
+            this.settingGeneralService.changeCountry$.subscribe(
+                (settings) => {
+                    this.legal_age = settings.legal_age;
+                    this.dateOptions.locale = settings.flatpickr;
+                    this.dateOptions.dateFormat = settings.formatFlatpickr;
+                    this.dateOptions.maxDate = moment().format(settings.formatMoment);
+                    this.dateOptions.defaultDate = moment(this.customer.dob).format(settings.formatMoment);
+                }
+            );
 
-        this.customerForm = this.builder.group({
-            id: this.customer.id,
-            name: [this.customer.name, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
-            surnames: [this.customer.surnames, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-            team_id: [this.customer.team_id, [Validators.required]],
-            dob: [{ 0: this.customer.dob }, [Validators.required]],
-            prefix: [this.customer.prefix, [Validators.required]],
-            mobile: [this.customer.mobile, [Validators.required]],
-            supplement: [this.customer.supplement, [Validators.required]],
-            illness: [this.customer.illness, [Validators.required]],
-            cp: [this.customer.cp, [Validators.required]],
-            email: [this.customer.email, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
-            legal_checkbox: [this.customer.legal ? this.customer.legal.name : null],
-            legal_name: [this.customer.legal ? this.customer.legal.name : null, [Validators.maxLength(this.validationMaxString.short_string)]],
-            legal_surnames: [this.customer.legal ? this.customer.legal.surnames : null, [Validators.maxLength(this.validationMaxString.long_string)]],
-            legal_identity: [this.customer.legal ? this.customer.legal.identity : null, [Validators.maxLength(this.validationMaxString.short_string)]],
-        });
+            this.customerForm = this.builder.group({
+                id: this.customer.id,
+                name: [this.customer.name, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
+                surnames: [this.customer.surnames, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                team_id: [this.customer.team_id, [Validators.required]],
+                dob: [null != this.customer.dob ? { 0: this.customer.dob } : null, [Validators.required]],
+                prefix: [this.customer.prefix, [Validators.required]],
+                mobile: [this.customer.mobile, [Validators.required]],
+                supplement: [this.customer.supplement, [Validators.required]],
+                illness: [this.customer.illness, [Validators.required]],
+                cp: [this.customer.cp, [Validators.required]],
+                email: [this.customer.email, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
+                legal_checkbox: [this.customer.legal ? this.customer.legal.name : null],
+                legal_name: [this.customer.legal ? this.customer.legal.name : null, [Validators.maxLength(this.validationMaxString.short_string)]],
+                legal_surnames: [this.customer.legal ? this.customer.legal.surnames : null, [Validators.maxLength(this.validationMaxString.long_string)]],
+                legal_identity: [this.customer.legal ? this.customer.legal.identity : null, [Validators.maxLength(this.validationMaxString.short_string)]],
+            });
+
+            this.autocompleteOptions = {
+                types: ['(regions)'],
+                componentRestrictions: { country: this.settingGeneralService.settings.cp_maps }
+            };
+        };
     }
 
     get f() { return this.customerForm.controls; }
@@ -141,6 +154,17 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
                 this.snackbarService.show('Algo ha pasado ....', 'danger');
             }
         ));
+    }
+
+    handleAddressChange($event) {
+        this.f['cp'].setValue(null);
+        this.noCpError = false;
+
+        this.f['cp'].setValue(this.autocompleteService.autoComplete($event));
+
+        if (null == this.f['cp'].value) {
+            this.noCpError = true;
+        }
     }
 
 

@@ -12,6 +12,7 @@ import { Validations } from 'src/app/shared/settings/validation';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { Illnes } from 'src/app/shared/interfaces/illnes.interface';
 import { OptionI } from 'src/app/shared/interfaces/option.interface';
+import { AutocompleteMapService } from 'src/app/shared/services/autcomplete-maps.service';
 
 
 @Component({
@@ -40,6 +41,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
     options: OptionI[] = [];
     illnesses: Illnes[] = [];
 
+    autocompleteOptions;
+    noCpError: boolean = false;
+
     constructor(
         private builder: FormBuilder,
         public settingGeneralService: SettingGeneralService,
@@ -47,6 +51,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
         private snackbarService: SnackbarService,
         private utilService: UtilsService,
         private authService: AuthenticationGeneralService,
+        private autocompleteService: AutocompleteMapService
     ) {
         this.options.push({ id: 1, text: this.settingGeneralService.getLangText("options.yes") });
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
@@ -63,18 +68,8 @@ export class CustomerComponent implements OnInit, OnDestroy {
         };
     }
 
-    renderExternalScript(): HTMLScriptElement {
-        // install google maps
-        let node = document.createElement('script');
-        node.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1ilL7-RLiGsfPuDbTnNXIVSX0g_WbYeI&libraries=places&language=en';
-        node.type = 'text/javascript';
-        node.async = true;
-        document.getElementsByTagName('head')[0].appendChild(node);
-        return node;
-    }
-
     ngOnInit(): void {
-        this.renderExternalScript().onload = () => {
+        this.autocompleteService.renderExternalScript(this.settingGeneralService.settings.locale).onload = () => {
             this.customerForm = this.builder.group({
                 name: ['', [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
                 surnames: ['', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
@@ -97,9 +92,23 @@ export class CustomerComponent implements OnInit, OnDestroy {
                     this.legal_age = settings.legal_age;
                 }
             );
+
+            this.autocompleteOptions = {
+                types: ['(regions)'],
+                componentRestrictions: { country: this.settingGeneralService.settings.cp_maps }
+            };
         }
+    }
 
+    handleAddressChange($event) {
+        this.f['cp'].setValue(null);
+        this.noCpError = false;
 
+        this.f['cp'].setValue(this.autocompleteService.autoComplete($event));
+
+        if (null == this.f['cp'].value) {
+            this.noCpError = true;
+        }
     }
 
     get f() { return this.customerForm.controls; }
