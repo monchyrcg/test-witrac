@@ -1,0 +1,15 @@
+.cell {
+    @apply rounded-md;
+    @apply text-center;
+}
+.day {
+    @apply p-2;
+    @apply cell;
+    @apply bg-nutriwell;
+}
+.meal{
+    @apply cell;
+    @apply p-3;
+    @apply bg-nutriwell-stone;
+    @apply text-white
+}

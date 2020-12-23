@@ -5,14 +5,14 @@ import * as moment from 'moment';
 import { FlatpickrOptions } from 'ng2-flatpickr';
 import { Subscription } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { CustomerExternal } from '../shared/interfaces/customers.interface';
-import { Illnes } from '../shared/interfaces/illnes.interface';
-import { OptionI } from '../shared/interfaces/option.interface';
-import { SettingGeneralService } from '../shared/services/settings-general.service';
-import { UtilsService } from '../shared/services/util.service';
-import { Validations } from '../shared/settings/validation';
+import { CustomerExternal } from '../../shared/interfaces/customers.interface';
+import { Illnes } from '../../shared/interfaces/illnes.interface';
+import { OptionI } from '../../shared/interfaces/option.interface';
+import { SettingGeneralService } from '../../shared/services/settings-general.service';
+import { UtilsService } from '../../shared/services/util.service';
+import { Validations } from '../../shared/settings/validation';
 import { AppointmentsService } from './appointments.service';
-import { AutocompleteMapService } from '../shared/services/autcomplete-maps.service';
+import { AutocompleteMapService } from '../../shared/services/autcomplete-maps.service';
 
 @Component({
     selector: 'app-appointments',

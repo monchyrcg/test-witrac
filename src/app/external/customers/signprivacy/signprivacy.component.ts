@@ -7,7 +7,7 @@ import { SignPrivacyService } from './signprivacy.service';
     templateUrl: './signprivacy.component.html',
     styleUrls: ['./signprivacy.component.scss']
 })
-export class SignPrivayComponent implements OnInit {
+export class SignPrivacyComponent implements OnInit {
 
     customer;
     customerCrypt;

@@ -9,26 +9,24 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { LoginComponent } from './auth/login/login.component';
 
 import { AuthGuard } from './shared/guards/auth.guard';
-import { SignPrivayComponent } from './signprivacy/signprivacy.component';
-import { AppointmentsModule } from './appointments/appointments.module';
+import { ExternalModule } from './external/external.module';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
-  { path: '', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'sign-privacy/:customer', component: SignPrivayComponent },
-  { path: 'appointments', loadChildren: './appointments/appointments.module#AppointmentsModule', },
-  { path: '**', component: NopagefoundComponent }
+	{ path: '', redirectTo: '', pathMatch: 'full' },
+	{ path: '', loadChildren: './dashboard/dashboard.module#DashboardModule', canActivate: [AuthGuard] },
+	{ path: 'external', loadChildren: './external/external.module#ExternalModule' },
+	{ path: 'login', component: LoginComponent },
+	{ path: '**', component: NopagefoundComponent }
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-    DashboardModule,
-    AuthRoutingModule,
-    AppointmentsModule
-  ],
-  exports: [RouterModule, DashboardModule]
+	imports: [
+		RouterModule.forRoot(routes),
+		DashboardModule,
+		AuthRoutingModule,
+		ExternalModule
+	],
+	exports: [RouterModule, DashboardModule]
 })
 export class AppRoutingModule {
 

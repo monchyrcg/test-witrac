@@ -26,13 +26,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FilterPipe } from './shared/pipes/filter.pipe';
 import { HighlightDirective } from './shared/directives/highlight.directive';
 import { MenuComponent } from './dashboard/home/menu/menu.component';
-import { SignPrivayComponent } from './signprivacy/signprivacy.component';
+import { ExternalModule } from './external/external.module';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		NopagefoundComponent,
-		SignPrivayComponent
 	],
 	imports: [
 		BrowserModule,
@@ -49,6 +48,7 @@ import { SignPrivayComponent } from './signprivacy/signprivacy.component';
 				deps: [HttpClient]
 			}
 		}),
+		ExternalModule
 	],
 	exports: [],
 	providers: [
