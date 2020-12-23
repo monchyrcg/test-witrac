@@ -33,12 +33,10 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
         Ng2FlatpickrModule,
         CustomerRoutingModule,
         GooglePlaceModule
-        // DragDropModule
     ],
     exports: [
         SharedModule,
         GooglePlaceModule
-        // DragDropModule
     ],
     providers: [],
 })

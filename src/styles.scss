@@ -13,35 +13,36 @@
 @import 'assets/fonts/muller/muller.scss';
 
 .inputClass {
-   @apply shadow;
-   @apply appearance-none;
-   @apply border;
-   @apply rounded;
-   @apply w-full;
-   @apply py-2;
-   @apply px-3;
-   @apply text-nutriwell;
-   @apply leading-tight; 
+  	@apply shadow;
+   	@apply appearance-none;
+   	@apply border;
+   	@apply rounded;
+   	@apply w-full;
+   	@apply py-2;
+   	@apply px-3;
+   	@apply text-nutriwell;
+   	@apply leading-tight; 
 }
 
 .inputClass:focus {
-    
+    @apply outline-none;
     @apply ring-nutriwell;
+    @apply border-nutriwell;
     @apply ring-opacity-50;
 }
 
 .inputClass_groups {
-  @extend .inputClass;
-  @apply pl-20;
+  	@extend .inputClass;
+  	@apply pl-20;
 }
 
 .customer-info {
-   @apply mt-2;
-   @apply flex;
-   @apply items-center;
-   @apply text-sm;
-   @apply leading-5;
-   @apply text-gray-500;
+   	@apply mt-2;
+   	@apply flex;
+   	@apply items-center;
+   	@apply text-sm;
+   	@apply leading-5;
+   	@apply text-gray-500;
 }
 
 .customer-info-svg {

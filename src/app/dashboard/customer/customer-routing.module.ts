@@ -12,7 +12,7 @@ const routes: Routes = [
         component: CustomerListComponent
     },
     {
-        path: ':hash',
+        path: ':customer',
         component: CustomerEditComponent
     },
     {

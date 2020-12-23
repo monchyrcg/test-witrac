@@ -116,7 +116,6 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
                 cp: [null, [Validators.required]]
             });
         }
-
     }
 
     show(errors) {
