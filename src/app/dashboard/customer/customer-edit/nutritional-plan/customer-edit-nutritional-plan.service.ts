@@ -13,6 +13,7 @@ export class CustomerEditNutritionalPlanService {
     getNutritionalPlanData() {
         return this.http.get(`${environment.apiUrl}/nutritional-plan`)
             .pipe(map((response: any) => {
+
                 return response.data;
             }));
     }

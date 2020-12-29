@@ -13,3 +13,11 @@
     @apply bg-nutriwell-stone;
     @apply text-white
 }
+
+.text-in-cell {
+    @apply flex;
+    @apply items-center;
+    @apply place-content-center;
+    @apply w-full;
+    @apply h-full;
+}
