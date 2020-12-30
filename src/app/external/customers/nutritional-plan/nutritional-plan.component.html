@@ -1,7 +1,22 @@
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="min-h-full min-w-full p-1">
+<div id="modal-container" class="hidden"></div>
+<div id="overlay" (click)="closeModal()" class="hidden"></div>
 
-        <div class="grid grid-cols-8 gap-4 pb-4">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="desktop; else mobile">
+    <div class="min-h-full min-w-full p-1">
+        <div class="py-6 px-4 bg-nutriwell sm:px-6 rounded-md">
+            <div class="flex items-center justify-between">
+                <h2 id="slide-over-heading" class="text-lg font-medium text-white">
+                    Nutritional Plan
+                </h2>
+            </div>
+            <div class="mt-1">
+                <p class="text-sm text-white">
+                    Get started by filling in the information below to create your new project.
+                </p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-8 gap-4 p-4">
             <div class="day flex place-content-center">
                 <svg class="w-6  h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +37,8 @@
         <div class="grid grid-cols-8 gap-4 pb-4">
             <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md">Lorem ipsum
                 dolor
-                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt dolorum,
+                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt
+                dolorum,
                 earum
                 error exercitationem ipsa
             </div>
@@ -35,7 +51,7 @@
 
             <div class="text-in-cell flex-col" *ngFor="let food of breakfasts">
                 <div class="grid grid-rows-{{food.length}} grid-flow-col gap-2">
-                    <div class="meal text-in-cell flex-col" *ngFor="let meal of food">
+                    <div class="meal text-in-cell flex-col" *ngFor="let meal of food" (click)="showInfoMeal(meal)">
                         <span>{{meal.name}}</span>
                     </div>
                 </div>
@@ -60,7 +76,8 @@
             <!-- <div class="bg-green-200 p-2 text-green-800 text-center font-semibold">DOMINGO</div> -->
             <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md">Lorem ipsum
                 dolor
-                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt dolorum,
+                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt
+                dolorum,
                 earum
                 error exercitationem ipsa
             </div>
@@ -98,7 +115,8 @@
             <!-- <div class="bg-green-200 p-2 text-green-800 text-center font-semibold">DOMINGO</div> -->
             <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md">Lorem ipsum
                 dolor
-                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt dolorum,
+                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt
+                dolorum,
                 earum
                 error exercitationem ipsa
             </div>
@@ -117,5 +135,69 @@
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+
+<ng-template #mobile>
+    <div class="flex-1 overflow-y-auto">
+        <div class="py-6 px-4 bg-nutriwell sm:px-6">
+            <div class="flex items-center justify-between">
+                <h2 id="slide-over-heading" class="text-lg font-medium text-white">
+                    Nutritional Plan
+                </h2>
+            </div>
+            <div class="mt-1">
+                <p class="text-sm text-white">
+                    Get started by filling in the information below to create your new project.
+                </p>
+            </div>
+        </div>
+        <div class="flex-1 flex flex-col justify-between">
+            <div class="px-4 divide-y divide-gray-200 sm:px-6">
+                <div class="space-y-6 pt-6 pb-5">
+                    <div>
+                        <label for="project_name" class="block text-sm font-medium text-gray-900">
+                            Change day
+                        </label>
+                        <div class="mt-1">
+                            <select class="bg-white inputClass" (change)="changeDay($event.target.value)">
+                                <option value="{{i}}" *ngFor="let day of week; let i = index">{{day.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="py-2">
+                                <p class="pb-1">Complements: </p>
+                                <div class="grid grid-cols-1 gap-4 pb-4">
+                                    <div class="bg-green-200 p-2 text-green-700  text-center rounded-md">
+                                        Lorem ipsum
+                                        dolor
+                                        sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum
+                                        deleniti
+                                        deserunt
+                                        dolorum,
+                                        earum
+                                        error exercitationem ipsa
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="py-2" *ngFor="let sche of schedule">
+                                <p class="pb-1">{{sche.name}}:</p>
+                                <div class="grid grid-cols-2 gap-2 pb-4">
+                                    <div class="meal text-in-cell flex-col" (click)="showInfoMeal(meal)"
+                                        *ngFor="let meal of sche.array">
+                                        <span>{{meal.name}}</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>

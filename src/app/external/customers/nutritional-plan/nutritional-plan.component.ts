@@ -1,4 +1,8 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { DeviceDetectorService } from "ngx-device-detector";
+import { ModalService } from "src/app/shared/services/modal.service";
+import { SettingGeneralService } from "src/app/shared/services/settings-general.service";
+import { NutritionalPlanInfoComponent } from "./info/info.component";
 import { NutritionalPlanService } from "./nutritional-plan.service";
 
 
@@ -9,27 +13,56 @@ import { NutritionalPlanService } from "./nutritional-plan.service";
 })
 export class NutritionalPlanComponent implements OnInit, OnDestroy {
 
+    desktop: boolean;
+
+    // desktop
     breakfasts;
     lunchs;
     meals;
     snacks;
     dinners;
 
+    // others
+    week;
+    schedule;
+
     constructor(
-        private nutritionalPlan: NutritionalPlanService
-    ) { }
+        private nutritionalPlan: NutritionalPlanService,
+        public settingGeneralService: SettingGeneralService,
+        private modalService: ModalService,
+        public deviceService: DeviceDetectorService
+    ) {
+        this.desktop = this.deviceService.isDesktop();
+    }
 
     ngOnInit(): void {
-        this.nutritionalPlan.getNutritionalPlan().subscribe(
+        this.nutritionalPlan.getNutritionalPlan(this.desktop).subscribe(
             response => {
-                console.log(response);
-                this.breakfasts = response.breakfasts;
-                this.lunchs = response.lunchs;
-                this.meals = response.meals;
-                this.snacks = response.snacks;
-                this.dinners = response.dinners;
+                if (this.desktop) {
+                    this.breakfasts = response.breakfasts;
+                    this.lunchs = response.lunchs;
+                    this.meals = response.meals;
+                    this.snacks = response.snacks;
+                    this.dinners = response.dinners;
+                } else {
+                    this.week = response.week;
+
+                    this.schedule = this.week[0].schedule;
+                }
             }
         );
+    }
+
+    showInfoMeal(meal) {
+        this.modalService.init(NutritionalPlanInfoComponent, { meal: meal }, { closeModal: this.closeModal.bind(this) });
+    }
+
+    closeModal() {
+        this.modalService.destroy();
+    }
+
+    changeDay(value) {
+        this.schedule = this.week[value].schedule;
     }
 
     ngOnDestroy(): void {
