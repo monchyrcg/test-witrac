@@ -1,27 +1,17 @@
 import { Input } from "@angular/core";
 import { Output } from "@angular/core";
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
     selector: "app-nutritional-plan-info",
-    templateUrl: "./info.component.html",
-    //styleUrls: ["./nutritional-plan.component.scss"]
+    templateUrl: "./info.component.html"
 })
-export class NutritionalPlanInfoComponent implements OnInit, OnDestroy {
+export class NutritionalPlanInfoComponent {
 
     @Input() meal;
     @Output() closeModal;
 
-    ngOnInit(): void {
-
-    }
-
     closeModalF() {
         this.closeModal();
     }
-
-    ngOnDestroy(): void {
-        //throw new Error("Method not implemented.");
-    }
-
 }
