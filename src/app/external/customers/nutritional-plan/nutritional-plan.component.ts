@@ -21,6 +21,7 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
     meals;
     snacks;
     dinners;
+    complements;
 
     // others
     week;
@@ -40,14 +41,16 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
             response => {
                 if (this.desktop) {
                     this.breakfasts = response.breakfasts;
-                    this.lunchs = response.lunchs;
+                    this.lunchs = response.lunches;
                     this.meals = response.meals;
                     this.snacks = response.snacks;
                     this.dinners = response.dinners;
+                    this.complements = response.complements;
                 } else {
                     this.week = response.week;
 
                     this.schedule = this.week[0].schedule;
+                    this.complements = response.complements_customer;
                 }
             }
         );

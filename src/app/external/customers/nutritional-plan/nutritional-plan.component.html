@@ -16,7 +16,7 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-8 gap-4 p-4">
+        <div class="grid grid-cols-8 gap-4 p-4 px-0">
             <div class="day flex place-content-center">
                 <svg class="w-6  h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -35,12 +35,8 @@
         </div>
 
         <div class="grid grid-cols-8 gap-4 pb-4">
-            <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md">Lorem ipsum
-                dolor
-                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt
-                dolorum,
-                earum
-                error exercitationem ipsa
+            <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md"
+                [innerHTML]="complements[0]">
             </div>
         </div>
 
@@ -73,13 +69,8 @@
         </div>
 
         <div class="grid grid-cols-8 gap-4 pb-1">
-            <!-- <div class="bg-green-200 p-2 text-green-800 text-center font-semibold">DOMINGO</div> -->
-            <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md">Lorem ipsum
-                dolor
-                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt
-                dolorum,
-                earum
-                error exercitationem ipsa
+            <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md"
+                [innerHTML]="complements[1]">
             </div>
         </div>
 
@@ -112,13 +103,8 @@
         </div>
 
         <div class="grid grid-cols-8 gap-4 pb-1">
-            <!-- <div class="bg-green-200 p-2 text-green-800 text-center font-semibold">DOMINGO</div> -->
-            <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md">Lorem ipsum
-                dolor
-                sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum deleniti deserunt
-                dolorum,
-                earum
-                error exercitationem ipsa
+            <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md"
+                [innerHTML]="complements[2]">
             </div>
         </div>
 
@@ -172,15 +158,8 @@
                             <li class="py-2">
                                 <p class="pb-1">Complements: </p>
                                 <div class="grid grid-cols-1 gap-4 pb-4">
-                                    <div class="bg-green-200 p-2 text-green-700  text-center rounded-md">
-                                        Lorem ipsum
-                                        dolor
-                                        sit amet, consectetur adipisicing elit. A architecto autem consequuntur cum
-                                        deleniti
-                                        deserunt
-                                        dolorum,
-                                        earum
-                                        error exercitationem ipsa
+                                    <div class="bg-green-200 p-2 text-green-700  text-center rounded-md"
+                                        [innerHTML]="complements[0]">
                                     </div>
                                 </div>
                             </li>
