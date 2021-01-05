@@ -8,6 +8,7 @@ export class AutocompleteMapService {
     renderExternalScript(locale): HTMLScriptElement {
         // install google maps
         let node = document.createElement('script');
+        console.log(locale);
         node.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB1ilL7-RLiGsfPuDbTnNXIVSX0g_WbYeI&libraries=places&language=' + locale;
         node.type = 'text/javascript';
         node.id = 'script_maps';

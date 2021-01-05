@@ -27,6 +27,9 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
     week;
     schedule;
 
+    //loading
+    isReady: boolean = false;
+
     constructor(
         private nutritionalPlan: NutritionalPlanService,
         public settingGeneralService: SettingGeneralService,
@@ -51,7 +54,10 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
 
                     this.schedule = this.week[0].schedule;
                     this.complements = response.complements_customer;
+
                 }
+                this.isReady = true;
+                console.log(this.isReady);
             }
         );
     }

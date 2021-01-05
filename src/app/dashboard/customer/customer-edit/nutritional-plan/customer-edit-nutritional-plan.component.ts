@@ -5,6 +5,7 @@ import { CustomerEditNutritionalPlanService } from "./customer-edit-nutritional-
 import { Day } from "src/app/shared/classes/day.class";
 import { ActivatedRoute } from "@angular/router";
 import { SnackbarService } from "src/app/shared/components/snackbar/snackbar.service";
+import { SettingGeneralService } from "src/app/shared/services/settings-general.service";
 
 @Component({
     selector: "customer-edit-nutritional-plan",
@@ -35,11 +36,17 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
 
     duration: number;
 
+    types = [];
     constructor(
         private route: ActivatedRoute,
         private nutritionalPlanService: CustomerEditNutritionalPlanService,
         private snackbarService: SnackbarService,
-    ) { }
+        private settingGeneralService: SettingGeneralService
+    ) {
+        this.types.push({ id: 1, text: this.settingGeneralService.getLangText('customer_edit.nutritional_plan.types.complements') });
+        this.types.push({ id: 2, text: this.settingGeneralService.getLangText('customer_edit.nutritional_plan.types.diets') });
+        this.types.push({ id: 3, text: this.settingGeneralService.getLangText('customer_edit.nutritional_plan.types.meals') });
+    }
 
 
     ngOnInit(): void {

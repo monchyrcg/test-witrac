@@ -2,7 +2,7 @@
     <div
         class="pb-5 border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-            Settings
+            {{ 'settings.settings' | translate }}
         </h3>
 
         <span class="sm:ml-3 flex rounded-md">
@@ -22,19 +22,19 @@
     <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 mb-10" *ngIf="!false">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Team</h3>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">{{ 'settings.change_team' | translate }}</h3>
                 <p class="mt-1 text-sm leading-5 text-gray-500">
-                    Change current team
+                    {{ 'settings.change_team' | translate }}
                 </p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
                 <div class="grid">
                     <div class="col-span-12 sm:col-span-3">
-                        <app-label-form for="name" name="{{ 'customer_create.team' | translate }}"></app-label-form>
+                        <app-label-form for="name" name="{{ 'settings.team' | translate }}"></app-label-form>
 
                         <select [(ngModel)]="current_team_id" class="bg-white inputClass" id="team"
                             (change)="changeTeam($event.target.value)">
-                            <option hidden selected value="">{{ 'customer_create.team' | translate }}</option>
+                            <option hidden selected value="">{{ 'settings.team' | translate }}</option>
                             <option value="{{ team.id }}"
                                 *ngFor="let team of (settingGeneralService.changeTeam$ | async).teams">{{ team.name }}
                             </option>
@@ -48,9 +48,9 @@
     <div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 mb-10" *ngIf="!false">
         <div class="md:grid md:grid-cols-3 md:gap-6">
             <div class="md:col-span-1">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Kinds of appointments</h3>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">{{ 'settings.appointments' | translate }}</h3>
                 <p class="mt-1 text-sm leading-5 text-gray-500">
-                    Decide your appointments colors to show in the calendar
+                    {{ 'settings.appointments_text' | translate }}
                 </p>
             </div>
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                     <div class="col-span-6 sm:col-span-3">
-                        <app-label-form for="name" name="Color"></app-label-form>
+                        <app-label-form for="name" name="{{ 'settings.color' | translate }}"></app-label-form>
 
                         <input class="border h-10 rounded w-full" id="name" type="color" [(ngModel)]="currentColor"
                             (ngModelChange)="changeColor($event)" />

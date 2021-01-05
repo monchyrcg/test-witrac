@@ -1,10 +1,11 @@
 <div class="grid grid-cols-2 gap-7 pb-5 pr-4 sm:pr-6">
     <div class="col-span-1">
-        <app-label-form for="duration" name="Duration">
+        <app-label-form for="duration" name="{{ 'customer_edit.nutritional_plan.duration' | translate }}">
         </app-label-form>
 
         <input class="inputClass" [(ngModel)]="duration" id="duration" type="number" min=0
-            [ngClass]="{ 'border border-red-500': submitted && duration == null }" placeholder="Duration">
+            [ngClass]="{ 'border border-red-500': submitted && duration == null }"
+            placeholder="{{ 'customer_edit.nutritional_plan.duration' | translate }}">
         <ng-container *ngIf="(submitted && duration == null)">
             <app-error-form error="{{'errors.required' | translate}}">
             </app-error-form>
@@ -30,13 +31,11 @@
 <div cdkDropListGroup class="grid grid-cols-3 gap-4 h-screen">
 
     <div class="">
-        <h2>Types</h2>
+        <h2>{{ 'customer_edit.nutritional_plan.type' | translate }}</h2>
         <div class="pb-3">
             <select id="location" name="location" (change)="changeType($event.target.value)" class="inputClass">
-                <option selected hidden>Types</option>
-                <option value="2">Diets</option>
-                <option value="3">Meals</option>
-                <option value="1">Complements</option>
+                <option selected hidden>{{ 'customer_edit.nutritional_plan.type' | translate }}</option>
+                <option value="{{type.id}}" *ngFor="let type of types">{{type.text}}</option>
             </select>
         </div>
 
@@ -53,7 +52,7 @@
                         class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
                         <div class="flex-1 px-4 py-2 text-sm truncate">
                             <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
-                            <p class="text-gray-500">{{item.type == 3 ? item.kilo_calories+' Kcal' : item.posology}}
+                            <p class="text-gray-500">{{ item.type == 3 ? item.kilo_calories+' Kcal' : item.doses }}
                             </p>
                         </div>
                     </div>
@@ -66,7 +65,7 @@
                 [ngClass]="{ 'border-red-500': submitted && complements.length == 0 }">
                 <span class="w-full flex items-center justify-between p-6 text-gray-200 bg-nutriwell"
                     [ngClass]="{ 'bg-red-500': submitted && complements.length == 0 }">
-                    Complementos
+                    {{ 'customer_edit.nutritional_plan.complements' | translate }}
                 </span>
 
                 <div cdkDropList [cdkDropListData]="complements" class="div-list" (cdkDropListDropped)="drop($event)"
@@ -112,7 +111,7 @@
     </div>
 
     <div class="col-span-2">
-        <h2 (click)="submit()" class="px-4 sm:px-6">Nutritional Plan</h2>
+        <h2 (click)="submit()" class="px-4 sm:px-6">{{ 'customer_edit.nutritional_plan.name' | translate }}</h2>
 
         <app-tabs>
             <app-tab *ngFor="let day of week; index as i" title="{{day.name}}">

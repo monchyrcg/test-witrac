@@ -136,5 +136,29 @@
     "appointment_calendar": {
         "confirm": "Confirm meeting",
         "edit": "Edit"
+    },
+    "external_nutritional_plan": {
+        "name": "Nutritional Plan",
+        "text": "Get started by filling in the information below to create your new project.",
+        "complements": "Complements",
+        "mobile": {
+            "select": "Change day"
+        }
+    },
+    "week": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+    },
+    "meals": {
+        "breakfast": "Breakfast",
+        "lunch": "Lunch",
+        "meal": "Meal",
+        "snack": "Snack",
+        "dinner": "Dinner"
     }
 }

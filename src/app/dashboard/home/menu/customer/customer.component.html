@@ -77,11 +77,11 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 w-full">
             <div class="mt-3 mx-4 text-left">
-                <app-label-form for="supplement" name="¿Estaría dispuesto a tomar suplementos?">
+                <app-label-form for="supplement" name="{{ 'customer_create.supplement' | translate }}">
                 </app-label-form>
                 <select formControlName="supplement" class="bg-white inputClass"
                     [ngClass]="{ 'border border-red-500': submitted && f.supplement.errors }" id="supplement">
-                    <option hidden selected value="">¿Estaría dispuesto a tomar suplementos?</option>
+                    <option hidden selected value="">{{ 'customer_create.supplement' | translate }}</option>
                     <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
                     </option>
                 </select>
@@ -92,11 +92,11 @@
             </div>
 
             <div class="mt-3 mx-4 text-left">
-                <app-label-form for="illness" name="Enfermedades">
+                <app-label-form for="illness" name="{{ 'customer_create.illness' | translate }}">
                 </app-label-form>
                 <select formControlName="illness" class="bg-white inputClass"
                     [ngClass]="{ 'border border-red-500': submitted && f.illness.errors }" id="illness">
-                    <option hidden selected value="">Enfermedades</option>
+                    <option hidden selected value="">{{ 'customer_create.illness' | translate }}</option>
                     <option value="{{ illness.id }}" *ngFor="let illness of illnesses">{{ illness.text }}
                     </option>
                 </select>

@@ -59,6 +59,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
         this.illnesses.push({ id: 1, text: this.settingGeneralService.getLangText('illnesses.diabetes') });
         this.illnesses.push({ id: 2, text: this.settingGeneralService.getLangText('illnesses.heart') });
         this.illnesses.push({ id: 3, text: this.settingGeneralService.getLangText('illnesses.cancer') });
+        this.illnesses.push({ id: 4, text: this.settingGeneralService.getLangText('illnesses.none') });
 
         this.dateOptions = {
             locale: this.settingGeneralService.settings.flatpickr,

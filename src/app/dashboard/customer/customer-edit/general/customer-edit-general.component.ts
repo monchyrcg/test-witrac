@@ -3,7 +3,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Spanish from 'flatpickr/dist/l10n/es.js';
 import { FlatpickrOptions } from 'ng2-flatpickr';
-import { Gender } from 'src/app/shared/interfaces/gender.interface';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import * as moment from 'moment';
 import { Countries } from 'src/app/shared/settings/country';
@@ -59,6 +58,7 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
         this.illnesses.push({ id: 1, text: this.settingGeneralService.getLangText('illnesses.diabetes') });
         this.illnesses.push({ id: 2, text: this.settingGeneralService.getLangText('illnesses.heart') });
         this.illnesses.push({ id: 3, text: this.settingGeneralService.getLangText('illnesses.cancer') });
+        this.illnesses.push({ id: 4, text: this.settingGeneralService.getLangText('illnesses.none') });
 
         this.dateOptions = {
             locale: this.settingGeneralService.settings.flatpickr,
