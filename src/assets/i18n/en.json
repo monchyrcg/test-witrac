@@ -37,10 +37,10 @@
         "text_button_register": "Registrar cliente",
         "name": "Name",
         "surnames": "Surnames",
-        "gender": "Gender",
+        "illness": "Illness",
+        "supplement": "Would you be willing to take supplements?",
         "team": "Team",
         "dob": "Birth date",
-        "job": "Job",
         "mobile": "Mobile",
         "email": "Email",
         "legal_text": "Texto legal",
@@ -74,10 +74,22 @@
         "message": "Send message",
         "save": "Save",
         "more": "More",
+        "next_appointment": "Next appointment at",
         "tabs": {
             "data": "Personal Data",
             "calendar": "Appointments",
             "shop": "Shop"
+        },
+        "nutritional_plan": {
+            "name": "Nutritional Plan",
+            "duration": "Duration",
+            "complements": "Complements",
+            "type": "Type",
+            "types": {
+                "diets": "Diets",
+                "meals": "Meals",
+                "complements": "Complements"
+            }
         }
     },
     "customer_privacy": {
@@ -131,7 +143,8 @@
     "illnesses": {
         "diabetes": "Diabetes",
         "heart": "Heart illnes",
-        "cancer": "Some kind of cancer"
+        "cancer": "Some kind of cancer",
+        "none": "None"
     },
     "appointment_calendar": {
         "confirm": "Confirm meeting",
@@ -160,5 +173,13 @@
         "meal": "Meal",
         "snack": "Snack",
         "dinner": "Dinner"
+    },
+    "settings": {
+        "settings": "Settings",
+        "team": "Team",
+        "change_team": "Change current team",
+        "appointments": "Kinds of appointments",
+        "appointments_text": "Decide your appointments colors to show in the calendar",
+        "color": "Color"
     }
 }
