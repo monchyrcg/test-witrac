@@ -8,7 +8,7 @@
     "test": "ng test -o",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "local": "ng serve -o -c local --host app.nutriwell.test --disableHostCheck --ssl --ssl-key /home/monchyrcg/projects/certificate/localhost.key  --ssl-cert /home/monchyrcg/projects/certificate/localhost.crt",
+    "local": "ng serve -o -c local --host app.nutriwell.test --disableHostCheck --ssl --ssl-key C:/wamp64/bin/apache/apache2.4.46/conf/key/private.key  --ssl-cert C:/wamp64/bin/apache/apache2.4.46/conf/key/certificate.crt",
     "develop": "ng build --prod --aot -c dev && npm run updated:dev",
     "develop-no": "ng build --prod --aot -c production",
     "updated:dev": "scp -r dist forge@188.166.106.234:/home/forge/app.naturhousedigital.com",

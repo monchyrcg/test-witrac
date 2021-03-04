@@ -194,6 +194,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(this.customer_id, this.appointment_id, body).subscribe(
             response => {
                 this.snackbarService.show('Nutritional created successfully', 'success');
+                window.location.href = 'https://stackoverflow.com';
             },
             error => {
                 this.snackbarService.show('Something was wrong', 'danger');
