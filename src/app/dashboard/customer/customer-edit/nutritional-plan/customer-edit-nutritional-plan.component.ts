@@ -57,6 +57,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
             response => {
                 this.dishes = response.meals;
                 this.menus = response.diets;
+                console.log(this.menus);
                 this.products = response.complements;
 
                 this.nutritionalPlanService.getNutritionalPlan(this.customer_id, this.appointment_id).subscribe(
@@ -111,7 +112,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
             if (event.item.data.type == 2) {
                 this.loading = true;
                 setTimeout(() => {
-                    this.generateMenu(event.item.data.days);
+                    this.generateMenu(event.item.data.days, event.item.data.is_shock);
                 }, 800);
             } else {
                 copyArrayItem(
@@ -124,9 +125,12 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         }
     }
 
-    private generateMenu(days) {
+    private generateMenu(days, is_shock: number) {
+        console.log(typeof days);
         let type_schedule = 0;
+
         days.forEach(element => {
+
             element.meals.forEach(meal => {
                 switch (meal.type_schedule) {
                     case 1:
@@ -144,6 +148,9 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
                     case 5:
                         type_schedule = 4;
                         break;
+                }
+                if (is_shock) {
+                    this.week[element.day].schedule[type_schedule].array = [];
                 }
                 this.week[element.day].schedule[type_schedule].array.push(meal);
             });
@@ -194,7 +201,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(this.customer_id, this.appointment_id, body).subscribe(
             response => {
                 this.snackbarService.show('Nutritional created successfully', 'success');
-                window.location.href = 'https://stackoverflow.com';
+                window.location.href = 'https://app.naturhousedigital.com/external/customers/nutritional-plan/asdf';
             },
             error => {
                 this.snackbarService.show('Something was wrong', 'danger');
