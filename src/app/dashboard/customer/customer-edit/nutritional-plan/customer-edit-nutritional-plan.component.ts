@@ -57,7 +57,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
             response => {
                 this.dishes = response.meals;
                 this.menus = response.diets;
-                console.log(this.menus);
+
                 this.products = response.complements;
 
                 this.nutritionalPlanService.getNutritionalPlan(this.customer_id, this.appointment_id).subscribe(
@@ -126,7 +126,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
     }
 
     private generateMenu(days, is_shock: number) {
-        console.log(typeof days);
+
         let type_schedule = 0;
 
         days.forEach(element => {
@@ -201,7 +201,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(this.customer_id, this.appointment_id, body).subscribe(
             response => {
                 this.snackbarService.show('Nutritional created successfully', 'success');
-                window.location.href = 'https://app.naturhousedigital.com/external/customers/nutritional-plan/asdf';
+                console.log(response);
             },
             error => {
                 this.snackbarService.show('Something was wrong', 'danger');

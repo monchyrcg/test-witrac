@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { ActivatedRoute } from "@angular/router";
 import { DeviceDetectorService } from "ngx-device-detector";
 import { ModalService } from "src/app/shared/services/modal.service";
 import { SettingGeneralService } from "src/app/shared/services/settings-general.service";
@@ -34,13 +35,16 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
         private nutritionalPlan: NutritionalPlanService,
         public settingGeneralService: SettingGeneralService,
         private modalService: ModalService,
-        public deviceService: DeviceDetectorService
+        public deviceService: DeviceDetectorService,
+        private route: ActivatedRoute
     ) {
         this.desktop = this.deviceService.isDesktop();
     }
 
     ngOnInit(): void {
-        this.nutritionalPlan.getNutritionalPlan(this.desktop).subscribe(
+        let customerEncrypt = this.route.snapshot.paramMap.get('customer');
+
+        this.nutritionalPlan.getNutritionalPlan(this.desktop, customerEncrypt).subscribe(
             response => {
                 if (this.desktop) {
                     this.breakfasts = response.breakfasts;
@@ -57,7 +61,6 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
 
                 }
                 this.isReady = true;
-                console.log(this.isReady);
             }
         );
     }

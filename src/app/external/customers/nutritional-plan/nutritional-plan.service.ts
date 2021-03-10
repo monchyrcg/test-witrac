@@ -10,9 +10,10 @@ export class NutritionalPlanService {
 
     constructor(private http: HttpClient) { }
 
-    getNutritionalPlan(is_desktop) {
+    getNutritionalPlan(is_desktop, customerEncrypt: string) {
         let params = new HttpParams;
         params = params.append('desktop', is_desktop);
+        params = params.append('customerEncrypt', customerEncrypt);
 
         return this.http.get(`${environment.apiUrl}/external/customer-nutritional-plan`, { params })
             .pipe(map((response: any) => {

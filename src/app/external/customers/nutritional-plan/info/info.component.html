@@ -1,5 +1,6 @@
 <div class="fixed z-40 inset-0 overflow-y-auto">
-    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20
+        text-center sm:block sm:p-0">
 
         <div class="fixed inset-0 transition-opacity" (click)="closeModalF()">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -7,37 +8,55 @@
 
         <!-- This element is to trick the browser into centering the modal contents. -->
         <span class="hidden sm:inline-block sm:align-middle sm:h-screen"></span>&#8203;
-
-
-        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:w-full sm:max-w-lg md:w-11/12 md:max-w-screen-md lg:w-11/12 lg:max-w-screen-md xl:w-1/2 xl:max-w-screen-xl"
+        <div class="inline-block align-bottom bg-white rounded-lg text-left
+            overflow-hidden shadow-xl transform transition-all sm:my-8
+            sm:align-middle sm:w-full sm:max-w-lg md:w-11/12 md:max-w-screen-md
+            lg:w-11/12 lg:max-w-screen-md xl:w-1/2 xl:max-w-screen-xl"
             role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-            <div class="bg-gray-50 px-4 pt-3 sm:px-6 sm:flex sm:flex-row-reverse cursor-pointer">
-                <svg class="w-6 h-6 pb-2 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+            <div class="bg-gray-50 px-4 pt-3 sm:px-6 sm:flex sm:flex-row-reverse
+                cursor-pointer">
+                <svg class="w-6 h-6 pb-2 cursor-pointer" fill="none"
+                    stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg" (click)="closeModalF()">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M6 18L18 6M6 6l12 12">
                     </path>
                 </svg>
             </div>
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="mb-4">
-                    <h3 class="text-lg leading-6 font-medium text-gray-900" id="renew-headline">
+                    <h3 class="text-lg leading-6 font-medium text-gray-900"
+                        id="renew-headline">
                         {{meal.name}}
                     </h3>
                     <div class="mt-2 sm:justify-between">
                         <div class="text-sm text-gray-500">
                             <p id="renew-description">
-                                {{meal.description}}
+                                {{meal.preparation}}
+                            </p>
+                        </div>
+                        <div class="text-sm text-gray-500">
+                            <p id="renew-description">
+                                {{meal.ingredients}}
                             </p>
                         </div>
                         <div class="mt-4 flex -space-x-1 overflow-hidden">
-                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-                                src="assets/images/allergens/crustacena_amber_50x50.png" alt="">
-                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-                                src="assets/images/allergens/crustacena_amber_50x50.png" alt="">
-                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-                                src="assets/images/allergens/crustacena_amber_50x50.png" alt="">
-                            <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white"
-                                src="assets/images/allergens/crustacena_amber_50x50.png" alt="">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2
+                                ring-white"
+                                src="assets/images/allergens/crustacena_amber_50x50.png"
+                                alt="">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2
+                                ring-white"
+                                src="assets/images/allergens/crustacena_amber_50x50.png"
+                                alt="">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2
+                                ring-white"
+                                src="assets/images/allergens/crustacena_amber_50x50.png"
+                                alt="">
+                            <img class="inline-block h-8 w-8 rounded-full ring-2
+                                ring-white"
+                                src="assets/images/allergens/crustacena_amber_50x50.png"
+                                alt="">
                         </div>
                     </div>
 
