@@ -21,7 +21,7 @@ export class CustomerEditAppointmentsListComponent implements OnInit {
 
     ngOnInit(): void {
         this.appointments = this.customer.appointments;
-        console.log(this.appointments);
+
         this.lengthLg = this.appointments.length > 4 ? 4 : this.appointments.length;
     }
 

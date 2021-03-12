@@ -3,7 +3,7 @@ import { CdkDrag, CdkDragDrop, copyArrayItem } from "@angular/cdk/drag-drop";
 import { Observable, Subscription } from "rxjs";
 import { CustomerEditNutritionalPlanService } from "./customer-edit-nutritional-plan.service";
 import { Day } from "src/app/shared/classes/day.class";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Route, Router } from "@angular/router";
 import { SnackbarService } from "src/app/shared/components/snackbar/snackbar.service";
 import { SettingGeneralService } from "src/app/shared/services/settings-general.service";
 
@@ -51,7 +51,8 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         private nutritionalPlanService: CustomerEditNutritionalPlanService,
         private snackbarService: SnackbarService,
         private settingGeneralService: SettingGeneralService,
-        public menuComponent: MenuComponent
+        public menuComponent: MenuComponent,
+        private router: Router
     ) {
         this.types.push({ id: 1, text: this.settingGeneralService.getLangText('customer_edit.nutritional_plan.types.complements') });
         this.types.push({ id: 2, text: this.settingGeneralService.getLangText('customer_edit.nutritional_plan.types.diets') });
@@ -63,10 +64,13 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
 
         this.crashSubscription = this.nutritionalPlanService.crashState.subscribe(
             (response) => {
+                let crashDayMails = [];
                 response.days.forEach(crashDay => {
                     this.cleanDay(crashDay);
+                    crashDayMails[crashDay] = this.crashDays[crashDay];
                 });
-                this.generateMenu(this.crashDays);
+
+                this.generateMenu(crashDayMails);
             }
         );
 
@@ -237,6 +241,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(this.customer_id, this.appointment_id, body).subscribe(
             response => {
                 this.snackbarService.show('Nutritional created successfully', 'success');
+                this.router.navigate(['/customers/' + this.customer_id]);
             },
             error => {
                 this.snackbarService.show('Something was wrong', 'danger');
