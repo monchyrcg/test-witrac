@@ -1,11 +1,15 @@
 <div class="grid grid-cols-2 gap-7 pb-5 pr-4 sm:pr-6">
     <div class="col-span-1">
-        <app-label-form for="duration" name="{{ 'customer_edit.nutritional_plan.duration' | translate }}">
+        <app-label-form for="duration" name="{{
+            'customer_edit.nutritional_plan.duration' | translate }}">
         </app-label-form>
 
-        <input class="inputClass" [(ngModel)]="duration" id="duration" type="number" min=0
-            [ngClass]="{ 'border border-red-500': submitted && duration == null }"
-            placeholder="{{ 'customer_edit.nutritional_plan.duration' | translate }}">
+        <input class="inputClass" [(ngModel)]="duration" id="duration"
+            type="number" min=0
+            [ngClass]="{ 'border border-red-500': submitted && duration == null
+            }"
+            placeholder="{{ 'customer_edit.nutritional_plan.duration' |
+            translate }}">
         <ng-container *ngIf="(submitted && duration == null)">
             <app-error-form error="{{'errors.required' | translate}}">
             </app-error-form>
@@ -13,119 +17,157 @@
     </div>
     <div class="col-span-1 flex flex-row-reverse pt-6">
         <span class="rounded-md">
-            <button type="button" class="customer-info-button-reverse" (click)="submit()">
+            <button type="button" class="customer-info-button-reverse"
+                (click)="submit()">
                 <!-- Heroicon name: check -->
-                <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                <svg class="customer-info-button-svg"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                     fill="currentColor">
                     <path fill-rule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414
+                        0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0
+                        011.414 0z"
                         clip-rule="evenodd" />
-                </svg>
-                {{ 'customer_edit.save' | translate }}
-            </button>
-        </span>
+                    </svg>
+                    {{ 'customer_edit.save' | translate }}
+                </button>
+            </span>
 
+        </div>
     </div>
-</div>
 
-<div cdkDropListGroup class="grid grid-cols-3 gap-4 h-screen">
+    <div cdkDropListGroup class="grid grid-cols-3 gap-4 h-screen">
 
-    <div class="">
-        <h2>{{ 'customer_edit.nutritional_plan.type' | translate }}</h2>
-        <div class="pb-3">
-            <select id="location" name="location" (change)="changeType($event.target.value)" class="inputClass">
-                <option selected hidden>{{ 'customer_edit.nutritional_plan.type' | translate }}</option>
-                <option value="{{type.id}}" *ngFor="let type of types">{{type.text}}</option>
-            </select>
-        </div>
-
-        <div cdkDropList [cdkDropListData]="items" id="general-drop" class="div-list" cdkDropListSortingDisabled
-            (cdkDropListDropped)="drop($event)" [cdkDropListEnterPredicate]="noReturnPredicate">
-            <ul class="my-3 grid grid-cols-1 gap-5 h-80 overflow-y-auto custom-scroll" *ngIf="items.length > 0">
-                <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of items" cdkDrag [cdkDragData]="item">
-                    <div
-                        class="flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm font-medium rounded-l-md">
-                        <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
-                            alt="">
-                    </div>
-                    <div
-                        class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                        <div class="flex-1 px-4 py-2 text-sm truncate">
-                            <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
-                            <p class="text-gray-500">{{ item.type == 3 ? item.kilo_calories+' Kcal' : item.doses }}
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <div class="pt-2">
-            <div class="div-meals border-2 rounded"
-                [ngClass]="{ 'border-red-500': submitted && complements.length == 0 }">
-                <span class="w-full flex items-center justify-between p-6 text-gray-200 bg-nutriwell"
-                    [ngClass]="{ 'bg-red-500': submitted && complements.length == 0 }">
-                    {{ 'customer_edit.nutritional_plan.complements' | translate }}
-                </span>
-
-                <div cdkDropList [cdkDropListData]="complements" class="div-list" (cdkDropListDropped)="drop($event)"
-                    [cdkDropListEnterPredicate]="isType">
-                    <ul class="my-3 grid grid-cols-1 gap-5">
-                        <li class="col-span-1 flex rounded-md px-2" *ngFor="let item of complements" cdkDrag
-                            [cdkDragData]="item">
-                            <div
-                                class=" flex-shrink-0 flex items-center justify-center w-16 bg-gray-200 text-white text-sm
-                                                                                                    font-medium rounded-l-md">
-                                <img src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="
-                                    alt="">
-                            </div>
-                            <div
-                                class="flex-1 flex items-center justify-between border-t border-r border-b border-gray-200 bg-white rounded-r-md truncate">
-                                <div class="flex-1 px-4 py-2 text-sm truncate">
-                                    <a href="#" class="text-gray-900 font-medium hover:text-gray-600">{{item.name}}</a>
-                                    <p class="text-gray-500">{{item.posology}}</p>
-                                </div>
-                                <div class="flex-shrink-0 pr-2">
-                                    <button (click)="deleteComplement(item)"
-                                        class="w-8 h-8 bg-white inline-flex items-center justify-center text-gray-400 rounded-full bg-transparent hover:text-gray-500 focus:outline-none">
-                                        <span class="sr-only">Delete</span>
-                                        <!-- Heroicon name: dots-vertical -->
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M6 18L18 6M6 6l12 12"></path>
-                                        </svg>
-                                    </button>
-                                </div>
-                            </div>
-
-                        </li>
-                    </ul>
-                </div>
+        <div class="">
+            <h2>{{ 'customer_edit.nutritional_plan.type' | translate }}</h2>
+            <div class="pb-3">
+                <select id="location" name="location"
+                    (change)="changeType($event.target.value)"
+                    class="inputClass">
+                    <option selected hidden>{{
+                        'customer_edit.nutritional_plan.type' | translate }}</option>
+                    <option value="{{type.id}}" *ngFor="let type of types">{{type.text}}</option>
+                </select>
             </div>
-            <ng-container *ngIf="submitted && complements.length == 0">
-                <app-error-form error="{{'errors.required' | translate}}">
-                </app-error-form>
-            </ng-container>
+
+            <div cdkDropList [cdkDropListData]="items" id="general-drop"
+                class="div-list" cdkDropListSortingDisabled
+                (cdkDropListDropped)="drop($event)"
+                [cdkDropListEnterPredicate]="noReturnPredicate">
+                <ul class="my-3 grid grid-cols-1 gap-5 h-80 overflow-y-auto
+                    custom-scroll" *ngIf="items.length> 0">
+                    <li class="col-span-1 flex rounded-md px-2" *ngFor="let item
+                        of items" cdkDrag [cdkDragData]="item">
+                        <div
+                            class="flex-shrink-0 flex items-center
+                            justify-center w-16 bg-gray-200 text-white text-sm
+                            font-medium rounded-l-md">
+                            <img
+                                src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="alt="">
+                        </div>
+                        <div
+                            class="flex-1 flex items-center justify-between
+                            border-t border-r border-b border-gray-200 bg-white
+                            rounded-r-md truncate">
+                            <div class="flex-1 px-4 py-2 text-sm truncate">
+                                <a href="#" class="text-gray-900 font-medium
+                                    hover:text-gray-600">{{item.name}}</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="pt-2">
+                <div class="div-meals border-2 rounded"
+                    [ngClass]="{ 'border-red-500': submitted &&
+                    complements.length == 0 }">
+                    <span class="w-full flex items-center justify-between p-6
+                        text-gray-200 bg-nutriwell"
+                        [ngClass]="{ 'bg-red-500': submitted &&
+                        complements.length == 0 }">
+                        {{ 'customer_edit.nutritional_plan.complements' |
+                        translate }}
+                    </span>
+
+                    <div cdkDropList [cdkDropListData]="complements"
+                        class="div-list" (cdkDropListDropped)="drop($event)"
+                        [cdkDropListEnterPredicate]="isType">
+                        <ul class="my-3 grid grid-cols-1 gap-5">
+                            <li class="col-span-1 flex rounded-md px-2"
+                                *ngFor="let item of complements" cdkDrag
+                                [cdkDragData]="item">
+                                <div
+                                    class="flex-shrink-0 flex items-center
+                                    justify-center w-16 bg-gray-200 text-white
+                                    text-sm
+                                    font-medium rounded-l-md">
+                                    <img
+                                        src="https://media.istockphoto.com/photos/rice-pudding-picture-id119394438?k=6&m=119394438&s=612x612&w=0&h=XH9wG_iHRFJWgJ-5DFvlyBmtIvfRIrbpW5oph5J5HVo="alt="">
+                                </div>
+                                <div
+                                    class="flex-1 flex items-center
+                                    justify-between border-t border-r border-b
+                                    border-gray-200 bg-white rounded-r-md
+                                    truncate">
+                                    <div class="flex-1 px-4 py-2 text-sm
+                                        truncate">
+                                        <a href="#" class="text-gray-900
+                                            font-medium hover:text-gray-600">{{item.name}}</a>
+                                    </div>
+                                    <div class="flex-shrink-0 pr-2">
+                                        <button (click)="deleteComplement(item)"
+                                            class="w-8 h-8 bg-white inline-flex
+                                            items-center justify-center
+                                            text-gray-400 rounded-full
+                                            bg-transparent hover:text-gray-500
+                                            focus:outline-none">
+                                            <span class="sr-only">Delete</span>
+                                            <!-- Heroicon name: dots-vertical -->
+                                            <svg class="w-6 h-6" fill="none"
+                                                stroke="currentColor" viewBox="0
+                                                0 24 24"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <ng-container *ngIf="submitted && complements.length == 0">
+                    <app-error-form error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="col-span-2">
+            <h2 (click)="submit()" class="px-4 sm:px-6">{{
+                'customer_edit.nutritional_plan.name' | translate }}</h2>
+            <app-tabs>
+                <app-tab *ngFor="let day of week; index as i"
+                    title="{{day.name}}">
+                    <div class="border-2 border-nutriwell rounded"
+                        *ngIf="!loading">
+                        <app-drag-drop *ngFor="let d of day.schedule"
+                            name="{{d.name}}" [items]="d.array"
+                            itemName="{{d.itemName}}" position="{{i}}"
+                            (cdkDropListDropped)="drop($event)"
+                            (delete)="deleteElement($event)">
+                        </app-drag-drop>
+                    </div>
+                </app-tab>
+            </app-tabs>
         </div>
     </div>
 
-    <div class="col-span-2">
-        <h2 (click)="submit()" class="px-4 sm:px-6">{{ 'customer_edit.nutritional_plan.name' | translate }}</h2>
-
-        <app-tabs>
-            <app-tab *ngFor="let day of week; index as i" title="{{day.name}}">
-                <div class="border-2 border-nutriwell rounded" *ngIf="!loading">
-                    <app-drag-drop *ngFor="let d of day.schedule" name="{{d.name}}" [items]="d.array"
-                        itemName="{{d.itemName}}" position="{{i}}" (cdkDropListDropped)="drop($event)"
-                        (delete)="deleteElement($event)">
-                    </app-drag-drop>
-                </div>
-            </app-tab>
-        </app-tabs>
-    </div>
-</div>
-
-<ng-container *ngIf="loading">
-    <app-loading></app-loading>
-</ng-container>
+    <ng-container *ngIf="loading">
+        <app-loading></app-loading>
+    </ng-container>
