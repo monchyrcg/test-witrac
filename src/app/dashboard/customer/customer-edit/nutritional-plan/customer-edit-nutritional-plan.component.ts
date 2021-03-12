@@ -87,7 +87,7 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
                 this.nutritionalPlanService.getNutritionalPlan(this.customer_id, this.appointment_id).subscribe(
                     res => {
                         this.complements = res.complements;
-                        this.duration = res.duration;
+                        this.duration = res.info.duration;
                         this.week = res.week;
                         this.nutritional_id = res.id;
 
