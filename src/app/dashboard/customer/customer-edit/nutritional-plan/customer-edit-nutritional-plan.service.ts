@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -9,6 +10,9 @@ import { environment } from 'src/environments/environment';
 export class CustomerEditNutritionalPlanService {
 
     constructor(private http: HttpClient) { }
+
+    private crashSubject = new Subject<any>();
+    public crashState = this.crashSubject.asObservable();
 
     getNutritionalPlanData() {
         return this.http.get(`${environment.apiUrl}/nutritional-plan`)
@@ -30,5 +34,9 @@ export class CustomerEditNutritionalPlanService {
             .pipe(map((response: any) => {
                 return response.data;
             }));
+    }
+
+    changeCrashState(days) {
+        this.crashSubject.next({ days: days });
     }
 }

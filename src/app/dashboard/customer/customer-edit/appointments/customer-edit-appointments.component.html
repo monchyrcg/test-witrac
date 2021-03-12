@@ -1,14 +1,17 @@
 <span class="relative z-0 inline-flex shadow-sm rounded-md mb-5">
-    <button type="button" (click)="changeView(true)" class="middle-button rounded-l-md"
+    <button type="button" (click)="changeView(true)" class="middle-button
+        rounded-l-md"
         [ngClass]="{'active': calendar}">Calendario
     </button>
-    <button type="button" (click)="changeView(false)" class="-ml-px middle-button rounded-r-md"
+    <button type="button" (click)="changeView(false)" class="-ml-px
+        middle-button rounded-r-md"
         [ngClass]="{'active': !calendar}">Listado
     </button>
 </span>
 
 <div *ngIf="!showAppointment">
-    <app-customer-edit-appointments-calendar [customer]="customer" *ngIf="calendar"
+    <app-customer-edit-appointments-calendar [customer]="customer"
+        *ngIf="calendar"
         (showAppointmentOutput)="showAppointmentO($event)">
     </app-customer-edit-appointments-calendar>
     <app-customer-edit-appointments-list [customer]="customer" *ngIf="!calendar"
@@ -16,16 +19,20 @@
 </div>
 
 
-<div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4" *ngIf="showAppointment"
+<div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200
+    mt-4" *ngIf="showAppointment"
     [@enterAnimation]>
     <div class="px-4 py-5 sm:px-6 cursor-pointer flex justify-between">
         <p>
             Informaciones de la cita
         </p>
         <div class="px-4 pt-3 sm:px-6 cursor-pointer">
-            <svg class="w-6 h-6 pb-2 cursor-pointer" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg" (click)="showAppointment = !showAppointment">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+            <svg class="w-6 h-6 pb-2 cursor-pointer" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg" (click)="showAppointment=
+                !showAppointment">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="2" d="M6 18L18 6M6 6l12 12">
                 </path>
             </svg>
         </div>
@@ -35,11 +42,15 @@
             <div class="col-span-3">
                 <div class="grid grid-cols-3 gap-5 lg:gap-10">
                     <div class="col-span-3 sm:col-span-1">
-                        <app-label-form for="five_meals" name="¿Has hecho las 5 comidas?"></app-label-form>
+                        <app-label-form for="five_meals" name="¿Has hecho las 5
+                            comidas?"></app-label-form>
 
-                        <select formControlName="five_meals" class="bg-white inputClass" id="five_meals">
-                            <option hidden selected value="">¿Has hecho las 5 comidas?</option>
-                            <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
+                        <select formControlName="five_meals" class="bg-white
+                            inputClass" id="five_meals">
+                            <option hidden selected value="">¿Has hecho las 5
+                                comidas?</option>
+                            <option value="{{ option.id }}" *ngFor="let option
+                                of options">{{ option.text }}
                             </option>
                         </select>
                         <ng-container *ngIf="submitted && f.five_meals.errors">
@@ -50,24 +61,32 @@
                     </div>
                     <div class="col-span-3 sm:col-span-1">
                         <app-label-form for="weight" name="Peso actual"></app-label-form>
-
-                        <input formControlName="weight" class="inputClass" id="weight" type="number" step="0.01" min="0"
-                            [ngClass]="{ 'border border-red-500': submitted && f.weight.errors }"
+                        <input formControlName="weight" class="inputClass"
+                            id="weight" type="number" step="0.01" min="0"
+                            [ngClass]="{ 'border border-red-500': submitted &&
+                            f.weight.errors }"
                             placeholder="Peso actual">
                         <ng-container *ngIf="submitted && f.weight.errors">
-                            <app-error-form *ngIf="f.weight.errors.required" error="{{'errors.required' | translate}}">
+                            <app-error-form *ngIf="f.weight.errors.required"
+                                error="{{'errors.required' | translate}}">
                             </app-error-form>
                         </ng-container>
                     </div>
                     <div class="col-span-3 sm:col-span-1">
-                        <app-label-form for="weight_objetive" name="Objetivo peso siguiente"></app-label-form>
+                        <app-label-form for="weight_objetive" name="Objetivo
+                            peso siguiente"></app-label-form>
 
-                        <input formControlName="weight_objetive" class="inputClass" id="weight_objetive" type="number"
+                        <input formControlName="weight_objetive"
+                            class="inputClass" id="weight_objetive"
+                            type="number"
                             step="0.01" min="0"
-                            [ngClass]="{ 'border border-red-500': submitted && f.weight_objetive.errors }"
+                            [ngClass]="{ 'border border-red-500': submitted &&
+                            f.weight_objetive.errors }"
                             placeholder="Objetivo peso siguiente">
-                        <ng-container *ngIf="submitted && f.weight_objetive.errors">
-                            <app-error-form *ngIf="f.weight_objetive.errors.required"
+                        <ng-container *ngIf="submitted &&
+                            f.weight_objetive.errors">
+                            <app-error-form
+                                *ngIf="f.weight_objetive.errors.required"
                                 error="{{'errors.required' | translate}}">
                             </app-error-form>
                         </ng-container>
@@ -78,75 +97,98 @@
             <div class="col-span-3 lg:col-span-1">
                 <app-label-form name="Agua"></app-label-form>
 
-                <input formControlName="water" class="inputClass" id="water" type="text"
-                    [ngClass]="{ 'border border-red-500': submitted && f.water.errors }" placeholder="Agua">
+                <input formControlName="water" class="inputClass" id="water"
+                    type="text"
+                    [ngClass]="{ 'border border-red-500': submitted &&
+                    f.water.errors }" placeholder="Agua">
                 <ng-container *ngIf="submitted && f.water.errors">
-                    <app-error-form *ngIf="f.water.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    <app-error-form *ngIf="f.water.errors.maxlength"
+                        error="{{'errors.maxlength' | translate}}">
                     </app-error-form>
                 </ng-container>
             </div>
             <div class="col-span-3 lg:col-span-1">
                 <app-label-form for="drugs" name="Digestión"></app-label-form>
-
-                <input formControlName="digestion" class="inputClass" id="digestion" type="text"
-                    [ngClass]="{ 'border border-red-500': submitted && f.digestion.errors }" placeholder="Digestión">
+                <input formControlName="digestion" class="inputClass"
+                    id="digestion" type="text"
+                    [ngClass]="{ 'border border-red-500': submitted &&
+                    f.digestion.errors }" placeholder="Digestión">
                 <ng-container *ngIf="submitted && f.digestion.errors">
-                    <app-error-form *ngIf="f.digestion.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    <app-error-form *ngIf="f.digestion.errors.maxlength"
+                        error="{{'errors.maxlength' | translate}}">
                     </app-error-form>
                 </ng-container>
             </div>
             <div class="col-span-3 lg:col-span-1">
                 <app-label-form for="allergies" name="Heces"></app-label-form>
-
-                <input formControlName="stools" class="inputClass" id="stools" type="text"
-                    [ngClass]="{ 'border border-red-500': submitted && f.stools.errors }" placeholder="Heces">
+                <input formControlName="stools" class="inputClass" id="stools"
+                    type="text"
+                    [ngClass]="{ 'border border-red-500': submitted &&
+                    f.stools.errors }" placeholder="Heces">
                 <ng-container *ngIf="submitted && f.stools.errors">
-                    <app-error-form *ngIf="f.stools.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    <app-error-form *ngIf="f.stools.errors.maxlength"
+                        error="{{'errors.maxlength' | translate}}">
                     </app-error-form>
                 </ng-container>
             </div>
             <div class="col-span-3">
                 <app-label-form name="Notes"></app-label-form>
 
-                <textarea formControlName="notes" class="inputClass" id="name" type="text"
-                    [ngClass]="{ 'border border-red-500': submitted && f.notes.errors }"
+                <textarea formControlName="notes" class="inputClass" id="name"
+                    type="text"
+                    [ngClass]="{ 'border border-red-500': submitted &&
+                    f.notes.errors }"
                     placeholder="Notes"> </textarea>
                 <ng-container *ngIf="submitted && f.notes.errors">
-                    <app-error-form *ngIf="f.notes.errors.required" error="{{'errors.required' | translate}}">
+                    <app-error-form *ngIf="f.notes.errors.required"
+                        error="{{'errors.required' | translate}}">
                     </app-error-form>
-                    <app-error-form *ngIf="f.notes.errors.maxlength" error="{{'errors.maxlength' | translate}}">
+                    <app-error-form *ngIf="f.notes.errors.maxlength"
+                        error="{{'errors.maxlength' | translate}}">
                     </app-error-form>
                 </ng-container>
             </div>
             <div class="col-span-3 flex flex-row-reverse">
-
                 <span class="shadow-sm rounded-md">
-                    <button type="button" class="customer-info-button-reverse" (click)="onSubmit()">
+                    <button type="button" class="customer-info-button-reverse"
+                        (click)="onSubmit()">
                         <!-- Heroicon name: check -->
-                        <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        <svg class="customer-info-button-svg"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20
+                            20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010
+                                1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0
+                                011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414
+                                0z"
                                 clip-rule="evenodd" />
-                        </svg>
-                        {{ 'customer_edit.save' | translate }}
-                    </button>
-                </span>
+                            </svg>
+                            {{ 'customer_edit.save' | translate }}
+                        </button>
+                    </span>
 
-                <span class="pr-2 rounded-md">
-                    <button type="button" class="customer-info-button" (click)="nutritionalPlan()">
-                        <!-- Heroicon name: beaker -->
-                        <svg class="customer-info-button-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
-                            </path>
-                        </svg>
-                        Nutritional Plan
-                    </button>
-                </span>
+                    <span class="pr-2 rounded-md">
+                        <button type="button" class="customer-info-button"
+                            (click)="nutritionalPlan()">
+                            <!-- Heroicon name: beaker -->
+                            <svg class="customer-info-button-svg" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="2"
+                                    d="M19.428 15.428a2 2 0
+                                    00-1.022-.547l-2.387-.477a6 6 0
+                                    00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05
+                                    15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2
+                                    2 0 00.586 1.414l5 5c1.26 1.26.367
+                                    3.414-1.415 3.414H4.828c-1.782
+                                    0-2.674-2.154-1.414-3.414l5-5A2 2 0 009
+                                    10.172V5L8 4z">
+                                </path>
+                            </svg>
+                            Nutritional Plan
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
-
     </div>
-</div>

@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { CdkDrag, CdkDragDrop, copyArrayItem } from "@angular/cdk/drag-drop";
-import { Subscription } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { CustomerEditNutritionalPlanService } from "./customer-edit-nutritional-plan.service";
 import { Day } from "src/app/shared/classes/day.class";
 import { ActivatedRoute } from "@angular/router";
 import { SnackbarService } from "src/app/shared/components/snackbar/snackbar.service";
 import { SettingGeneralService } from "src/app/shared/services/settings-general.service";
+
+import { MenuComponent } from "src/app/dashboard/home/menu/menu.component";
 
 @Component({
     selector: "customer-edit-nutritional-plan",
@@ -31,17 +33,25 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
 
     listProductsSubscription: Subscription = new Subscription;
 
+    private crashSubscription: Subscription;
+
     loading: boolean = true;
     submitted: boolean = false;
 
     duration: number;
 
     types = [];
+
+    probarO: Observable<any> = new Observable;
+
+    crashDays: [];
+
     constructor(
         private route: ActivatedRoute,
         private nutritionalPlanService: CustomerEditNutritionalPlanService,
         private snackbarService: SnackbarService,
-        private settingGeneralService: SettingGeneralService
+        private settingGeneralService: SettingGeneralService,
+        public menuComponent: MenuComponent
     ) {
         this.types.push({ id: 1, text: this.settingGeneralService.getLangText('customer_edit.nutritional_plan.types.complements') });
         this.types.push({ id: 2, text: this.settingGeneralService.getLangText('customer_edit.nutritional_plan.types.diets') });
@@ -50,6 +60,16 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(): void {
+
+        this.crashSubscription = this.nutritionalPlanService.crashState.subscribe(
+            (response) => {
+                response.days.forEach(crashDay => {
+                    this.cleanDay(crashDay);
+                });
+                this.generateMenu(this.crashDays);
+            }
+        );
+
         this.customer_id = this.route.snapshot.paramMap.get('customer');
         this.appointment_id = this.route.snapshot.paramMap.get('appointment');
 
@@ -85,6 +105,12 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         ));
     }
 
+    private cleanDay(day: number) {
+        for (let index = 0; index < 5; index++) {
+            this.week[day].schedule[index].array = [];
+        }
+    }
+
     changeType(value) {
         this.items = this.returnArray(value);
     }
@@ -110,10 +136,18 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
     drop(event: CdkDragDrop<object[]>) {
         if (event.container.id !== event.previousContainer.id) {
             if (event.item.data.type == 2) {
-                this.loading = true;
-                setTimeout(() => {
-                    this.generateMenu(event.item.data.days, event.item.data.is_shock);
-                }, 800);
+                const is_shock = event.item.data.is_shock;
+                let days = event.item.data.days;
+
+                if (!is_shock) {
+                    this.loading = true;
+                    setTimeout(() => {
+                        this.generateMenu(days);
+                    }, 800);
+                } else {
+                    this.crashDays = days;
+                    this.menuComponent.createCrashDay();
+                }
             } else {
                 copyArrayItem(
                     event.previousContainer.data,
@@ -125,37 +159,39 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         }
     }
 
-    private generateMenu(days, is_shock: number) {
+    private generateMenu(days) {
+        days.forEach(day => {
+            this.generateDay(day);
+        });
 
+        this.loading = false;
+    }
+
+
+    private generateDay(day) {
         let type_schedule = 0;
 
-        days.forEach(element => {
+        day.meals.forEach(meal => {
+            switch (meal.type_schedule) {
+                case 1:
+                    type_schedule = 0;
+                    break;
+                case 2:
+                    type_schedule = 1;
+                    break;
+                case 3:
+                    type_schedule = 2;
+                    break;
+                case 4:
+                    type_schedule = 3;
+                    break;
+                case 5:
+                    type_schedule = 4;
+                    break;
+            }
 
-            element.meals.forEach(meal => {
-                switch (meal.type_schedule) {
-                    case 1:
-                        type_schedule = 0;
-                        break;
-                    case 2:
-                        type_schedule = 1;
-                        break;
-                    case 3:
-                        type_schedule = 2;
-                        break;
-                    case 4:
-                        type_schedule = 3;
-                        break;
-                    case 5:
-                        type_schedule = 4;
-                        break;
-                }
-                if (is_shock) {
-                    this.week[element.day].schedule[type_schedule].array = [];
-                }
-                this.week[element.day].schedule[type_schedule].array.push(meal);
-            });
+            this.week[day.day].schedule[type_schedule].array.push(meal);
         });
-        this.loading = false;
     }
 
     isType(item: CdkDrag<any>) {
@@ -201,7 +237,6 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
         this.listProductsSubscription.add(this.nutritionalPlanService.saveNutritionalPlan(this.customer_id, this.appointment_id, body).subscribe(
             response => {
                 this.snackbarService.show('Nutritional created successfully', 'success');
-                console.log(response);
             },
             error => {
                 this.snackbarService.show('Something was wrong', 'danger');

@@ -30,6 +30,8 @@ import { HttpClient } from '@angular/common/http';
 import { ModalDataComponent } from '../shared/components/modals/data/modal-data.component';
 import { SettingsComponent } from './settings/settings.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { CustomerEditNutritionalPlanComponent } from './customer/customer-edit/nutritional-plan/customer-edit-nutritional-plan.component';
+import { CustomerEditCrashDietComponent } from './home/menu/crashDiet/customer-edit-crash-diet.component';
 
 /* export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
@@ -48,7 +50,8 @@ registerLocaleData(localeIt);
         ModalDataComponent,
         CustomerComponent,
         AppointmentComponent,
-        SettingsComponent
+        SettingsComponent,
+        CustomerEditCrashDietComponent
     ],
     imports: [
         CommonModule,

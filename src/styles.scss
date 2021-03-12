@@ -105,6 +105,9 @@
     @apply  h-5;
     @apply  w-5;
 }
+.customer-info-button-svg:focus {    
+    @apply outline-none;
+}
 
 @mixin scrollbars($sizeW, $sizeH, $foreground-color, $background-color: mix($foreground-color, white,  10%)) {
   &::-webkit-scrollbar {

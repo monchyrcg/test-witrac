@@ -25,5 +25,8 @@ export class ModalService {
 		this.domService.removeComponent();
 		document.getElementById(this.modalElementId).className = 'hidden';
 		document.getElementById(this.overlayElementId).className = 'hidden';
+
 	}
+
+
 }

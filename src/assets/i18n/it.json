@@ -89,6 +89,12 @@
                 "diets": "Diets",
                 "meals": "Meals",
                 "complements": "Complements"
+            },
+            "shock": {
+                "title": "Seleccionada el día",
+                "text": "Selecciona los días en los que la dieta surgira efecto",
+                "text_button_register": "Guardar",
+                "day": "Seleccionada los días"
             }
         }
     },
@@ -154,6 +160,9 @@
         "name": "Nutritional Plan",
         "text": "Get started by filling in the information below to create your new project.",
         "complements": "Complements",
+        "customer": "Cliente",
+        "duration": "Duración",
+        "dietist": "Dietista",
         "mobile": {
             "select": "Change day"
         }

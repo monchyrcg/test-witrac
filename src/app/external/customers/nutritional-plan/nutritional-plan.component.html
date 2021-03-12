@@ -3,27 +3,53 @@
     <div id="modal-container" class="hidden"></div>
     <div id="overlay" (click)="closeModal()" class="hidden"></div>
 
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="desktop; else mobile">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="desktop; else
+        mobile">
         <div class="min-h-full min-w-full p-1">
-            <div class="py-6 px-4 bg-nutriwell sm:px-6 rounded-md">
-                <div class="flex items-center justify-between">
-                    <h2 id="slide-over-heading" class="text-lg font-medium text-white">
-                        {{ 'external_nutritional_plan.name' | translate}}
-                    </h2>
+            <div class="grid grid-cols-2 gap-4 p-4 px-0">
+                <div class="py-6 px-4 bg-nutriwell sm:px-6 rounded-md">
+                    <div class="flex items-center justify-between">
+                        <h2 id="slide-over-heading" class="text-lg font-medium
+                            text-white">
+                            {{ 'external_nutritional_plan.name' | translate}}
+                        </h2>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-sm text-white">
+                            {{ 'external_nutritional_plan.customer' |
+                            translate}}: {{info.customer}}
+                        </p>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-sm text-white">
+                            {{ 'external_nutritional_plan.duration' |
+                            translate}}: {{info.duration}} semana/s
+                        </p>
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <p class="text-sm text-white">
-                        {{ 'external_nutritional_plan.text' | translate}}
-                    </p>
+                <div class="py-6 px-4 bg-nutriwell sm:px-6 rounded-md">
+                    <img class="w-16 h-16"
+                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        />
+                    <div class="mt-1">
+                        <p class="text-sm text-white">
+                            {{ 'external_nutritional_plan.dietist' |
+                            translate}}: {{info.user}}
+                        </p>
+                    </div>
                 </div>
             </div>
 
+
             <div class="grid grid-cols-8 gap-4 p-4 px-0">
                 <div class="day flex place-content-center">
-                    <svg class="w-6  h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0
+                            00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                         </path>
                     </svg>
                 </div>
@@ -37,19 +63,24 @@
             </div>
 
             <div class="grid grid-cols-8 gap-4 pb-4">
-                <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md"
+                <div class="col-start-2 col-end-9 bg-green-200 p-2
+                    text-green-700 text-center rounded-md"
                     [innerHTML]="complements[0]">
                 </div>
             </div>
 
             <div class="grid grid-cols-8 gap-4 pb-4">
                 <div class="day">
-                    <span class="text-in-cell">{{ 'meals.breakfast' | translate}}</span>
+                    <span class="text-in-cell">{{ 'meals.breakfast' |
+                        translate}}</span>
                 </div>
 
-                <div class="text-in-cell flex-col" *ngFor="let food of breakfasts">
-                    <div class="grid grid-rows-{{food.length}} grid-flow-col gap-2">
-                        <div class="meal text-in-cell flex-col" *ngFor="let meal of food" (click)="showInfoMeal(meal)">
+                <div class="text-in-cell flex-col" *ngFor="let food of
+                    breakfasts">
+                    <div class="grid grid-rows-{{food.length}} grid-flow-col
+                        gap-2">
+                        <div class="meal text-in-cell flex-col" *ngFor="let meal
+                            of food" (click)="showInfoMeal(meal)">
                             <span>{{meal.name}}</span>
                         </div>
                     </div>
@@ -62,8 +93,10 @@
                 </div>
 
                 <div *ngFor="let food of lunchs">
-                    <div class="grid grid-rows-{{food.length}} grid-flow-col gap-2">
-                        <div class="meal text-in-cell flex-col" *ngFor="let meal of food">
+                    <div class="grid grid-rows-{{food.length}} grid-flow-col
+                        gap-2">
+                        <div class="meal text-in-cell flex-col" *ngFor="let meal
+                            of food">
                             <span>{{meal.name}}</span>
                         </div>
                     </div>
@@ -71,7 +104,8 @@
             </div>
 
             <div class="grid grid-cols-8 gap-4 pb-1">
-                <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md"
+                <div class="col-start-2 col-end-9 bg-green-200 p-2
+                    text-green-700 text-center rounded-md"
                     [innerHTML]="complements[1]">
                 </div>
             </div>
@@ -82,8 +116,10 @@
                 </div>
 
                 <div *ngFor="let food of meals">
-                    <div class="grid grid-rows-{{food.length}} grid-flow-col gap-2">
-                        <div class="meal text-in-cell flex-col" *ngFor="let meal of food">
+                    <div class="grid grid-rows-{{food.length}} grid-flow-col
+                        gap-2">
+                        <div class="meal text-in-cell flex-col" *ngFor="let meal
+                            of food">
                             <span>{{meal.name}}</span>
                         </div>
                     </div>
@@ -96,8 +132,10 @@
                 </div>
 
                 <div *ngFor="let food of snacks">
-                    <div class="grid grid-rows-{{food.length}} grid-flow-col gap-2">
-                        <div class="meal text-in-cell flex-col" *ngFor="let meal of food">
+                    <div class="grid grid-rows-{{food.length}} grid-flow-col
+                        gap-2">
+                        <div class="meal text-in-cell flex-col" *ngFor="let meal
+                            of food">
                             <span>{{meal.name}}</span>
                         </div>
                     </div>
@@ -105,7 +143,8 @@
             </div>
 
             <div class="grid grid-cols-8 gap-4 pb-1">
-                <div class="col-start-2 col-end-9 bg-green-200 p-2 text-green-700  text-center rounded-md"
+                <div class="col-start-2 col-end-9 bg-green-200 p-2
+                    text-green-700 text-center rounded-md"
                     [innerHTML]="complements[2]">
                 </div>
             </div>
@@ -116,8 +155,10 @@
                 </div>
 
                 <div *ngFor="let food of dinners">
-                    <div class="grid grid-rows-{{food.length}} grid-flow-col gap-2">
-                        <div class="meal text-in-cell flex-col" *ngFor="let meal of food">
+                    <div class="grid grid-rows-{{food.length}} grid-flow-col
+                        gap-2">
+                        <div class="meal text-in-cell flex-col" *ngFor="let meal
+                            of food">
                             <span>{{meal.name}}</span>
                         </div>
                     </div>
@@ -129,28 +170,48 @@
 
     <ng-template #mobile>
         <div class="flex-1 overflow-y-auto">
-            <div class="py-6 px-4 bg-nutriwell sm:px-6">
-                <div class="flex items-center justify-between">
-                    <h2 id="slide-over-heading" class="text-lg font-medium text-white">
-                        {{ 'external_nutritional_plan.name' | translate}}
-                    </h2>
+            <div class="grid grid-cols-2 gap-4 p-4 px-4">
+                <div class="py-6 px-4 bg-nutriwell sm:px-6 rounded-md">
+                    <div class="flex items-center justify-between">
+                        <h2 id="slide-over-heading" class="text-lg font-medium
+                            text-white">
+                            {{ 'external_nutritional_plan.name' | translate}}
+                        </h2>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-sm text-white">
+                            Cliente: {{info.customer}}
+                        </p>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-sm text-white">
+                            Duracion: {{info.duration}} semana/s
+                        </p>
+                    </div>
                 </div>
-                <div class="mt-1">
-                    <p class="text-sm text-white">
-                        {{ 'external_nutritional_plan.text' | translate}}
-                    </p>
+                <div class="py-6 px-4 bg-nutriwell sm:px-6 rounded-md">
+                    <div class="mt-1">
+                        <p class="text-sm text-white">
+                            Dietista: {{info.user}}
+                        </p>
+                    </div>
                 </div>
             </div>
+
             <div class="flex-1 flex flex-col justify-between">
                 <div class="px-4 divide-y divide-gray-200 sm:px-6">
                     <div class="space-y-6 pt-6 pb-5">
                         <div>
-                            <label for="project_name" class="block text-sm font-medium text-gray-900">
-                                {{ 'external_nutritional_plan.mobile.select' | translate}}
+                            <label for="project_name" class="block text-sm
+                                font-medium text-gray-900">
+                                {{ 'external_nutritional_plan.mobile.select' |
+                                translate}}
                             </label>
                             <div class="mt-1">
-                                <select class="bg-white inputClass" (change)="changeDay($event.target.value)">
-                                    <option class="uppercase" value="{{i}}" *ngFor="let day of week; let i = index">
+                                <select class="bg-white inputClass"
+                                    (change)="changeDay($event.target.value)">
+                                    <option class="uppercase" value="{{i}}"
+                                        *ngFor="let day of week; let i= index">
                                         {{day.name}}
                                     </option>
                                 </select>
@@ -159,18 +220,27 @@
                         <div>
                             <ul class="divide-y divide-gray-200">
                                 <li class="py-2">
-                                    <p class="pb-1">{{ 'external_nutritional_plan.complements' | translate}}: </p>
+                                    <p class="pb-1">{{
+                                        'external_nutritional_plan.complements'
+                                        | translate}}: </p>
                                     <div class="grid grid-cols-1 gap-4 pb-4">
-                                        <span>{{ 'meals.breakfast' | translate}}:</span>
-                                        <div class="bg-green-200 p-2 text-green-700  text-center rounded-md"
+                                        <span>{{ 'meals.breakfast' |
+                                            translate}}:</span>
+                                        <div class="bg-green-200 p-2
+                                            text-green-700 text-center
+                                            rounded-md"
                                             [innerHTML]="complements[0]">
                                         </div>
                                         <span>{{ 'meals.meal' | translate}}:</span>
-                                        <div class="bg-green-200 p-2 text-green-700  text-center rounded-md"
+                                        <div class="bg-green-200 p-2
+                                            text-green-700 text-center
+                                            rounded-md"
                                             [innerHTML]="complements[1]">
                                         </div>
                                         <span>{{ 'meals.dinner' | translate}}:</span>
-                                        <div class="bg-green-200 p-2 text-green-700  text-center rounded-md"
+                                        <div class="bg-green-200 p-2
+                                            text-green-700 text-center
+                                            rounded-md"
                                             [innerHTML]="complements[2]">
                                         </div>
                                     </div>
@@ -179,7 +249,8 @@
                                 <li class="py-2" *ngFor="let sche of schedule">
                                     <p class="pb-1">{{sche.name}}:</p>
                                     <div class="grid grid-cols-2 gap-2 pb-4">
-                                        <div class="meal text-in-cell flex-col" (click)="showInfoMeal(meal)"
+                                        <div class="meal text-in-cell flex-col"
+                                            (click)="showInfoMeal(meal)"
                                             *ngFor="let meal of sche.array">
                                             <span>{{meal.name}}</span>
                                         </div>

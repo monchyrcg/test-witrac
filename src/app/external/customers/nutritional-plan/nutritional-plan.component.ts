@@ -28,6 +28,9 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
     week;
     schedule;
 
+    // both
+    info;
+
     //loading
     isReady: boolean = false;
 
@@ -60,6 +63,9 @@ export class NutritionalPlanComponent implements OnInit, OnDestroy {
                     this.complements = response.complements_customer;
 
                 }
+
+                this.info = response.info;
+
                 this.isReady = true;
             }
         );

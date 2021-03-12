@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
 import { Component } from '@angular/core';
 import { ModalInfoComponent } from 'src/app/shared/components/modals/info/modal-info.component';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
+import { CustomerEditNutritionalPlanService } from '../../customer/customer-edit/nutritional-plan/customer-edit-nutritional-plan.service';
 import { AppointmentComponent } from './appointment/appointment.component';
+import { CustomerEditCrashDietComponent } from './crashDiet/customer-edit-crash-diet.component';
 import { CustomerComponent } from './customer/customer.component';
 
 @Component({
@@ -11,9 +12,7 @@ import { CustomerComponent } from './customer/customer.component';
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss'],
 })
-/* @Injectable({
-    providedIn: 'root' // just before your class
-}) */
+
 export class MenuComponent {
 
     isOpenMobile = true;
@@ -26,11 +25,14 @@ export class MenuComponent {
     totalTeams: number;
     teams: any;
 
-    // @ViewChild("teamDiv") teamDiv: ElementRef;
+    crashDays: [];
+
+
 
     constructor(
         public settingGeneralService: SettingGeneralService,
         private modalService: ModalService,
+        private nutritionalPlanService: CustomerEditNutritionalPlanService
     ) { }
 
     changeValue(value?) {
@@ -40,12 +42,7 @@ export class MenuComponent {
     smallNavBar() {
         this.showSmallNavBar = !this.showSmallNavBar;
     }
-    /* changeTeam(id: number) {
-        this.teamDiv.nativeElement.style.display = 'none !important';
-    
-        this.subscription.add(this.settingGeneralService.changeTeam(id).subscribe(() => this.customerService.listCustomer(1, 15)));
-        this.divTeams = false;
-    } */
+
 
     showModal() {
         this.changeValue(true);
@@ -72,5 +69,20 @@ export class MenuComponent {
         }
 
         this.modalService.init(AppointmentComponent, inputs, { closeModal: this.closeModal.bind(this) })
+    }
+
+    createCrashDay() {
+        this.changeValue(true);
+        this.modalService.init(
+            CustomerEditCrashDietComponent,
+            this.settingGeneralService.getLangText('customer_edit.nutritional_plan.shock'),
+            { closeModal: this.closeModal.bind(this), sendDays: ($days) => { this.sendDays($days) } }
+        );
+    }
+
+    sendDays(days) {
+        this.closeModal();
+
+        this.nutritionalPlanService.changeCrashState(days);
     }
 }
