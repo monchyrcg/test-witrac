@@ -19,7 +19,7 @@ export class Countries {
             'flatpickr': Spanish.es,
             'formatMoment': 'DD-MM-YYYY',
             'formatFlatpickr': 'd-m-Y',
-            'cp_maps': ['es']
+            'zip_maps': ['es']
         },
         'us': {
             'locale': 'en',
@@ -29,7 +29,7 @@ export class Countries {
             'flatpickr': english,
             'formatMoment': 'MM-DD-YYYY',
             'formatFlatpickr': 'm-d-Y',
-            'cp_maps': ['gb', 'us']
+            'zip_maps': ['gb', 'us']
         },
         'fr': {
             'locale': 'fr',
@@ -39,7 +39,7 @@ export class Countries {
             'flatpickr': French.fr,
             'formatMoment': 'DD-MM-YYYY',
             'formatFlatpickr': 'd-m-Y',
-            'cp_maps': ['fr']
+            'zip_maps': ['fr']
         },
         'it': {
             'locale': 'it',
@@ -49,7 +49,7 @@ export class Countries {
             'flatpickr': Italian.it,
             'formatMoment': 'DD-MM-YYYY',
             'formatFlatpickr': 'd-m-Y',
-            'cp_maps': ['it']
+            'zip_maps': ['it']
         },
         'pl': {
             'locale': 'en',
@@ -59,7 +59,7 @@ export class Countries {
             'flatpickr': Polish.pl,
             'formatMoment': 'DD-MM-YYYY',
             'formatFlatpickr': 'd-m-Y',
-            'cp_maps': ['pl']
+            'zip_maps': ['pl']
         },
     };
 }

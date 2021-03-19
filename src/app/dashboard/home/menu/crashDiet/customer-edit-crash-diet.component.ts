@@ -1,7 +1,6 @@
 import { Component, Input, Output } from "@angular/core";
 import { Day } from "src/app/shared/interfaces/day.interface";
 import { SettingGeneralService } from "src/app/shared/services/settings-general.service";
-import { runInThisContext } from "vm";
 
 @Component({
     selector: 'app-customer-edit-crash-diet',

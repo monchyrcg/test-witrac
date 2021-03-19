@@ -40,7 +40,6 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
     private subscription = new Subscription();
 
-
     autocompleteOptions;
     noCpError: boolean = false;
 
@@ -93,7 +92,7 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
                 mobile: [this.customer.mobile, [Validators.required]],
                 supplement: [this.customer.supplement, [Validators.required]],
                 illness: [this.customer.illness, [Validators.required]],
-                cp: [this.customer.cp, [Validators.required]],
+                zip: [this.customer.zip, [Validators.required]],
                 email: [this.customer.email, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
                 legal_checkbox: [this.customer.legal ? this.customer.legal.name : null],
                 legal_name: [this.customer.legal ? this.customer.legal.name : null, [Validators.maxLength(this.validationMaxString.short_string)]],
@@ -103,7 +102,7 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
             this.autocompleteOptions = {
                 types: ['(regions)'],
-                componentRestrictions: { country: this.settingGeneralService.settings.cp_maps }
+                componentRestrictions: { country: this.settingGeneralService.settings.zip_maps }
             };
         };
     }
@@ -157,12 +156,12 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
     }
 
     handleAddressChange($event) {
-        this.f['cp'].setValue(null);
+        this.f['zip'].setValue(null);
         this.noCpError = false;
 
-        this.f['cp'].setValue(this.autocompleteService.autoComplete($event));
+        this.f['zip'].setValue(this.autocompleteService.autoComplete($event));
 
-        if (null == this.f['cp'].value) {
+        if (null == this.f['zip'].value) {
             this.noCpError = true;
         }
     }

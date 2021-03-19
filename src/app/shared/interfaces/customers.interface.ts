@@ -6,7 +6,7 @@ export interface CustomerCreated {
     dob: any;
     supplement: boolean;
     illness: number;
-    cp: string;
+    zip: string;
     prefix: string,
     mobile: string,
     legal_checkbox?: string,
@@ -56,7 +56,7 @@ export interface CustomerExternal {
     mobile: string,
     supplement: boolean;
     illness: number;
-    cp: string;
+    zip: string;
     date: any;
     hour: any;
 }

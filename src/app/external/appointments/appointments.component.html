@@ -3,36 +3,44 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <div class="flex-shrink-0 flex items-center">
-                    <img class="block lg:hidden h-8 w-auto" src="assets/images/logo" alt="Naturhouse">
-                    <img class="hidden lg:block h-8 w-auto" src="assets/images/logo-pdf-white.png" alt="Naturhouse">
+                    <img class="block lg:hidden h-8 w-auto" src="assets/images/logo"
+                        alt="Naturhouse">
+                    <img class="hidden lg:block h-8 w-auto" src="assets/images/logo-pdf-white.png"
+                        alt="Naturhouse">
                 </div>
                 <div class="hidden sm:-my-px sm:ml-6 space-x-2.5 md:flex">
-                    <a class="inline-flex items-center px-1 pt-1 text-white" href="https://naturhouse.es/alimentacion"
+                    <a class="inline-flex items-center px-1 pt-1 text-white"
+                        href="https://naturhouse.es/alimentacion"
                         target="_blank">
                         Alimentación
                     </a>
 
-                    <a class="inline-flex items-center px-1 pt-1 text-white" href="https://naturhouse.es/adelgazamiento"
+                    <a class="inline-flex items-center px-1 pt-1 text-white"
+                        href="https://naturhouse.es/adelgazamiento"
                         target="_blank">
                         Adelgazamiento
                     </a>
 
-                    <a class="inline-flex items-center px-1 pt-1 text-white" href="https://naturhouse.es/detox"
+                    <a class="inline-flex items-center px-1 pt-1 text-white"
+                        href="https://naturhouse.es/detox"
                         target="_blank">
                         Detox
                     </a>
 
-                    <a class="inline-flex items-center px-1 pt-1 text-white" href="https://naturhouse.es/belleza"
+                    <a class="inline-flex items-center px-1 pt-1 text-white"
+                        href="https://naturhouse.es/belleza"
                         target="_blank">
                         Belleza
                     </a>
 
-                    <a class="inline-flex items-center px-1 pt-1 text-white" href="https://naturhouse.es/bienstar"
+                    <a class="inline-flex items-center px-1 pt-1 text-white"
+                        href="https://naturhouse.es/bienstar"
                         target="_blank">
                         Bienstar
                     </a>
 
-                    <a class="inline-flex items-center px-1 pt-1 text-white" href="https://naturhouse.es/packs"
+                    <a class="inline-flex items-center px-1 pt-1 text-white"
+                        href="https://naturhouse.es/packs"
                         target="_blank">
                         Packs
                     </a>
@@ -40,272 +48,331 @@
             </div>
             <div class="-mr-2 flex items-center md:hidden">
                 <!-- Mobile menu button -->
-                <button (click)="isOpenMobile = !isOpenMobile"
-                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
+                <button (click)="isOpenMobile= !isOpenMobile"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400
+                    hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100
+                    focus:text-gray-500">
                     <!-- Menu open: "hidden", Menu closed: "block" -->
-                    <svg class="block h-6 w-6" [ngClass]="{ hidden:!isOpenMobile}" stroke="currentColor" fill="none"
+                    <svg class="block h-6 w-6" [ngClass]="{ hidden:!isOpenMobile}"
+                        stroke="currentColor" fill="none"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <!-- Menu open: "block", Menu closed: "hidden" -->
-                    <svg class="hidden h-6 w-6" [ngClass]="{ hidden:isOpenMobile}" stroke="currentColor" fill="none"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div class="md:hidden" [ngClass]="{ hidden:isOpenMobile}">
-        <div class="pt-2 pb-3 space-y-1">
-            <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/alimentacion" target="_blank">
-                Alimentación
-            </a>
-
-            <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/adelgazamiento" target="_blank">
-                Adelgazamiento
-            </a>
-
-            <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/detox" target="_blank">
-                Detox
-            </a>
-
-            <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/belleza" target="_blank">
-                Belleza
-            </a>
-
-            <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/bienstar" target="_blank">
-                Bienstar
-            </a>
-
-            <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/packs" target="_blank">
-                Packs
-            </a>
-        </div>
-    </div>
-</nav>
-
-
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="customer; else loading;">
-    <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
-    <div class="max-w-3xl mx-auto">
-        <div>
-            <ul class="grid grid-cols-1 gap-6">
-                <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow divide-y divide-gray-200">
-                    <div class="flex-1 flex flex-col p-8">
-                        <img class="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-full"
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
-                            alt="">
-                        <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper</h3>
-                        <dl class="mt-1 flex-grow flex flex-col justify-between">
-                            <dt class="sr-only">Title</dt>
-                            <dd class="text-gray-500 text-sm">Paradigm Representative</dd>
-                            <dt class="sr-only">Role</dt>
-                            <dd class="mt-3">
-                                <span
-                                    class="px-2 py-1 text-green-800 text-xs font-medium bg-green-100 rounded-full">Admin</span>
-                            </dd>
-                        </dl>
+                        </svg>
+                        <!-- Menu open: "block", Menu closed: "hidden" -->
+                        <svg class="hidden h-6 w-6" [ngClass]="{ hidden:isOpenMobile}"
+                            stroke="currentColor" fill="none"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
                     </div>
-                </li>
-            </ul>
-        </div>
-        <div [formGroup]="customerExternalForm">
-
-            <div class="flex items-center p-3 flex-col sm:flex-row" *ngIf="stepNumber == 1" [@enterAnimation]>
-
-                <div class="flex-1" [ngClass]="{'hidden': isMobile && notShowCalendar}">
-                    <ng2-flatpickr #calendar addClass="inputClass hidden" [config]="dateOptions" (change)="changeDay()"
-                        formControlName="date">
-                    </ng2-flatpickr>
                 </div>
+            </div>
 
-                <div class="h-64 overflow-y-auto w-full sm:w-1/2 pt-10 sm:pt-0 custom-scroll pr-2 sm:block"
-                    [ngClass]="{'hidden': isMobile && !notShowCalendar}">
+            <div class="md:hidden" [ngClass]="{ hidden:isOpenMobile}">
+                <div class="pt-2 pb-3 space-y-1">
+                    <a class="block pl-3 pr-4 py-2 text-white"
+                        href="https://naturhouse.es/alimentacion" target="_blank">
+                        Alimentación
+                    </a>
 
-                    <ul class="space-y-4" role="radiogroup" aria-labelledby="radiogroup-label"
-                        *ngIf="setHours ; else loadingHours;">
-                        <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
-                            class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none"
-                            *ngFor="let hour of hours">
-                            <div class="rounded-lg border border-gray-300 bg-white px-6 py-4 hover:border-gray-400 text-center text-sm"
-                                (click)="setHour(hour)">
-                                <p class="font-medium text-gray-900">
-                                    {{hour}}
-                                </p>
+                    <a class="block pl-3 pr-4 py-2 text-white"
+                        href="https://naturhouse.es/adelgazamiento" target="_blank">
+                        Adelgazamiento
+                    </a>
+
+                    <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/detox"
+                        target="_blank">
+                        Detox
+                    </a>
+
+                    <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/belleza"
+                        target="_blank">
+                        Belleza
+                    </a>
+
+                    <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/bienstar"
+                        target="_blank">
+                        Bienstar
+                    </a>
+
+                    <a class="block pl-3 pr-4 py-2 text-white" href="https://naturhouse.es/packs"
+                        target="_blank">
+                        Packs
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" *ngIf="customer; else loading;">
+            <!-- We've used 3xl here, but feel free to try other max-widths based on your needs -->
+            <div class="max-w-3xl mx-auto">
+                <div>
+                    <ul class="grid grid-cols-1 gap-6">
+                        <li class="col-span-1 flex flex-col text-center bg-white rounded-lg shadow
+                            divide-y divide-gray-200">
+                            <div class="flex-1 flex flex-col p-8">
+                                <img class="w-32 h-32 flex-shrink-0 mx-auto bg-black rounded-full"
+                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=4&amp;w=256&amp;h=256&amp;q=60"
+                                    alt="">
+                                <h3 class="mt-6 text-gray-900 text-sm font-medium">Jane Cooper</h3>
+                                <dl class="mt-1 flex-grow flex flex-col justify-between">
+                                    <dt class="sr-only">Title</dt>
+                                    <dd class="text-gray-500 text-sm">Paradigm Representative</dd>
+                                    <dt class="sr-only">Role</dt>
+                                    <dd class="mt-3">
+                                        <span
+                                            class="px-2 py-1 text-green-800 text-xs font-medium
+                                            bg-green-100 rounded-full">Admin</span>
+                                    </dd>
+                                </dl>
                             </div>
                         </li>
-
                     </ul>
-                    <ng-template #loadingHours>
-                        <ul class="space-y-4" role="radiogroup" aria-labelledby="radiogroup-label">
-                            <li id="radiogroup-option-0" tabindex="0" role="radio" aria-checked="true"
-                                class="group relative bg-white rounded-lg shadow-sm cursor-pointer focus:outline-none">
-                                <span
-                                    class="text-green-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0 right-1/2">
-                                    <i class="fas fa-circle-notch fa-spin fa-5x"></i>
-                                </span>
-                            </li>
-                        </ul>
-                    </ng-template>
                 </div>
-            </div>
+                <div [formGroup]="customerExternalForm">
 
-            <div class="grid grid-cols-2 gap-8 p-3" *ngIf="stepNumber == 2" [@enterAnimation]>
-                <div class="col-span-2">
-                    <h4 class="text-2xl pb-2.5">{{ 'appointment_calendar.confirm' | translate }}</h4>
-                    {{ f.date.value[0] | date }} {{f.hour.value}}
-                    <span class="text-sm cursor-pointer" (click)="comeBack()">{{ 'appointment_calendar.edit' | translate
-                        }}</span>
-                </div>
+                    <div class="flex items-center p-3 flex-col sm:flex-row" *ngIf="stepNumber == 1"
+                        [@enterAnimation]>
 
-                <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="name" name="{{ 'customer_create.name' | translate }}"></app-label-form>
-
-                    <input formControlName="name" class="inputClass" id="name" type="text"
-                        [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
-                        placeholder="{{ 'customer_create.name' | translate }}">
-                    <ng-container *ngIf="submitted && f.name.errors">
-                        <app-error-form *ngIf="f.name.errors.required" error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                        <app-error-form *ngIf="f.name.errors.maxlength"
-                            error="{{'errors.maxLength' | translate:{number: validationMaxString.short_string} }}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
-
-                <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="name" name="{{ 'customer_create.surnames' | translate }}">
-                    </app-label-form>
-
-                    <input formControlName="surnames" class="inputClass" id="surnames" type="text"
-                        [ngClass]="{ 'border border-red-500': submitted && f.surnames.errors }"
-                        placeholder="{{ 'customer_create.surnames' | translate }}">
-                    <ng-container *ngIf="submitted && f.surnames.errors">
-                        <app-error-form *ngIf="f.surnames.errors.required" error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                        <app-error-form *ngIf="f.surnames.errors.maxlength"
-                            error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
-
-                <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="mobile" name="{{ 'customer_create.mobile' | translate }}">
-                    </app-label-form>
-                    <div class="mt-1 relative rounded-md shadow-sm">
-                        <div class="absolute inset-y-0 left-0 flex items-center">
-                            <select aria-label="prefix" formControlName="prefix"
-                                [ngClass]="{ 'border border-red-500': submitted && f.prefix.errors }"
-                                class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5 focus:border-nutriwell-default">
-                                <option hidden selected value="">Prefix</option>
-                                <option value="+34">+34</option>
-                                <option value="+39">+39</option>
-                                <option value="+33">+33</option>
-                                <option value="+48">+48</option>
-                                <option value="+1">+1</option>
-                            </select>
+                        <div class="flex-1" [ngClass]="{'hidden': isMobile && notShowCalendar}">
+                            <ng2-flatpickr #calendar addClass="inputClass hidden"
+                                [config]="dateOptions" (change)="changeDay()"
+                                formControlName="date">
+                            </ng2-flatpickr>
                         </div>
-                        <input formControlName="mobile" class="inputClass_groups"
-                            [ngClass]="{ 'border border-red-500': submitted && f.mobile.errors }" id="mobile"
-                            type="number" placeholder="{{ 'customer_create.mobile' | translate }}" min="0">
+
+                        <div class="h-64 overflow-y-auto w-full sm:w-1/2 pt-10 sm:pt-0 custom-scroll
+                            pr-2 sm:block"
+                            [ngClass]="{'hidden': isMobile && !notShowCalendar}">
+
+                            <ul class="space-y-4" role="radiogroup"
+                                aria-labelledby="radiogroup-label"
+                                *ngIf="setHours ; else loadingHours;">
+                                <li id="radiogroup-option-0" tabindex="0" role="radio"
+                                    aria-checked="true"
+                                    class="group relative bg-white rounded-lg shadow-sm
+                                    cursor-pointer focus:outline-none"
+                                    *ngFor="let hour of hours">
+                                    <div class="rounded-lg border border-gray-300 bg-white px-6 py-4
+                                        hover:border-gray-400 text-center text-sm"
+                                        (click)="setHour(hour)">
+                                        <p class="font-medium text-gray-900">
+                                            {{hour}}
+                                        </p>
+                                    </div>
+                                </li>
+
+                            </ul>
+                            <ng-template #loadingHours>
+                                <ul class="space-y-4" role="radiogroup"
+                                    aria-labelledby="radiogroup-label">
+                                    <li id="radiogroup-option-0" tabindex="0" role="radio"
+                                        aria-checked="true"
+                                        class="group relative bg-white rounded-lg shadow-sm
+                                        cursor-pointer focus:outline-none">
+                                        <span
+                                            class="text-green-500 opacity-75 top-1/2 my-0 mx-auto
+                                            block relative w-0 h-0 right-1/2">
+                                            <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </ng-template>
+                        </div>
                     </div>
-                    <ng-container *ngIf="submitted && (f.mobile.errors || f.prefix.errors)">
-                        <app-error-form error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
 
-                <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="email" name="{{ 'customer_create.email' | translate }}">
-                    </app-label-form>
-                    <input formControlName="email" class="inputClass"
-                        [ngClass]="{ 'border border-red-500': submitted && f.mobile.errors }" id="email" type="text"
-                        placeholder="{{ 'customer_create.email' | translate }}">
-                    <ng-container *ngIf="submitted && f.email.errors">
-                        <app-error-form *ngIf="f.email.errors.required" error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                        <app-error-form *ngIf="f.email.errors.email" error="{{'errors.email' | translate}}">
-                        </app-error-form>
-                        <app-error-form *ngIf="f.email.errors.maxlength"
-                            error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
+                    <div class="grid grid-cols-2 gap-8 p-3" *ngIf="stepNumber == 2"
+                        [@enterAnimation]>
+                        <div class="col-span-2">
+                            <h4 class="text-2xl pb-2.5">{{ 'appointment_calendar.confirm' |
+                                translate }}</h4>
+                            {{ f.date.value[0] | date }} {{f.hour.value}}
+                            <span class="text-sm cursor-pointer" (click)="comeBack()">{{
+                                'appointment_calendar.edit' | translate
+                                }}</span>
+                        </div>
 
-                <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="supplement" name="¿Estaría dispuesto a tomar suplementos?">
-                    </app-label-form>
-                    <select formControlName="supplement" class="bg-white inputClass"
-                        [ngClass]="{ 'border border-red-500': submitted && f.supplement.errors }" id="supplement">
-                        <option hidden selected value="">¿Estaría dispuesto a tomar suplementos?</option>
-                        <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
-                        </option>
-                    </select>
-                    <ng-container *ngIf="submitted && f.supplement.errors">
-                        <app-error-form error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
+                        <div class="col-span-2 lg:col-span-1">
+                            <app-label-form for="name" name="{{ 'customer_create.name' | translate
+                                }}"></app-label-form>
 
-                <div class="col-span-2 lg:col-span-1">
-                    <app-label-form for="illness" name="Enfermedades">
-                    </app-label-form>
-                    <select formControlName="illness" class="bg-white inputClass"
-                        [ngClass]="{ 'border border-red-500': submitted && f.illness.errors }" id="illness">
-                        <option hidden selected value="">Enfermedades</option>
-                        <option value="{{ illness.id }}" *ngFor="let illness of illnesses">{{ illness.text }}
-                        </option>
-                    </select>
-                    <ng-container *ngIf="submitted && f.illness.errors">
-                        <app-error-form *ngIf="f.illness.errors.required" error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
+                            <input formControlName="name" class="inputClass" id="name" type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+                                placeholder="{{ 'customer_create.name' | translate }}">
+                            <ng-container *ngIf="submitted && f.name.errors">
+                                <app-error-form *ngIf="f.name.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                                <app-error-form *ngIf="f.name.errors.maxlength"
+                                    error="{{'errors.maxLength' | translate:{number:
+                                    validationMaxString.short_string} }}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
 
-                <div class="col-span-2">
-                    <app-label-form for="cp" name="CP"></app-label-form>
+                        <div class="col-span-2 lg:col-span-1">
+                            <app-label-form for="name" name="{{ 'customer_create.surnames' |
+                                translate }}">
+                            </app-label-form>
 
-                    <input ngx-google-places-autocomplete class="inputClass"
-                        (onAddressChange)="handleAddressChange($event)" [options]='autocompleteOptions'
-                        [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }" />
+                            <input formControlName="surnames" class="inputClass" id="surnames"
+                                type="text"
+                                [ngClass]="{ 'border border-red-500': submitted && f.surnames.errors
+                                }"
+                                placeholder="{{ 'customer_create.surnames' | translate }}">
+                            <ng-container *ngIf="submitted && f.surnames.errors">
+                                <app-error-form *ngIf="f.surnames.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                                <app-error-form *ngIf="f.surnames.errors.maxlength"
+                                    error="{{'errors.maxLength' | translate:{number:
+                                    validationMaxString.long_string} }}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
 
-                    <ng-container *ngIf="submitted && f.cp.errors">
-                        <app-error-form *ngIf="f.cp.errors.required" error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                    <ng-container *ngIf="noCpError">
-                        <app-error-form error="Busque por su código postal">
-                        </app-error-form>
-                    </ng-container>
-                </div>
+                        <div class="col-span-2 lg:col-span-1">
+                            <app-label-form for="mobile" name="{{ 'customer_create.mobile' |
+                                translate }}">
+                            </app-label-form>
+                            <div class="mt-1 relative rounded-md shadow-sm">
+                                <div class="absolute inset-y-0 left-0 flex items-center">
+                                    <select aria-label="prefix" formControlName="prefix"
+                                        [ngClass]="{ 'border border-red-500': submitted &&
+                                        f.prefix.errors }"
+                                        class="form-select h-full py-0 pl-2 pr-7 border-transparent
+                                        bg-transparent text-gray-500 sm:text-sm sm:leading-5
+                                        focus:border-nutriwell-default">
+                                        <option hidden selected value="">Prefix</option>
+                                        <option value="+34">+34</option>
+                                        <option value="+39">+39</option>
+                                        <option value="+33">+33</option>
+                                        <option value="+48">+48</option>
+                                        <option value="+1">+1</option>
+                                    </select>
+                                </div>
+                                <input formControlName="mobile" class="inputClass_groups"
+                                    [ngClass]="{ 'border border-red-500': submitted &&
+                                    f.mobile.errors }" id="mobile"
+                                    type="number" placeholder="{{ 'customer_create.mobile' |
+                                    translate }}" min="0">
+                            </div>
+                            <ng-container *ngIf="submitted && (f.mobile.errors || f.prefix.errors)">
+                                <app-error-form error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
 
-                <div class="col-span-2 flex flex-row-reverse">
-                    <span class="shadow-sm rounded-md">
-                        <button type="button" class="customer-info-button-reverse" (click)="onSubmit()">
-                            <!-- Heroicon name: check -->
-                            <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                                fill="currentColor">
-                                <path fill-rule="evenodd"
-                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                            {{ 'customer_edit.save' | translate }}
-                        </button>
-                    </span>
+                        <div class="col-span-2 lg:col-span-1">
+                            <app-label-form for="email" name="{{ 'customer_create.email' | translate
+                                }}">
+                            </app-label-form>
+                            <input formControlName="email" class="inputClass"
+                                [ngClass]="{ 'border border-red-500': submitted && f.mobile.errors
+                                }" id="email" type="text"
+                                placeholder="{{ 'customer_create.email' | translate }}">
+                            <ng-container *ngIf="submitted && f.email.errors">
+                                <app-error-form *ngIf="f.email.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                                <app-error-form *ngIf="f.email.errors.email" error="{{'errors.email'
+                                    | translate}}">
+                                </app-error-form>
+                                <app-error-form *ngIf="f.email.errors.maxlength"
+                                    error="{{'errors.maxLength' | translate:{number:
+                                    validationMaxString.long_string} }}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
+
+                        <div class="col-span-2 lg:col-span-1">
+                            <app-label-form for="supplement" name="¿Estaría dispuesto a tomar
+                                suplementos?">
+                            </app-label-form>
+                            <select formControlName="supplement" class="bg-white inputClass"
+                                [ngClass]="{ 'border border-red-500': submitted &&
+                                f.supplement.errors }" id="supplement">
+                                <option hidden selected value="">¿Estaría dispuesto a tomar
+                                    suplementos?</option>
+                                <option value="{{ option.id }}" *ngFor="let option of options">{{
+                                    option.text }}
+                                </option>
+                            </select>
+                            <ng-container *ngIf="submitted && f.supplement.errors">
+                                <app-error-form error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
+
+                        <div class="col-span-2 lg:col-span-1">
+                            <app-label-form for="illness" name="Enfermedades">
+                            </app-label-form>
+                            <select formControlName="illness" class="bg-white inputClass"
+                                [ngClass]="{ 'border border-red-500': submitted && f.illness.errors
+                                }" id="illness">
+                                <option hidden selected value="">Enfermedades</option>
+                                <option value="{{ illness.id }}" *ngFor="let illness of illnesses">{{
+                                    illness.text }}
+                                </option>
+                            </select>
+                            <ng-container *ngIf="submitted && f.illness.errors">
+                                <app-error-form *ngIf="f.illness.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
+
+                        <div class="col-span-2">
+                            <app-label-form for="zip" name="CP"></app-label-form>
+
+                            <input ngx-google-places-autocomplete class="inputClass"
+                                (onAddressChange)="handleAddressChange($event)"
+                                [options]='autocompleteOptions'
+                                [ngClass]="{ 'border border-red-500': submitted && f.zip.errors }"
+                                />
+
+                            <ng-container *ngIf="submitted && f.zip.errors">
+                                <app-error-form *ngIf="f.zip.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                            <ng-container *ngIf="noCpError">
+                                <app-error-form error="Busque por su código postal">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
+
+                        <div class="col-span-2 flex flex-row-reverse">
+                            <span class="shadow-sm rounded-md">
+                                <button type="button" class="customer-info-button-reverse"
+                                    (click)="onSubmit()">
+                                    <!-- Heroicon name: check -->
+                                    <svg class="customer-info-button-svg"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                        fill="currentColor">
+                                        <path fill-rule="evenodd"
+                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414
+                                            0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0
+                                            011.414 0z"
+                                            clip-rule="evenodd" />
+                                        </svg>
+                                        {{ 'customer_edit.save' | translate }}
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col text-2xl text-center p-8" *ngIf="stepNumber == 3">
+                            <p>MUCHAS GRACIAS SU CITA HA SIDO CONFIRMADA!!!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="flex flex-col text-2xl text-center p-8" *ngIf="stepNumber == 3">
-                <p>MUCHAS GRACIAS SU CITA HA SIDO CONFIRMADA!!!</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<ng-template #loading>
-    <app-loading></app-loading>
-</ng-template>
+            <ng-template #loading>
+                <app-loading></app-loading>
+            </ng-template>

@@ -32,6 +32,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { CustomerEditNutritionalPlanComponent } from './customer/customer-edit/nutritional-plan/customer-edit-nutritional-plan.component';
 import { CustomerEditCrashDietComponent } from './home/menu/crashDiet/customer-edit-crash-diet.component';
+import { ProfileComponent } from './profile/profile.component';
 
 /* export function momentAdapterFactory(): DateAdapter {
     return adapterFactory(moment);
@@ -51,7 +52,8 @@ registerLocaleData(localeIt);
         CustomerComponent,
         AppointmentComponent,
         SettingsComponent,
-        CustomerEditCrashDietComponent
+        CustomerEditCrashDietComponent,
+        ProfileComponent
     ],
     imports: [
         CommonModule,

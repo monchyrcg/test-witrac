@@ -28,6 +28,13 @@ export class AuthenticationGeneralService {
         localStorage.setItem('currentUser', JSON.stringify(user));
     }
 
+    updateUser(user: User) {
+        let currentUser = this.getUser();
+        const newUser = { ...currentUser, ...user };
+
+        localStorage.setItem('currentUser', JSON.stringify(newUser));
+    }
+
     isLoggedIn() {
         const data = this.getUser();
         if (!data) {

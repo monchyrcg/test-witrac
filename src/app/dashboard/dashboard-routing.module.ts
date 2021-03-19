@@ -7,6 +7,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 import { SettingsComponent } from './settings/settings.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
     {
@@ -33,6 +34,10 @@ const routes: Routes = [
             {
                 path: 'settings',
                 component: SettingsComponent
+            },
+            {
+                path: 'profile',
+                component: ProfileComponent
             }
         ]
     }

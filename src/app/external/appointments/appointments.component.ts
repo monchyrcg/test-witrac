@@ -97,7 +97,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
         this.autocompleteService.renderExternalScript(this.settingGeneralService.settings.locale).onload = () => {
             this.autocompleteOptions = {
                 types: ['(regions)'],
-                componentRestrictions: { country: this.settingGeneralService.settings.cp_maps }
+                componentRestrictions: { country: this.settingGeneralService.settings.zip_maps }
             };
 
             this.customer = 'a';
@@ -113,7 +113,7 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
                 prefix: ['', [Validators.required]],
                 mobile: [null, [Validators.required]],
                 email: [null, [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
-                cp: [null, [Validators.required]]
+                zip: [null, [Validators.required]]
             });
         }
     }
@@ -185,12 +185,12 @@ export class AppointmentsComponent implements OnInit, OnDestroy {
     }
 
     handleAddressChange($event) {
-        this.f['cp'].setValue(null);
+        this.f['zip'].setValue(null);
         this.noCpError = false;
 
-        this.f['cp'].setValue(this.autocompleteService.autoComplete($event));
+        this.f['zip'].setValue(this.autocompleteService.autoComplete($event));
 
-        if (null == this.f['cp'].value) {
+        if (null == this.f['zip'].value) {
             this.noCpError = true;
         }
     }

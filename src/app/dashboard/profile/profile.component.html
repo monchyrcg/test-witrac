@@ -1,0 +1,113 @@
+<div class="px-4 py-6 sm:px-6 lg:px-8">
+	<div class="pb-5 border-b border-gray-200 space-y-3 sm:flex sm:items-center
+		sm:justify-between sm:space-x-4 sm:space-y-0">
+		<h3 class="text-lg leading-6 font-medium text-gray-900">
+			Profile
+		</h3>
+
+		<span class="sm:ml-3 flex rounded-md">
+			<button type="button" class="customer-info-button-reverse"
+				(click)="submit()">
+				<img src="assets/images/svg/check-white.svg"
+					class="customer-info-button-svg" alt="check">
+				{{ 'customer_edit.save' | translate }}
+			</button>
+		</span>
+	</div>
+
+
+	<div class="mt-6 bg-white shadow px-4 py-5 sm:rounded-lg sm:p-6 mb-10"
+		[formGroup]="userForm">
+		<div class="md:grid md:grid-cols-3 md:gap-6">
+			<div class="md:col-span-1">
+				<h3 class="text-lg font-medium leading-6 text-gray-900">Change your personal
+					data</h3>
+				<p class="mt-1 text-sm leading-5 text-gray-500">
+					Change your personal data
+				</p>
+			</div>
+			<div class="mt-5 md:mt-0 md:col-span-2">
+				<div class="grid">
+					<div class="col-span-12 sm:col-span-3 pb-2">
+						<app-label-form for="name" name="Name"></app-label-form>
+						<input formControlName="name" class="inputClass" id="name" type="text"
+							[ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
+							placeholder="{{ 'customer_create.name' | translate }}">
+						<ng-container *ngIf="submitted && f.name.errors">
+							<app-error-form *ngIf="f.name.errors.required" error="{{'errors.required'
+								| translate}}">
+							</app-error-form>
+							<app-error-form *ngIf="f.name.errors.maxlength"
+								error="{{'errors.maxLength' | translate:{number:
+								validationMaxString.short_string} }}">
+							</app-error-form>
+						</ng-container>
+
+					</div>
+					<div class="col-span-12 sm:col-span-3 pb-2">
+						<app-label-form for="email" name="Email"></app-label-form>
+						<input formControlName="email" class="inputClass" id="email" type="text"
+							[ngClass]="{ 'border border-red-500': submitted && f.email.errors }"
+							placeholder="{{ 'customer_create.email' | translate }}">
+						<ng-container *ngIf="submitted && f.email.errors">
+							<app-error-form *ngIf="f.email.errors.required"
+								error="{{'errors.required' | translate}}">
+							</app-error-form>
+							<app-error-form *ngIf="f.email.errors.maxlength"
+								error="{{'errors.maxLength' | translate:{number:
+								validationMaxString.short_string} }}">
+							</app-error-form>
+						</ng-container>
+
+					</div>
+					<div class="col-span-12 sm:col-span-3 pb-2">
+						<app-label-form for="start_hour" name="Hora de inicio"></app-label-form>
+						<input formControlName="start_hour" class="inputClass" id="start_hour"
+							type="time"
+							[ngClass]="{ 'border border-red-500': submitted && f.start_hour.errors }"
+							placeholder="Hora de inicio">
+						<ng-container *ngIf="submitted && f.start_hour.errors">
+							<app-error-form *ngIf="f.start_hour.errors.required"
+								error="{{'errors.required' | translate}}">
+							</app-error-form>
+						</ng-container>
+					</div>
+					<div class="col-span-12 sm:col-span-3 pb-2">
+						<app-label-form for="finish_hour" name="Hora de fin"></app-label-form>
+						<input formControlName="finish_hour" class="inputClass" id="finish_hour"
+							type="time"
+							[ngClass]="{ 'border border-red-500': submitted && f.finish_hour.errors
+							}"
+							placeholder="Hora de fin">
+						<ng-container *ngIf="submitted && f.finish_hour.errors">
+							<app-error-form *ngIf="f.finish_hour.errors.required"
+								error="{{'errors.required' | translate}}">
+							</app-error-form>
+						</ng-container>
+					</div>
+					<div class="col-span-12 sm:col-span-3 pb-2">
+						<app-label-form for="finish_hour" name="Día habiles"></app-label-form>
+						<div class="flex flex-col">
+							<label class="flex inline-flex items-center" *ngFor="let day of days">
+								<input type="checkbox" class="ml-2 form-checkbox text-nutriwell
+									focus:border-nutriwell focus:ring-2 focus:ring-nutriwell
+									focus:ring-opacity-50 focus:ring-offset-0" [checked]="day.selected ?
+									true : false" (change)="changeDaySelected(day)">
+								<span class="ml-2 text-nutriwell">{{day.text}}</span>
+							</label>
+						</div>
+						<ng-container *ngIf="submitted && f.days.errors">
+							<app-error-form *ngIf="f.days.errors.required"
+								error="{{'errors.required' | translate}}">
+							</app-error-form>
+						</ng-container>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #loading>
+	<app-loading></app-loading>
+</ng-template>

@@ -25,7 +25,7 @@ export class SettingGeneralService {
 		flatpickr: this.settings.flatpickr,
 		formatMoment: this.settings.formatMoment,
 		formatFlatpickr: this.settings.formatFlatpickr,
-		cp_maps: this.settings.cp_maps,
+		zip_maps: this.settings.zip_maps,
 	});
 	public changeCountry$ = this.changeCountrySource.asObservable();
 
@@ -58,7 +58,7 @@ export class SettingGeneralService {
 			flatpickr: countrySettings.flatpickr,
 			formatMoment: countrySettings.formatMoment,
 			formatFlatpickr: countrySettings.formatFlatpickr,
-			cp_maps: countrySettings.cp_maps,
+			zip_maps: countrySettings.zip_maps,
 		});
 	}
 

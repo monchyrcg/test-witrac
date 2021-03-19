@@ -80,7 +80,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
                 team_id: [this.authService.getUserVariable('current_team_id'), [Validators.required]],
                 supplement: ['', [Validators.required]],
                 illness: ['', [Validators.required]],
-                cp: [null, [Validators.required]],
+                zip: [null, [Validators.required]],
                 dob: [null, []],
                 legal_checkbox: [null],
                 legal_name: [null, [Validators.maxLength(this.validationMaxString.short_string)]],
@@ -96,18 +96,18 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
             this.autocompleteOptions = {
                 types: ['(regions)'],
-                componentRestrictions: { country: this.settingGeneralService.settings.cp_maps }
+                componentRestrictions: { country: this.settingGeneralService.settings.zip_maps }
             };
         }
     }
 
     handleAddressChange($event) {
-        this.f['cp'].setValue(null);
+        this.f['zip'].setValue(null);
         this.noCpError = false;
 
-        this.f['cp'].setValue(this.autocompleteService.autoComplete($event));
+        this.f['zip'].setValue(this.autocompleteService.autoComplete($event));
 
-        if (null == this.f['cp'].value) {
+        if (null == this.f['zip'].value) {
             this.noCpError = true;
         }
     }

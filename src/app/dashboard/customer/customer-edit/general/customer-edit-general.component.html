@@ -8,15 +8,16 @@
         <div class="grid grid-cols-2 gap-8">
             <div class="col-span-2 lg:col-span-1">
                 <app-label-form for="name" name="{{ 'customer_create.name' | translate }}"></app-label-form>
-
                 <input formControlName="name" class="inputClass" id="name" type="text"
                     [ngClass]="{ 'border border-red-500': submitted && f.name.errors }"
                     placeholder="{{ 'customer_create.name' | translate }}">
                 <ng-container *ngIf="submitted && f.name.errors">
-                    <app-error-form *ngIf="f.name.errors.required" error="{{'errors.required' | translate}}">
+                    <app-error-form *ngIf="f.name.errors.required" error="{{'errors.required' |
+                        translate}}">
                     </app-error-form>
                     <app-error-form *ngIf="f.name.errors.maxlength"
-                        error="{{'errors.maxLength' | translate:{number: validationMaxString.short_string} }}">
+                        error="{{'errors.maxLength' | translate:{number:
+                        validationMaxString.short_string} }}">
                     </app-error-form>
                 </ng-container>
             </div>
@@ -29,10 +30,12 @@
                     [ngClass]="{ 'border border-red-500': submitted && f.surnames.errors }"
                     placeholder="{{ 'customer_create.surnames' | translate }}">
                 <ng-container *ngIf="submitted && f.surnames.errors">
-                    <app-error-form *ngIf="f.surnames.errors.required" error="{{'errors.required' | translate}}">
+                    <app-error-form *ngIf="f.surnames.errors.required" error="{{'errors.required' |
+                        translate}}">
                     </app-error-form>
                     <app-error-form *ngIf="f.surnames.errors.maxlength"
-                        error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                        error="{{'errors.maxLength' | translate:{number:
+                        validationMaxString.long_string} }}">
                     </app-error-form>
                 </ng-container>
             </div>
@@ -43,7 +46,9 @@
                 <div class="mt-1 relative rounded-md shadow-sm">
                     <div class="absolute inset-y-0 left-0 flex items-center">
                         <select aria-label="prefix" formControlName="prefix"
-                            class="form-select h-full py-0 pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5 focus:border-nutriwell-default">
+                            class="form-select h-full py-0 pl-2 pr-7 border-transparent
+                            bg-transparent text-gray-500 sm:text-sm sm:leading-5
+                            focus:border-nutriwell-default">
                             <option hidden selected value="">Prefix</option>
                             <option value="+34">+34</option>
                             <option value="+39">+39</option>
@@ -52,7 +57,8 @@
                             <option value="+1">+1</option>
                         </select>
                     </div>
-                    <input formControlName="mobile" class="inputClass_groups" id="mobile" type="number"
+                    <input formControlName="mobile" class="inputClass_groups" id="mobile"
+                        type="number"
                         placeholder="{{ 'customer_create.mobile' | translate }}" min="0">
                 </div>
                 <ng-container *ngIf="submitted && (f.mobile.errors || f.prefix.errors)">
@@ -67,21 +73,26 @@
                 <input formControlName="email" class="inputClass" id="email" type="text"
                     placeholder="{{ 'customer_create.email' | translate }}">
                 <ng-container *ngIf="submitted && f.email.errors">
-                    <app-error-form *ngIf="f.email.errors.required" error="{{'errors.required' | translate}}">
+                    <app-error-form *ngIf="f.email.errors.required" error="{{'errors.required' |
+                        translate}}">
                     </app-error-form>
-                    <app-error-form *ngIf="f.email.errors.email" error="{{'errors.email' | translate}}">
+                    <app-error-form *ngIf="f.email.errors.email" error="{{'errors.email' |
+                        translate}}">
                     </app-error-form>
                     <app-error-form *ngIf="f.email.errors.maxlength"
-                        error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                        error="{{'errors.maxLength' | translate:{number:
+                        validationMaxString.long_string} }}">
                     </app-error-form>
                 </ng-container>
             </div>
 
             <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="supplement" name="{{ 'customer_create.supplement' | translate }}">
+                <app-label-form for="supplement" name="{{ 'customer_create.supplement' | translate
+                    }}">
                 </app-label-form>
                 <select formControlName="supplement" class="bg-white inputClass"
-                    [ngClass]="{ 'border border-red-500': submitted && f.supplement.errors }" id="supplement">
+                    [ngClass]="{ 'border border-red-500': submitted && f.supplement.errors }"
+                    id="supplement">
                     <option hidden selected value="">{{ 'customer_create.supplement' | translate }}</option>
                     <option value="{{ option.id }}" *ngFor="let option of options">{{ option.text }}
                     </option>
@@ -96,26 +107,30 @@
                 <app-label-form for="illness" name="{{ 'customer_create.illness' | translate }}">
                 </app-label-form>
                 <select formControlName="illness" class="bg-white inputClass"
-                    [ngClass]="{ 'border border-red-500': submitted && f.illness.errors }" id="illness">
+                    [ngClass]="{ 'border border-red-500': submitted && f.illness.errors }"
+                    id="illness">
                     <option hidden selected value="">{{ 'customer_create.illness' | translate }}</option>
-                    <option value="{{ illness.id }}" *ngFor="let illness of illnesses">{{ illness.text }}
+                    <option value="{{ illness.id }}" *ngFor="let illness of illnesses">{{
+                        illness.text }}
                     </option>
                 </select>
                 <ng-container *ngIf="submitted && f.illness.errors">
-                    <app-error-form *ngIf="f.illness.errors.required" error="{{'errors.required' | translate}}">
+                    <app-error-form *ngIf="f.illness.errors.required" error="{{'errors.required' |
+                        translate}}">
                     </app-error-form>
                 </ng-container>
             </div>
 
             <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="cp" name="CP"></app-label-form>
+                <app-label-form for="zip" name="CP"></app-label-form>
 
-                <input ngx-google-places-autocomplete class="inputClass" (onAddressChange)="handleAddressChange($event)"
-                    [options]='autocompleteOptions' value="{{f['cp'].value}}"
-                    [ngClass]="{ 'border border-red-500': submitted && f.cp.errors }" />
-
-                <ng-container *ngIf="submitted && f.cp.errors">
-                    <app-error-form *ngIf="f.cp.errors.required" error="{{'errors.required' | translate}}">
+                <input ngx-google-places-autocomplete class="inputClass"
+                    (onAddressChange)="handleAddressChange($event)"
+                    [options]='autocompleteOptions' value="{{f['zip'].value}}"
+                    [ngClass]="{ 'border border-red-500': submitted && f.zip.errors }" />
+                <ng-container *ngIf="submitted && f.zip.errors">
+                    <app-error-form *ngIf="f.zip.errors.required" error="{{'errors.required' |
+                        translate}}">
                     </app-error-form>
                 </ng-container>
                 <ng-container *ngIf="noCpError">
@@ -126,11 +141,14 @@
 
             <div class="col-span-2 lg:col-span-1">
                 <app-label-form for="dob" name="{{ 'customer_create.dob' | translate }}"></app-label-form>
-                <ng2-flatpickr formControlName="dob" #calendar addClass="inputClass" [config]="dateOptions"
-                    (change)="changeDob($event)" placeholder="{{ 'customer_create.dob' | translate }}">
+                <ng2-flatpickr formControlName="dob" #calendar addClass="inputClass"
+                    [config]="dateOptions"
+                    (change)="changeDob($event)" placeholder="{{ 'customer_create.dob' | translate
+                    }}">
                 </ng2-flatpickr>
                 <ng-container *ngIf="submitted && f.dob.errors">
-                    <app-error-form *ngIf="f.dob.errors.required" error="{{'errors.required' | translate}}">
+                    <app-error-form *ngIf="f.dob.errors.required" error="{{'errors.required' |
+                        translate}}">
                     </app-error-form>
                 </ng-container>
             </div>
@@ -138,49 +156,61 @@
             <div class="col-span-2" *ngIf="under">
                 <div class="grid grid-cols-3 gap-7">
                     <div class="col-span-3 lg:col-span-1">
-                        <app-label-form for="email" name="{{ 'customer_create.legal_name' | translate }}">
+                        <app-label-form for="email" name="{{ 'customer_create.legal_name' |
+                            translate }}">
                         </app-label-form>
-                        <input formControlName="legal_name" class="inputClass" id="legal_name" type="text"
-                            [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors }"
+                        <input formControlName="legal_name" class="inputClass" id="legal_name"
+                            type="text"
+                            [ngClass]="{ 'border border-red-500': submitted && f.legal_name.errors
+                            }"
                             placeholder="{{ 'customer_create.legal_name' | translate }}">
                         <ng-container *ngIf="submitted && f.legal_name.errors">
                             <app-error-form *ngIf="f.legal_name.errors.required"
                                 error="{{'errors.required' | translate}}">
                             </app-error-form>
                             <app-error-form *ngIf="f.legal_name.errors.maxlength"
-                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                                error="{{'errors.maxLength' | translate:{number:
+                                validationMaxString.long_string} }}">
                             </app-error-form>
                         </ng-container>
                     </div>
 
                     <div class="col-span-3 lg:col-span-1">
-                        <app-label-form for="email" name="{{ 'customer_create.legal_surnames' | translate }}">
+                        <app-label-form for="email" name="{{ 'customer_create.legal_surnames' |
+                            translate }}">
                         </app-label-form>
-                        <input formControlName="legal_surnames" class="inputClass" id="legal_surnames" type="text"
-                            [ngClass]="{ 'border border-red-500': submitted && f.legal_surnames.errors }"
+                        <input formControlName="legal_surnames" class="inputClass"
+                            id="legal_surnames" type="text"
+                            [ngClass]="{ 'border border-red-500': submitted &&
+                            f.legal_surnames.errors }"
                             placeholder="{{ 'customer_create.legal_surnames' | translate }}">
                         <ng-container *ngIf="submitted && f.legal_surnames.errors">
                             <app-error-form *ngIf="f.legal_surnames.errors.required"
                                 error="{{'errors.required' | translate}}">
                             </app-error-form>
                             <app-error-form *ngIf="f.legal_surnames.errors.maxlength"
-                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                                error="{{'errors.maxLength' | translate:{number:
+                                validationMaxString.long_string} }}">
                             </app-error-form>
                         </ng-container>
                     </div>
 
                     <div class="col-span-3 lg:col-span-1">
-                        <app-label-form for="email" name="{{ 'customer_create.legal_identity' | translate }}">
+                        <app-label-form for="email" name="{{ 'customer_create.legal_identity' |
+                            translate }}">
                         </app-label-form>
-                        <input formControlName="legal_identity" class="inputClass" id="legal_identity" type="text"
-                            [ngClass]="{ 'border border-red-500': submitted && f.legal_identity.errors }"
+                        <input formControlName="legal_identity" class="inputClass"
+                            id="legal_identity" type="text"
+                            [ngClass]="{ 'border border-red-500': submitted &&
+                            f.legal_identity.errors }"
                             placeholder="{{ 'customer_create.legal_identity' | translate }}">
                         <ng-container *ngIf="submitted && f.legal_identity.errors">
                             <app-error-form *ngIf="f.legal_identity.errors.required"
                                 error="{{'errors.required' | translate}}">
                             </app-error-form>
                             <app-error-form *ngIf="f.legal_identity.errors.maxlength"
-                                error="{{'errors.maxLength' | translate:{number: validationMaxString.long_string} }}">
+                                error="{{'errors.maxLength' | translate:{number:
+                                validationMaxString.long_string} }}">
                             </app-error-form>
                         </ng-container>
                     </div>
@@ -191,98 +221,112 @@
                 <span class="shadow-sm rounded-md">
                     <button type="button" class="customer-info-button-reverse" (click)="onSubmit()">
                         <!-- Heroicon name: check -->
-                        <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
                             fill="currentColor">
                             <path fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0
+                                011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                 clip-rule="evenodd" />
-                        </svg>
-                        {{ 'customer_edit.save' | translate }}
-                    </button>
-                </span>
+                            </svg>
+                            {{ 'customer_edit.save' | translate }}
+                        </button>
+                    </span>
+                </div>
             </div>
+
         </div>
-
     </div>
-</div>
-<div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
-    <div class="px-4 py-5 sm:px-6 cursor-pointer">
-        Notifications
-        <p class="mt-1 text-sm leading-5 text-gray-500">Decide which communications you'd like to receive and how.
-        </p>
-    </div>
-    <div class="px-4 py-5 sm:p-6">
-        <fieldset>
-            <legend class="text-base leading-6 font-medium text-gray-900">By Email</legend>
-            <div class="mt-4">
-                <div class="flex items-start">
-                    <div class="flex items-center h-5">
-                        <input id="comments" type="checkbox"
-                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                    </div>
-                    <div class="ml-3 text-sm leading-5">
-                        <label for="comments" class="font-medium text-gray-700">Comments</label>
-                        <p class="text-gray-500">Get notified when someones posts a comment on a posting.</p>
-                    </div>
-                </div>
+    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
+        <div class="px-4 py-5 sm:px-6 cursor-pointer">
+            Notifications
+            <p class="mt-1 text-sm leading-5 text-gray-500">Decide which communications you'd like
+                to receive and how.
+            </p>
+        </div>
+        <div class="px-4 py-5 sm:p-6">
+            <fieldset>
+                <legend class="text-base leading-6 font-medium text-gray-900">By Email</legend>
                 <div class="mt-4">
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
-                            <input id="candidates" type="checkbox"
-                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
+                            <input id="comments" type="checkbox"
+                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150
+                                ease-in-out">
                         </div>
                         <div class="ml-3 text-sm leading-5">
-                            <label for="candidates" class="font-medium text-gray-700">Candidates</label>
-                            <p class="text-gray-500">Get notified when a candidate applies for a job.</p>
+                            <label for="comments" class="font-medium text-gray-700">Comments</label>
+                            <p class="text-gray-500">Get notified when someones posts a comment on a
+                                posting.</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="candidates" type="checkbox"
+                                    class="form-checkbox h-4 w-4 text-indigo-600 transition
+                                    duration-150 ease-in-out">
+                            </div>
+                            <div class="ml-3 text-sm leading-5">
+                                <label for="candidates" class="font-medium text-gray-700">Candidates</label>
+                                <p class="text-gray-500">Get notified when a candidate applies for a
+                                    job.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                                <input id="offers" type="checkbox"
+                                    class="form-checkbox h-4 w-4 text-indigo-600 transition
+                                    duration-150 ease-in-out">
+                            </div>
+                            <div class="ml-3 text-sm leading-5">
+                                <label for="offers" class="font-medium text-gray-700">Offers</label>
+                                <p class="text-gray-500">Get notified when a candidate accepts or
+                                    rejects an offer.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </fieldset>
+            <fieldset class="mt-6">
+                <legend class="text-base leading-6 font-medium text-gray-900">Push Notifications</legend>
+                <p class="text-sm leading-5 text-gray-500">These are delivered via SMS to your
+                    mobile phone.</p>
                 <div class="mt-4">
-                    <div class="flex items-start">
-                        <div class="flex items-center h-5">
-                            <input id="offers" type="checkbox"
-                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                        </div>
-                        <div class="ml-3 text-sm leading-5">
-                            <label for="offers" class="font-medium text-gray-700">Offers</label>
-                            <p class="text-gray-500">Get notified when a candidate accepts or rejects an offer.
-                            </p>
-                        </div>
+                    <div class="flex items-center">
+                        <input id="push_everything" name="push_notifications" type="radio"
+                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150
+                            ease-in-out">
+                        <label for="push_everything" class="ml-3">
+                            <span class="block text-sm leading-5 font-medium text-gray-700">Everything</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <input id="push_email" name="push_notifications" type="radio"
+                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150
+                            ease-in-out">
+                        <label for="push_email" class="ml-3">
+                            <span class="block text-sm leading-5 font-medium text-gray-700">Same as
+                                email</span>
+                        </label>
+                    </div>
+                    <div class="mt-4 flex items-center">
+                        <input id="push_nothing" name="push_notifications" type="radio"
+                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150
+                            ease-in-out">
+                        <label for="push_nothing" class="ml-3">
+                            <span class="block text-sm leading-5 font-medium text-gray-700">No push
+                                notifications</span>
+                        </label>
                     </div>
                 </div>
-            </div>
-        </fieldset>
-        <fieldset class="mt-6">
-            <legend class="text-base leading-6 font-medium text-gray-900">Push Notifications</legend>
-            <p class="text-sm leading-5 text-gray-500">These are delivered via SMS to your mobile phone.</p>
-            <div class="mt-4">
-                <div class="flex items-center">
-                    <input id="push_everything" name="push_notifications" type="radio"
-                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                    <label for="push_everything" class="ml-3">
-                        <span class="block text-sm leading-5 font-medium text-gray-700">Everything</span>
-                    </label>
-                </div>
-                <div class="mt-4 flex items-center">
-                    <input id="push_email" name="push_notifications" type="radio"
-                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                    <label for="push_email" class="ml-3">
-                        <span class="block text-sm leading-5 font-medium text-gray-700">Same as email</span>
-                    </label>
-                </div>
-                <div class="mt-4 flex items-center">
-                    <input id="push_nothing" name="push_notifications" type="radio"
-                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out">
-                    <label for="push_nothing" class="ml-3">
-                        <span class="block text-sm leading-5 font-medium text-gray-700">No push
-                            notifications</span>
-                    </label>
-                </div>
-            </div>
-        </fieldset>
+            </fieldset>
+        </div>
     </div>
-</div>
 
-<ng-template #loading>
-    <app-loading></app-loading>
-</ng-template>
+    <ng-template #loading>
+        <app-loading></app-loading>
+    </ng-template>

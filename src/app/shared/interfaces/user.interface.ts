@@ -1,3 +1,5 @@
+import { Time } from "@angular/common";
+
 export interface User {
     created_at: Date;
     email?: string;
@@ -7,4 +9,7 @@ export interface User {
     token: string;
     current_team_id?: number;
     teams?: any;
+    start_hour?: Time;
+    finish_hour: Time;
+    days: any;
 }
