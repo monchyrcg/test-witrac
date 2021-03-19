@@ -88,7 +88,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
         this.appointmentDataForm = this.builder.group({
             weight: [null !== data ? data.weight : '', [Validators.required]],
-            weight_objetive: [null !== data ? data.weight_objetive : '', [Validators.required]],
+            weight_objective: [null !== data ? data.weight_objective : '', [Validators.required]],
             five_meals: [null !== data ? data.five_meals : '', [Validators.required]],
             water: [null !== data ? data.water : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             digestion: [null !== data ? data.digestion : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],

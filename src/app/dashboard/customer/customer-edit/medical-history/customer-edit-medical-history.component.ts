@@ -62,9 +62,10 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
             allergies: [this.medical.allergies ? this.medical.allergies : '', [Validators.maxLength(this.validationMaxString.text)]],
             weight: [this.medical.weight ? this.medical.weight : '', [Validators.required]],
             height: [this.medical.height ? this.medical.height : '', [Validators.required]],
-            weight_objetive: [this.medical.weight_objetive ? this.medical.weight_objetive : '', [Validators.required]],
+            weight_objective: [this.medical.weight_objective ? this.medical.weight_objective : '', [Validators.required]],
             build: [this.medical.build ? this.medical.build : '', [Validators.required]],
             physical_activity: [this.medical.physical_activity ? this.medical.physical_activity : '', [Validators.required]],
+            notes: [this.medical.notes ? this.medical.notes : ''],
         });
     }
 

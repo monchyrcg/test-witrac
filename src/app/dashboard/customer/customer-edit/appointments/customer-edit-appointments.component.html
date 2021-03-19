@@ -73,20 +73,20 @@
                         </ng-container>
                     </div>
                     <div class="col-span-3 sm:col-span-1">
-                        <app-label-form for="weight_objetive" name="Objetivo
+                        <app-label-form for="weight_objective" name="Objetivo
                             peso siguiente"></app-label-form>
 
-                        <input formControlName="weight_objetive"
-                            class="inputClass" id="weight_objetive"
+                        <input formControlName="weight_objective"
+                            class="inputClass" id="weight_objective"
                             type="number"
                             step="0.01" min="0"
                             [ngClass]="{ 'border border-red-500': submitted &&
-                            f.weight_objetive.errors }"
+                            f.weight_objective.errors }"
                             placeholder="Objetivo peso siguiente">
                         <ng-container *ngIf="submitted &&
-                            f.weight_objetive.errors">
+                            f.weight_objective.errors">
                             <app-error-form
-                                *ngIf="f.weight_objetive.errors.required"
+                                *ngIf="f.weight_objective.errors.required"
                                 error="{{'errors.required' | translate}}">
                             </app-error-form>
                         </ng-container>

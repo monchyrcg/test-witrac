@@ -72,10 +72,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
         this.submitted = true;
 
         const getSelectedDays = (days) => {
-            return days.filter(day => day.selected);
+            return days.reduce((results, day) => {
+                if (day?.selected) {
+                    results.push(day.id);
+                }
+                return results;
+            }, []);
         };
 
-        const selectedDays = getSelectedDays(this.days).map(element => element.id);
+        const selectedDays = getSelectedDays(this.days);
 
         if (selectedDays.length) {
             this.userForm.controls['days'].setValue((selectedDays));

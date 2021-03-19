@@ -44,7 +44,7 @@ export interface CustomerMedicalInformation {
     allergies: string;
     weight: number;
     height: number;
-    weight_objetive: number;
+    weight_objective: number;
     build: number;
     physical_activity: number;
 }

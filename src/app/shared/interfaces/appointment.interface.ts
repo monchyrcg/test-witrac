@@ -19,7 +19,7 @@ export interface AppointmentCalendar {
 
 export interface AppointmentData {
     weight: number;
-    weight_objetive: number;
+    weight_objective: number;
     five_meals: boolean;
     water: string;
     digestion: string;
