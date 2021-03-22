@@ -8,6 +8,7 @@ import { AppointmentService } from 'src/app/shared/services/appointment.service'
 import * as moment from 'moment';
 import { MenuComponent } from '../home/menu/menu.component';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-calendar',
@@ -48,7 +49,8 @@ export class CalendarComponent implements OnInit, OnDestroy {
 		public settingGeneralService: SettingGeneralService,
 		public appointmentService: AppointmentService,
 		public menuComponent: MenuComponent,
-		private authService: AuthenticationGeneralService
+		private authService: AuthenticationGeneralService,
+		private router: Router
 	) { }
 
 	ngOnInit(): void {
@@ -81,7 +83,7 @@ export class CalendarComponent implements OnInit, OnDestroy {
 	}
 
 	eventClicked(event) {
-		console.log(event);
+		this.router.navigate(['customers/' + event.event.customer_id]);
 	}
 
 	setView(view: CalendarView): void {

@@ -10,6 +10,7 @@ export interface Appointment {
 
 export interface AppointmentCalendar {
     id: number;
+    customer_id: number;
     title: string;
     start: any;
     allDay: boolean;

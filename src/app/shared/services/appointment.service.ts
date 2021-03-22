@@ -32,6 +32,7 @@ export class AppointmentService {
                 return response.data.map((appointmentCalendar: AppointmentCalendar) => {
                     return {
                         title: appointmentCalendar.title,
+                        customer_id: appointmentCalendar.customer_id,
                         start: new Date(appointmentCalendar.start),
                         allDay: appointmentCalendar.allDay,
                         color: { 'primary': appointmentCalendar.color },
