@@ -7,6 +7,7 @@ import { AppointmentService } from 'src/app/shared/services/appointment.service'
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import * as moment from 'moment';
 import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
+import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 
 
 @Component({
@@ -35,10 +36,15 @@ export class CustomerEditAppointmentsCalendarComponent implements OnInit, OnDest
 
     viewName: string;
 
+    dayStartHour: number;
+    dayEndHour: number;
+    excludeDays: number[];
+
     constructor(
         public settingGeneralService: SettingGeneralService,
         public appointmentService: AppointmentService,
-        public menuComponent: MenuComponent
+        public menuComponent: MenuComponent,
+        private authService: AuthenticationGeneralService
     ) {
         this.viewName = this.settingGeneralService.getLangText('calendar.month');
     }
@@ -51,6 +57,28 @@ export class CustomerEditAppointmentsCalendarComponent implements OnInit, OnDest
                 this.events$ = response;
             }
         );
+
+        this.dayStartHour = (this.authService.getUserVariable('start_hour')).split(':')[0];
+        this.dayEndHour = (this.authService.getUserVariable('finish_hour')).split(':')[0];
+
+        this.excludeDays = this.generateExcludeDays();
+    }
+
+    generateExcludeDays(): number[] {
+        const days = this.authService.getUserVariable('days');
+
+        let excludeDays: number[] = [];
+        for (let index = 0; index < 7; index++) {
+            if (!days.includes(index)) {
+                if (index == 6) {
+                    excludeDays.push(0);
+                } else {
+                    excludeDays.push(index + 1);
+                }
+            }
+        }
+
+        return excludeDays;
     }
 
     listAppointments(newDay?) {

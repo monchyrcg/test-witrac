@@ -7,6 +7,7 @@ import { SettingGeneralService } from 'src/app/shared/services/settings-general.
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import * as moment from 'moment';
 import { MenuComponent } from '../home/menu/menu.component';
+import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 
 @Component({
 	selector: 'app-calendar',
@@ -39,14 +40,40 @@ export class CalendarComponent implements OnInit, OnDestroy {
 
 	viewName: string;
 
+	dayStartHour: number;
+	dayEndHour: number;
+	excludeDays: number[];
+
 	constructor(
 		public settingGeneralService: SettingGeneralService,
 		public appointmentService: AppointmentService,
-		public menuComponent: MenuComponent
+		public menuComponent: MenuComponent,
+		private authService: AuthenticationGeneralService
 	) { }
 
 	ngOnInit(): void {
 		this.events$ = this.appointmentService.listAppointment(this.currentDay);
+		this.dayStartHour = (this.authService.getUserVariable('start_hour')).split(':')[0];
+		this.dayEndHour = (this.authService.getUserVariable('finish_hour')).split(':')[0];
+
+		this.excludeDays = this.generateExcludeDays();
+	}
+
+	generateExcludeDays(): number[] {
+		const days = this.authService.getUserVariable('days');
+
+		let excludeDays: number[] = [];
+		for (let index = 0; index < 7; index++) {
+			if (!days.includes(index)) {
+				if (index == 6) {
+					excludeDays.push(0);
+				} else {
+					excludeDays.push(index + 1);
+				}
+			}
+		}
+
+		return excludeDays;
 	}
 
 	dayClicked(date: Date): void {

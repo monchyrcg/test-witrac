@@ -63,20 +63,26 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     ) {
         this.options.push({ id: 1, text: this.settingGeneralService.getLangText('options.yes') });
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
+
+        this.showAppointment = false;
     }
 
     ngOnInit(): void {
-
+        this.showAppointment = false;
     }
 
     changeView(showCalendar) {
+        console.log(this.showAppointment);
         this.showAppointment = false;
+        console.log(this.showAppointment);
         this.calendar = showCalendar;
     }
 
     get f() { return this.appointmentDataForm.controls; }
 
     showAppointmentO(appointment) {
+        this.showAppointment = false;
+
         let data = appointment.data;
         this.appointment_id = appointment.id
         if (this.calendar) {
