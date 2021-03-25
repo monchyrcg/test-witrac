@@ -5,6 +5,7 @@ import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.ser
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { SettingService } from 'src/app/shared/services/setting.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
+import { MenuComponent } from '../home/menu/menu.component';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         public settingGeneralService: SettingGeneralService,
         private authService: AuthenticationGeneralService,
         private settingService: SettingService,
-        private snackbarService: SnackbarService
+        private snackbarService: SnackbarService,
     ) { }
 
 
@@ -64,7 +65,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
     submit() {
         this.settingGeneralService.changeSettings(this.current_team_id, this.kindsAppointments).subscribe(
-            (response) => {
+            () => {
                 this.showSnackBar('Seetings updated successfully.', 'success');
             },
             (error) => {

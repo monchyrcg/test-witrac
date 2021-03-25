@@ -71,6 +71,7 @@ export class MenuComponent {
         this.modalService.init(AppointmentComponent, inputs, { closeModal: this.closeModal.bind(this) })
     }
 
+    // crashDays
     createCrashDay() {
         this.changeValue(true);
         this.modalService.init(

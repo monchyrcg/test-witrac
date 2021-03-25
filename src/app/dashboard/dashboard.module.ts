@@ -52,8 +52,8 @@ registerLocaleData(localeIt);
         CustomerComponent,
         AppointmentComponent,
         SettingsComponent,
-        CustomerEditCrashDietComponent,
-        ProfileComponent
+        ProfileComponent,
+        CustomerEditCrashDietComponent
     ],
     imports: [
         CommonModule,

@@ -12,4 +12,7 @@ export interface User {
     start_hour?: Time;
     finish_hour: Time;
     days: any;
+    google_calendar_connect: boolean;
+    google_calendar_id?: string;
+    google_calendar_name?: string;
 }

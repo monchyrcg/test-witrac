@@ -56,7 +56,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
         private customerService: CustomerService,
         public settingGeneralService: SettingGeneralService,
         private magentoService: MagentoService,
-        private builder: FormBuilder,
         private menuComponent: MenuComponent
     ) { }
 

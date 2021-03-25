@@ -8,8 +8,18 @@ import { User } from 'src/app/shared/interfaces/user.interface';
 import { AuthenticationGeneralService } from 'src/app/shared/services/auth-general.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { Validations } from 'src/app/shared/settings/validation';
+import { MenuComponent } from '../home/menu/menu.component';
 import { ProfileService } from './profile.service';
 
+// GOOGLE CALENDAR CONST
+// This is for testing purposes. Please use your own API KEY. You can get it from https://developers.google.com/calendar/quickstart/js
+const API_KEY = 'AIzaSyC2jcfM_s7kpfIK5VWTPNy9QflhIswiR-A';
+// This is for testing purposes. Please use your own CLIENT ID. You can get it from https://developers.google.com/calendar/quickstart/js
+const CLIENT_ID = '633586758726-t6dtd2lh33eeuq6eanjeqsglnq78bgng.apps.googleusercontent.com';;
+
+const DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
+const SCOPES = 'https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/calendar.readonly';
+const win: any = window;
 
 @Component({
     selector: 'app-profile',
@@ -26,12 +36,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     days: Day[] = [];
 
+    calendars = [];
+
+    google_calendar_connect: boolean;
+
     constructor(
         private builder: FormBuilder,
         private authService: AuthenticationGeneralService,
         private snackbarService: SnackbarService,
         public settingGeneralService: SettingGeneralService,
-        private profileService: ProfileService
+        private profileService: ProfileService,
+        private menuComponent: MenuComponent
     ) {
         this.days.push({ id: 0, text: this.settingGeneralService.getLangText('week.monday') });
         this.days.push({ id: 1, text: this.settingGeneralService.getLangText('week.tuesday') });
@@ -45,6 +60,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         const user = this.authService.getUser();
+        this.google_calendar_connect = user.google_calendar_connect;
 
         this.userForm = this.builder.group({
             id: user.id,
@@ -53,7 +69,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
             password: ['', [Validators.maxLength(this.validationMaxString.long_string)]],
             start_hour: [user.start_hour, [Validators.required]],
             finish_hour: [user.finish_hour, [Validators.required]],
-            days: [null, [Validators.required, Validators.minLength(1)]]
+            days: [null, [Validators.required, Validators.minLength(1)]],
+            google_calendar_connect: [user.google_calendar_connect, [Validators.required]],
+            google_calendar_id: [user.google_calendar_id, []],
+            google_calendar_name: [user.google_calendar_name, []]
         });
 
         const currentDays = user.days;
@@ -64,6 +83,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
                 }
             });
         });
+
+        // Load the Google API Client
+        win.onGoogleLoad = () => {
+            win.gapi.load('client', () => this.initClient());
+        };
     }
 
     get f() { return this.userForm.controls; }
@@ -113,5 +137,97 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.subscription.unsubscribe();
+    }
+
+    // Load the SDK asynchronously
+    loadGoogleSDK(): void {
+        ((d: any, s: any, id: any) => {
+            let js: any;
+            const fjs: any = d.getElementsByTagName(s)[0];
+
+            if (d.getElementById(id)) {
+                win.onGoogleLoad();
+                return;
+            } else {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://apis.google.com/js/api.js?onload=onGoogleLoad';
+                js.onload = 'onGoogleLoad';
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+
+        })(document, 'script', 'google-jssdk');
+    }
+
+    initClient() {
+        win.gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+        }).then(
+            () => {
+                if (!win.gapi.auth2.getAuthInstance().isSignedIn.get()) {
+                    console.log('login in calendar');
+                    this.loginCalendar();
+                } else {
+                    this.listCalendars();
+                }
+            },
+            (error) => {
+                console.log(JSON.stringify(error, null, 2));
+            }
+        );
+    }
+
+    loginCalendar() {
+        win.gapi.auth2.getAuthInstance().signIn().then(
+            () => this.listCalendars()
+        )
+    }
+
+    listCalendars() {
+        win.gapi.client.calendar.calendarList.list({}).then(
+            (response) => {
+                console.log('Upcoming calendars:');
+                const myCalendars = response.result.items;
+
+                if (myCalendars.length > 0) {
+                    console.log(myCalendars);
+                    this.calendars = myCalendars;
+                } else {
+                    this.showSnackBar('No hay ningun calendario asociado a esta cuenta.', 'danger');
+                }
+            }
+        );
+    }
+
+    recoverEvents(calendar) {
+        console.log(calendar);
+        win.gapi.client.calendar.events.list({
+            'calendarId': calendar,
+            'timeMin': (new Date()).toISOString(),
+            'showDeleted': false,
+            'singleEvents': true,
+            'maxResults': 100,
+            'orderBy': 'startTime'
+        }).then(
+            (response) => {
+                const events = response.result.items;
+                console.log(events);
+
+                this.subscription.add(this.profileService.saveGoogleCalendarEvents(this.userForm.controls['id'].value, events).subscribe(
+                    (response) => {
+                        this.snackbarService.show('User updated successfully.', 'success');
+                        const result: User = response;
+                        result.days = JSON.parse(result.days);
+                        this.authService.updateUser(result);
+                    },
+                    (error) => {
+                        this.snackbarService.show('Algo ha pasado ....', 'danger');
+                    }
+                ));
+            }
+        );
     }
 }
