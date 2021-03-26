@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     days: Day[] = [];
 
     calendars = [];
+    showCalendars: boolean = false;
 
     google_calendar_connect: boolean;
 
@@ -168,7 +169,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }).then(
             () => {
                 if (!win.gapi.auth2.getAuthInstance().isSignedIn.get()) {
-                    console.log('login in calendar');
                     this.loginCalendar();
                 } else {
                     this.listCalendars();
@@ -189,12 +189,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     listCalendars() {
         win.gapi.client.calendar.calendarList.list({}).then(
             (response) => {
-                console.log('Upcoming calendars:');
                 const myCalendars = response.result.items;
 
                 if (myCalendars.length > 0) {
-                    console.log(myCalendars);
                     this.calendars = myCalendars;
+                    this.showCalendars = true;
                 } else {
                     this.showSnackBar('No hay ningun calendario asociado a esta cuenta.', 'danger');
                 }
@@ -203,7 +202,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     recoverEvents(calendar) {
-        console.log(calendar);
         win.gapi.client.calendar.events.list({
             'calendarId': calendar,
             'timeMin': (new Date()).toISOString(),
@@ -214,14 +212,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
         }).then(
             (response) => {
                 const events = response.result.items;
-                console.log(events);
 
-                this.subscription.add(this.profileService.saveGoogleCalendarEvents(this.userForm.controls['id'].value, events).subscribe(
+                this.subscription.add(this.profileService.saveGoogleCalendarEvents(this.userForm.controls['id'].value, { "events": events }).subscribe(
                     (response) => {
-                        this.snackbarService.show('User updated successfully.', 'success');
-                        const result: User = response;
-                        result.days = JSON.parse(result.days);
-                        this.authService.updateUser(result);
+                        this.snackbarService.show('Sus citas se estan importando correctamente.', 'success');
                     },
                     (error) => {
                         this.snackbarService.show('Algo ha pasado ....', 'danger');

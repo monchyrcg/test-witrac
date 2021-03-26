@@ -123,7 +123,7 @@
 						{{google_calendar_connect ? 'Unconnect' : 'Connect'}} to Google Calendar
 					</button>
 				</div>
-				<div class="grid grid-cols-1" *ngIf="calendars.length>0">
+				<div class="grid grid-cols-1" *ngIf="showCalendars">
 					<div class="mt-3 text-left">
 						<ng-container *ngIf="!google_calendar_connect">
 							<app-label-form for="name" name="{{ 'profile.calendar.calendar' | translate }}"
