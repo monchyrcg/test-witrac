@@ -202,12 +202,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
 
     recoverEvents(calendar) {
+        const date = new Date();
         win.gapi.client.calendar.events.list({
             'calendarId': calendar,
-            'timeMin': (new Date()).toISOString(),
+            'timeMin': (date).toISOString(),
+            'timeMax': (new Date(date.getFullYear(), date.getMonth() + 1, 30)).toISOString(),
             'showDeleted': false,
             'singleEvents': true,
-            'maxResults': 100,
+            // 'maxResults': 100,
             'orderBy': 'startTime'
         }).then(
             (response) => {
