@@ -71,9 +71,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
             start_hour: [user.start_hour, [Validators.required]],
             finish_hour: [user.finish_hour, [Validators.required]],
             days: [null, [Validators.required, Validators.minLength(1)]],
-            google_calendar_connect: [user.google_calendar_connect, [Validators.required]],
+            /* google_calendar_connect: [user.google_calendar_connect, [Validators.required]],
             google_calendar_id: [user.google_calendar_id, []],
-            google_calendar_name: [user.google_calendar_name, []]
+            google_calendar_name: [user.google_calendar_name, []] */
         });
 
         const currentDays = user.days;
