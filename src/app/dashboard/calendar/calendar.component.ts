@@ -19,7 +19,7 @@ import { Router } from '@angular/router';
 
 export class CalendarComponent implements OnInit, OnDestroy {
 
-	view: CalendarView = CalendarView.Month;
+	view: CalendarView = CalendarView.Day;
 
 	locale: string = localStorage.getItem('locale');
 

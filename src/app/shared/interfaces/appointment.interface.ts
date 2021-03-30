@@ -26,4 +26,6 @@ export interface AppointmentData {
     digestion: string;
     stools: string;
     notes: string;
+    date: any;
+    hour: any;
 }

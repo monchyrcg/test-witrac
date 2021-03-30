@@ -99,6 +99,21 @@
     @apply border-nutriwell;
 }
 
+.customer-info-button-red-reverse {
+    @apply customer-info-button;
+    @apply text-white;
+    @apply bg-red-600;
+}
+
+.customer-info-button-red-reverse:hover {
+    @apply bg-red-600;
+}
+
+.customer-info-button-red-reverse:focus {
+    @apply outline-none;
+    @apply border-red-600;
+}
+
 .customer-info-button-svg {
     @apply -ml-1;
     @apply mr-2;

@@ -2,6 +2,8 @@ import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FlatpickrOptions } from 'ng2-flatpickr';
+import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { AppointmentData } from 'src/app/shared/interfaces/appointment.interface';
@@ -37,7 +39,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     @Input() customer;
     @Output() reloadCustomer = new EventEmitter<void>();
 
-    calendar: boolean = true;
+    calendar: boolean = false;
 
     showAppointment: boolean = false;
 
@@ -50,6 +52,8 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     validationMaxString = Validations.validationMaxString;
 
     options: OptionI[] = [];
+
+    dateOptions: FlatpickrOptions;
 
     private subscription = new Subscription();
 
@@ -65,6 +69,13 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
 
         this.showAppointment = false;
+
+        this.dateOptions = {
+            locale: this.settingGeneralService.settings.flatpickr,
+            disableMobile: true,
+            dateFormat: 'Y-m-d H:i',
+            enableTime: true
+        };
     }
 
     ngOnInit(): void {
@@ -72,15 +83,15 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     }
 
     changeView(showCalendar) {
-        console.log(this.showAppointment);
         this.showAppointment = false;
-        console.log(this.showAppointment);
+
         this.calendar = showCalendar;
     }
 
     get f() { return this.appointmentDataForm.controls; }
 
     showAppointmentO(appointment) {
+        console.log(appointment);
         this.showAppointment = false;
 
         let data = appointment.data;
@@ -92,7 +103,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
         this.showAppointment = true;
 
+        const day = appointment.date + ' ' + appointment.hour;
         this.appointmentDataForm = this.builder.group({
+            date: [{ 0: day }, [Validators.required]],
             weight: [null !== data ? data.weight : '', [Validators.required]],
             weight_objective: [null !== data ? data.weight_objective : '', [Validators.required]],
             five_meals: [null !== data ? data.five_meals : '', [Validators.required]],
@@ -101,6 +114,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             stools: [null !== data ? data.stools : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
             notes: [null !== data ? data.notes : '', [Validators.required, Validators.maxLength(this.validationMaxString.text)]],
         });
+
+        const dayMoment = moment(day).format('YYYY-MM-DD HH:mm');
+        this.dateOptions.defaultDate = dayMoment;
     }
 
     onSubmit() {
@@ -111,7 +127,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         }
 
         let appointmentDataInformation: AppointmentData = this.utilService.clear(this.appointmentDataForm.value);
-
+        const hour = moment(appointmentDataInformation.date[0]).format('HH:mm');
+        appointmentDataInformation.date = moment(appointmentDataInformation.date[0]).format('YYYY-MM-DD');
+        appointmentDataInformation.hour = hour;
 
         this.subscription.add(this.appointmentService.updateAppointment(this.appointment_id, appointmentDataInformation).subscribe(
             (response) => {
@@ -127,6 +145,19 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     nutritionalPlan() {
         this.router.navigate([`/customers/${this.customer.id}/${this.appointment_id}/nutritional-plan`]);
+    }
+
+    onDelete() {
+        this.subscription.add(this.appointmentService.deleteAppointment(this.appointment_id).subscribe(
+            (response) => {
+                this.submitted = false;
+                this.snackbarService.show('Appointment deleted successfully', 'success');
+                this.reloadCustomer.emit();
+            },
+            (error) => {
+                this.snackbarService.show('Something was wrong', 'danger');
+            }
+        ));
     }
 
     ngOnDestroy() {

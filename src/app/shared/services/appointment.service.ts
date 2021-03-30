@@ -91,4 +91,13 @@ export class AppointmentService {
                 this.listAppointment(this.date);
             }));
     }
+
+    deleteAppointment(appointment_id) {
+        return this.http
+            .delete(`${environment.apiUrl}/appointments/${appointment_id}`)
+            .pipe(map((response: any) => {
+                response.data;
+                this.listAppointment(this.date);
+            }));
+    }
 }

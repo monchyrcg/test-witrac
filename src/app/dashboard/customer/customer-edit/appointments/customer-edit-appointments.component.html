@@ -24,7 +24,7 @@
     [@enterAnimation]>
     <div class="px-4 py-5 sm:px-6 cursor-pointer flex justify-between">
         <p>
-            Informaciones de la cita
+            Información de la cita
         </p>
         <div class="px-4 pt-3 sm:px-6 cursor-pointer">
             <img class="w-6 h-6 pb-2 cursor-pointer" src="/assets/images/svg/x.svg"
@@ -34,6 +34,20 @@
     </div>
     <div class="px-4 py-5 sm:p-6">
         <div class="grid grid-cols-3 gap-7" [formGroup]="appointmentDataForm">
+            <div class="col-span-3">
+                <app-label-form for="date" name="{{ 'appointment_create.date' | translate
+                    }}">
+                </app-label-form>
+                <ng2-flatpickr formControlName="date" #calendar addClass="inputClass"
+                    [config]="dateOptions"
+                    placeholder="{{ 'appointment_create.date' | translate }}">
+                </ng2-flatpickr>
+                <ng-container *ngIf="submitted && f.date.errors">
+                    <app-error-form *ngIf="f.date.errors.required"
+                        error="{{'errors.required' | translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
             <div class="col-span-3">
                 <div class="grid grid-cols-3 gap-5 lg:gap-10">
                     <div class="col-span-3 sm:col-span-1">
@@ -87,7 +101,6 @@
                         </ng-container>
                     </div>
                 </div>
-
             </div>
             <div class="col-span-3 lg:col-span-1">
                 <app-label-form name="Agua"></app-label-form>
@@ -143,25 +156,38 @@
                     </app-error-form>
                 </ng-container>
             </div>
-            <div class="col-span-3 flex flex-row-reverse">
-                <span class="shadow-sm rounded-md">
-                    <button type="button" class="customer-info-button-reverse"
-                        (click)="onSubmit()">
-                        <img class="customer-info-button-svg"
-                            src="/assets/images/svg/check-white.svg" />
+            <div class="col-span-3">
+                <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                    <span class="shadow-sm rounded-md">
+                        <button type="button" class="customer-info-button-red-reverse"
+                            (click)="onDelete()">
+                            <img class="customer-info-button-svg"
+                                src="/assets/images/svg/trash-white.svg" />
 
-                        {{ 'customer_edit.save' | translate }}
-                    </button>
-                </span>
+                            {{ 'customer_edit.save' | translate }}
+                        </button>
+                    </span>
+                    <div class="col-span-2 flex flex-row-reverse">
+                        <span class="shadow-sm rounded-md">
+                            <button type="button" class="customer-info-button-reverse"
+                                (click)="onSubmit()">
+                                <img class="customer-info-button-svg"
+                                    src="/assets/images/svg/check-white.svg" />
 
-                <span class="pr-2 rounded-md">
-                    <button type="button" class="customer-info-button"
-                        (click)="nutritionalPlan()">
-                        <img class="customer-info-button-svg"
-                            src="/assets/images/svg/beaker.svg" />
-                        Nutritional Plan
-                    </button>
-                </span>
+                                {{ 'customer_edit.save' | translate }}
+                            </button>
+                        </span>
+
+                        <span class="pr-2 rounded-md">
+                            <button type="button" class="customer-info-button"
+                                (click)="nutritionalPlan()">
+                                <img class="customer-info-button-svg"
+                                    src="/assets/images/svg/beaker.svg" />
+                                Nutritional Plan
+                            </button>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
