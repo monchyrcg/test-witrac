@@ -148,3 +148,7 @@
 .custom-scroll {
   @include scrollbars(.5em, .1em, slategray);
 }
+
+.event-class .cal-event-title {
+  color: black !important;
+}

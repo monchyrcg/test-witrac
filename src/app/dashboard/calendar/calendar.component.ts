@@ -1,4 +1,4 @@
-import { Component, ViewChild, TemplateRef, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, TemplateRef, ChangeDetectionStrategy, OnInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { CalendarView, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, DAYS_OF_WEEK } from 'angular-calendar';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
@@ -14,7 +14,8 @@ import { Router } from '@angular/router';
 	selector: 'app-calendar',
 	templateUrl: './calendar.component.html',
 	styleUrls: ['./calendar.component.scss'],
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
+	encapsulation: ViewEncapsulation.None
 })
 
 export class CalendarComponent implements OnInit, OnDestroy {

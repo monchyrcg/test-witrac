@@ -38,10 +38,15 @@ export class AppointmentService {
                         customer_id: appointmentCalendar.customer_id,
                         start: new Date(appointmentCalendar.start),
                         allDay: appointmentCalendar.allDay,
-                        color: { 'primary': appointmentCalendar.color },
+                        color: {
+                            'primary': appointmentCalendar.color,
+                            'secondary': appointmentCalendar.color
+
+                        },
                         meta: {
                             appointmentCalendar,
                         },
+                        cssClass: 'event-class',
                     };
                 });
             }));
