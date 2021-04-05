@@ -15,7 +15,7 @@
         (showAppointmentOutput)="showAppointmentO($event)">
     </app-customer-edit-appointments-calendar>
     <app-customer-edit-appointments-list [customer]="customer" *ngIf="!calendar"
-        (showAppointmentOutput)="showAppointmentO($event)"></app-customer-edit-appointments-list>
+        (showAppointmentOutput)="showAppointmentO($event)" (delete)="generateDeleteModal($event)"></app-customer-edit-appointments-list>
 </div>
 
 
@@ -34,6 +34,7 @@
     </div>
     <div class="px-4 py-5 sm:p-6">
         <div class="grid grid-cols-3 gap-7" [formGroup]="appointmentDataForm">
+
             <div class="col-span-3">
                 <app-label-form for="date" name="{{ 'appointment_create.date' | translate
                     }}">
@@ -48,123 +49,127 @@
                     </app-error-form>
                 </ng-container>
             </div>
-            <div class="col-span-3">
-                <div class="grid grid-cols-3 gap-5 lg:gap-10">
-                    <div class="col-span-3 sm:col-span-1">
-                        <app-label-form for="five_meals" name="¿Has hecho las 5
-                            comidas?"></app-label-form>
 
-                        <select formControlName="five_meals" class="bg-white
-                            inputClass" id="five_meals">
-                            <option hidden selected value="">¿Has hecho las 5
-                                comidas?</option>
-                            <option value="{{ option.id }}" *ngFor="let option
-                                of options">{{ option.text }}
-                            </option>
-                        </select>
-                        <ng-container *ngIf="submitted && f.five_meals.errors">
-                            <app-error-form *ngIf="f.five_meals.errors.required"
-                                error="{{'errors.required' | translate}}">
-                            </app-error-form>
-                        </ng-container>
-                    </div>
-                    <div class="col-span-3 sm:col-span-1">
-                        <app-label-form for="weight" name="Peso actual"></app-label-form>
-                        <input formControlName="weight" class="inputClass"
-                            id="weight" type="number" step="0.01" min="0"
-                            [ngClass]="{ 'border border-red-500': submitted &&
-                            f.weight.errors }"
-                            placeholder="Peso actual">
-                        <ng-container *ngIf="submitted && f.weight.errors">
-                            <app-error-form *ngIf="f.weight.errors.required"
-                                error="{{'errors.required' | translate}}">
-                            </app-error-form>
-                        </ng-container>
-                    </div>
-                    <div class="col-span-3 sm:col-span-1">
-                        <app-label-form for="weight_objective" name="Objetivo
-                            peso siguiente"></app-label-form>
+            <ng-container *ngIf="type !== 2">
+                <div class="col-span-3">
+                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="five_meals" name="¿Has hecho las 5
+                                comidas?"></app-label-form>
 
-                        <input formControlName="weight_objective"
-                            class="inputClass" id="weight_objective"
-                            type="number"
-                            step="0.01" min="0"
-                            [ngClass]="{ 'border border-red-500': submitted &&
-                            f.weight_objective.errors }"
-                            placeholder="Objetivo peso siguiente">
-                        <ng-container *ngIf="submitted &&
-                            f.weight_objective.errors">
-                            <app-error-form
-                                *ngIf="f.weight_objective.errors.required"
-                                error="{{'errors.required' | translate}}">
-                            </app-error-form>
-                        </ng-container>
+                            <select formControlName="five_meals" class="bg-white
+                                inputClass" id="five_meals">
+                                <option hidden selected value="">¿Has hecho las 5
+                                    comidas?</option>
+                                <option value="{{ option.id }}" *ngFor="let option
+                                    of options">{{ option.text }}
+                                </option>
+                            </select>
+                            <ng-container *ngIf="submitted && f.five_meals.errors">
+                                <app-error-form *ngIf="f.five_meals.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="weight" name="Peso actual"></app-label-form>
+                            <input formControlName="weight" class="inputClass"
+                                id="weight" type="number" step="0.01" min="0"
+                                [ngClass]="{ 'border border-red-500': submitted &&
+                                f.weight.errors }"
+                                placeholder="Peso actual">
+                            <ng-container *ngIf="submitted && f.weight.errors">
+                                <app-error-form *ngIf="f.weight.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="weight_objective" name="Objetivo
+                                peso siguiente"></app-label-form>
+
+                            <input formControlName="weight_objective"
+                                class="inputClass" id="weight_objective"
+                                type="number"
+                                step="0.01" min="0"
+                                [ngClass]="{ 'border border-red-500': submitted &&
+                                f.weight_objective.errors }"
+                                placeholder="Objetivo peso siguiente">
+                            <ng-container *ngIf="submitted &&
+                                f.weight_objective.errors">
+                                <app-error-form
+                                    *ngIf="f.weight_objective.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-span-3 lg:col-span-1">
-                <app-label-form name="Agua"></app-label-form>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form name="Agua"></app-label-form>
 
-                <input formControlName="water" class="inputClass" id="water"
-                    type="text"
-                    [ngClass]="{ 'border border-red-500': submitted &&
-                    f.water.errors }" placeholder="Agua">
-                <ng-container *ngIf="submitted && f.water.errors">
-                    <app-error-form *ngIf="f.water.errors.maxlength"
-                        error="{{'errors.maxlength' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
-            <div class="col-span-3 lg:col-span-1">
-                <app-label-form for="drugs" name="Digestión"></app-label-form>
-                <input formControlName="digestion" class="inputClass"
-                    id="digestion" type="text"
-                    [ngClass]="{ 'border border-red-500': submitted &&
-                    f.digestion.errors }" placeholder="Digestión">
-                <ng-container *ngIf="submitted && f.digestion.errors">
-                    <app-error-form *ngIf="f.digestion.errors.maxlength"
-                        error="{{'errors.maxlength' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
-            <div class="col-span-3 lg:col-span-1">
-                <app-label-form for="allergies" name="Heces"></app-label-form>
-                <input formControlName="stools" class="inputClass" id="stools"
-                    type="text"
-                    [ngClass]="{ 'border border-red-500': submitted &&
-                    f.stools.errors }" placeholder="Heces">
-                <ng-container *ngIf="submitted && f.stools.errors">
-                    <app-error-form *ngIf="f.stools.errors.maxlength"
-                        error="{{'errors.maxlength' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
-            <div class="col-span-3">
-                <app-label-form name="Notes"></app-label-form>
+                    <input formControlName="water" class="inputClass" id="water"
+                        type="text"
+                        [ngClass]="{ 'border border-red-500': submitted &&
+                        f.water.errors }" placeholder="Agua">
+                    <ng-container *ngIf="submitted && f.water.errors">
+                        <app-error-form *ngIf="f.water.errors.maxlength"
+                            error="{{'errors.maxlength' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="drugs" name="Digestión"></app-label-form>
+                    <input formControlName="digestion" class="inputClass"
+                        id="digestion" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted &&
+                        f.digestion.errors }" placeholder="Digestión">
+                    <ng-container *ngIf="submitted && f.digestion.errors">
+                        <app-error-form *ngIf="f.digestion.errors.maxlength"
+                            error="{{'errors.maxlength' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="allergies" name="Heces"></app-label-form>
+                    <input formControlName="stools" class="inputClass" id="stools"
+                        type="text"
+                        [ngClass]="{ 'border border-red-500': submitted &&
+                        f.stools.errors }" placeholder="Heces">
+                    <ng-container *ngIf="submitted && f.stools.errors">
+                        <app-error-form *ngIf="f.stools.errors.maxlength"
+                            error="{{'errors.maxlength' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+                <div class="col-span-3">
+                    <app-label-form name="Notes"></app-label-form>
 
-                <textarea formControlName="notes" class="inputClass" id="name"
-                    type="text"
-                    [ngClass]="{ 'border border-red-500': submitted &&
-                    f.notes.errors }"
-                    placeholder="Notes"> </textarea>
-                <ng-container *ngIf="submitted && f.notes.errors">
-                    <app-error-form *ngIf="f.notes.errors.required"
-                        error="{{'errors.required' | translate}}">
-                    </app-error-form>
-                    <app-error-form *ngIf="f.notes.errors.maxlength"
-                        error="{{'errors.maxlength' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
+                    <textarea formControlName="notes" class="inputClass" id="name"
+                        type="text"
+                        [ngClass]="{ 'border border-red-500': submitted &&
+                        f.notes.errors }"
+                        placeholder="Notes"> </textarea>
+                    <ng-container *ngIf="submitted && f.notes.errors">
+                        <app-error-form *ngIf="f.notes.errors.required"
+                            error="{{'errors.required' | translate}}">
+                        </app-error-form>
+                        <app-error-form *ngIf="f.notes.errors.maxlength"
+                            error="{{'errors.maxlength' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+            </ng-container>
+
             <div class="col-span-3">
                 <div class="grid grid-cols-3 gap-5 lg:gap-10">
                     <span class="shadow-sm rounded-md">
                         <button type="button" class="customer-info-button-red-reverse"
-                            (click)="onDelete()">
+                            (click)="generateDeleteModal(appointment_id)">
                             <img class="customer-info-button-svg"
                                 src="/assets/images/svg/trash-white.svg" />
 
-                            {{ 'customer_edit.save' | translate }}
+                            Delete
                         </button>
                     </span>
                     <div class="col-span-2 flex flex-row-reverse">

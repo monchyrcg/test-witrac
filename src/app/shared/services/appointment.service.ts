@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { endOfMonth, subDays } from 'date-fns';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AppointmentCalendar } from '../interfaces/appointment.interface';
@@ -17,6 +17,9 @@ export class AppointmentService {
     public listAppointmentCustomer$ = this.listAppointmentCustomerSubject.asObservable();
 
     date;
+
+    private deleteSubject = new Subject<any>();
+    public deleteState = this.deleteSubject.asObservable();
 
     constructor(private http: HttpClient, private utilService: UtilsService) { }
 
@@ -90,6 +93,10 @@ export class AppointmentService {
                 response.data;
                 this.listAppointment(this.date);
             }));
+    }
+
+    deleteAppointmentState(appointment_id) {
+        this.deleteSubject.next({ appointment_id: appointment_id });
     }
 
     deleteAppointment(appointment_id) {

@@ -6,12 +6,13 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
-import { AppointmentData } from 'src/app/shared/interfaces/appointment.interface';
+import { AppointmentData, AppointmentDate } from 'src/app/shared/interfaces/appointment.interface';
 import { OptionI } from 'src/app/shared/interfaces/option.interface';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
 import { Validations } from 'src/app/shared/settings/validation';
+import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 
 
 @Component({
@@ -56,6 +57,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     dateOptions: FlatpickrOptions;
 
     private subscription = new Subscription();
+    private deleteSubscription: Subscription;
+
+    type: number;
 
     constructor(
         private builder: FormBuilder,
@@ -63,7 +67,8 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         private snackbarService: SnackbarService,
         private utilService: UtilsService,
         private appointmentService: AppointmentService,
-        private router: Router
+        private router: Router,
+        private menuComponent: MenuComponent
     ) {
         this.options.push({ id: 1, text: this.settingGeneralService.getLangText('options.yes') });
         this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
@@ -80,6 +85,13 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.showAppointment = false;
+
+        this.deleteSubscription = this.appointmentService.deleteState.subscribe(
+            (response) => {
+                console.log(response.appointment_id);
+                this.deleteAppointment(response.appointment_id);
+            }
+        );
     }
 
     changeView(showCalendar) {
@@ -90,11 +102,14 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     get f() { return this.appointmentDataForm.controls; }
 
-    showAppointmentO(appointment) {
-        console.log(appointment);
+    showAppointmentO(event) {
+
         this.showAppointment = false;
 
-        let data = appointment.data;
+        const appointment = event.appointment;
+        this.type = event.type;
+
+        let data = appointment?.data;
         this.appointment_id = appointment.id
         if (this.calendar) {
             data = appointment.meta.data;
@@ -104,16 +119,23 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.showAppointment = true;
 
         const day = appointment.date + ' ' + appointment.hour;
+
         this.appointmentDataForm = this.builder.group({
             date: [{ 0: day }, [Validators.required]],
-            weight: [null !== data ? data.weight : '', [Validators.required]],
-            weight_objective: [null !== data ? data.weight_objective : '', [Validators.required]],
-            five_meals: [null !== data ? data.five_meals : '', [Validators.required]],
-            water: [null !== data ? data.water : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-            digestion: [null !== data ? data.digestion : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-            stools: [null !== data ? data.stools : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-            notes: [null !== data ? data.notes : '', [Validators.required, Validators.maxLength(this.validationMaxString.text)]],
         });
+
+        if (this.type == 3) {
+            this.appointmentDataForm = this.builder.group({
+                ...this.appointmentDataForm.controls,
+                weight: [null !== data ? data.weight : '', [Validators.required]],
+                weight_objective: [null !== data ? data.weight_objective : '', [Validators.required]],
+                five_meals: [null !== data ? data.five_meals : '', [Validators.required]],
+                water: [null !== data ? data.water : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                digestion: [null !== data ? data.digestion : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                stools: [null !== data ? data.stools : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
+                notes: [null !== data ? data.notes : '', [Validators.required, Validators.maxLength(this.validationMaxString.text)]],
+            });
+        }
 
         const dayMoment = moment(day).format('YYYY-MM-DD HH:mm');
         this.dateOptions.defaultDate = dayMoment;
@@ -126,7 +148,8 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             return;
         }
 
-        let appointmentDataInformation: AppointmentData = this.utilService.clear(this.appointmentDataForm.value);
+        let appointmentDataInformation: AppointmentDate | AppointmentData = this.utilService.clear(this.appointmentDataForm.value);
+
         const hour = moment(appointmentDataInformation.date[0]).format('HH:mm');
         appointmentDataInformation.date = moment(appointmentDataInformation.date[0]).format('YYYY-MM-DD');
         appointmentDataInformation.hour = hour;
@@ -147,8 +170,12 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.router.navigate([`/customers/${this.customer.id}/${this.appointment_id}/nutritional-plan`]);
     }
 
-    onDelete() {
-        this.subscription.add(this.appointmentService.deleteAppointment(this.appointment_id).subscribe(
+    generateDeleteModal(event) {
+        this.menuComponent.generateDeleteAppointment(event);
+    }
+
+    deleteAppointment(appointment_id) {
+        this.subscription.add(this.appointmentService.deleteAppointment(appointment_id).subscribe(
             (response) => {
                 this.submitted = false;
                 this.snackbarService.show('Appointment deleted successfully', 'success');

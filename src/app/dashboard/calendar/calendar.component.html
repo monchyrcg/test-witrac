@@ -4,7 +4,7 @@
             <button type="button" class="middle-button rounded-l-md" mwlCalendarPreviousView
                 [view]="view"
                 [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-                <img class="h-5 w-5" src="assets/images/svg/chevron-left.svg" alt="check">
+                <img class="h-5 w-5" src="assets/images/svg/chevron-left.svg" alt="chevron">
             </button>
             <button type="button" class="-ml-px middle-button" mwlCalendarToday
                 [(viewDate)]="viewDate"
@@ -14,12 +14,12 @@
             <button type="button" class="-ml-px middle-button rounded-r-md" mwlCalendarNextView
                 [view]="view"
                 [(viewDate)]="viewDate" (viewDateChange)="closeOpenMonthViewDay()">
-                <img class="h-5 w-5" src="assets/images/svg/chevron-right.svg" alt="check">
+                <img class="h-5 w-5" src="assets/images/svg/chevron-right.svg" alt="chevron">
             </button>
         </span>
         <span class="relative z-10 inline-flex shadow-sm rounded-md float-right">
             <button type="button" class="middle-button rounded-l-md">
-                {{ viewName ? viewName : 'calendar.month' | translate }}
+                {{ viewName ? viewName : 'calendar.day' | translate }}
             </button>
             <span class="-ml-px relative block">
                 <button type="button" class="middle-button rounded-r-md" aria-label="Expand"

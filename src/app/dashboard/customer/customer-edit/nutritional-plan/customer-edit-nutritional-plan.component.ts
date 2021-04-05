@@ -42,8 +42,6 @@ export class CustomerEditNutritionalPlanComponent implements OnInit, OnDestroy {
 
     types = [];
 
-    probarO: Observable<any> = new Observable;
-
     crashDays: [];
 
     constructor(

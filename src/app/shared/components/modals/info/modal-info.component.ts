@@ -12,6 +12,7 @@ export class ModalInfoComponent {
 	@Input() text: string;
 	@Input() text_button_cancel: string;
 	@Output() closeModal;
+	@Output() buttonAction;
 
 	closeModalF() {
 		this.closeModal();

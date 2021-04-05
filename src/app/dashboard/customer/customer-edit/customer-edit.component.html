@@ -53,17 +53,9 @@
                     <button (click)="createAppointment()" type="button"
                         class="customer-info-button-white">
                         <!-- Heroicon name: pencil -->
-                        <svg class="customer-info-button-svg text-gray-500"
-                            fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5
-                                2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732
-                                3.732z">
-                            </path>
-                        </svg>
+                        <img class="customer-info-button-svg text-gray-500"
+                            src="assets/images/svg/pencil.svg"
+                            />
                         {{ 'customer_edit.appointment' | translate }}
                     </button>
                 </span>
@@ -116,15 +108,16 @@
                                         text-gray-700 hover:bg-gray-100
                                         focus:outline-none focus:bg-gray-100
                                         transition duration-150 ease-in-out"
-                                        role="menuitem">{{
-                                        'customer_edit.appointment' | translate
-                                        }}</a>
+                                        role="menuitem">
+                                        {{ 'customer_edit.appointment' | translate }}
+                                    </a>
                                     <a class="block px-4 py-2 text-sm leading-5
                                         text-gray-700 hover:bg-gray-100
                                         focus:outline-none focus:bg-gray-100
                                         transition duration-150 ease-in-out"
-                                        role="menuitem">{{
-                                        'customer_edit.message' | translate }}</a>
+                                        role="menuitem">
+                                        {{ 'customer_edit.message' | translate }}
+                                    </a>
                                 </div>
                             </div>
                         </span>

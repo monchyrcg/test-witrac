@@ -1,0 +1,17 @@
+.group-hover {
+  display: none;
+}
+.group:hover .group-hover {
+  display: block !important;
+}
+
+.navbar-a {
+    @apply cursor-pointer;
+    @apply block;
+    @apply py-2;
+    @apply text-sm;
+    @apply text-left;
+}
+.navbar-a:hover {
+    @apply bg-gray-100;
+}

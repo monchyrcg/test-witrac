@@ -1,7 +1,8 @@
 <ng-container *ngIf="listCustomer$ | async; else loading">
     <div class="px-4 py-6 sm:px-6 lg:px-8">
         <div
-            class="pb-5 border-b border-gray-200 space-y-3 sm:flex sm:items-center sm:justify-between sm:space-x-4 sm:space-y-0">
+            class="pb-5 border-b border-gray-200 space-y-3 sm:flex sm:items-center
+            sm:justify-between sm:space-x-4 sm:space-y-0">
             <h3 class="text-lg leading-6 font-medium text-gray-900">
                 {{ 'customer_list.title' | translate }}
             </h3>
@@ -32,15 +33,18 @@
                     <thead>
                         <tr>
                             <th
-                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium
+                                text-gray-500 uppercase tracking-wider">
                                 {{ 'customer_list.table.name' | translate }}
                             </th>
                             <th
-                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium
+                                text-gray-500 uppercase tracking-wider">
                                 {{ 'customer_list.table.appointment' | translate }}
                             </th>
                             <th
-                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium
+                                text-gray-500 uppercase tracking-wider">
                                 {{ 'customer_list.table.phone' | translate }}
                             </th>
                             <th class="px-6 py-3 bg-gray-50"></th>
@@ -67,7 +71,10 @@
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
                                 <div class="text-sm leading-5 text-gray-900">
-                                    {{customer.appointment ? ((customer.appointment.date+' '+customer.appointment.hour) | date: 'short' : '' : ((settingGeneralService.changeCountry$ | async).locale))  : 'N/A'}}
+                                    {{customer.appointment ? ((customer.appointment.date+'
+                                    '+customer.appointment.hour) | date: 'short' : '' :
+                                    ((settingGeneralService.changeCountry$ | async).locale)) :
+                                    'N/A'}}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-no-wrap">
@@ -75,35 +82,36 @@
                                     {{customer.phone}}
                                 </div>
                             </td>
-                            <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-                                <div class="relative mx-1 px-1 py-2 group mb-1 md:mb-0" id="button_mlist">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z">
-                                        </path>
-                                    </svg>
+                            <td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5
+                                font-medium">
+                                <div class="relative mx-1 px-1 py-2 group mb-1 md:mb-0"
+                                    id="button_mlist">
+                                    <img class="w-6 h-6" src="assets/images/svg/dots.svg" />
 
                                     <ul
-                                        class="absolute group-hover left-auto mt-10 p-2 rounded-lg shadow-lg bottom-0 right-0 text-left bg-white z-10">
+                                        class="absolute group-hover left-auto mt-10 p-2 rounded-lg
+                                        shadow-lg bottom-0 right-0 text-left bg-white z-10">
                                         <li class="navbar-a">
                                             <a class="px-2 py-1" (click)="edit(customer.id)">
                                                 <span>
-                                                    {{ 'customer_list.table.menu.edit' | translate }}
+                                                    {{ 'customer_list.table.menu.edit' | translate
+                                                    }}
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="navbar-a">
                                             <a class="px-2 py-1">
                                                 <span class="">
-                                                    {{ 'customer_list.table.menu.delete' | translate }}
+                                                    {{ 'customer_list.table.menu.delete' | translate
+                                                    }}
                                                 </span>
                                             </a>
                                         </li>
                                         <li class="navbar-a">
-                                            <a class=" px-2 py-1" (click)="call(customer)">
+                                            <a class="px-2 py-1" (click)="call(customer)">
                                                 <span class="">
-                                                    {{ 'customer_list.table.menu.call' | translate }}
+                                                    {{ 'customer_list.table.menu.call' | translate
+                                                    }}
                                                 </span>
                                             </a>
                                         </li>
@@ -139,28 +147,24 @@
                 </p>
                 <nav class="relative z-0 inline-flex shadow-sm">
 
-                    <a *ngIf="!first_page" (click)="nextPage('-')" class="px-2 py-2 rounded-l-md pagination"
+                    <a *ngIf="!first_page" (click)="nextPage('-')" class="px-2 py-2 rounded-l-md
+                        pagination"
                         aria-label="{{ 'customer_list.table.pagination.previous' | translate }}">
-                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
+                        <img class="h-5 w-5" src="assets/images/svg/chevron-left.svg" alt="chevron">
                     </a>
 
                     <ng-container *ngFor="let link of links; let i=index">
-                        <a *ngIf="showPerPage(i)" (click)="nextPage(link.label)" class="-ml-px px-4 py-2 pagination">
+                        <a *ngIf="showPerPage(i)" (click)="nextPage(link.label)" class="-ml-px
+                            px-4 py-2 pagination">
                             {{link.label}}
                         </a>
                     </ng-container>
 
-                    <a *ngIf="!last_page" (click)="nextPage('+')" class="-ml-px px-2 py-2 pagination"
+                    <a *ngIf="!last_page" (click)="nextPage('+')" class="-ml-px px-2 py-2
+                        pagination"
                         aria-label="{{ 'customer_list.table.pagination.next' | translate }}">
-                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
+                        <img class="h-5 w-5" src="assets/images/svg/chevron-right.svg"
+                            alt="chevron">
                     </a>
                 </nav>
             </div>

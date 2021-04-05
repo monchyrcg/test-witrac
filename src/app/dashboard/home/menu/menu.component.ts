@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ModalInfoComponent } from 'src/app/shared/components/modals/info/modal-info.component';
+import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { CustomerEditNutritionalPlanService } from '../../customer/customer-edit/nutritional-plan/customer-edit-nutritional-plan.service';
@@ -32,7 +33,8 @@ export class MenuComponent {
     constructor(
         public settingGeneralService: SettingGeneralService,
         private modalService: ModalService,
-        private nutritionalPlanService: CustomerEditNutritionalPlanService
+        private nutritionalPlanService: CustomerEditNutritionalPlanService,
+        private appointmentService: AppointmentService
     ) { }
 
     changeValue(value?) {
@@ -85,5 +87,21 @@ export class MenuComponent {
         this.closeModal();
 
         this.nutritionalPlanService.changeCrashState(days);
+    }
+
+    // deleteAppointment
+    generateDeleteAppointment(appointment_id) {
+        this.changeValue(true);
+        console.log(appointment_id);
+        this.modalService.init(
+            ModalInfoComponent,
+            this.settingGeneralService.getLangText('customer_edit.appointments'),
+            { closeModal: this.closeModal.bind(this), buttonAction: ($action) => { this.deleteAppointment(appointment_id) } });
+    }
+
+    deleteAppointment(appointment_id) {
+        this.closeModal();
+        console.log(appointment_id);
+        this.appointmentService.deleteAppointmentState(appointment_id)
     }
 }

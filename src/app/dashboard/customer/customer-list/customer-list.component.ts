@@ -21,7 +21,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
     name: string;
     customerForm: FormGroup;
-    private debounce: number = 200;
+    private debounce: number = 1250;
 
     // pagination
     page = 1;

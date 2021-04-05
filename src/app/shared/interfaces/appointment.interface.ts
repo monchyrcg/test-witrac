@@ -29,3 +29,8 @@ export interface AppointmentData {
     date: any;
     hour: any;
 }
+
+export interface AppointmentDate {
+    date: any;
+    hour: any;
+}
