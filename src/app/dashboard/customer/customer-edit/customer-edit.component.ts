@@ -11,6 +11,7 @@ import { MagentoService } from 'src/app/shared/services/magento.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { MenuComponent } from '../../home/menu/menu.component';
 import { EChartOption } from 'echarts';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -51,15 +52,21 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     options2: any;
     options3: any;
 
+    path: string = 'tab=personal';
+
     constructor(
         private route: ActivatedRoute,
         private customerService: CustomerService,
         public settingGeneralService: SettingGeneralService,
         private magentoService: MagentoService,
-        private menuComponent: MenuComponent
+        private menuComponent: MenuComponent,
+        private location: Location
     ) { }
 
     ngOnInit(): void {
+        this.path = this.location.path().split('?')[1] ?? this.path;
+
+
         this.listProducts();
 
         this.customer_id = this.route.snapshot.paramMap.get('customer');
@@ -300,7 +307,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
     createAppointment(): void {
         this.customer$.subscribe((customer) => {
-            this.menuComponent.createAppointment(null, customer)
+            this.menuComponent.createAppointment(null, customer);
+
         })
 
     }

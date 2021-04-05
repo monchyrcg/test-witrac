@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "local": "ng serve -o -c local --host app.nutriwell.test --disableHostCheck --ssl --ssl-key C:/wamp64/bin/apache/apache2.4.46/conf/key/private.key  --ssl-cert C:/wamp64/bin/apache/apache2.4.46/conf/key/certificate.crt",
-    "develop": "ng build --prod --aot -c dev && npm run updated:dev",
+    "develop": "NODE_ENV=production ng build --prod --aot -c dev && npm run updated:dev",
     "develop-no": "ng build --prod --aot -c production",
     "updated:dev": "scp -r dist forge@188.166.106.234:/home/forge/app.naturhousedigital.com",
     "production": "ng build --prod --aot -c production  && npm run updated:pro",

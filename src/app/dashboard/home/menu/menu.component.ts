@@ -92,7 +92,7 @@ export class MenuComponent {
     // deleteAppointment
     generateDeleteAppointment(appointment_id) {
         this.changeValue(true);
-        console.log(appointment_id);
+
         this.modalService.init(
             ModalInfoComponent,
             this.settingGeneralService.getLangText('customer_edit.appointments'),
@@ -101,7 +101,6 @@ export class MenuComponent {
 
     deleteAppointment(appointment_id) {
         this.closeModal();
-        console.log(appointment_id);
         this.appointmentService.deleteAppointmentState(appointment_id)
     }
 }

@@ -174,6 +174,7 @@ export class AppointmentComponent implements OnInit, OnDestroy {
         this.subscription.add(this.appointmentService.saveAppointment(appointment).subscribe(
             (response) => {
                 this.showSnackBar('Appointment created successfully.', 'success');
+                window.location.reload();
             },
             (error) => {
                 this.showSnackBar('Algo ha pasado ....', 'danger');

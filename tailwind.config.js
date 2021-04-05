@@ -4,10 +4,7 @@ module.exports = {
     purgeLayersByDefault: true,
     removeDeprecatedGapUtilities: true,
   },
-  purge: {
-    // enabled: true,
-    // content: ['./src/**/*.html', './src/**/*.ts']
-  },
+  purge: ["./src/**/*.{html,ts}"],
   theme: {
     fontFamily: {
       'nutriwell': ['Muller-Regular']

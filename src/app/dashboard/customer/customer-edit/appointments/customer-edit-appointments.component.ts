@@ -88,7 +88,6 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
         this.deleteSubscription = this.appointmentService.deleteState.subscribe(
             (response) => {
-                console.log(response.appointment_id);
                 this.deleteAppointment(response.appointment_id);
             }
         );

@@ -52,7 +52,7 @@ export class AppointmentService {
             .post(`${environment.apiUrl}/appointments`, appointment)
             .pipe(map((response: any) => {
                 response.data;
-                this.listAppointment(this.date);
+                this.listAppointmentCustomer(appointment.customer_id, response.data.date);
             }));
     }
 
@@ -63,6 +63,7 @@ export class AppointmentService {
         if (date) {
             params = params.append('date', date);
         }
+
         let data = this.http
             .get(`${environment.apiUrl}/appointments`, { params })
             .pipe(map((response: any) => {

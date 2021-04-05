@@ -5,16 +5,18 @@ import { TabsComponent } from '../tabs/tabs.component';
 
 @Component({
     selector: 'app-tab',
-    templateUrl: './tab.component.html',
+    templateUrl: './tab.component.html'
 })
 export class TabComponent implements OnInit, Tab {
 
     @Input() title: string;
-    public isActive: boolean = false;
+    @Input() slug: string;
+    @Input() isActive: boolean = false;
 
     constructor(
         public tabsComponent: TabsComponent
     ) { }
+
 
     ngOnInit(): void {
         this.tabsComponent.addTabs(this);

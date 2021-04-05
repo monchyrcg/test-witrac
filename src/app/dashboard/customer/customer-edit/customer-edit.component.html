@@ -126,18 +126,21 @@
             </div>
 
             <app-tabs>
-                <app-tab title="{{ 'customer_edit.tabs.data' | translate }}">
+                <app-tab title="{{ 'customer_edit.tabs.data' | translate }}" slug="personal"
+                    [isActive]="path === 'tab=personal'">
                     <app-customer-edit-general [customer]="customer$"></app-customer-edit-general>
                 </app-tab>
 
-                <app-tab title="Historial Médico">
+                <app-tab title="Historial Médico" slug="historial" [isActive]="path ===
+                    'tab=historial'">
                     <app-customer-edit-medical-history
                         [customer_id]="customer$.id"
                         [medical]="customer$.medical">
                     </app-customer-edit-medical-history>
                 </app-tab>
 
-                <app-tab title="Appointments">
+                <app-tab title="Appointments" slug="appointment" [isActive]="path ===
+                    'tab=appointment'">
                     <app-customer-edit-appointments [customer]="customer$"
                         (reloadCustomer)="reloadCustomer()">
                     </app-customer-edit-appointments>
