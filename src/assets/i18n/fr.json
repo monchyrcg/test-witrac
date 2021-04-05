@@ -29,7 +29,13 @@
     "profile": {
         "profile": "Your profile",
         "settings": "Settings",
-        "logout": "Logout"
+        "logout": "Logout",
+        "calendar": {
+            "title": "Seleccione el calendario",
+            "text": "Selecciona el calendario que quiere conectar",
+            "text_button_register": "Guardar",
+            "calendar": "Seleccione un calendario"
+        }
     },
     "customer_create": {
         "title": "Registrar el cliente",
@@ -96,6 +102,11 @@
                 "text_button_register": "Guardar",
                 "day": "Seleccionada los días"
             }
+        },
+        "appointments": {
+            "title": "¿Esta seguro que quiere borrar la cita?",
+            "text": "Esta operación no se puede deshacer",
+            "text_button_cancel": "Borrar"
         }
     },
     "customer_privacy": {
