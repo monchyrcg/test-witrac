@@ -113,7 +113,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     get f() { return this.appointmentDataForm.controls; }
 
     showAppointmentO(event) {
-        console.log(event);
+
         this.showAppointment = false;
 
         const appointment = event.appointment;
