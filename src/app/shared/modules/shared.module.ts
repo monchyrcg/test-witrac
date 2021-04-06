@@ -22,6 +22,7 @@ import { LoadingComponent } from '../components/loading/loading.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DragDropComponent } from '../components/drag-drop/drag-drop.component';
+import { ModalInfoOptionsComponent } from '../components/modals/info-options/modal-info-options.component';
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -30,6 +31,7 @@ export function createTranslateLoader(http: HttpClient) {
 @NgModule({
     declarations: [
         ModalInfoComponent,
+        ModalInfoOptionsComponent,
         ErrorFormComponent,
         LabelFormComponent,
         SnackbarComponent,

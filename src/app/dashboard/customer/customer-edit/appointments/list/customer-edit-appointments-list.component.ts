@@ -12,7 +12,8 @@ export class CustomerEditAppointmentsListComponent implements OnInit {
 
     @Input() customer;
     @Output() showAppointmentOutput = new EventEmitter<any>();
-    @Output() delete = new EventEmitter<any>();
+    @Output() deleteAppointmentModal = new EventEmitter<any>();
+    @Output() startAppointmentModal = new EventEmitter<any>();
 
     appointments;
     lengthLg: number;
@@ -39,7 +40,11 @@ export class CustomerEditAppointmentsListComponent implements OnInit {
         window.open('/external/customers/nutritional-plan/' + nutritionalPlan, "_blank");
     }
 
-    deleteAppointment(appointment) {
-        this.delete.emit(appointment.id);
+    generateDeleteAppointment(appointment) {
+        this.deleteAppointmentModal.emit(appointment.id);
+    }
+
+    generateStartAppointment(appointment) {
+        this.startAppointmentModal.emit(appointment)
     }
 }

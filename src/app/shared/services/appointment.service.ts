@@ -21,6 +21,9 @@ export class AppointmentService {
     private deleteSubject = new Subject<any>();
     public deleteState = this.deleteSubject.asObservable();
 
+    private showSubject = new Subject<any>();
+    public showState = this.showSubject.asObservable();
+
     constructor(private http: HttpClient, private utilService: UtilsService) { }
 
     listAppointment(date?) {
@@ -111,6 +114,25 @@ export class AppointmentService {
             .pipe(map((response: any) => {
                 response.data;
                 this.listAppointment(this.date);
+            }));
+    }
+
+    showAppointmentState(action, appointment) {
+        console.log(action);
+        const data = { action: action, appointment: appointment };
+        if (action === 1) {
+            this.startAppointmentTimestamp(data).subscribe();
+        } else {
+            this.showSubject.next(data);
+        }
+    }
+
+    startAppointmentTimestamp(data) {
+
+        return this.http
+            .get(`${environment.apiUrl}/appointments/start/${data.appointment.id}`,)
+            .pipe(map((response: any) => {
+                this.showSubject.next(data);
             }));
     }
 }

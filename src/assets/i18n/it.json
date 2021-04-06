@@ -103,10 +103,14 @@
                 "day": "Seleccionada los días"
             }
         },
-        "appointments": {
+        "appointments_delete": {
             "title": "¿Esta seguro que quiere borrar la cita?",
             "text": "Esta operación no se puede deshacer",
             "text_button_cancel": "Borrar"
+        },
+        "appointments_show": {
+            "title": "¿Quieres empezar con la cita o simplemente ver los datos?",
+            "text": "Selecciona una de las opciones"
         }
     },
     "customer_privacy": {

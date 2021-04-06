@@ -58,6 +58,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     private subscription = new Subscription();
     private deleteSubscription: Subscription;
+    private showSubscription: Subscription;
 
     type: number;
 
@@ -91,6 +92,16 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                 this.deleteAppointment(response.appointment_id);
             }
         );
+
+        this.showSubscription = this.appointmentService.showState.subscribe(
+            (response) => {
+                const event = {
+                    type: response.action == 1 ? 3 : 1,
+                    appointment: response.appointment
+                };
+                this.showAppointmentO(event);
+            }
+        );
     }
 
     changeView(showCalendar) {
@@ -102,7 +113,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     get f() { return this.appointmentDataForm.controls; }
 
     showAppointmentO(event) {
-
+        console.log(event);
         this.showAppointment = false;
 
         const appointment = event.appointment;
@@ -123,7 +134,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             date: [{ 0: day }, [Validators.required]],
         });
 
-        if (this.type == 3) {
+        if (this.type !== 2) {
             this.appointmentDataForm = this.builder.group({
                 ...this.appointmentDataForm.controls,
                 weight: [null !== data ? data.weight : '', [Validators.required]],
@@ -169,6 +180,10 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.router.navigate([`/customers/${this.customer.id}/${this.appointment_id}/nutritional-plan`]);
     }
 
+    generateStartModal(event) {
+        this.menuComponent.generateStartAppointment(event);
+    }
+
     generateDeleteModal(event) {
         this.menuComponent.generateDeleteAppointment(event);
     }
@@ -188,5 +203,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
+
+        if (this.deleteSubscription) {
+            this.deleteSubscription.unsubscribe();
+        }
     }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ModalInfoOptionsComponent } from 'src/app/shared/components/modals/info-options/modal-info-options.component';
 import { ModalInfoComponent } from 'src/app/shared/components/modals/info/modal-info.component';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { ModalService } from 'src/app/shared/services/modal.service';
@@ -95,12 +96,43 @@ export class MenuComponent {
 
         this.modalService.init(
             ModalInfoComponent,
-            this.settingGeneralService.getLangText('customer_edit.appointments'),
-            { closeModal: this.closeModal.bind(this), buttonAction: ($action) => { this.deleteAppointment(appointment_id) } });
+            this.settingGeneralService.getLangText('customer_edit.appointments_delete'),
+            { closeModal: this.closeModal.bind(this), buttonAction: ($action) => { this.deleteAppointmentAction(appointment_id) } });
     }
 
-    deleteAppointment(appointment_id) {
+    deleteAppointmentAction(appointment_id) {
         this.closeModal();
         this.appointmentService.deleteAppointmentState(appointment_id)
+    }
+
+    // startAppointment
+    generateStartAppointment(appointment) {
+        this.changeValue(true);
+
+        let inputs = this.settingGeneralService.getLangText('customer_edit.appointments_show');
+
+        inputs.options = [
+            {
+                'text': 'Empezar cita',
+                'optionReturn': 1,
+                'class': 'customer-info-button-reverse'
+            },
+            {
+                'text': 'Ver cita',
+                'optionReturn': 2,
+                'class': 'customer-info-button-white'
+            }
+        ];
+
+        this.modalService.init(
+            ModalInfoOptionsComponent,
+            inputs,
+            { closeModal: this.closeModal.bind(this), buttonAction: ($action) => { this.startAppointmentAction($action, appointment) } });
+    }
+
+    startAppointmentAction(action, appointment) {
+        this.closeModal();
+
+        this.appointmentService.showAppointmentState(action, appointment)
     }
 }

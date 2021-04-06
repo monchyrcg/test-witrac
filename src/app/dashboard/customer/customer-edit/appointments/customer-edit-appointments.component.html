@@ -15,7 +15,9 @@
         (showAppointmentOutput)="showAppointmentO($event)">
     </app-customer-edit-appointments-calendar>
     <app-customer-edit-appointments-list [customer]="customer" *ngIf="!calendar"
-        (showAppointmentOutput)="showAppointmentO($event)" (delete)="generateDeleteModal($event)"></app-customer-edit-appointments-list>
+        (showAppointmentOutput)="showAppointmentO($event)"
+        (startAppointmentModal)="generateStartModal($event)"
+        (deleteAppointmentModal)="generateDeleteModal($event)"></app-customer-edit-appointments-list>
 </div>
 
 
@@ -161,7 +163,7 @@
                 </div>
             </ng-container>
 
-            <div class="col-span-3">
+            <div class="col-span-3" *ngIf="type !== 1">
                 <div class="grid grid-cols-3 gap-5 lg:gap-10">
                     <span class="shadow-sm rounded-md">
                         <button type="button" class="customer-info-button-red-reverse"
