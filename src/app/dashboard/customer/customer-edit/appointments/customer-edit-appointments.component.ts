@@ -13,6 +13,7 @@ import { SettingGeneralService } from 'src/app/shared/services/settings-general.
 import { UtilsService } from 'src/app/shared/services/util.service';
 import { Validations } from 'src/app/shared/settings/validation';
 import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -61,6 +62,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     private showSubscription: Subscription;
 
     type: number;
+    private debounce: number = 800;
 
     constructor(
         private builder: FormBuilder,
@@ -113,7 +115,6 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     get f() { return this.appointmentDataForm.controls; }
 
     showAppointmentO(event) {
-
         this.showAppointment = false;
 
         const appointment = event.appointment;
@@ -137,14 +138,31 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         if (this.type !== 2) {
             this.appointmentDataForm = this.builder.group({
                 ...this.appointmentDataForm.controls,
+                imc: [{ value: null !== data ? data.imc : '', disabled: true }, [Validators.required]],
                 weight: [null !== data ? data.weight : '', [Validators.required]],
                 weight_objective: [null !== data ? data.weight_objective : '', [Validators.required]],
-                five_meals: [null !== data ? data.five_meals : '', [Validators.required]],
-                water: [null !== data ? data.water : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-                digestion: [null !== data ? data.digestion : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-                stools: [null !== data ? data.stools : '', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
-                notes: [null !== data ? data.notes : '', [Validators.required, Validators.maxLength(this.validationMaxString.text)]],
+                five_meals: [data.five_meals ?? ''],
+                water: [data.water ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
+                digestion: [data.digestion ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
+                stools: [data.stools ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
+                notes: [data.notes ?? '', [Validators.maxLength(this.validationMaxString.text)]],
+                waist: [data.waist ?? ''],
+                girth: [data.girth ?? ''],
+                hip: [data.hip ?? ''],
+                leg: [data.leg ?? '']
             });
+
+            this.appointmentDataForm.get("weight").valueChanges
+                .pipe(debounceTime(this.debounce), distinctUntilChanged())
+                .subscribe(weight => {
+                    if (typeof weight !== 'undefined') {
+                        const number = (10000 * weight) / (this.customer.medical.height * this.customer.medical.height);
+                        this.appointmentDataForm.get('imc').setValue(
+                            Math.round((number + Number.EPSILON) * 100) / 100
+                        );
+                    }
+                }
+                );
         }
 
         const dayMoment = moment(day).format('YYYY-MM-DD HH:mm');
@@ -158,7 +176,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             return;
         }
 
-        let appointmentDataInformation: AppointmentDate | AppointmentData = this.utilService.clear(this.appointmentDataForm.value);
+        let appointmentDataInformation: AppointmentDate | AppointmentData = this.utilService.clear(this.appointmentDataForm.getRawValue());
 
         const hour = moment(appointmentDataInformation.date[0]).format('HH:mm');
         appointmentDataInformation.date = moment(appointmentDataInformation.date[0]).format('YYYY-MM-DD');

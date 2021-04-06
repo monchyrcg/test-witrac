@@ -56,24 +56,6 @@
                 <div class="col-span-3">
                     <div class="grid grid-cols-3 gap-5 lg:gap-10">
                         <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="five_meals" name="¿Has hecho las 5
-                                comidas?"></app-label-form>
-
-                            <select formControlName="five_meals" class="bg-white
-                                inputClass" id="five_meals">
-                                <option hidden selected value="">¿Has hecho las 5
-                                    comidas?</option>
-                                <option value="{{ option.id }}" *ngFor="let option
-                                    of options">{{ option.text }}
-                                </option>
-                            </select>
-                            <ng-container *ngIf="submitted && f.five_meals.errors">
-                                <app-error-form *ngIf="f.five_meals.errors.required"
-                                    error="{{'errors.required' | translate}}">
-                                </app-error-form>
-                            </ng-container>
-                        </div>
-                        <div class="col-span-3 sm:col-span-1">
                             <app-label-form for="weight" name="Peso actual"></app-label-form>
                             <input formControlName="weight" class="inputClass"
                                 id="weight" type="number" step="0.01" min="0"
@@ -105,9 +87,35 @@
                                 </app-error-form>
                             </ng-container>
                         </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="weight" name="IMC"></app-label-form>
+                            <input formControlName="imc" class="inputClass"
+                                id="imc" type="number" step="0.01" min="0"
+                                [ngClass]="{ 'border border-red-500': submitted &&
+                                f.imc.errors }"
+                                placeholder="IMC">
+                            <ng-container *ngIf="submitted && f.imc.errors">
+                                <app-error-form *ngIf="f.imc.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
                     </div>
                 </div>
                 <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="five_meals" name="¿Has hecho las 5
+                        comidas?"></app-label-form>
+
+                    <select formControlName="five_meals" class="bg-white
+                        inputClass" id="five_meals">
+                        <option hidden selected value="">¿Has hecho las 5
+                            comidas?</option>
+                        <option value="{{ option.id }}" *ngFor="let option
+                            of options">{{ option.text }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-span-3 lg:col-span-2">
                     <app-label-form name="Agua"></app-label-form>
 
                     <input formControlName="water" class="inputClass" id="water"
@@ -132,7 +140,7 @@
                         </app-error-form>
                     </ng-container>
                 </div>
-                <div class="col-span-3 lg:col-span-1">
+                <div class="col-span-3 lg:col-span-2">
                     <app-label-form for="allergies" name="Heces"></app-label-form>
                     <input formControlName="stools" class="inputClass" id="stools"
                         type="text"
@@ -143,6 +151,28 @@
                             error="{{'errors.maxlength' | translate}}">
                         </app-error-form>
                     </ng-container>
+                </div>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="waist" name="Cintura (cm)"></app-label-form>
+
+                    <input formControlName="waist" class="inputClass" id="waist"
+                        type="number" step="0.01" min="0" placeholder="Cintura">
+                </div>
+                <div class="col-span-3 lg:col-span-2">
+                    <app-label-form name="Contorno (cm)"></app-label-form>
+
+                    <input formControlName="girth" class="inputClass" id="girth"
+                        type="number" step="0.01" min="0" placeholder="Contorno">
+                </div>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="hip" name="Cintura (cm)"></app-label-form>
+                    <input formControlName="hip" class="inputClass" id="hip" type="number"
+                        step="0.01" min="0" placeholder="Cintura">
+                </div>
+                <div class="col-span-3 lg:col-span-2">
+                    <app-label-form for="leg" name="Piernas (cm)"></app-label-form>
+                    <input formControlName="leg" class="inputClass" id="leg"
+                        type="number" step="0.01" min="0" placeholder="Piernas">
                 </div>
                 <div class="col-span-3">
                     <app-label-form name="Notes"></app-label-form>

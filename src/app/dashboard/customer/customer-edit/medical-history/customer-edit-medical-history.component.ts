@@ -2,6 +2,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { Build } from 'src/app/shared/interfaces/build.interface';
 import { CustomerMedicalInformation } from 'src/app/shared/interfaces/customers.interface';
@@ -14,8 +15,7 @@ import { Validations } from 'src/app/shared/settings/validation';
 
 @Component({
     selector: 'app-customer-edit-medical-history',
-    templateUrl: './customer-edit-medical-history.component.html',
-    // styleUrls: ['../customer-edit.component.scss']
+    templateUrl: './customer-edit-medical-history.component.html'
 })
 
 export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
@@ -32,6 +32,8 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
     validationMaxString = Validations.validationMaxString;
 
     private subscription = new Subscription();
+
+    private debounce: number = 800;
 
     constructor(
         private builder: FormBuilder,
@@ -57,16 +59,39 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
             this.medical = [];
         }
         this.customerHistoryMedical = this.builder.group({
-            history: [this.medical.history ? this.medical.history : '', [Validators.required, Validators.maxLength(this.validationMaxString.text)]],
-            drugs: [this.medical.drugs ? this.medical.drugs : '', [Validators.maxLength(this.validationMaxString.text)]],
-            allergies: [this.medical.allergies ? this.medical.allergies : '', [Validators.maxLength(this.validationMaxString.text)]],
-            weight: [this.medical.weight ? this.medical.weight : '', [Validators.required]],
+            build: [this.medical.build ?? '', [Validators.required]],
+            physical_activity: [this.medical.physical_activity ?? '', [Validators.required]],
             height: [this.medical.height ? this.medical.height : '', [Validators.required]],
+            weight: [this.medical.weight ? this.medical.weight : '', [Validators.required]],
             weight_objective: [this.medical.weight_objective ? this.medical.weight_objective : '', [Validators.required]],
-            build: [this.medical.build ? this.medical.build : '', [Validators.required]],
-            physical_activity: [this.medical.physical_activity ? this.medical.physical_activity : '', [Validators.required]],
-            notes: [this.medical.notes ? this.medical.notes : ''],
+            imc: [{ value: this.medical.imc ? this.medical.imc : '', disabled: true }, [Validators.required]],
+
+            history: [this.medical.history ?? '', [Validators.maxLength(this.validationMaxString.text)]],
+            drugs: [this.medical.drugs ?? '', [Validators.maxLength(this.validationMaxString.text)]],
+            allergies: [this.medical.allergies ?? '', [Validators.maxLength(this.validationMaxString.text)]],
+
+            notes: [this.medical.notes ?? ''],
         });
+
+        this.customerHistoryMedical.valueChanges
+            .pipe(debounceTime(this.debounce), distinctUntilChanged())
+            .subscribe(query => {
+                const weight = query.weight;
+                const height = query.height;
+                if (this.isValidToQuery(weight) && this.isValidToQuery(height)) {
+                    const number = (10000 * weight) / (height * height);
+                    this.customerHistoryMedical.get('imc').setValue(
+                        Math.round((number + Number.EPSILON) * 100) / 100
+                    );
+                }
+            }
+            );
+    }
+
+    private isValidToQuery(value): boolean {
+        if (value != '' || value != null || typeof value !== 'undefined')
+            return true;
+        return false;
     }
 
     get f() { return this.customerHistoryMedical.controls; }
@@ -78,7 +103,7 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
             return;
         }
 
-        let customerMedicalInformation: CustomerMedicalInformation = this.utilService.clear(this.customerHistoryMedical.value);
+        let customerMedicalInformation: CustomerMedicalInformation = this.utilService.clear(this.customerHistoryMedical.getRawValue());
 
 
         this.subscription.add(this.customerService.saveMedicalInformation(this.customer_id, customerMedicalInformation).subscribe(
