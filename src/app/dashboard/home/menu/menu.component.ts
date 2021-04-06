@@ -30,7 +30,6 @@ export class MenuComponent {
     crashDays: [];
 
 
-
     constructor(
         public settingGeneralService: SettingGeneralService,
         private modalService: ModalService,
@@ -111,18 +110,19 @@ export class MenuComponent {
 
         let inputs = this.settingGeneralService.getLangText('customer_edit.appointments_show');
 
-        inputs.options = [
-            {
+        inputs.options = [];
+        inputs.options.push({
+            'text': 'Ver cita',
+            'optionReturn': 2,
+            'class': 'customer-info-button-white'
+        });
+        if (!appointment.status) {
+            inputs.options.push({
                 'text': 'Empezar cita',
                 'optionReturn': 1,
                 'class': 'customer-info-button-reverse'
-            },
-            {
-                'text': 'Ver cita',
-                'optionReturn': 2,
-                'class': 'customer-info-button-white'
-            }
-        ];
+            });
+        }
 
         this.modalService.init(
             ModalInfoOptionsComponent,

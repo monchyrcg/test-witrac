@@ -16,6 +16,7 @@ export interface AppointmentCalendar {
     allDay: boolean;
     color: string;
     data: any;
+    status: boolean;
 }
 
 export interface AppointmentData {

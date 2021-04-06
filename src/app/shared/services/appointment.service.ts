@@ -46,6 +46,7 @@ export class AppointmentService {
                             'secondary': appointmentCalendar.color
 
                         },
+                        status: appointmentCalendar.status,
                         meta: {
                             appointmentCalendar,
                         },
@@ -118,7 +119,6 @@ export class AppointmentService {
     }
 
     showAppointmentState(action, appointment) {
-        console.log(action);
         const data = { action: action, appointment: appointment };
         if (action === 1) {
             this.startAppointmentTimestamp(data).subscribe();
