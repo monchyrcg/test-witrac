@@ -115,6 +115,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     get f() { return this.appointmentDataForm.controls; }
 
     showAppointmentO(event) {
+        console.log(event);
         this.showAppointment = false;
 
         const appointment = event.appointment;
@@ -135,24 +136,29 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             date: [{ 0: day }, [Validators.required]],
         });
 
+        console.log(this.type);
         if (this.type !== 2) {
+            console.log(data);
+            console.log(this.appointmentDataForm);
+
             this.appointmentDataForm = this.builder.group({
                 ...this.appointmentDataForm.controls,
                 imc: [{ value: null !== data ? data.imc : '', disabled: true }, [Validators.required]],
                 weight: [null !== data ? data.weight : '', [Validators.required]],
                 weight_objective: [null !== data ? data.weight_objective : '', [Validators.required]],
-                five_meals: [data.five_meals ?? ''],
-                water: [data.water ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
-                digestion: [data.digestion ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
-                stools: [data.stools ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
-                notes: [data.notes ?? '', [Validators.maxLength(this.validationMaxString.text)]],
-                waist: [data.waist ?? ''],
-                girth: [data.girth ?? ''],
-                hip: [data.hip ?? ''],
-                leg: [data.leg ?? '']
+                five_meals: [null !== data ? data.five_meals : ''],
+                water: [null !== data ? data.water : '', [Validators.maxLength(this.validationMaxString.long_string)]],
+                digestion: [null !== data ? data.digestion : '', [Validators.maxLength(this.validationMaxString.long_string)]],
+                stools: [null !== data ? data.stools : '', [Validators.maxLength(this.validationMaxString.long_string)]],
+                notes: [null !== data ? data.notes : '', [Validators.maxLength(this.validationMaxString.text)]],
+                waist: [null !== data ? data.waist : ''],
+                girth: [null !== data ? data.girth : ''],
+                hip: [null !== data ? data.hip : ''],
+                leg: [null !== data ? data.leg : '']
             });
+            console.log(this.appointmentDataForm);
 
-            this.appointmentDataForm.get("weight").valueChanges
+            /* this.appointmentDataForm.get("weight").valueChanges
                 .pipe(debounceTime(this.debounce), distinctUntilChanged())
                 .subscribe(weight => {
                     if (typeof weight !== 'undefined') {
@@ -162,7 +168,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                         );
                     }
                 }
-                );
+                ); */
         }
 
         const dayMoment = moment(day).format('YYYY-MM-DD HH:mm');
