@@ -15,6 +15,7 @@ import { CustomerService } from 'src/app/shared/services/customer.service';
 import { Illnes } from 'src/app/shared/interfaces/illnes.interface';
 import { OptionI } from 'src/app/shared/interfaces/option.interface';
 import { AutocompleteMapService } from 'src/app/shared/services/autcomplete-maps.service';
+import { Gender } from 'src/app/shared/interfaces/gender.interface';
 
 @Component({
     selector: 'app-customer-edit-general',
@@ -26,6 +27,7 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
     options: OptionI[] = [];
     illnesses: Illnes[] = [];
+    genders: Gender[] = [];
     customerForm: FormGroup;
     submitted = false;
 
@@ -59,6 +61,9 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
         this.illnesses.push({ id: 3, text: this.settingGeneralService.getLangText('illnesses.cancer') });
         this.illnesses.push({ id: 4, text: this.settingGeneralService.getLangText('illnesses.none') });
 
+        this.genders.push({ id: 2, text: this.settingGeneralService.getLangText("genders.male") });
+        this.genders.push({ id: 1, text: this.settingGeneralService.getLangText('genders.female') });
+
         this.dateOptions = {
             locale: this.settingGeneralService.settings.flatpickr,
             dateFormat: this.settingGeneralService.settings.formatFlatpickr,
@@ -84,6 +89,7 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
 
             this.customerForm = this.builder.group({
                 id: this.customer.id,
+                gender: [this.customer.gender, [Validators.required]],
                 name: [this.customer.name, [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
                 surnames: [this.customer.surnames, [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
                 team_id: [this.customer.team_id, [Validators.required]],

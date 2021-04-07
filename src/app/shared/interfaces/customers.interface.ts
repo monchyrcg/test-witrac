@@ -25,6 +25,7 @@ export interface CustomerList {
 
 export interface Customer {
     id: number;
+    gender: number;
     name: string;
     team: string;
     email: string;

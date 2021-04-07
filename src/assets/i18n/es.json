@@ -41,6 +41,7 @@
         "title": "Registrar el cliente",
         "text": "Registra tu cliente y sigue programando la cita",
         "text_button_register": "Registrar cliente",
+        "gender": "Gender",
         "name": "Name",
         "surnames": "Surnames",
         "illness": "Illness",

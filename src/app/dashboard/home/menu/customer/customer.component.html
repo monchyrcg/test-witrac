@@ -160,6 +160,29 @@
             </div>
         </div>
 
+        <div class="grid grid-cols-1 sm:grid-cols-2 w-full">
+            <div class="mt-3 mx-4 text-left">
+                <app-label-form for="gender" name="{{ 'customer_create.gender' | translate
+                    }}">
+                </app-label-form>
+                <select formControlName="gender" class="bg-white inputClass"
+                    [ngClass]="{ 'border border-red-500': submitted && f.gender.errors }"
+                    id="gender">
+                    <option hidden selected value="">{{ 'customer_create.gender' |
+                        translate }}</option>
+                    <option value="{{ gender.id }}" *ngFor="let gender of genders">
+                        {{ gender.text }}
+                    </option>
+                </select>
+                <ng-container *ngIf="submitted && f.gender.errors">
+                    <app-error-form *ngIf="f.gender.errors.required"
+                        error="{{'errors.required' |
+                        translate}}">
+                    </app-error-form>
+                </ng-container>
+            </div>
+        </div>
+
         <ng-container *ngIf="under">
             <div class="mt-3 mx-4 sm:text-left w-full">
                 <app-label-form for="legal_checkbox" name="Responsable legal"></app-label-form>

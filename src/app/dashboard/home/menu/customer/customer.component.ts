@@ -13,6 +13,7 @@ import { AuthenticationGeneralService } from 'src/app/shared/services/auth-gener
 import { Illnes } from 'src/app/shared/interfaces/illnes.interface';
 import { OptionI } from 'src/app/shared/interfaces/option.interface';
 import { AutocompleteMapService } from 'src/app/shared/services/autcomplete-maps.service';
+import { Gender } from 'src/app/shared/interfaces/gender.interface';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     options: OptionI[] = [];
     illnesses: Illnes[] = [];
+    genders: Gender[] = [];
 
     autocompleteOptions;
     noCpError: boolean = false;
@@ -61,6 +63,9 @@ export class CustomerComponent implements OnInit, OnDestroy {
         this.illnesses.push({ id: 3, text: this.settingGeneralService.getLangText('illnesses.cancer') });
         this.illnesses.push({ id: 4, text: this.settingGeneralService.getLangText('illnesses.none') });
 
+        this.genders.push({ id: 2, text: this.settingGeneralService.getLangText("genders.male") });
+        this.genders.push({ id: 1, text: this.settingGeneralService.getLangText('genders.female') });
+
         this.dateOptions = {
             locale: this.settingGeneralService.settings.flatpickr,
             dateFormat: this.settingGeneralService.settings.formatFlatpickr,
@@ -72,6 +77,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.autocompleteService.renderExternalScript(this.settingGeneralService.settings.locale).onload = () => {
             this.customerForm = this.builder.group({
+                gender: ['', [Validators.required]],
                 name: ['', [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
                 surnames: ['', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
                 prefix: ['', [Validators.required]],

@@ -1,6 +1,5 @@
-import { ElementRef, ViewChild } from '@angular/core';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -33,7 +32,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
     name: string;
     productForm: FormGroup;
-    private debounce: number = 200;
 
     // pagination
     page = 1;
@@ -64,7 +62,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.path = this.location.path().split('?')[1] ?? this.path;
-
 
         this.listProducts();
 

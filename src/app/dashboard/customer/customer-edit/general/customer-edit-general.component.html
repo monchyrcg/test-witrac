@@ -121,36 +121,62 @@
                 </ng-container>
             </div>
 
-            <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="zip" name="CP"></app-label-form>
+            <div class="col-span-2">
+                <div class="grid grid-cols-3 gap-7">
+                    <div class="col-span-3 lg:col-span-1">
+                        <app-label-form for="zip" name="CP"></app-label-form>
 
-                <input ngx-google-places-autocomplete class="inputClass"
-                    (onAddressChange)="handleAddressChange($event)"
-                    [options]='autocompleteOptions' value="{{f['zip'].value}}"
-                    [ngClass]="{ 'border border-red-500': submitted && f.zip.errors }" />
-                <ng-container *ngIf="submitted && f.zip.errors">
-                    <app-error-form *ngIf="f.zip.errors.required" error="{{'errors.required' |
-                        translate}}">
-                    </app-error-form>
-                </ng-container>
-                <ng-container *ngIf="noCpError">
-                    <app-error-form error="Busque por su código postal">
-                    </app-error-form>
-                </ng-container>
-            </div>
-
-            <div class="col-span-2 lg:col-span-1">
-                <app-label-form for="dob" name="{{ 'customer_create.dob' | translate }}"></app-label-form>
-                <ng2-flatpickr formControlName="dob" #calendar addClass="inputClass"
-                    [config]="dateOptions"
-                    (change)="changeDob($event)" placeholder="{{ 'customer_create.dob' | translate
-                    }}">
-                </ng2-flatpickr>
-                <ng-container *ngIf="submitted && f.dob.errors">
-                    <app-error-form *ngIf="f.dob.errors.required" error="{{'errors.required' |
-                        translate}}">
-                    </app-error-form>
-                </ng-container>
+                        <input ngx-google-places-autocomplete class="inputClass"
+                            (onAddressChange)="handleAddressChange($event)"
+                            [options]='autocompleteOptions' value="{{f['zip'].value}}"
+                            [ngClass]="{ 'border border-red-500': submitted && f.zip.errors }" />
+                        <ng-container *ngIf="submitted && f.zip.errors">
+                            <app-error-form *ngIf="f.zip.errors.required" error="{{'errors.required'
+                                |
+                                translate}}">
+                            </app-error-form>
+                        </ng-container>
+                        <ng-container *ngIf="noCpError">
+                            <app-error-form error="Busque por su código postal">
+                            </app-error-form>
+                        </ng-container>
+                    </div>
+                    <div class="col-span-3 lg:col-span-1">
+                        <app-label-form for="dob" name="{{ 'customer_create.dob' | translate }}"></app-label-form>
+                        <ng2-flatpickr formControlName="dob" #calendar addClass="inputClass"
+                            [config]="dateOptions"
+                            (change)="changeDob($event)" placeholder="{{ 'customer_create.dob' |
+                            translate
+                            }}">
+                        </ng2-flatpickr>
+                        <ng-container *ngIf="submitted && f.dob.errors">
+                            <app-error-form *ngIf="f.dob.errors.required" error="{{'errors.required'
+                                |
+                                translate}}">
+                            </app-error-form>
+                        </ng-container>
+                    </div>
+                    <div class="col-span-3 lg:col-span-1">
+                        <app-label-form for="gender" name="{{ 'customer_create.gender' | translate
+                            }}">
+                        </app-label-form>
+                        <select formControlName="gender" class="bg-white inputClass"
+                            [ngClass]="{ 'border border-red-500': submitted && f.gender.errors }"
+                            id="gender">
+                            <option hidden selected value="">{{ 'customer_create.gender' |
+                                translate }}</option>
+                            <option value="{{ gender.id }}" *ngFor="let gender of genders">
+                                {{ gender.text }}
+                            </option>
+                        </select>
+                        <ng-container *ngIf="submitted && f.gender.errors">
+                            <app-error-form *ngIf="f.gender.errors.required"
+                                error="{{'errors.required' |
+                                translate}}">
+                            </app-error-form>
+                        </ng-container>
+                    </div>
+                </div>
             </div>
 
             <div class="col-span-2" *ngIf="under">
@@ -220,113 +246,106 @@
             <div class="col-span-2 flex flex-row-reverse">
                 <span class="shadow-sm rounded-md">
                     <button type="button" class="customer-info-button-reverse" (click)="onSubmit()">
-                        <!-- Heroicon name: check -->
-                        <svg class="customer-info-button-svg" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0
-                                011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clip-rule="evenodd" />
-                            </svg>
-                            {{ 'customer_edit.save' | translate }}
-                        </button>
-                    </span>
-                </div>
-            </div>
+                        <img class="customer-info-button-svg"
+                            src="assets/images/svg/check-white.svg" />
 
+                        {{ 'customer_edit.save' | translate }}
+                    </button>
+                </span>
+            </div>
         </div>
+
     </div>
-    <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
-        <div class="px-4 py-5 sm:px-6 cursor-pointer">
-            Notifications
-            <p class="mt-1 text-sm leading-5 text-gray-500">Decide which communications you'd like
-                to receive and how.
-            </p>
-        </div>
-        <div class="px-4 py-5 sm:p-6">
-            <fieldset>
-                <legend class="text-base leading-6 font-medium text-gray-900">By Email</legend>
+</div>
+<!-- <div class="bg-white overflow-hidden shadow rounded-lg divide-y divide-gray-200 mt-4">
+    <div class="px-4 py-5 sm:px-6 cursor-pointer">
+        Notifications
+        <p class="mt-1 text-sm leading-5 text-gray-500">Decide which communications you'd like
+            to receive and how.
+        </p>
+    </div>
+    <div class="px-4 py-5 sm:p-6">
+        <fieldset>
+            <legend class="text-base leading-6 font-medium text-gray-900">By Email</legend>
+            <div class="mt-4">
+                <div class="flex items-start">
+                    <div class="flex items-center h-5">
+                        <input id="comments" type="checkbox"
+                            class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150
+                            ease-in-out">
+                    </div>
+                    <div class="ml-3 text-sm leading-5">
+                        <label for="comments" class="font-medium text-gray-700">Comments</label>
+                        <p class="text-gray-500">Get notified when someones posts a comment on a
+                            posting.</p>
+                    </div>
+                </div>
                 <div class="mt-4">
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
-                            <input id="comments" type="checkbox"
-                                class="form-checkbox h-4 w-4 text-indigo-600 transition duration-150
-                                ease-in-out">
+                            <input id="candidates" type="checkbox"
+                                class="form-checkbox h-4 w-4 text-indigo-600 transition
+                                duration-150 ease-in-out">
                         </div>
                         <div class="ml-3 text-sm leading-5">
-                            <label for="comments" class="font-medium text-gray-700">Comments</label>
-                            <p class="text-gray-500">Get notified when someones posts a comment on a
-                                posting.</p>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="candidates" type="checkbox"
-                                    class="form-checkbox h-4 w-4 text-indigo-600 transition
-                                    duration-150 ease-in-out">
-                            </div>
-                            <div class="ml-3 text-sm leading-5">
-                                <label for="candidates" class="font-medium text-gray-700">Candidates</label>
-                                <p class="text-gray-500">Get notified when a candidate applies for a
-                                    job.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-4">
-                        <div class="flex items-start">
-                            <div class="flex items-center h-5">
-                                <input id="offers" type="checkbox"
-                                    class="form-checkbox h-4 w-4 text-indigo-600 transition
-                                    duration-150 ease-in-out">
-                            </div>
-                            <div class="ml-3 text-sm leading-5">
-                                <label for="offers" class="font-medium text-gray-700">Offers</label>
-                                <p class="text-gray-500">Get notified when a candidate accepts or
-                                    rejects an offer.
-                                </p>
-                            </div>
+                            <label for="candidates" class="font-medium text-gray-700">Candidates</label>
+                            <p class="text-gray-500">Get notified when a candidate applies for a
+                                job.</p>
                         </div>
                     </div>
                 </div>
-            </fieldset>
-            <fieldset class="mt-6">
-                <legend class="text-base leading-6 font-medium text-gray-900">Push Notifications</legend>
-                <p class="text-sm leading-5 text-gray-500">These are delivered via SMS to your
-                    mobile phone.</p>
                 <div class="mt-4">
-                    <div class="flex items-center">
-                        <input id="push_everything" name="push_notifications" type="radio"
-                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150
-                            ease-in-out">
-                        <label for="push_everything" class="ml-3">
-                            <span class="block text-sm leading-5 font-medium text-gray-700">Everything</span>
-                        </label>
-                    </div>
-                    <div class="mt-4 flex items-center">
-                        <input id="push_email" name="push_notifications" type="radio"
-                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150
-                            ease-in-out">
-                        <label for="push_email" class="ml-3">
-                            <span class="block text-sm leading-5 font-medium text-gray-700">Same as
-                                email</span>
-                        </label>
-                    </div>
-                    <div class="mt-4 flex items-center">
-                        <input id="push_nothing" name="push_notifications" type="radio"
-                            class="form-radio h-4 w-4 text-indigo-600 transition duration-150
-                            ease-in-out">
-                        <label for="push_nothing" class="ml-3">
-                            <span class="block text-sm leading-5 font-medium text-gray-700">No push
-                                notifications</span>
-                        </label>
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                            <input id="offers" type="checkbox"
+                                class="form-checkbox h-4 w-4 text-indigo-600 transition
+                                duration-150 ease-in-out">
+                        </div>
+                        <div class="ml-3 text-sm leading-5">
+                            <label for="offers" class="font-medium text-gray-700">Offers</label>
+                            <p class="text-gray-500">Get notified when a candidate accepts or
+                                rejects an offer.
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </fieldset>
-        </div>
+            </div>
+        </fieldset>
+        <fieldset class="mt-6">
+            <legend class="text-base leading-6 font-medium text-gray-900">Push Notifications</legend>
+            <p class="text-sm leading-5 text-gray-500">These are delivered via SMS to your
+                mobile phone.</p>
+            <div class="mt-4">
+                <div class="flex items-center">
+                    <input id="push_everything" name="push_notifications" type="radio"
+                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150
+                        ease-in-out">
+                    <label for="push_everything" class="ml-3">
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Everything</span>
+                    </label>
+                </div>
+                <div class="mt-4 flex items-center">
+                    <input id="push_email" name="push_notifications" type="radio"
+                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150
+                        ease-in-out">
+                    <label for="push_email" class="ml-3">
+                        <span class="block text-sm leading-5 font-medium text-gray-700">Same as
+                            email</span>
+                    </label>
+                </div>
+                <div class="mt-4 flex items-center">
+                    <input id="push_nothing" name="push_notifications" type="radio"
+                        class="form-radio h-4 w-4 text-indigo-600 transition duration-150
+                        ease-in-out">
+                    <label for="push_nothing" class="ml-3">
+                        <span class="block text-sm leading-5 font-medium text-gray-700">No push
+                            notifications</span>
+                    </label>
+                </div>
+            </div>
+        </fieldset>
     </div>
-
-    <ng-template #loading>
-        <app-loading></app-loading>
-    </ng-template>
+</div> -->
+<ng-template #loading>
+    <app-loading></app-loading>
+</ng-template>
