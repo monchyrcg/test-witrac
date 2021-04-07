@@ -64,7 +64,7 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
             height: [this.medical.height ? this.medical.height : '', [Validators.required]],
             weight: [this.medical.weight ? this.medical.weight : '', [Validators.required]],
             weight_objective: [this.medical.weight_objective ? this.medical.weight_objective : '', [Validators.required]],
-            imc: [{ value: this.medical.imc ? this.medical.imc : '', disabled: true }, [Validators.required]],
+            imc: [{ value: this.medical.imc ? this.medical.imc : null, disabled: true }, [Validators.required]],
 
             history: [this.medical.history ?? '', [Validators.maxLength(this.validationMaxString.text)]],
             drugs: [this.medical.drugs ?? '', [Validators.maxLength(this.validationMaxString.text)]],
@@ -79,9 +79,9 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
                 const weight = query.weight;
                 const height = query.height;
                 if (this.isValidToQuery(weight) && this.isValidToQuery(height)) {
-                    const number = (10000 * weight) / (height * height);
+                    const imc = (10000 * weight) / (height * height);
                     this.customerHistoryMedical.get('imc').setValue(
-                        Math.round((number + Number.EPSILON) * 100) / 100
+                        Math.round((imc + Number.EPSILON) * 100) / 100
                     );
                 }
             }
