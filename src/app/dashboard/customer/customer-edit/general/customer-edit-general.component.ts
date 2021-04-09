@@ -141,6 +141,10 @@ export class CustomerEditGeneralComponent implements OnInit, OnDestroy {
         });
     }
 
+    private onChangeSelect(name, value) {
+        this.customerForm.controls[name].setValue(parseInt(value));
+    }
+
     onSubmit() {
         this.submitted = true;
 

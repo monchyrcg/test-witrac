@@ -135,4 +135,12 @@ export class AppointmentService {
                 this.showSubject.next(data);
             }));
     }
+
+    calculateTeoricWeight(weight: number) {
+        return this.http
+            .get(`${environment.apiUrl}/external/weight-theoric/${weight * 100}`,)
+            .pipe(map((response: any) => {
+                console.log(response);
+            }));
+    }
 }

@@ -76,16 +76,17 @@ export class CustomerComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         this.autocompleteService.renderExternalScript(this.settingGeneralService.settings.locale).onload = () => {
+
             this.customerForm = this.builder.group({
-                gender: ['', [Validators.required]],
+                gender: [null, [Validators.required]],
                 name: ['', [Validators.required, Validators.maxLength(this.validationMaxString.short_string)]],
                 surnames: ['', [Validators.required, Validators.maxLength(this.validationMaxString.long_string)]],
                 prefix: ['', [Validators.required]],
                 mobile: ['', [Validators.required]],
                 email: ['', [Validators.required, Validators.email, Validators.maxLength(this.validationMaxString.long_string)]],
                 team_id: [this.authService.getUserVariable('current_team_id'), [Validators.required]],
-                supplement: ['', [Validators.required]],
-                illness: ['', [Validators.required]],
+                supplement: [null, [Validators.required]],
+                illness: [null, [Validators.required]],
                 zip: [null, [Validators.required]],
                 dob: [null, []],
                 legal_checkbox: [null],
@@ -116,6 +117,10 @@ export class CustomerComponent implements OnInit, OnDestroy {
         if (null == this.f['zip'].value) {
             this.noCpError = true;
         }
+    }
+
+    private onChangeSelect(name, value) {
+        this.customerForm.controls[name].setValue(parseInt(value));
     }
 
     get f() { return this.customerForm.controls; }

@@ -3,6 +3,7 @@ export interface CustomerCreated {
     name: string;
     team: string;
     email: string;
+    gender: number;
     dob: any;
     supplement: boolean;
     illness: number;

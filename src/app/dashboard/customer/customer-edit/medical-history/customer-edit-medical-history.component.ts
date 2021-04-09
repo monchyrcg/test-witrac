@@ -6,6 +6,7 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { Build } from 'src/app/shared/interfaces/build.interface';
 import { CustomerMedicalInformation } from 'src/app/shared/interfaces/customers.interface';
+import { OptionI } from 'src/app/shared/interfaces/option.interface';
 import { Physical } from 'src/app/shared/interfaces/physical.interface';
 import { CustomerService } from 'src/app/shared/services/customer.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
@@ -25,6 +26,7 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
 
     builds: Build[] = [];
     physicals: Physical[] = [];
+    options: OptionI[] = [];
 
     customerHistoryMedical: FormGroup;
     submitted = false;
@@ -52,6 +54,9 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
         this.physicals.push({ id: 4, text: this.settingGeneralService.getLangText('physicals.normal') });
         this.physicals.push({ id: 5, text: this.settingGeneralService.getLangText('physicals.intensive') });
         this.physicals.push({ id: 6, text: this.settingGeneralService.getLangText('physicals.v_intensive') });
+
+        this.options.push({ id: 1, text: this.settingGeneralService.getLangText('options.yes') });
+        this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
     }
 
     ngOnInit(): void {
@@ -65,6 +70,11 @@ export class CustomerEditMedicalHistoryComponent implements OnInit, OnDestroy {
             weight: [this.medical.weight ? this.medical.weight : '', [Validators.required]],
             weight_objective: [this.medical.weight_objective ? this.medical.weight_objective : '', [Validators.required]],
             imc: [{ value: this.medical.imc ? this.medical.imc : null, disabled: true }, [Validators.required]],
+
+            five_meals: [this.medical.five_meals ?? ''],
+            water: [this.medical.water ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
+            digestion: [this.medical.digestion ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
+            stools: [this.medical.stools ?? '', [Validators.maxLength(this.validationMaxString.long_string)]],
 
             history: [this.medical.history ?? '', [Validators.maxLength(this.validationMaxString.text)]],
             drugs: [this.medical.drugs ?? '', [Validators.maxLength(this.validationMaxString.text)]],

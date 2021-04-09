@@ -7,7 +7,6 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { AppointmentData, AppointmentDate } from 'src/app/shared/interfaces/appointment.interface';
-import { OptionI } from 'src/app/shared/interfaces/option.interface';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
@@ -15,6 +14,7 @@ import { Validations } from 'src/app/shared/settings/validation';
 import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
+const CTE_WATER = 0.732;
 
 @Component({
     selector: 'app-customer-edit-appointments',
@@ -53,8 +53,6 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     validationMaxString = Validations.validationMaxString;
 
-    options: OptionI[] = [];
-
     dateOptions: FlatpickrOptions;
 
     private subscription = new Subscription();
@@ -62,7 +60,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     private showSubscription: Subscription;
 
     type: number;
+    years: number;
     private debounce: number = 800;
+
 
     constructor(
         private builder: FormBuilder,
@@ -73,9 +73,6 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         private router: Router,
         private menuComponent: MenuComponent
     ) {
-        this.options.push({ id: 1, text: this.settingGeneralService.getLangText('options.yes') });
-        this.options.push({ id: 0, text: this.settingGeneralService.getLangText('options.no') });
-
         this.showAppointment = false;
 
         this.dateOptions = {
@@ -87,6 +84,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+
+        this.years = moment().diff(this.customer.dob, 'years');
+
         this.showAppointment = false;
 
         this.deleteSubscription = this.appointmentService.deleteState.subscribe(
@@ -142,15 +142,19 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                 imc: [{ value: null !== data ? data.imc : '', disabled: true }, [Validators.required]],
                 weight: [null !== data ? data.weight : '', [Validators.required]],
                 weight_objective: [null !== data ? data.weight_objective : '', [Validators.required]],
-                five_meals: [null !== data ? data.five_meals : ''],
-                water: [null !== data ? data.water : '', [Validators.maxLength(this.validationMaxString.long_string)]],
-                digestion: [null !== data ? data.digestion : '', [Validators.maxLength(this.validationMaxString.long_string)]],
-                stools: [null !== data ? data.stools : '', [Validators.maxLength(this.validationMaxString.long_string)]],
+                weight_theoretical: [{ value: this.customer.medical.weight_theoretical, disabled: true }],
                 notes: [null !== data ? data.notes : '', [Validators.maxLength(this.validationMaxString.text)]],
                 waist: [null !== data ? data.waist : ''],
                 girth: [null !== data ? data.girth : ''],
                 hip: [null !== data ? data.hip : ''],
-                leg: [null !== data ? data.leg : '']
+                leg: [null !== data ? data.leg : ''],
+                fat_percentaje: [null],
+                fat: [{ value: null !== data ? data.fat : '', disabled: true }],
+                body_fat: [{ value: null !== data ? data.fat : '', disabled: true }],
+                excess_fat: [{ value: null !== data ? data.fat : '', disabled: true }],
+                not_fat: [{ value: null !== data ? data.fat : '', disabled: true }],
+                water: [{ value: null !== data ? data.fat : '', disabled: true }],
+                excess_water: [{ value: null !== data ? data.fat : '', disabled: true }],
             });
 
 
@@ -162,13 +166,60 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                         this.appointmentDataForm.get('imc').setValue(
                             Math.round((number + Number.EPSILON) * 100) / 100
                         );
+
+                        const fat_percentaje = this.appointmentDataForm.controls['fat_percentaje'].value;
+                        if (fat_percentaje !== null) {
+                            this.calculateFatNumbers(fat_percentaje);
+                        }
                     }
+                }
+                );
+
+            this.appointmentDataForm.get('fat_percentaje').valueChanges
+                .pipe(debounceTime(this.debounce), distinctUntilChanged())
+                .subscribe(percentaje => {
+                    this.calculateFatNumbers(percentaje);
                 }
                 );
         }
 
         const dayMoment = moment(day).format('YYYY-MM-DD HH:mm');
         this.dateOptions.defaultDate = dayMoment;
+    }
+
+    private calculateFatNumbers(percentaje: number) {
+        const weight = this.appointmentDataForm.get('weight').value;
+        const fat = (weight * percentaje) / 100;
+        const body_fat = (weight * (Math.round((this.getOptimalFactor() + Number.EPSILON) * 100) / 100)) / 100;
+        const excess_fat = Math.round(((fat - body_fat) + Number.EPSILON) * 100) / 100;
+        const not_fat = weight - fat;
+        const water = not_fat * CTE_WATER;
+        const excess_water = Math.round(((weight - (parseFloat(this.appointmentDataForm.get('weight_theoretical').value) + excess_fat)) + Number.EPSILON) * 100) / 100;
+
+        this.appointmentDataForm.get('fat').setValue(fat);
+        this.appointmentDataForm.get('body_fat').setValue(body_fat);
+        this.appointmentDataForm.get('excess_fat').setValue(excess_fat);
+        this.appointmentDataForm.get('not_fat').setValue(not_fat);
+        this.appointmentDataForm.get('water').setValue(water);
+        this.appointmentDataForm.get('excess_water').setValue(excess_water);
+    }
+
+    private getOptimalFactor(): number {
+        switch (this.customer.gender) {
+            case 1:
+                if (this.years >= 30)
+                    return 17;
+                else
+                    return 14;
+                break;
+
+            default:
+                if (this.years >= 30)
+                    return 27;
+                else
+                    return 24;
+                break;
+        }
     }
 
     onSubmit() {
@@ -226,6 +277,10 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
         if (this.deleteSubscription) {
             this.deleteSubscription.unsubscribe();
+        }
+
+        if (this.showSubscription) {
+            this.showSubscription.unsubscribe();
         }
     }
 }

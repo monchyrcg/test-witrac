@@ -33,8 +33,11 @@ export class TabsComponent implements OnInit {
         }
         tab.isActive = true;
 
-        const path = this.location.path().split('?')[0];
-        this.location.replaceState(path + "?tab=" + tab.slug);
+        if (tab.slug) {
+            const path = this.location.path().split('?')[0];
+            this.location.replaceState(path + "?tab=" + tab.slug);
+        }
+
     }
 
     selectTabMobile(index: number) {

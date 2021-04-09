@@ -138,6 +138,57 @@
                     </ng-container>
                 </div>
 
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="five_meals" name="¿Has hecho las 5
+                        comidas?"></app-label-form>
+
+                    <select formControlName="five_meals" class="bg-white
+                        inputClass" id="five_meals">
+                        <option hidden selected value="">¿Has hecho las 5
+                            comidas?</option>
+                        <option value="{{ option.id }}" *ngFor="let option
+                            of options">{{ option.text }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-span-3 lg:col-span-2">
+                    <app-label-form name="Agua"></app-label-form>
+
+                    <input formControlName="water" class="inputClass" id="water"
+                        type="text"
+                        [ngClass]="{ 'border border-red-500': submitted &&
+                        f.water.errors }" placeholder="Agua">
+                    <ng-container *ngIf="submitted && f.water.errors">
+                        <app-error-form *ngIf="f.water.errors.maxlength"
+                            error="{{'errors.maxlength' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+                <div class="col-span-3 lg:col-span-1">
+                    <app-label-form for="drugs" name="Digestión"></app-label-form>
+                    <input formControlName="digestion" class="inputClass"
+                        id="digestion" type="text"
+                        [ngClass]="{ 'border border-red-500': submitted &&
+                        f.digestion.errors }" placeholder="Digestión">
+                    <ng-container *ngIf="submitted && f.digestion.errors">
+                        <app-error-form *ngIf="f.digestion.errors.maxlength"
+                            error="{{'errors.maxlength' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+                <div class="col-span-3 lg:col-span-2">
+                    <app-label-form for="allergies" name="Heces"></app-label-form>
+                    <input formControlName="stools" class="inputClass" id="stools"
+                        type="text"
+                        [ngClass]="{ 'border border-red-500': submitted &&
+                        f.stools.errors }" placeholder="Heces">
+                    <ng-container *ngIf="submitted && f.stools.errors">
+                        <app-error-form *ngIf="f.stools.errors.maxlength"
+                            error="{{'errors.maxlength' | translate}}">
+                        </app-error-form>
+                    </ng-container>
+                </div>
+
                 <div class="col-span-3">
                     <app-label-form name="Notes"></app-label-form>
 

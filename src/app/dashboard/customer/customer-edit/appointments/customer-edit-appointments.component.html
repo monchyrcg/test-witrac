@@ -27,6 +27,14 @@
     <div class="px-4 py-5 sm:px-6 cursor-pointer flex justify-between">
         <p>
             Información de la cita
+            <span class="customer-info">
+                <img class="customer-info-svg"
+                    src="/assets/images/svg/switch-vertical.svg" />
+                {{customer.medical.height}} cm
+                &nbsp;
+                <img class="customer-info-svg"
+                    src="/assets/images/svg/gift.svg" /> {{years}} años
+            </span>
         </p>
         <div class="px-4 pt-3 sm:px-6 cursor-pointer">
             <img class="w-6 h-6 pb-2 cursor-pointer" src="/assets/images/svg/x.svg"
@@ -34,195 +42,223 @@
                 !showAppointment" />
         </div>
     </div>
-    <div class="px-4 py-5 sm:p-6" *ngIf="appointmentDataForm">
-        <div class="grid grid-cols-3 gap-7" [formGroup]="appointmentDataForm">
+    <div *ngIf="appointmentDataForm">
+        <div [formGroup]="appointmentDataForm">
 
-            <div class="col-span-3">
-                <app-label-form for="date" name="{{ 'appointment_create.date' | translate
-                    }}">
-                </app-label-form>
-                <ng2-flatpickr formControlName="date" #calendar addClass="inputClass"
-                    [config]="dateOptions"
-                    placeholder="{{ 'appointment_create.date' | translate }}">
-                </ng2-flatpickr>
-                <ng-container *ngIf="submitted && f.date.errors">
-                    <app-error-form *ngIf="f.date.errors.required"
-                        error="{{'errors.required' | translate}}">
-                    </app-error-form>
-                </ng-container>
-            </div>
+            <app-tabs>
+                <app-tab title="Información" [isActive]="true">
+                    <div class="grid grid-cols-3 gap-7">
+                        <div class="col-span-3">
+                            <app-label-form for="date" name="{{ 'appointment_create.date' |
+                                translate
+                                }}">
+                            </app-label-form>
+                            <ng2-flatpickr formControlName="date" #calendar addClass="inputClass"
+                                [config]="dateOptions"
+                                placeholder="{{ 'appointment_create.date' | translate }}">
+                            </ng2-flatpickr>
+                            <ng-container *ngIf="submitted && f.date.errors">
+                                <app-error-form *ngIf="f.date.errors.required"
+                                    error="{{'errors.required' | translate}}">
+                                </app-error-form>
+                            </ng-container>
+                        </div>
 
-            <ng-container *ngIf="type !== 2">
-                <div class="col-span-3">
-                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                        <ng-container *ngIf="type !== 2">
+                            <div class="col-span-3">
+                                <div class="grid grid-cols-3 gap-5 lg:gap-10">
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <app-label-form for="weight" name="Peso actual"></app-label-form>
+                                        <input formControlName="weight" class="inputClass"
+                                            id="weight" type="number" step="0.01" min="0"
+                                            [ngClass]="{ 'border border-red-500': submitted &&
+                                            f.weight.errors }"
+                                            placeholder="Peso actual">
+                                        <ng-container *ngIf="submitted && f.weight.errors">
+                                            <app-error-form *ngIf="f.weight.errors.required"
+                                                error="{{'errors.required' | translate}}">
+                                            </app-error-form>
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <app-label-form for="weight_objective" name="Objetivo
+                                            peso siguiente"></app-label-form>
+
+                                        <input formControlName="weight_objective"
+                                            class="inputClass" id="weight_objective"
+                                            type="number"
+                                            step="0.01" min="0"
+                                            [ngClass]="{ 'border border-red-500': submitted &&
+                                            f.weight_objective.errors }"
+                                            placeholder="Objetivo peso siguiente">
+                                        <ng-container *ngIf="submitted &&
+                                            f.weight_objective.errors">
+                                            <app-error-form
+                                                *ngIf="f.weight_objective.errors.required"
+                                                error="{{'errors.required' | translate}}">
+                                            </app-error-form>
+                                        </ng-container>
+                                    </div>
+                                    <div class="col-span-3 sm:col-span-1">
+                                        <app-label-form for="weight" name="IMC"></app-label-form>
+                                        <input formControlName="imc" class="inputClass bg-gray-100"
+                                            id="imc" type="number" step="0.01" min="0"
+                                            [ngClass]="{ 'border border-red-500': submitted &&
+                                            f.imc.errors }"
+                                            placeholder="IMC">
+                                        <ng-container *ngIf="submitted && f.imc.errors">
+                                            <app-error-form *ngIf="f.imc.errors.required"
+                                                error="{{'errors.required' | translate}}">
+                                            </app-error-form>
+                                        </ng-container>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-span-3">
+                                <div class="grid grid-cols-4 gap-5 lg:gap-10">
+                                    <div class="col-span-4 lg:col-span-1">
+                                        <app-label-form for="waist" name="Cintura (cm)"></app-label-form>
+                                        <input formControlName="waist" class="inputClass" id="waist"
+                                            type="number" step="0.01" min="0" placeholder="Cintura">
+                                    </div>
+                                    <div class="col-span-4 lg:col-span-1">
+                                        <app-label-form name="Contorno (cm)"></app-label-form>
+                                        <input formControlName="girth" class="inputClass" id="girth"
+                                            type="number" step="0.01" min="0"
+                                            placeholder="Contorno">
+                                    </div>
+                                    <div class="col-span-4 lg:col-span-1">
+                                        <app-label-form for="hip" name="Cadera (cm)"></app-label-form>
+                                        <input formControlName="hip" class="inputClass" id="hip"
+                                            type="number"
+                                            step="0.01" min="0" placeholder="Cadera">
+                                    </div>
+                                    <div class="col-span-4 lg:col-span-1">
+                                        <app-label-form for="leg" name="Piernas (cm)"></app-label-form>
+                                        <input formControlName="leg" class="inputClass" id="leg"
+                                            type="number" step="0.01" min="0" placeholder="Piernas">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-span-3">
+                                <app-label-form name="Notes"></app-label-form>
+
+                                <textarea formControlName="notes" class="inputClass" id="name"
+                                    type="text"
+                                    [ngClass]="{ 'border border-red-500': submitted &&
+                                    f.notes.errors }"
+                                    placeholder="Notes"> </textarea>
+                                <ng-container *ngIf="submitted && f.notes.errors">
+                                    <app-error-form *ngIf="f.notes.errors.required"
+                                        error="{{'errors.required' | translate}}">
+                                    </app-error-form>
+                                    <app-error-form *ngIf="f.notes.errors.maxlength"
+                                        error="{{'errors.maxlength' | translate}}">
+                                    </app-error-form>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </app-tab>
+                <app-tab title="Bioimpedancia">
+                    <div class="grid grid-cols-3 gap-5 lg:gap-10 pb-4">
                         <div class="col-span-3 sm:col-span-1">
                             <app-label-form for="weight" name="Peso actual"></app-label-form>
-                            <input formControlName="weight" class="inputClass"
+                            <input class="inputClass bg-gray-100"
+                                value="{{appointmentDataForm.controls['weight'].value}}"
+                                disabled
                                 id="weight" type="number" step="0.01" min="0"
-                                [ngClass]="{ 'border border-red-500': submitted &&
-                                f.weight.errors }"
                                 placeholder="Peso actual">
-                            <ng-container *ngIf="submitted && f.weight.errors">
-                                <app-error-form *ngIf="f.weight.errors.required"
-                                    error="{{'errors.required' | translate}}">
-                                </app-error-form>
-                            </ng-container>
                         </div>
                         <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="weight_objective" name="Objetivo
-                                peso siguiente"></app-label-form>
-
-                            <input formControlName="weight_objective"
-                                class="inputClass" id="weight_objective"
+                            <app-label-form for="weight_theoretical" name="Peso Teórico"></app-label-form>
+                            <input formControlName="weight_theoretical"
+                                class="inputClass bg-gray-100" id="weight_theoretical"
                                 type="number"
-                                step="0.01" min="0"
-                                [ngClass]="{ 'border border-red-500': submitted &&
-                                f.weight_objective.errors }"
-                                placeholder="Objetivo peso siguiente">
-                            <ng-container *ngIf="submitted &&
-                                f.weight_objective.errors">
-                                <app-error-form
-                                    *ngIf="f.weight_objective.errors.required"
-                                    error="{{'errors.required' | translate}}">
-                                </app-error-form>
-                            </ng-container>
+                                step="0.01" min="0" placeholder="Peso Teórico">
                         </div>
                         <div class="col-span-3 sm:col-span-1">
-                            <app-label-form for="weight" name="IMC"></app-label-form>
-                            <input formControlName="imc" class="inputClass"
-                                id="imc" type="number" step="0.01" min="0"
-                                [ngClass]="{ 'border border-red-500': submitted &&
-                                f.imc.errors }"
-                                placeholder="IMC">
-                            <ng-container *ngIf="submitted && f.imc.errors">
-                                <app-error-form *ngIf="f.imc.errors.required"
-                                    error="{{'errors.required' | translate}}">
-                                </app-error-form>
-                            </ng-container>
+                            <app-label-form for="weight" name="Grasa %"></app-label-form>
+                            <input formControlName="fat_percentaje" class="inputClass"
+                                id="fat_percentaje" type="number" step="1" min="0"
+                                placeholder="Grasa %">
                         </div>
                     </div>
-                </div>
-                <div class="col-span-3 lg:col-span-1">
-                    <app-label-form for="five_meals" name="¿Has hecho las 5
-                        comidas?"></app-label-form>
+                    <div class="grid grid-cols-6 gap-5 lg:gap-10">
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="fat" name="Grasa"></app-label-form>
+                            <input formControlName="fat" class="inputClass bg-gray-100"
+                                id="fat" type="number" step="0.01" min="0"
+                                placeholder="Grasa">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="body_fat" name="Grasa Corporal"></app-label-form>
+                            <input formControlName="body_fat" class="inputClass bg-gray-100"
+                                id="body_fat" type="number" step="0.01" min="0"
+                                placeholder="Grasa Corporal">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="excess_fat" name="Exceso de grasa"></app-label-form>
+                            <input formControlName="excess_fat" class="inputClass bg-gray-100"
+                                id="excess_fat" type="number" step="0.01" min="0"
+                                placeholder="Exceso de grasa">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="not_fat" name="Materia no grasa"></app-label-form>
+                            <input formControlName="not_fat" class="inputClass bg-gray-100"
+                                id="not_fat" type="number" step="0.01" min="0"
+                                placeholder="Materia no grasa">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="water" name="Agua"></app-label-form>
+                            <input formControlName="water" class="inputClass bg-gray-100"
+                                id="water" type="number" step="0.01" min="0"
+                                placeholder="Agua">
+                        </div>
+                        <div class="col-span-3 sm:col-span-1">
+                            <app-label-form for="excess_water" name="Exceso de agua"></app-label-form>
+                            <input formControlName="excess_water" class="inputClass bg-gray-100"
+                                id="excess_water" type="number" step="0.01" min="0"
+                                placeholder="Exceso de agua">
+                        </div>
+                    </div>
+                </app-tab>
+            </app-tabs>
 
-                    <select formControlName="five_meals" class="bg-white
-                        inputClass" id="five_meals">
-                        <option hidden selected value="">¿Has hecho las 5
-                            comidas?</option>
-                        <option value="{{ option.id }}" *ngFor="let option
-                            of options">{{ option.text }}
-                        </option>
-                    </select>
-                </div>
-                <div class="col-span-3 lg:col-span-2">
-                    <app-label-form name="Agua"></app-label-form>
-
-                    <input formControlName="water" class="inputClass" id="water"
-                        type="text"
-                        [ngClass]="{ 'border border-red-500': submitted &&
-                        f.water.errors }" placeholder="Agua">
-                    <ng-container *ngIf="submitted && f.water.errors">
-                        <app-error-form *ngIf="f.water.errors.maxlength"
-                            error="{{'errors.maxlength' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
-                <div class="col-span-3 lg:col-span-1">
-                    <app-label-form for="drugs" name="Digestión"></app-label-form>
-                    <input formControlName="digestion" class="inputClass"
-                        id="digestion" type="text"
-                        [ngClass]="{ 'border border-red-500': submitted &&
-                        f.digestion.errors }" placeholder="Digestión">
-                    <ng-container *ngIf="submitted && f.digestion.errors">
-                        <app-error-form *ngIf="f.digestion.errors.maxlength"
-                            error="{{'errors.maxlength' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
-                <div class="col-span-3 lg:col-span-2">
-                    <app-label-form for="allergies" name="Heces"></app-label-form>
-                    <input formControlName="stools" class="inputClass" id="stools"
-                        type="text"
-                        [ngClass]="{ 'border border-red-500': submitted &&
-                        f.stools.errors }" placeholder="Heces">
-                    <ng-container *ngIf="submitted && f.stools.errors">
-                        <app-error-form *ngIf="f.stools.errors.maxlength"
-                            error="{{'errors.maxlength' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
-                <div class="col-span-3 lg:col-span-1">
-                    <app-label-form for="waist" name="Cintura (cm)"></app-label-form>
-
-                    <input formControlName="waist" class="inputClass" id="waist"
-                        type="number" step="0.01" min="0" placeholder="Cintura">
-                </div>
-                <div class="col-span-3 lg:col-span-2">
-                    <app-label-form name="Contorno (cm)"></app-label-form>
-
-                    <input formControlName="girth" class="inputClass" id="girth"
-                        type="number" step="0.01" min="0" placeholder="Contorno">
-                </div>
-                <div class="col-span-3 lg:col-span-1">
-                    <app-label-form for="hip" name="Cintura (cm)"></app-label-form>
-                    <input formControlName="hip" class="inputClass" id="hip" type="number"
-                        step="0.01" min="0" placeholder="Cintura">
-                </div>
-                <div class="col-span-3 lg:col-span-2">
-                    <app-label-form for="leg" name="Piernas (cm)"></app-label-form>
-                    <input formControlName="leg" class="inputClass" id="leg"
-                        type="number" step="0.01" min="0" placeholder="Piernas">
-                </div>
-                <div class="col-span-3">
-                    <app-label-form name="Notes"></app-label-form>
-
-                    <textarea formControlName="notes" class="inputClass" id="name"
-                        type="text"
-                        [ngClass]="{ 'border border-red-500': submitted &&
-                        f.notes.errors }"
-                        placeholder="Notes"> </textarea>
-                    <ng-container *ngIf="submitted && f.notes.errors">
-                        <app-error-form *ngIf="f.notes.errors.required"
-                            error="{{'errors.required' | translate}}">
-                        </app-error-form>
-                        <app-error-form *ngIf="f.notes.errors.maxlength"
-                            error="{{'errors.maxlength' | translate}}">
-                        </app-error-form>
-                    </ng-container>
-                </div>
-            </ng-container>
-
-            <div class="col-span-3" *ngIf="type !== 1">
-                <div class="grid grid-cols-3 gap-5 lg:gap-10">
-                    <span class="shadow-sm rounded-md">
-                        <button type="button" class="customer-info-button-red-reverse"
-                            (click)="generateDeleteModal(appointment_id)">
-                            <img class="customer-info-button-svg"
-                                src="/assets/images/svg/trash-white.svg" />
-
-                            Delete
-                        </button>
-                    </span>
-                    <div class="col-span-2 flex flex-row-reverse">
+            <div class="grid grid-cols-3 gap-7 px-4 py-6 sm:px-6 lg:px-8">
+                <div class="col-span-3" *ngIf="type !== 1">
+                    <div class="grid grid-cols-3 gap-5 lg:gap-10">
                         <span class="shadow-sm rounded-md">
-                            <button type="button" class="customer-info-button-reverse"
-                                (click)="onSubmit()">
+                            <button type="button" class="customer-info-button-red-reverse"
+                                (click)="generateDeleteModal(appointment_id)">
                                 <img class="customer-info-button-svg"
-                                    src="/assets/images/svg/check-white.svg" />
+                                    src="/assets/images/svg/trash-white.svg" />
 
-                                {{ 'customer_edit.save' | translate }}
+                                Delete
                             </button>
                         </span>
+                        <div class="col-span-2 flex flex-row-reverse">
+                            <span class="shadow-sm rounded-md">
+                                <button type="button" class="customer-info-button-reverse"
+                                    (click)="onSubmit()">
+                                    <img class="customer-info-button-svg"
+                                        src="/assets/images/svg/check-white.svg" />
 
-                        <span class="pr-2 rounded-md">
-                            <button type="button" class="customer-info-button"
-                                (click)="nutritionalPlan()">
-                                <img class="customer-info-button-svg"
-                                    src="/assets/images/svg/beaker.svg" />
-                                Nutritional Plan
-                            </button>
-                        </span>
+                                    {{ 'customer_edit.save' | translate }}
+                                </button>
+                            </span>
+
+                            <span class="pr-2 rounded-md">
+                                <button type="button" class="customer-info-button"
+                                    (click)="nutritionalPlan()">
+                                    <img class="customer-info-button-svg"
+                                        src="/assets/images/svg/beaker.svg" />
+                                    Nutritional Plan
+                                </button>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

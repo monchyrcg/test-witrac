@@ -163,9 +163,9 @@
                         <select formControlName="gender" class="bg-white inputClass"
                             [ngClass]="{ 'border border-red-500': submitted && f.gender.errors }"
                             id="gender">
-                            <option hidden selected value="">{{ 'customer_create.gender' |
+                            <option hidden selected>{{ 'customer_create.gender' |
                                 translate }}</option>
-                            <option value="{{ gender.id }}" *ngFor="let gender of genders">
+                            <option *ngFor="let gender of genders" [value]=gender.id>
                                 {{ gender.text }}
                             </option>
                         </select>
