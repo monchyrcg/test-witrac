@@ -207,7 +207,6 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     }
 
     private getOptimalFactor(): number {
-        console.log(this.customer.gender);
         switch (this.customer.gender) {
             case 2:
                 if (this.years >= 30)
@@ -241,7 +240,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.subscription.add(this.appointmentService.updateAppointment(this.appointment_id, appointmentDataInformation).subscribe(
             (response) => {
                 this.submitted = false;
-                if (null !== this.appointmentDataForm.controls['fat_percentage'].value) {
+                if (this.type !== 2 && null !== this.appointmentDataForm.controls['fat_percentage'].value) {
                     this.saveFatData();
                 } else {
                     this.showSnackService('Appointment updated successfully', 'success');
