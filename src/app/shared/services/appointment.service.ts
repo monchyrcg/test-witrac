@@ -105,6 +105,14 @@ export class AppointmentService {
             }));
     }
 
+    updateFatAppointment(appointment_id, fat) {
+        return this.http
+            .post(`${environment.apiUrl}/appointments/${appointment_id}/data/fat`, fat)
+            .pipe(map((response: any) => {
+                response.data;
+            }));
+    }
+
     deleteAppointmentState(appointment_id) {
         this.deleteSubject.next({ appointment_id: appointment_id });
     }

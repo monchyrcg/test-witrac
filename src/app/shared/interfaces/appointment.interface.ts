@@ -35,3 +35,13 @@ export interface AppointmentDate {
     date: any;
     hour: any;
 }
+
+export interface AppointmentFat {
+    fat_percentage: number;
+    fat: number;
+    body_fat: number;
+    excess_fat: number;
+    not_fat: number;
+    water: number;
+    excess_water: number;
+}

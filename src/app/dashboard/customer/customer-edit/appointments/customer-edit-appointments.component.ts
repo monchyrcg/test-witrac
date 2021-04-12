@@ -6,7 +6,7 @@ import { FlatpickrOptions } from 'ng2-flatpickr';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
-import { AppointmentData, AppointmentDate } from 'src/app/shared/interfaces/appointment.interface';
+import { AppointmentData, AppointmentDate, AppointmentFat } from 'src/app/shared/interfaces/appointment.interface';
 import { AppointmentService } from 'src/app/shared/services/appointment.service';
 import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
 import { UtilsService } from 'src/app/shared/services/util.service';
@@ -127,6 +127,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             data = appointment.meta.data;
             this.appointment_id = appointment.meta.id;
         }
+        let fat = appointment?.fat;
 
         this.showAppointment = true;
 
@@ -148,13 +149,13 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                 girth: [null !== data ? data.girth : ''],
                 hip: [null !== data ? data.hip : ''],
                 leg: [null !== data ? data.leg : ''],
-                fat_percentaje: [null],
-                fat: [{ value: null !== data ? data.fat : '', disabled: true }],
-                body_fat: [{ value: null !== data ? data.fat : '', disabled: true }],
-                excess_fat: [{ value: null !== data ? data.fat : '', disabled: true }],
-                not_fat: [{ value: null !== data ? data.fat : '', disabled: true }],
-                water: [{ value: null !== data ? data.fat : '', disabled: true }],
-                excess_water: [{ value: null !== data ? data.fat : '', disabled: true }],
+                fat_percentage: [null !== fat ? fat.fat_percentage : null],
+                fat: [{ value: null !== fat ? fat.fat : '', disabled: true }],
+                body_fat: [{ value: null !== fat ? fat.body_fat : '', disabled: true }],
+                excess_fat: [{ value: null !== fat ? fat.excess_fat : '', disabled: true }],
+                not_fat: [{ value: null !== fat ? fat.not_fat : '', disabled: true }],
+                water: [{ value: null !== fat ? fat.water : '', disabled: true }],
+                excess_water: [{ value: null !== fat ? fat.excess_water : '', disabled: true }],
             });
 
 
@@ -167,18 +168,18 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                             Math.round((number + Number.EPSILON) * 100) / 100
                         );
 
-                        const fat_percentaje = this.appointmentDataForm.controls['fat_percentaje'].value;
-                        if (fat_percentaje !== null) {
-                            this.calculateFatNumbers(fat_percentaje);
+                        const fat_percentage = this.appointmentDataForm.controls['fat_percentage'].value;
+                        if (fat_percentage !== null) {
+                            this.calculateFatNumbers(fat_percentage);
                         }
                     }
                 }
                 );
 
-            this.appointmentDataForm.get('fat_percentaje').valueChanges
+            this.appointmentDataForm.get('fat_percentage').valueChanges
                 .pipe(debounceTime(this.debounce), distinctUntilChanged())
-                .subscribe(percentaje => {
-                    this.calculateFatNumbers(percentaje);
+                .subscribe(percentage => {
+                    this.calculateFatNumbers(percentage);
                 }
                 );
         }
@@ -205,8 +206,9 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     }
 
     private getOptimalFactor(): number {
+        console.log(this.customer.gender);
         switch (this.customer.gender) {
-            case 1:
+            case 2:
                 if (this.years >= 30)
                     return 17;
                 else
@@ -238,11 +240,33 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.subscription.add(this.appointmentService.updateAppointment(this.appointment_id, appointmentDataInformation).subscribe(
             (response) => {
                 this.submitted = false;
-                this.snackbarService.show('Appointment updated successfully', 'success');
-                this.reloadCustomer.emit();
+                if (null !== this.appointmentDataForm.controls['fat_percentage']) {
+                    this.saveFatData();
+                } else {
+                    this.showSnackService('Appointment updated successfully', 'success');
+                }
             },
             (error) => {
-                this.snackbarService.show('Something was wrong', 'danger');
+                this.showSnackService('Something was wrong', 'danger');
+            }
+        ));
+    }
+
+    private showSnackService(text: string, cssClass: string) {
+        this.snackbarService.show(text, cssClass);
+        if ('success' === cssClass)
+            this.reloadCustomer.emit();
+    }
+
+    private saveFatData() {
+        let appointmentFatInformation: AppointmentFat = this.utilService.clear(this.appointmentDataForm.getRawValue());
+
+        this.subscription.add(this.appointmentService.updateFatAppointment(this.appointment_id, appointmentFatInformation).subscribe(
+            (response) => {
+                this.showSnackService('Appointment updated successfully', 'success');
+            },
+            (error) => {
+                this.showSnackService('Something was wrong', 'danger');
             }
         ));
     }
