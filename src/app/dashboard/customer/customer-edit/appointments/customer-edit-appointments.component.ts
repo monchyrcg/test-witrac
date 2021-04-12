@@ -13,6 +13,7 @@ import { UtilsService } from 'src/app/shared/services/util.service';
 import { Validations } from 'src/app/shared/settings/validation';
 import { MenuComponent } from 'src/app/dashboard/home/menu/menu.component';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { lastDayOfQuarterWithOptions } from 'date-fns/fp';
 
 const CTE_WATER = 0.732;
 
@@ -240,7 +241,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.subscription.add(this.appointmentService.updateAppointment(this.appointment_id, appointmentDataInformation).subscribe(
             (response) => {
                 this.submitted = false;
-                if (null !== this.appointmentDataForm.controls['fat_percentage']) {
+                if (null !== this.appointmentDataForm.controls['fat_percentage'].value) {
                     this.saveFatData();
                 } else {
                     this.showSnackService('Appointment updated successfully', 'success');
@@ -287,11 +288,10 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
         this.subscription.add(this.appointmentService.deleteAppointment(appointment_id).subscribe(
             (response) => {
                 this.submitted = false;
-                this.snackbarService.show('Appointment deleted successfully', 'success');
-                this.reloadCustomer.emit();
+                this.showSnackService('Appointment deleted successfully', 'success');
             },
             (error) => {
-                this.snackbarService.show('Something was wrong', 'danger');
+                this.showSnackService('Something was wrong', 'danger');
             }
         ));
     }
