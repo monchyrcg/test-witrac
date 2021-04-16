@@ -6,12 +6,6 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-// html{
-//   font-family: 'slim-joe, big-john';
-// }
-
-@import 'assets/fonts/muller/muller.scss';
-
 .inputClass {
   	@apply shadow;
    	@apply appearance-none;
@@ -20,108 +14,20 @@
    	@apply w-full;
    	@apply py-2;
    	@apply px-3;
-   	@apply text-nutriwell;
+   	@apply text-witrac;
    	@apply leading-tight; 
 }
 
 .inputClass:focus {
     @apply outline-none;
-    @apply ring-nutriwell;
-    @apply border-nutriwell;
+    @apply ring-witrac;
+    @apply border-witrac;
     @apply ring-opacity-50;
 }
 
 .inputClass_groups {
   	@extend .inputClass;
   	@apply pl-20;
-}
-
-.customer-info {
-   	@apply mt-2;
-   	@apply flex;
-   	@apply items-center;
-   	@apply text-sm;
-   	@apply leading-5;
-   	@apply text-gray-500;
-}
-
-.customer-info-svg {
-    @apply flex-shrink-0;
-    @apply  h-5;
-    @apply  w-5;
-    @apply  text-nutriwell;
-    @apply  mr-1.5;
-}
-
-.customer-info-button {
-    @apply inline-flex;
-    @apply  items-center;
-    @apply  px-4;
-    @apply  py-2;
-    @apply  border;
-    @apply  border-gray-300;
-    @apply  text-sm;
-    @apply  leading-5;
-    @apply  font-medium;
-    @apply  rounded-md;
-    @apply transition;
-    @apply duration-150;
-    @apply ease-in-out;
-}
-
-.customer-info-button-white {
-    @apply customer-info-button;
-    @apply text-gray-700;
-    @apply  bg-white;
-}
-
-.customer-info-button-white:hover {
-    @apply text-gray-500;
-}
-
-.customer-info-button-white:focus {
-    @apply outline-none;
-    @apply ring-blue-100;
-}
-
-.customer-info-button-reverse {
-    @apply customer-info-button;
-    @apply text-white;
-    @apply bg-nutriwell;
-}
-
-.customer-info-button-reverse:hover {
-    @apply bg-nutriwell;
-}
-
-.customer-info-button-reverse:focus {
-    @apply outline-none;
-    @apply border-nutriwell;
-}
-
-.customer-info-button-red-reverse {
-    @apply customer-info-button;
-    @apply text-white;
-    @apply bg-red-600;
-}
-
-.customer-info-button-red-reverse:hover {
-    @apply bg-red-600;
-}
-
-.customer-info-button-red-reverse:focus {
-    @apply outline-none;
-    @apply border-red-600;
-}
-
-.customer-info-button-svg {
-    @apply -ml-1;
-    @apply mr-2;
-    @apply  h-5;
-    @apply  w-5;
-}
-.customer-info-button-svg:focus {    
-    @apply outline-none;
 }
 
 @mixin scrollbars($sizeW, $sizeH, $foreground-color, $background-color: mix($foreground-color, white,  10%)) {
@@ -147,8 +53,4 @@
 
 .custom-scroll {
   @include scrollbars(.5em, .1em, slategray);
-}
-
-.event-class .cal-event-title {
-  color: black !important;
 }

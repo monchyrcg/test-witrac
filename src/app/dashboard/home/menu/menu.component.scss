@@ -14,16 +14,16 @@
     @apply leading-5;
 }
 .menu:hover {
-    @apply bg-nutriwell-sansivera
+    @apply bg-witrac-sansivera
 }
 .menu:focus {
-    @apply bg-nutriwell-sansivera;
+    @apply bg-witrac-sansivera;
     @apply outline-none;
 }
 
 .active {
     @apply text-white;
-    @apply bg-nutriwell-sansivera;
+    @apply bg-witrac-sansivera;
 }
 
 
@@ -31,10 +31,10 @@
 .modal {
     @apply cursor-pointer;
     @apply text-white;
-    @apply bg-nutriwell-stone;
+    @apply bg-witrac-stone;
 }
 .modal:focus {
     @apply outline-none;
     @apply text-white;
-    @apply bg-nutriwell-stone;
+    @apply bg-witrac-stone;
 }

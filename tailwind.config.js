@@ -6,9 +6,6 @@ module.exports = {
   },
   purge: ["./src/**/*.{html,ts}"],
   theme: {
-    fontFamily: {
-      'nutriwell': ['Muller-Regular']
-    },
     inset: {
       '0': 0,
       auto: 'auto',
@@ -18,7 +15,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        nutriwell: {
+        witrac: {
           DEFAULT: '#006C5B',
           stone: '#86897E',
           sansivera: '#6FBFA4',

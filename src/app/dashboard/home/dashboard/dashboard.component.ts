@@ -3,16 +3,14 @@ import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { LoginService } from 'src/app/auth/login/login.service';
 
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
+    selector: 'app-dashboard',
+    templateUrl: './dashboard.component.html',
 })
 
-export class HomeComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit, OnDestroy {
 
     isOpen = false;
     isCountry = false;
@@ -21,16 +19,11 @@ export class HomeComponent implements OnInit, OnDestroy {
     private subscription = new Subscription();
 
     constructor(
-        private loginService: LoginService,
         private router: Router
     ) { }
 
     ngOnInit(): void {
         console.log('nit home');
-    }
-
-    logout() {
-        this.subscription.add(this.loginService.logout().subscribe(() => this.router.navigate(['/login'])));
     }
 
     disabled() {

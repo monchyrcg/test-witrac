@@ -1,26 +1,12 @@
 
 
 .snackbar-wrap {
-  @apply fixed;
-  transform-origin: center center;
-  transform: translate(-50%, 0%);
-  @apply py-2;
-  @apply rounded;
-  @apply w-1/3;
-  @apply bottom-1/5;
-  @apply left-1/2%;
     &.success {
-      @apply bg-nutriwell;
+      @apply bg-witrac;
     }
     &.danger {
       background: rgb(173, 35, 0);
     }
-    // .snackbar-text {
-    //   text-align: center;
-    //   font-size: 1.3em;
-    //   color: white;
-    //   margin: 0;
-    // }
   }
   
 

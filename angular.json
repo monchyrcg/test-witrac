@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "nutriwell": {
+    "witrac": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "outputPath": "dist/nutriwell",
+            "outputPath": "dist/witrac",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -28,9 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "./node_modules/angular-calendar/css/angular-calendar.css",
-              "node_modules/flatpickr/dist/flatpickr.min.css"
+              "src/styles.scss"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
@@ -95,24 +93,24 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "nutriwell:build",
+            "browserTarget": "witrac:build",
             "customWebpackConfig": {
               "path": "webpack.config.js"
             }
           },
           "configurations": {
             "production": {
-              "browserTarget": "nutriwell:build:production"
+              "browserTarget": "witrac:build:production"
             },
             "local": {
-              "browserTarget": "nutriwell:build:local"
+              "browserTarget": "witrac:build:local"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "nutriwell:build"
+            "browserTarget": "witrac:build"
           }
         },
         "test": {
@@ -150,18 +148,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "nutriwell:serve"
+            "devServerTarget": "witrac:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "nutriwell:serve:production"
+              "devServerTarget": "witrac:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "nutriwell",
+  "defaultProject": "witrac",
   "cli": {
     "analytics": "4b981e68-d709-4965-8881-979ca74e1548"
   }

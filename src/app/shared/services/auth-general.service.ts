@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgxRolesService, NgxPermissionsService } from 'ngx-permissions';
 import { User } from '../interfaces/user.interface';
-import { Roles } from '../settings/rol';
+
 
 @Injectable()
 export class AuthenticationGeneralService {
     data;
 
-    constructor(private router: Router, private rolesService: NgxRolesService,
-        private permissionsService: NgxPermissionsService) {
+    constructor(private router: Router) {
         if (this.isLoggedIn()) {
             this.data = this.getUser();
         }
@@ -41,18 +39,7 @@ export class AuthenticationGeneralService {
             return false;
         }
 
-        const user: User = this.getUser();
-
-        const currentTeam = (user.teams).filter(x => x.id == user.current_team_id)[0];
-
-        const rol = Roles.roles.filter(x => x.id == currentTeam.rol)[0];
-        // refresh permissions
-        this.permissionsService.flushPermissions();
-        this.permissionsService.loadPermissions(rol.permissions);
-
-        // refresh roles
-        this.rolesService.flushRoles();
-        this.rolesService.addRole(rol.name, rol.permissions);
+        const user: User = data;
 
         return true;
     }

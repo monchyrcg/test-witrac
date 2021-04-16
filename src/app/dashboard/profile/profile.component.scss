@@ -24,14 +24,14 @@
 .customer-info-button-reverse {
     @apply customer-info-button;
     @apply text-white;
-    @apply bg-nutriwell;
+    @apply bg-witrac;
 }
 
 .customer-info-button-reverse:hover {
-    @apply bg-nutriwell;
+    @apply bg-witrac;
 }
 
 .customer-info-button-reverse:focus {
     @apply outline-none;
-    @apply border-nutriwell;
+    @apply border-witrac;
 }

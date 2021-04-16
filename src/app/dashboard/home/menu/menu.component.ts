@@ -1,13 +1,4 @@
 import { Component } from '@angular/core';
-import { ModalInfoOptionsComponent } from 'src/app/shared/components/modals/info-options/modal-info-options.component';
-import { ModalInfoComponent } from 'src/app/shared/components/modals/info/modal-info.component';
-import { AppointmentService } from 'src/app/shared/services/appointment.service';
-import { ModalService } from 'src/app/shared/services/modal.service';
-import { SettingGeneralService } from 'src/app/shared/services/settings-general.service';
-import { CustomerEditNutritionalPlanService } from '../../customer/customer-edit/nutritional-plan/customer-edit-nutritional-plan.service';
-import { AppointmentComponent } from './appointment/appointment.component';
-import { CustomerEditCrashDietComponent } from './crashDiet/customer-edit-crash-diet.component';
-import { CustomerComponent } from './customer/customer.component';
 
 @Component({
     selector: 'app-menu',
@@ -20,21 +11,8 @@ export class MenuComponent {
     isOpenMobile = true;
     showSmallNavBar = false;
 
-    // team
-    nameTeam: string;
-    divTeams = false;
-
-    totalTeams: number;
-    teams: any;
-
-    crashDays: [];
-
-
     constructor(
-        public settingGeneralService: SettingGeneralService,
-        private modalService: ModalService,
-        private nutritionalPlanService: CustomerEditNutritionalPlanService,
-        private appointmentService: AppointmentService
+
     ) { }
 
     changeValue(value?) {
@@ -43,96 +21,5 @@ export class MenuComponent {
 
     smallNavBar() {
         this.showSmallNavBar = !this.showSmallNavBar;
-    }
-
-
-    showModal() {
-        this.changeValue(true);
-        this.modalService.init(ModalInfoComponent, this.settingGeneralService.getLangText('modal'), { closeModal: this.closeModal.bind(this) });
-    }
-
-    closeModal() {
-        this.modalService.destroy();
-    }
-
-    createCustomer() {
-        this.changeValue(true);
-        this.modalService.init(CustomerComponent, this.settingGeneralService.getLangText('customer_create'), { closeModal: this.closeModal.bind(this) });
-    }
-
-    createAppointment(date?, customer?) {
-        this.changeValue(true);
-        let inputs = this.settingGeneralService.getLangText('appointment_create');
-        if (date) {
-            inputs.appointmentDay = date;
-        }
-        if (customer) {
-            inputs.customerI = customer;
-        }
-
-        this.modalService.init(AppointmentComponent, inputs, { closeModal: this.closeModal.bind(this) })
-    }
-
-    // crashDays
-    createCrashDay() {
-        this.changeValue(true);
-        this.modalService.init(
-            CustomerEditCrashDietComponent,
-            this.settingGeneralService.getLangText('customer_edit.nutritional_plan.shock'),
-            { closeModal: this.closeModal.bind(this), sendDays: ($days) => { this.sendDays($days) } }
-        );
-    }
-
-    sendDays(days) {
-        this.closeModal();
-
-        this.nutritionalPlanService.changeCrashState(days);
-    }
-
-    // deleteAppointment
-    generateDeleteAppointment(appointment_id) {
-        this.changeValue(true);
-
-        this.modalService.init(
-            ModalInfoComponent,
-            this.settingGeneralService.getLangText('customer_edit.appointments_delete'),
-            { closeModal: this.closeModal.bind(this), buttonAction: ($action) => { this.deleteAppointmentAction(appointment_id) } });
-    }
-
-    deleteAppointmentAction(appointment_id) {
-        this.closeModal();
-        this.appointmentService.deleteAppointmentState(appointment_id)
-    }
-
-    // startAppointment
-    generateStartAppointment(appointment) {
-        this.changeValue(true);
-
-        let inputs = this.settingGeneralService.getLangText('customer_edit.appointments_show');
-
-        inputs.options = [];
-        inputs.options.push({
-            'text': 'Ver cita',
-            'optionReturn': 2,
-            'class': 'customer-info-button-white'
-        });
-        if (!appointment.status) {
-            inputs.options.push({
-                'text': 'Empezar cita',
-                'optionReturn': 1,
-                'class': 'customer-info-button-reverse'
-            });
-        }
-
-        this.modalService.init(
-            ModalInfoOptionsComponent,
-            inputs,
-            { closeModal: this.closeModal.bind(this), buttonAction: ($action) => { this.startAppointmentAction($action, appointment) } });
-    }
-
-    startAppointmentAction(action, appointment) {
-        this.closeModal();
-
-        this.appointmentService.showAppointmentState(action, appointment)
     }
 }

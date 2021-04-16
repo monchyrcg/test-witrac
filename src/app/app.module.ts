@@ -1,37 +1,25 @@
 import { NgModule } from '@angular/core';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
-
-export function createTranslateLoader(http: HttpClient) {
-	return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
-
 // modules
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserModule } from '@angular/platform-browser';
+import { AppComponent } from './app.component';
+import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/modules/shared.module';
 import { AuthModule } from './auth/auth.module';
-import { DashboardModule } from './dashboard/dashboard.module';
-
-import { AppComponent } from './app.component';
-import { NopagefoundComponent } from './nopagefound/nopagefound.component';
-import { AuthenticationGeneralService } from './shared/services/auth-general.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { FilterPipe } from './shared/pipes/filter.pipe';
-import { HighlightDirective } from './shared/directives/highlight.directive';
 import { MenuComponent } from './dashboard/home/menu/menu.component';
-import { ExternalModule } from './external/external.module';
+import { AuthenticationGeneralService } from './shared/services/auth-general.service';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+
 
 @NgModule({
 	declarations: [
 		AppComponent,
-		NopagefoundComponent,
+
 	],
 	imports: [
 		BrowserModule,
@@ -40,15 +28,7 @@ import { ExternalModule } from './external/external.module';
 		RouterModule,
 		AppRoutingModule,
 		DashboardModule,
-		AuthModule,
-		TranslateModule.forRoot({
-			loader: {
-				provide: TranslateLoader,
-				useFactory: createTranslateLoader,
-				deps: [HttpClient]
-			}
-		}),
-		ExternalModule
+		AuthModule
 	],
 	exports: [],
 	providers: [

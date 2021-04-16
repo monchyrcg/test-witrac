@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  url: 'https://api.nutriwell.test',
-  apiUrl: 'https://api.nutriwell.test/api'
+  url: 'https://api.witrac.test',
+  apiUrl: 'https://api.witrac.test/api'
 };
 
 /*

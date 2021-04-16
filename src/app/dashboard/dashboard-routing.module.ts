@@ -1,13 +1,13 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from '../shared/guards/auth.guard';
+import { DashboardComponent } from './home/dashboard/dashboard.component';
 
 import { HomeComponent } from './home/home.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { AuthGuard } from '../shared/guards/auth.guard';
-import { NgxPermissionsGuard } from 'ngx-permissions';
-import { SettingsComponent } from './settings/settings.component';
+import { AssetComponent } from './home/asset/asset.component';
 import { ProfileComponent } from './profile/profile.component';
+
 
 const routes: Routes = [
     {
@@ -15,25 +15,10 @@ const routes: Routes = [
         component: HomeComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: '', redirectTo: '', pathMatch: 'full' },
+            { path: '', component: DashboardComponent },
             {
-                path: 'calendar',
-                component: CalendarComponent,
-                canActivate: [NgxPermissionsGuard],
-                data: {
-                    permissions: {
-                        only: ['admin'],
-                        redirectTo: '/forbidden'
-                    }
-                }
-            },
-            {
-                path: 'customers',
-                loadChildren: './customer/customer.module#CustomerModule'
-            },
-            {
-                path: 'settings',
-                component: SettingsComponent
+                path: 'assets',
+                component: AssetComponent
             },
             {
                 path: 'profile',
