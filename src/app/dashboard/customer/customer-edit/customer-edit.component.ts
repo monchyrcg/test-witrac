@@ -294,7 +294,6 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
                 return idx * 5;
             }
         };
-
     }
 
     private listProducts(query?) {
@@ -304,9 +303,7 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     createAppointment(): void {
         this.customer$.subscribe((customer) => {
             this.menuComponent.createAppointment(null, customer);
-
         })
-
     }
 
     ngOnDestroy(): void {
@@ -316,6 +313,8 @@ export class CustomerEditComponent implements OnInit, OnDestroy {
     }
 
     reloadCustomer() {
-        this.customer$ = this.customerService.getCustomer(this.customer_id);
+        this.customer$.subscribe((customer) => {
+            this.customer$ = this.customerService.getCustomer(customer.id);
+        });
     }
 }

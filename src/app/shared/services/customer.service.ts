@@ -69,7 +69,7 @@ export class CustomerService {
             }));
     }
 
-    getCustomer(customer_id: string) {
+    getCustomer(customer_id: string | number) {
         return this.http.get(`${environment.apiUrl}/customers/${customer_id}`,)
             .pipe(map((response: any) => {
                 return response.data;

@@ -51,6 +51,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
 
     appointments;
     appointment_id: number;
+    previous_weight: number;
 
     validationMaxString = Validations.validationMaxString;
 
@@ -116,12 +117,13 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
     get f() { return this.appointmentDataForm.controls; }
 
     showAppointmentO(event) {
-
+        // start loading
         this.showAppointment = false;
 
         const appointment = event.appointment;
         this.type = event.type;
 
+        // get data
         let data = appointment?.data;
         this.appointment_id = appointment.id
         if (this.calendar) {
@@ -129,9 +131,11 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             this.appointment_id = appointment.meta.id;
         }
         let fat = appointment?.fat;
+        this.previous_weight = appointment.previous_weight;
 
         this.showAppointment = true;
 
+        // get day
         const day = appointment.date + ' ' + appointment.hour;
 
         this.appointmentDataForm = this.builder.group({
@@ -160,6 +164,7 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
             });
 
 
+            // onchanges values
             this.appointmentDataForm.get("weight").valueChanges
                 .pipe(debounceTime(this.debounce), distinctUntilChanged())
                 .subscribe(weight => {
@@ -185,17 +190,18 @@ export class CustomerEditAppointmentComponent implements OnInit, OnDestroy {
                 );
         }
 
+        // correct format
         const dayMoment = moment(day).format('YYYY-MM-DD HH:mm');
         this.dateOptions.defaultDate = dayMoment;
     }
 
     private calculateFatNumbers(percentaje: number) {
         const weight = this.appointmentDataForm.get('weight').value;
-        const fat = (weight * percentaje) / 100;
+        const fat = Math.round((((weight * percentaje) / 100) + Number.EPSILON) * 100) / 100;
         const body_fat = (weight * (Math.round((this.getOptimalFactor() + Number.EPSILON) * 100) / 100)) / 100;
         const excess_fat = Math.round(((fat - body_fat) + Number.EPSILON) * 100) / 100;
-        const not_fat = weight - fat;
-        const water = not_fat * CTE_WATER;
+        const not_fat = Math.round(((weight - fat) + Number.EPSILON) * 100) / 100;
+        const water = Math.round(((not_fat * CTE_WATER) + Number.EPSILON) * 100) / 100;
         const excess_water = Math.round(((weight - (parseFloat(this.appointmentDataForm.get('weight_theoretical').value) + excess_fat)) + Number.EPSILON) * 100) / 100;
 
         this.appointmentDataForm.get('fat').setValue(fat);

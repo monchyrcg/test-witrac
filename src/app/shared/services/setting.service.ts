@@ -46,6 +46,9 @@ export class SettingService {
             case 5:
                 name = this.settingGeneralService.getLangText('kind_appointments.recovered')
                 break;
+            case 6:
+                name = this.settingGeneralService.getLangText('kind_appointments.revision_no_payment')
+                break;
         }
 
         return name;

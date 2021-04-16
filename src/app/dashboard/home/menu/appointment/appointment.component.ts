@@ -105,13 +105,12 @@ export class AppointmentComponent implements OnInit, OnDestroy {
             (response) => {
                 this.users = response;
                 this.appointmentForm.controls['user_id'].setValue('');
-            }
-        ));
-
-        this.subscription.add(this.settingService.getColors(this.current_team_id).subscribe(
-            (response) => {
-                this.kindsAppointments = response;
-                this.firstKindAppointment = this.kindsAppointments[0];
+                this.subscription.add(this.settingService.getColors(this.current_team_id).subscribe(
+                    (response) => {
+                        this.kindsAppointments = response;
+                        this.firstKindAppointment = this.kindsAppointments[3];
+                    }
+                ));
             }
         ));
     }

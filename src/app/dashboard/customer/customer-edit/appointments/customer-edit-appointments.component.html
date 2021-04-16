@@ -34,6 +34,11 @@
                 &nbsp;
                 <img class="customer-info-svg"
                     src="/assets/images/svg/gift.svg" /> {{years}} años
+                <ng-container *ngIf="previous_weight">
+                    &nbsp;
+                    <img class="customer-info-svg"
+                        src="/assets/images/svg/hand.svg" /> {{previous_weight}} kg
+                </ng-container>
             </span>
         </p>
         <div class="px-4 pt-3 sm:px-6 cursor-pointer">
