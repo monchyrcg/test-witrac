@@ -5,12 +5,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { SnackbarService } from 'src/app/shared/components/snackbar/snackbar.service';
 import { AssetService } from './asset.service';
 
 
 @Component({
     selector: 'app-asset',
     templateUrl: './asset.component.html',
+    providers: [AssetService]
     // styleUrls: ['./asset.component.scss'],
 })
 
@@ -42,8 +44,8 @@ export class AssetComponent implements OnInit, OnDestroy {
 
     constructor(
         private builder: FormBuilder,
-        private router: Router,
-        private assetService: AssetService
+        private assetService: AssetService,
+        private snackbarService: SnackbarService
     ) { }
 
     ngOnInit(): void {
@@ -56,16 +58,15 @@ export class AssetComponent implements OnInit, OnDestroy {
                         this.loadingShow = true;
 
                         this.assets = data['data'];
-                        console.log(this.assets);
-                        // pagination
-                        const meta = data['meta'];
 
+
+                        // pagination
                         this.from = data['from'];
                         this.to = data['to'];
                         this.total = data['total'];
                         this.current_page = data['current_page'];
                         this.first_page = data['current_page'] == 1 ? true : false;
-                        this.last_page = data['las_page'] === data['current_page'] ? true : false;
+                        this.last_page = data['last_page'] === data['current_page'] ? true : false;
                         this.links = data['links'];
 
                         this.loadingShow = false;
@@ -104,8 +105,20 @@ export class AssetComponent implements OnInit, OnDestroy {
         this.listAssets();
     }
 
-    progressBarFinish() {
-        console.log('progress is finished');
+    progressBarFinish($event) {
+        this.subscription.add(this.assetService.saveMyLibray($event).subscribe(
+            (response) => {
+                var data = 'some data here...';
+
+                const blob = new Blob([data], { type: 'text/csv' });
+                const url = window.URL.createObjectURL(blob);
+                window.open(url);
+            },
+            (error) => this.snackbarService.show('Algo ha pasado ....', 'danger')
+
+        ))
+
+
     }
 
 

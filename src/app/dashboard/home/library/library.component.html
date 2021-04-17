@@ -1,23 +1,12 @@
-<ng-container *ngIf="assetsList$ | async; else loading">
+<ng-container *ngIf="libraryList$ | async; else loading">
 	<div class="px-4 py-6 sm:px-6 lg:px-8">
 		<h1 class="my-8 text-center text-6xl font-bold"><span
-				class="text-green-600">All</span> the <span
-				class="text-red-600">ASSET</span> you need!
+				class="text-green-600">My</span> <span
+				class="text-red-600">LIBRARY</span> is awesome!
 		</h1>
 	</div>
 
 	<div class="px-4 sm:px-6 lg:px-8">
-		<!-- // search -->
-		<div class="flex flex-wrap" [formGroup]="assetForm">
-			<div class="w-full sm:w-1/2 p-2">
-				<app-label-form for="search" name="Search Assets"></app-label-form>
-				<input type="text" id="search" class="inputClass" id="search-text"
-					aria-describedby="search-text"
-					formControlName="searchText" placeholder="Complete your library"
-					autofocus>
-			</div>
-		</div>
-
 		<!-- // table -->
 		<div class="overflow-x-auto pt-6 pb-2 align-middle min-w-full">
 			<div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg inline">
@@ -32,40 +21,21 @@
 							<th
 								class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium
 								text-gray-500 uppercase tracking-wider">
-								Size
+								Date
 							</th>
-							<th
-								class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium
-								text-gray-500 uppercase tracking-wider">
-								Format
-							</th>
-							<th class="px-6 py-3 bg-gray-50"></th>
 						</tr>
 					</thead>
 					<tbody class="bg-white divide-y divide-gray-200">
-						<tr *ngFor="let asset of assets">
+						<tr *ngFor="let library of libraries">
 							<td class="px-6 py-4 whitespace-no-wrap">
 								<div class="text-sm leading-5 text-gray-900">
-									{{asset.name}}
+									{{library.name}}
 
-									<app-progress-bar #progressBar id="{{asset.id}}" (onComplete)="progressBarFinish($event)"></app-progress-bar>
 								</div>
 							</td>
 							<td class="px-6 py-4 whitespace-no-wrap">
 								<div class="text-sm leading-5 text-gray-900">
-									{{asset.size}}
-								</div>
-							</td>
-							<td class="px-6 py-4 whitespace-no-wrap">
-								<div class="text-sm leading-5 text-gray-900">
-									{{asset.extension}}
-								</div>
-							</td>
-							<td class="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5
-								font-medium">
-								<div class="relative mx-1 px-1 py-2 group mb-1 md:mb-0"
-									id="button_mlist" (click)="progressBar.startProgressBar()">
-									<img class="w-6 h-6" src="assets/img/svg/play.svg" />
+									{{library.date}}
 								</div>
 							</td>
 						</tr>

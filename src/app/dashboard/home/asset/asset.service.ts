@@ -1,13 +1,10 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
+import { map } from "rxjs/operators";
 import { environment } from "src/environments/environment";
 
-
-
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class AssetService {
 
     private assestListSource = new BehaviorSubject<any>([]);
@@ -18,7 +15,6 @@ export class AssetService {
     ) { }
 
     listAssets(page, per_page, fields?) {
-
         if (!page) {
             page = 1;
         }
@@ -38,4 +34,14 @@ export class AssetService {
         this.assestListSource.next(data);
     }
 
+    saveMyLibray(asset) {
+        const assets = {
+            asset
+        }
+        return this.http
+            .post(`${environment.apiUrl}/assets`, assets)
+            .pipe(map((response: any) => {
+                return response.data;
+            }));
+    }
 }

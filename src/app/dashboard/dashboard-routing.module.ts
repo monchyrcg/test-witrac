@@ -7,6 +7,7 @@ import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { AssetComponent } from './home/asset/asset.component';
 import { ProfileComponent } from './profile/profile.component';
+import { LibraryComponent } from './home/library/library.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
             {
                 path: 'profile',
                 component: ProfileComponent
+            },
+            {
+                path: 'library',
+                component: LibraryComponent
             }
         ]
     }

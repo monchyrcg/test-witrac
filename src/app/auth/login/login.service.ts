@@ -46,10 +46,6 @@ export class LoginService {
     }
 
     logout() {
-        return this.http
-            .get(`${environment.apiUrl}/logout`)
-            .pipe(map((response: any) => {
-                this.auth.clearUser();
-            }));
+        this.auth.logout();
     }
 }

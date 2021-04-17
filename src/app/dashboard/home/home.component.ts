@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     }
 
     logout() {
-        this.subscription.add(this.loginService.logout().subscribe(() => this.router.navigate(['/login'])));
+        this.loginService.logout();
     }
 
     disabled() {

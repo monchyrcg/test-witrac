@@ -1,42 +1,38 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ProgressBarService } from './progress.service';
 
 @Component({
     selector: 'app-progress-bar',
     templateUrl: './progress.component.html',
+    providers: [ProgressBarService]
     // styleUrls: ['./progress-bar.component.css']
 })
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent implements OnInit, OnDestroy {
 
-    progress: number = 0;
-    @Output() onComplete = new EventEmitter<void>();
+    @Output() onComplete = new EventEmitter<number>();
+    @Input() id: number;
+
+    private progressBarSubscription: Subscription = null;
+
+    constructor(
+        public barService: ProgressBarService
+    ) { }
 
 
-    active: boolean = false;
+    ngOnInit(): void {
+        this.progressBarSubscription = this.barService.progressBarEnd$.subscribe(() => {
+            this.onComplete.emit(this.id);
+        })
+    }
 
-    constructor() { }
-
-    ngOnInit() {
-
+    ngOnDestroy(): void {
+        if (this.progressBarSubscription) {
+            this.progressBarSubscription.unsubscribe();
+        }
     }
 
     startProgressBar() {
-        console.log(this.progress);
-        if (this.progress < 100) {
-            setTimeout(() => {
-                this.progress += 25;
-                this.progressFinish();
-            }, 1000);
-        }
-
-    }
-
-    progressFinish() {
-        if (this.progress == 100) {
-            console.log('finis');
-            this.onComplete.emit();
-        } else {
-            this.startProgressBar();
-        }
-
+        this.barService.startProgressBar();
     }
 }
