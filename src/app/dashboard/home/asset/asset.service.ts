@@ -17,14 +17,24 @@ export class AssetService {
         private http: HttpClient
     ) { }
 
-    listAssets(fields?) {
+    listAssets(page, per_page, fields?) {
+
+        if (!page) {
+            page = 1;
+        }
+        if (!per_page) {
+            per_page = 15;
+        }
 
         let params = new HttpParams();
+        params = params.append('page', page);
+        params = params.append('per_page', per_page);
+
         if (fields) {
             params = params.append('name', fields['searchText']);
         }
 
-        const data = this.http.get(`${environment.apiUrl}/customers`, { params }).pipe();
+        const data = this.http.get(`${environment.apiUrl}/assets`, { params }).pipe();
         this.assestListSource.next(data);
     }
 

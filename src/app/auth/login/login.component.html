@@ -9,7 +9,7 @@
                     px-3
                     text-witrac leading-tight focus:outline-none
                     focus:border-witrac" [ngClass]="{ 'border border-red-500': submitted &&
-                    f.password.errors }" id="email" type="text" placeholder="Email}">
+                    f.password.errors }" id="email" type="text" placeholder="Email">
                 <ng-container *ngIf="submitted && f.email.errors">
                     <app-error-form *ngIf="f.email.errors.required" error="Campo obligatorio">
                     </app-error-form>

@@ -26,6 +26,17 @@ export class AssetComponent implements OnInit, OnDestroy {
     assets;
     loadingShow: boolean = false;
 
+    // pagination
+    page = 1;
+    per_page = 5;
+    from: number;
+    to: number;
+    total: number;
+    current_page: number;
+    first_page: boolean = true;
+    last_page: boolean = false;
+    links: [];
+
     // locale
     private subscription = new Subscription();
 
@@ -44,7 +55,18 @@ export class AssetComponent implements OnInit, OnDestroy {
                     (data) => {
                         this.loadingShow = true;
 
+                        this.assets = data['data'];
+                        console.log(this.assets);
+                        // pagination
+                        const meta = data['meta'];
 
+                        this.from = data['from'];
+                        this.to = data['to'];
+                        this.total = data['total'];
+                        this.current_page = data['current_page'];
+                        this.first_page = data['current_page'] == 1 ? true : false;
+                        this.last_page = data['las_page'] === data['current_page'] ? true : false;
+                        this.links = data['links'];
 
                         this.loadingShow = false;
                     }
@@ -60,12 +82,30 @@ export class AssetComponent implements OnInit, OnDestroy {
         this.assetForm.valueChanges
             .pipe(debounceTime(this.debounce), distinctUntilChanged())
             .subscribe(query => {
+                this.page = 1;
                 this.listAssets(query);
             });
     }
 
     listAssets(query?) {
-        this.assetService.listAssets(query);
+        this.assetService.listAssets(this.page, this.per_page, query);
+    }
+
+    nextPage(page) {
+        console.log(this.page);
+        if (page == '+')
+            page = ++this.page;
+
+        if (page == '-')
+            page = --this.page;
+
+        this.page = page;
+        console.log(this.page);
+        this.listAssets();
+    }
+
+    progressBarFinish() {
+        console.log('progress is finished');
     }
 
 

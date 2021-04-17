@@ -6,6 +6,7 @@ import { ErrorFormComponent } from '../components/form/error/error.component';
 import { LabelFormComponent } from '../components/form/label/label.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from '../components/loading/loading.component';
+import { ProgressBarComponent } from '../components/progress/progress..component';
 
 
 
@@ -14,7 +15,8 @@ import { LoadingComponent } from '../components/loading/loading.component';
         ErrorFormComponent,
         LabelFormComponent,
         SnackbarComponent,
-        LoadingComponent
+        LoadingComponent,
+        ProgressBarComponent
     ],
     imports: [
         CommonModule,
@@ -29,7 +31,8 @@ import { LoadingComponent } from '../components/loading/loading.component';
         SnackbarComponent,
         ErrorFormComponent,
         LabelFormComponent,
-        LoadingComponent
+        LoadingComponent,
+        ProgressBarComponent
     ],
     entryComponents: [],
     providers: []
