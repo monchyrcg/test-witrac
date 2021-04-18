@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://api.witrac.test',
-  apiUrl: 'http://api.witrac.test/api'
+  url: 'http://127.0.0.1:8000',
+  apiUrl: 'http://127.0.0.1:8000/api'
 };
 
